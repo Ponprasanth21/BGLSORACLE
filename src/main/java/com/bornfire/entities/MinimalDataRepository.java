@@ -26,11 +26,15 @@ public interface MinimalDataRepository extends JpaRepository<EKYCMinimalData, St
 	@Query(value = "select * from AMT where national_id=?1", nativeQuery = true)
 	Page<EKYCMinimalData> findAllIdCustom(String nationalid, Pageable pageable);
 
-	@Query(value = "select NEXT VALUE FOR ARN_NO AS nextval", nativeQuery = true)
+	@Query(value = "SELECT ARN_NO.NEXTVAL FROM DUAL", nativeQuery = true)
 	String ARNNO();
 	
-	@Query(value = "SELECT MAX(CAST(numeric_part AS INT)) AS max_numeric_part FROM (SELECT REPLACE(REPLACE(REPLACE(cif_id, 'CIF', ''), '-', ''), '.', '') AS numeric_part FROM BACP_MINIMAL_DATA WHERE ISNUMERIC(REPLACE(REPLACE(REPLACE(cif_id, 'CIF', ''), '-', ''), '.', '')) = 1) AS numeric_parts;\r\n"
-			+ "", nativeQuery = true)
+	@Query(value = "SELECT MAX(CAST(numeric_part AS INT)) AS max_numeric_part\r\n" + 
+			"FROM (\r\n" + 
+			"    SELECT REPLACE(REPLACE(REPLACE(cif_id, 'CIF', ''), '-', ''), '.', '') AS numeric_part\r\n" + 
+			"    FROM BACP_MINIMAL_DATA\r\n" + 
+			"    WHERE REGEXP_LIKE(REPLACE(REPLACE(REPLACE(cif_id, 'CIF', ''), '-', ''), '.', ''), '^\\d+$')\r\n" + 
+			")", nativeQuery = true)
 	String getCifId();
 
 	

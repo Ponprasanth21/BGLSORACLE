@@ -63,7 +63,7 @@ public interface BACP_CUS_PROFILE_REPO extends JpaRepository<CustomerRequest,Str
 	List<CustomerRequest> getnotapproved();
 	
 	
-	@Query(value = "SELECT * FROM BACP_CUS_PROFILE  WHERE KYC_FLG = 'N' AND status NOT IN ('REJECT', 'HOLD');\r\n" + 
+	@Query(value = "SELECT * FROM BACP_CUS_PROFILE  WHERE KYC_FLG = 'N' AND status NOT IN ('REJECT', 'HOLD')\r\n" + 
 			"", nativeQuery = true)
 	List<CustomerRequest> getkyclist();
 	@Query(value = "select * from BACP_CUS_PROFILE where status in ('HOLD','REJECT') order by entry_time desc", nativeQuery = true)
