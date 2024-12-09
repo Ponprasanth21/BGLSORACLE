@@ -32,7 +32,7 @@ public interface Bacp_Signature_masterRepo extends JpaRepository<Bacp_Signature_
 	@Query(value = "select * from BACP_SIGNATURE_MASTER where appl_ref_no= ?1 and del_flg ='N'", nativeQuery = true)
 	 Bacp_Signature_master getty(String applRefNo);
 	
-	@Query(value = "select NEXT VALUE FOR SIGN_ID AS nextval", nativeQuery = true)
+	@Query(value = "select SIGN_ID.NEXTVAL FROM DUAL", nativeQuery = true)
 	Integer srlnum();
 	
 	@Query(value = "select * from BACP_SIGNATURE_MASTER where appl_ref_no= ?1 AND rec_no= ?2 and del_flg ='N'", nativeQuery = true)

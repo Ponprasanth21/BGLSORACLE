@@ -17,7 +17,7 @@ public interface DMD_TABLE_REPO extends JpaRepository<DMD_TABLE, DMD_TABLE_IDcla
 	@Query(value = "select TOP 2* from DEMAND_TBL aa where aa.loan_acct_no=?1 and aa.flow_date>=?2 order by FLOW_ID", nativeQuery = true)
 	List<DMD_TABLE> getAlldemand(String acct_num,Date flow);
 	
-	@Query(value = "SELECT NEXT VALUE FOR DMD_SRL_SEQ AS SRL_NO;", nativeQuery = true)
+	@Query(value = "SELECT DMD_SRL_SEQ.NEXTVAL FROM DUAL", nativeQuery = true)
 	BigDecimal getSrlNo();
 
 	@Query(value = "select * from DEMAND_TBL aa where aa.loan_acct_no = ?1", nativeQuery = true)

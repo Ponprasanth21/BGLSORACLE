@@ -54,8 +54,7 @@ public interface BACP_CUS_PROFILE_REPO extends JpaRepository<CustomerRequest,Str
 	List<CustomerRequest> getcorplist();
 	
 	//for approval screen
-	@Query(value = "SELECT * FROM BACP_CUS_PROFILE WHERE status IN ('APPROVED', 'NOT APPROVED');\r\n" + 
-			" ", nativeQuery = true)
+	@Query(value = "SELECT * FROM BACP_CUS_PROFILE WHERE status IN ('APPROVED', 'NOT APPROVED')", nativeQuery = true)
 	List<CustomerRequest> getApprovelist();
 	@Query(value = "select * from BACP_CUS_PROFILE  where STATUS='APPROVED' ", nativeQuery = true)
 	List<CustomerRequest> getapproved();
@@ -153,11 +152,12 @@ public interface BACP_CUS_PROFILE_REPO extends JpaRepository<CustomerRequest,Str
 		CustomerRequest findByref_norec(String appl_ref_no,String rec_no);
 	 @Query(value = "select * from BACP_CUS_PROFILE where appl_ref_no= ?1 ", nativeQuery = true)
 		CustomerRequest findByappl(String appl_ref_no );
-		@Query(value = "select NEXT VALUE FOR CIF_ID AS nextval", nativeQuery = true)
+	 
+		@Query(value = "select CIF_ID.NEXTVAL FROM DUAL", nativeQuery = true)
 		Integer cif_id();
-		@Query(value = "select NEXT VALUE FOR ACC_ID AS nextval", nativeQuery = true)
+		@Query(value = "select ACC_ID.NEXTVAL FROM DUAL", nativeQuery = true)
 		Integer Acc_id(); 
-		@Query(value = "select NEXT VALUE FOR LEASE_ACCOUNT_COR AS nextval", nativeQuery = true)
+		@Query(value = "select LEASE_ACCOUNT_COR.NEXTVAL FROM DUAL", nativeQuery = true)
 		Integer GetLEASE_ACCOUNT_COR(); 
 		
 	@Query(value = "SELECT DISTINCT(CIF_ID) FROM BACP_CUS_PROFILE", nativeQuery = true)

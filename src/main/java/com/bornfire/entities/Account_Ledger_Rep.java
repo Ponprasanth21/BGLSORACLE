@@ -43,7 +43,7 @@ public interface Account_Ledger_Rep extends JpaRepository<Account_Ledger_Entity,
 	@Query(value = "SELECT TOP 1 tran_id FROM BGLS_JOURNAL_ENTRIES ORDER BY entry_time DESC", nativeQuery = true)
 	String getlast();
 
-	@Query(value = "select NEXT VALUE FOR SRL_NO_SEQ AS nextval", nativeQuery = true)
+	@Query(value = "select SRL_NO_SEQ.NEXTVAL FROM DUAL", nativeQuery = true)
 	String getsrlNo();
 
 	@Query(value = "SELECT * FROM BGLS_JOURNAL_ENTRIES WHERE ACCT_NUM = ?1 AND CAST(TRAN_DATE AS DATE) BETWEEN CAST(?2 AS DATE) AND CAST(?3 AS DATE)", nativeQuery = true)

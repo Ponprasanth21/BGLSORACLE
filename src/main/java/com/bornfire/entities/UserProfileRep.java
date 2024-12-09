@@ -12,7 +12,7 @@ public interface UserProfileRep extends CrudRepository<UserProfile, String> {
 
 	public Optional<UserProfile> findByusername(String userName);
 
-	@Query(value = "SELECT * FROM BGLS_USER_PROFILE_TABLE WHERE DEL_FLG='N' ORDER BY LEFT(USER_ID, PATINDEX('%[0-9]%', USER_ID) - 1),CAST(SUBSTRING(USER_ID, PATINDEX('%[0-9]%', USER_ID), LEN(USER_ID)) AS INT)", nativeQuery = true)
+	@Query(value = "SELECT * FROM BGLS_USER_PROFILE_TABLE WHERE DEL_FLG = 'N' ORDER BY REGEXP_SUBSTR(USER_ID, '^[^0-9]+'), TO_NUMBER(REGEXP_SUBSTR(USER_ID, '[0-9]+'))", nativeQuery = true)
 	List<UserProfile> getAllList();
 	
 	@Query(value = "select * from BGLS_USER_PROFILE_TABLE where USER_ID=?1", nativeQuery = true)
