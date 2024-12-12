@@ -1254,7 +1254,26 @@ function signsubmit(a) {
 				removeUpload();
 			}
 		}
+		function getTomorrowsDate() {
+		    const today = new Date();
+		    const tomorrow = new Date(today);
+		    tomorrow.setDate(today.getDate());
+		    const year = tomorrow.getFullYear();
+		    const month = String(tomorrow.getMonth() + 1).padStart(2, '0');
+		    const day = String(tomorrow.getDate()).padStart(2, '0');
+		    return `${year}-${month}-${day}`;
+		}
+		function getCurrentDate1() {
+		    const today = new Date();
+		    const year = today.getFullYear();
+		    const month = String(today.getMonth() + 1).padStart(2, '0');
+		    const day = String(today.getDate()).padStart(2, '0');
+		    return `${year}-${month}-${day}`;
+		}
+		const todayDate = getCurrentDate1();
 
+		// Get tomorrow's date
+		const tomorrowDate = getTomorrowsDate();
 		 
 		var mrowCount = 1;
 		var mrowCountcor =3;
@@ -1287,8 +1306,8 @@ function signsubmit(a) {
 					cell4.innerHTML = '<input type="text" name="docDesc" id="docDesc' + mrowCountcor + '" class="uniform-input pl-2" autocomplete="off" onkeyup="this.value = this.value.toUpperCase(); handleIn(this)" readonly>'; 
 					cell5.innerHTML = '<input type="text" name="uniqId" id="uniqId1' + mrowCount + '" class="uniform-input pl-2" autocomplete="off" onkeyup="this.value = this.value.toUpperCase(); handleIn(this)">'; 
 					cell6.innerHTML = '<input type="text" name="docIssPlace" id="docIssPlace1' + mrowCount + '" class="uniform-input pl-2" autocomplete="off" onkeyup="this.value = this.value.toUpperCase(); handleIn(this)">'; 
-					cell7.innerHTML = '<input type="date" name="docIssDate"   id="docIssDate1' + mrowCount + '" class="uniform-input pl-2" autocomplete="off" onkeyup="this.value = this.value.toUpperCase(); handleIn(this)">';  
-					cell8.innerHTML = '<input type="date" name="docExpDate"  id="docExpDate1' + mrowCount + '" class="uniform-input pl-2" autocomplete="off" autocomplete="off" onkeyup="this.value = this.value.toUpperCase(); handleIn(this)">'; 
+					cell7.innerHTML = '<input type="date" name="docIssDate"   id="docIssDate1' + mrowCount + '" class="uniform-input pl-2" autocomplete="off" max="' + todayDate + '"  onkeyup="this.value = this.value.toUpperCase(); handleIn(this)">';  
+					cell8.innerHTML = '<input type="date" name="docExpDate"  id="docExpDate1' + mrowCount + '" class="uniform-input pl-2" min="' + tomorrowDate + '" autocomplete="off" autocomplete="off" onkeyup="this.value = this.value.toUpperCase(); handleIn(this)">'; 
 					cell9.innerHTML = '<input type="file" name="docExpDate" id="file' + mrowCount + '">'; 
 			        mrowCountcor++;
 					 mrowCount++;
@@ -2597,7 +2616,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
 	</script>
 <script>
 	function SmsFunction(){
-		var appl_ref_no = document.getElementById("appl_ref_no").value;
+		
+
+		 $('#SmsPopUpMsg').modal('show'); 
+
+			var a = document.getElementById("mobno").value;
+			$('#mobile_no_sms').val(a);
+		/* var appl_ref_no = document.getElementById("appl_ref_no").value;
 		var phone_no = document.getElementById("mobno").value;
 		var unique_id = 'ID_' + Date.now() + '_' + Math.floor(Math.random() * 1000);
 		
@@ -2611,8 +2636,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		       },
 		       success: function(response) {
 		           console.log('Success:', response);
-		           $('#msgsmspopup').text(
-					"The Message has been Sent Successfully...")
+		           $('#msgsmspopup').text("The Message has been Sent Successfully...")
 	               $('#smspopup').modal('show');
 		       },
 		       error: function(xhr, status, error) {
@@ -2621,10 +2645,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		       }
 		   });
 		
-		/* var appl_ref_no = document.getElementById("appl_ref_no").value;
+		 var appl_ref_no = document.getElementById("appl_ref_no").value;
 		  var unique_id = 'ID_' + Date.now() + '_' + Math.floor(Math.random() * 1000);
 		  alert('Application Ref No: ' + appl_ref_no + '\nUnique ID: ' + unique_id);
-          window.open('SmsPopup?formmode=smspopup&appl_ref_no=' + appl_ref_no, '_blank'); */
+          window.open('SmsPopup?formmode=smspopup&appl_ref_no=' + appl_ref_no, '_blank'); */ 
 	}
 	
 	</script>
@@ -3023,7 +3047,7 @@ function SmsFunction() {
 														<div class="col-sm-2">
 
 															<input type="text" id="prisolidmini" name="ca_solid"
-																th:value="${sess_branch_id}"
+																th:value="${sess_branch_id}" readonly
 																class="form-control form-control-sm bg-white border border-dark"
 																autocomplete="off" />
 
@@ -3033,7 +3057,7 @@ function SmsFunction() {
 															<label for="sche_type">Branch Name </label>
 														</div>
 														<div class="col-sm-2">
-															<input type="text"
+															<input type="text" 
 																onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
 																class="form-control form-control-sm bg-white border border-dark"
 																th:value="${sess_branch_desc}" maxlength="13"
@@ -3102,7 +3126,7 @@ function SmsFunction() {
 														</div>
 														<div class="col-sm-2">
 															<input type="text" name="shortName" id="short_nam"
-																onkeyup="this.value = this.value.toUpperCase();handleIn(this) "
+																onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
 																class="form-control form-control-sm bg-white border border-dark"
 																autocomplete="off" />
 														</div>
@@ -3198,7 +3222,7 @@ function SmsFunction() {
 														<input type="text" id="prisolidmini_corp" name="ca_solid"
 															th:value="${sess_branch_id}"
 															class="form-control form-control-sm bg-white border border-dark"
-															autocomplete="off" />
+															autocomplete="off" readonly />
 													</div>
 													<div class="col-sm-2"></div>
 													<div class="col-sm-2">
@@ -3386,7 +3410,7 @@ function SmsFunction() {
 															<input type="text" id="prisolidminija" name="ca_solid"
 																th:value="${sess_branch_id}"
 																class="form-control form-control-sm bg-white border border-dark"
-																autocomplete="off" />
+																autocomplete="off" readonly />
 														</div>
 														<div class="col-sm-2"></div>
 														<div class="col-sm-2">
@@ -5296,7 +5320,7 @@ function SmsFunction() {
 										style="overflow: auto; white-space: nowrap; margin-left: 15px">
 										<table border="1" id="dynamicTable"
 											class="table table-bordered"
-											style="text-align: center; vertical-align: 22px; margin-top: 10px; width: 223px; font-size: 15px;">
+											style="text-align: center; vertical-align: 22px; margin-top: 10px;  font-size: 15px;">
 											<thead>
 												<tr>
 
@@ -5952,6 +5976,10 @@ if (signaturePad.isEmpty()) {
 	function goBack() {
 	    $('#myrequired22').modal('hide'); // Close the modal
 	}
+	
+	function goBackSms() {
+	    $('#SmsPopUpMsg').modal('hide'); // Close the modal
+	}
 
 	
 </script>
@@ -6606,14 +6634,13 @@ document.addEventListener('DOMContentLoaded', function () {
         input.setAttribute('min', today);
     }
     
-//no future data
 
-   
+
  
 </script>
 <script>
 //to hide future values
-      function Futuredatefn(dateInput) {
+function Futuredatefn(dateInput) {
     const today = new Date().toISOString().split('T')[0];
     dateInput.setAttribute('max', today);
 }
@@ -6621,13 +6648,21 @@ document.addEventListener('DOMContentLoaded', function () {
 document.addEventListener('DOMContentLoaded', (event) => {
     const doiInput = document.getElementById('doi');
     const addvalfromInput = document.getElementById('addvalfrom');
-    
+    const docIssDate0 = document.getElementById('docIssDate0');
+    const docIssDate1 = document.getElementById('docIssDate1');
     if (doiInput) {
         Futuredatefn(doiInput);
     }
     
     if (addvalfromInput) {
         Futuredatefn(addvalfromInput);
+    }
+    
+    if (docIssDate0) {
+        Futuredatefn(docIssDate0);
+    }
+    if (docIssDate1) {
+        Futuredatefn(docIssDate1);
     }
 });
 
@@ -6637,13 +6672,18 @@ document.addEventListener('DOMContentLoaded', (event) => {
             input.setAttribute('min', today);
         }
         
-       /*  document.addEventListener('DOMContentLoaded', (event) => {
-            const dateInput = document.getElementById('addvalfrom');
-            
+         document.addEventListener('DOMContentLoaded', (event) => {
+            const dateInput = document.getElementById('docExpDate0');
+            const dateInput1 = document.getElementById('docExpDate1');
+           
             if (dateInput) {
             	pastdatefn(dateInput);
             }
-        }); */
+            if (dateInput1) {
+            	pastdatefn(dateInput1);
+            }
+       
+        }); 
     </script>
 
 <script>
@@ -6693,8 +6733,33 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		</div>
 	</div>
 </div>
-
-
+<!--  -->
+<div class="modal fade" data-backdrop="false" data-keyboard="false"
+	tabindex="-1" role="dialog" aria-hidden="true"
+	 id="SmsPopUpMsg">
+	<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+		style="height: 20%">
+		<div class="modal-content">
+			<div class="modal-body" style="text-align: center">
+					<div class="row formline" style="font-weight: 500; margin-top: 5px">
+				<label class="col-form-label ml-3 p-2" style="font-size: 14px;">
+					Primary Mobile No </label>
+				<!-- Adjusted label to align -->
+				<div class="col-sm-6 mb-2">
+					<!-- Increased input width for better alignment -->
+					<input type="text" id="mobile_no_sms" style="font-weight: 500"
+						class="form-control form-control-sm bg-white border border-dark"
+						autocomplete="off" />
+				</div>
+			</div>
+			    <button type="button" class="btn btn-primary mt-2" data-dismiss="modal"
+					onclick="goBackSms();">Send</button>
+				<button type="button" class="btn btn-primary mt-2" data-dismiss="modal"
+					onclick="goBackSms();">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
 <!-- for tab 1 ajax pop up -->
 <div class="modal fade" data-backdrop="false" data-keyboard="false"
 	tabindex="-1" role="dialog" aria-hidden="true"
@@ -7585,7 +7650,7 @@ initializeTabs();
 		class="modal-dialog modal-diaCap At Maturity ? log-centered modal-dialog-scrollable"
 		style="height: 20%">
 		<div class="modal-content">
-		
+
 			<div class="modal-body" style="text-align: center">
 				<p id="msgsmspopup"></p>
 				<button type="button" class="btn btn-primary" data-dismiss="modal"

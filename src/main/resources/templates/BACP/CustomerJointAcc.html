@@ -1151,43 +1151,7 @@ function proceedclick() {
 			 }
 		}
 
-		var mrowCount =0;
-		function rowadd() {  
-			 if (mrowCount < 3) {
-			
-			var table = document.getElementById("click1"); 
-			var row = table.insertRow(); 
-			//var cell1 = row.insertCell(); 
-			var cell2 = row.insertCell(); 
-			var cell3 = row.insertCell(); 
-			var cell4 = row.insertCell(); 
-			var cell5 = row.insertCell(); 
-			var cell6 = row.insertCell(); 
-			var cell7 = row.insertCell(); 
-			var cell8 = row.insertCell();  
-			var cell9 = row.insertCell(); 
-			 
-			//cell1.innerHTML = '<input type="checkbox"' + mrowCount + '">'; 
-				/* cell2.innerHTML = '<select name="docType" id="docType1' + mrowCountcor + '" name="docType" class="uniform-input pl-2" style="height: 24px">' +
-         '<option value="">SELECT</option>' +
-         '<option  value="NIC">NIC - Net Interest Cost</option>' + 
-         '<option value="POA" >POA - Power of Attorney</option>' +
-         '</select>';
- */         
-         cell2.innerHTML = '<input type="text" name="docType" id="docType1' + mrowCount + '" class="uniform-input pl-2" autocomplete="off" onkeyup="this.value = this.value.toUpperCase(); handleIn(this)">';
-        	cell3.innerHTML = '<input type="text" name="docCode" id="docCode1' + mrowCount + '" class="uniform-input pl-2" autocomplete="off" onkeyup="this.value = this.value.toUpperCase(); handleIn(this)">';
-			cell4.innerHTML = '<input type="text" name="docDesc" id="docDesc1' + mrowCount + '" class="uniform-input pl-2" autocomplete="off" onkeyup="this.value = this.value.toUpperCase(); handleIn(this)">'; 
-			cell5.innerHTML = '<input type="text" name="uniqId" id="uniqId1' + mrowCount + '" class="uniform-input pl-2" autocomplete="off" onkeyup="this.value = this.value.toUpperCase(); handleIn(this)">'; 
-			cell6.innerHTML = '<input type="text" name="docIssPlace" id="docIssPlace1' + mrowCount + '" class="uniform-input pl-2" autocomplete="off" onkeyup="this.value = this.value.toUpperCase(); handleIn(this)">'; 
-			cell7.innerHTML = '<input type="date" name="docIssDate"   id="docIssDate1' + mrowCount + '" class="uniform-input pl-2" autocomplete="off" onkeyup="this.value = this.value.toUpperCase(); handleIn(this)">';  
-			cell8.innerHTML = '<input type="date" name="docExpDate"  id="docExpDate1' + mrowCount + '" class="uniform-input pl-2" autocomplete="off" autocomplete="off" onkeyup="this.value = this.value.toUpperCase(); handleIn(this)">'; 
-			cell9.innerHTML = '<input type="file" name="docExpDate" id="file' + mrowCount + '" onchange="readURL(this);">'; 
-			mrowCount++ 
-			 }else{
-				   alert("You can only add up to 5 rows.");
-			 }
-		}
-		
+
 		function rowdelete(ele) { 
 			var table = $('#click1')[0]; 
 			var rowCount = table.rows.length; 
@@ -10455,7 +10419,26 @@ function last_change_re(rowCount) {
 	        $(docDesc).val("DOCUMENT");
 	    }
 }
+function getTomorrowsDate() {
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(today.getDate());
+    const year = tomorrow.getFullYear();
+    const month = String(tomorrow.getMonth() + 1).padStart(2, '0');
+    const day = String(tomorrow.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+}
+function getCurrentDate1() {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+}
+const todayDate = getCurrentDate1();
 
+// Get tomorrow's date
+const tomorrowDate = getTomorrowsDate();
 
 var mrowCount = 1;
 var mrowCountcor =3;
@@ -10487,9 +10470,9 @@ function rowadd() {
  //  cell3.innerHTML = '<input type="text" name="docCode" id="docCode1' + mrowCount + '" class="uniform-input pl-2" autocomplete="off" onkeyup="this.value = this.value.toUpperCase(); handleIn(this)">';
 			cell4.innerHTML = '<input type="text" name="docDesc" id="docDesc' + mrowCountcor + '" class="uniform-input pl-2" autocomplete="off" onkeyup="this.value = this.value.toUpperCase(); handleIn(this)" readonly>'; 
 			cell5.innerHTML = '<input type="text" name="uniqId" id="uniqId1' + mrowCount + '" class="uniform-input pl-2" autocomplete="off" onkeyup="this.value = this.value.toUpperCase(); handleIn(this)">'; 
-			cell6.innerHTML = '<input type="text" name="docIssPlace" id="docIssPlace1' + mrowCount + '" class="uniform-input pl-2" autocomplete="off" onkeyup="this.value = this.value.toUpperCase(); handleIn(this)">'; 
-			cell7.innerHTML = '<input type="date" name="docIssDate"   id="docIssDate1' + mrowCount + '" class="uniform-input pl-2" autocomplete="off" onkeyup="this.value = this.value.toUpperCase(); handleIn(this)">';  
-			cell8.innerHTML = '<input type="date" name="docExpDate"  id="docExpDate1' + mrowCount + '" class="uniform-input pl-2" autocomplete="off" autocomplete="off" onkeyup="this.value = this.value.toUpperCase(); handleIn(this)">'; 
+			cell6.innerHTML = '<input type="text" name="docIssPlace" id="docIssPlace1' + mrowCount + '" class="uniform-input pl-2" autocomplete="off"   onkeyup="this.value = this.value.toUpperCase(); handleIn(this)">'; 
+			cell7.innerHTML = '<input type="date" name="docIssDate"   id="docIssDate1' + mrowCount + '" class="uniform-input pl-2" autocomplete="off" max="' + todayDate + '" onkeyup="this.value = this.value.toUpperCase(); handleIn(this)">';  
+			cell8.innerHTML = '<input type="date" name="docExpDate"  id="docExpDate1' + mrowCount + '" class="uniform-input pl-2" autocomplete="off" autocomplete="off" min="' + tomorrowDate + '" onkeyup="this.value = this.value.toUpperCase(); handleIn(this)">'; 
 			cell9.innerHTML = '<input type="file" name="docExpDate" id="file' + mrowCount + '">'; 
 	        mrowCountcor++;
 			 mrowCount++;
@@ -10595,16 +10578,32 @@ document.addEventListener('DOMContentLoaded', function () {
     // Set the min date for 'la_expiry_date' (no past dates)
     document.getElementById('la_expiry_date').setAttribute('min', today);
 
-    // Set the max date for additional issue dates
-    document.getElementById('docIssDate0').setAttribute('max', today);
-    document.getElementById('docIssDate1').setAttribute('max', today);
-
-    // Set the min date for additional expiry dates
-    document.getElementById('docExpDate0').setAttribute('min', today);
-    document.getElementById('docExpDate1').setAttribute('min', today);
 </script>
 
 <script>
+//to hide future values
+function Futuredatefn(dateInput) {
+    const today = new Date().toISOString().split('T')[0];
+    dateInput.setAttribute('max', today);
+}
+
+document.addEventListener('DOMContentLoaded', (event) => {
+  
+    const addvalfromInput = document.getElementById('addvalfrom');
+    const docIssDate0 = document.getElementById('docIssDate0');
+    const docIssDate1 = document.getElementById('docIssDate1');
+   
+    if (addvalfromInput) {
+        Futuredatefn(addvalfromInput);
+    }
+    
+    if (docIssDate0) {
+        Futuredatefn(docIssDate0);
+    }
+    if (docIssDate1) {
+        Futuredatefn(docIssDate1);
+    }
+});
     // Function for issue date (restricts future dates)
     function setIssueDateLimit() {
         const todayIssue = new Date().toISOString().split('T')[0];
@@ -10628,6 +10627,30 @@ document.addEventListener('DOMContentLoaded', function () {
 	function handleAddress(input) {
 		input.value = input.value.replace(/[^a-zA-Z0-9\s,]/g, '').toUpperCase();
 	}
+	
+	 
+</script>
+<script>
+//to hide past values
+function pastdatefn(input) {
+    const today = new Date().toISOString().split('T')[0];
+    input.setAttribute('min', today);
+}
+
+ document.addEventListener('DOMContentLoaded', (event) => {
+    const dateInput = document.getElementById('docExpDate0');
+    const dateInput1 = document.getElementById('docExpDate1');
+   
+    if (dateInput) {
+    	pastdatefn(dateInput);
+    }
+    if (dateInput1) {
+    	pastdatefn(dateInput1);
+    }
+
+});
+
+
 </script>
 
 <div class="modal fade " id="myModalpopup1" data-backdrop="false"

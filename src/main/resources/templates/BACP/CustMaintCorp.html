@@ -143,6 +143,7 @@ canvas {
 .drag-text {
 	text-align: center;
 }
+
 .custom-icon {
 	font-size: 20px; /* Adjust the size of the icon */
 }
@@ -1280,24 +1281,81 @@ function PersonalDetilsForEdit(a){
 	
 	event.preventDefault();
 	 var rec_no = document.getElementById('rec_no_for_indi').value;
-    var refnumber = a.getAttribute("data-refnumber");
+     var refnumber = a.getAttribute("data-refnumber");
+     for (let i = 2; i <= 10; i++) {
+    	    // Construct the input field name
+    	    let inputName = `ca_annual_income_${i}`;
+    	    
+    	    // Select the input field
+    	    let inputField = document.querySelector(`input[name="${inputName}"]`);
+    	    
+    	    // Check if the input field exists
+    	    if (inputField) {
+    	        let inputValue = inputField.value;
+    	        
+    	        // Remove commas from the value
+    	        inputValue = inputValue.replace(/,/g, '');
 
-alert(rec_no);
-alert(refnumber);
+    	        // Check if inputValue is not empty
+    	        if (inputValue) {
+    	            // Convert date from dd-MM-yyyy to yyyy-MM-dd
+    	            let dateParts = inputValue.split("-");
+    	            if (dateParts.length === 3) {
+    	                let formattedDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
+
+    	                // Set the formatted date back to the input field
+    	                inputField.value = formattedDate;
+    	            } else {
+    	                // If not a date, just set the cleaned numeric value
+    	                inputField.value = inputValue;
+    	            }
+    	        }
+    	    }
+    	}
+     for (let i = 2; i <= 10; i++) {
+ 	    // Construct the input field name
+ 	    let inputName = `ca_monthly_income_${i}`;
+ 	    
+ 	    // Select the input field
+ 	    let inputField = document.querySelector(`input[name="${inputName}"]`);
+ 	    
+ 	    // Check if the input field exists
+ 	    if (inputField) {
+ 	        let inputValue = inputField.value;
+ 	        
+ 	        // Remove commas from the value
+ 	        inputValue = inputValue.replace(/,/g, '');
+
+ 	        // Check if inputValue is not empty
+ 	        if (inputValue) {
+ 	            // Convert date from dd-MM-yyyy to yyyy-MM-dd
+ 	            let dateParts = inputValue.split("-");
+ 	            if (dateParts.length === 3) {
+ 	                let formattedDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
+
+ 	                // Set the formatted date back to the input field
+ 	                inputField.value = formattedDate;
+ 	            } else {
+ 	                // If not a date, just set the cleaned numeric value
+ 	                inputField.value = inputValue;
+ 	            }
+ 	        }
+ 	    }
+ 	}
 
 
 var formData = $("#edit_forform").serialize();
-    // If all validations pass, with the AJAX request
-    $.ajax({
-        type: "POST",
-        url: './personalDetailForEdit?refnumber=' + refnumber + "&rec_no=" + rec_no,
-        data: formData,
-        data: $("#edit_forform").serialize(),
-        success: function (response) { 
-        	  $("#mypopup_alertmsg").html(response); 
-              $('#mypopup').modal('show');
-        }
-    });
+// If all validations pass, with the AJAX request
+$.ajax({
+    type: "POST",
+    url: './personalDetailForEdit?refnumber=' + refnumber + "&rec_no=" + rec_no,
+    data: formData,
+    data: $("#edit_forform").serialize(),
+    success: function (response) { 
+    	  $("#mypopup_alertmsg").html(response); 
+          $('#mypopup').modal('show');
+    }
+});
 }
 
 </script>
@@ -4331,8 +4389,8 @@ function gotocorporate(){
 
 						</div>
 						<div class="card-body">
-							<form action="#" th:object="${customerRequest}" method="post" id="edit_forform"
-								autocomplete="off" th:fragment="finuserapply">
+							<form action="#" th:object="${customerRequest}" method="post"
+								id="edit_forform" autocomplete="off" th:fragment="finuserapply">
 
 
 
@@ -4371,7 +4429,7 @@ function gotocorporate(){
 														<input type="text" id="ca_customer_type_1"
 															name="ca_customer_type_1"
 															class="form-control form-control-sm bg-white border border-dark"
-															value="CORPORATE" autocomplete="off" />
+															value="CORPORATE" autocomplete="off" readonly />
 													</div>
 													<div class="col-sm-1"></div>
 													<div class="col-sm-2">
@@ -4383,7 +4441,7 @@ function gotocorporate(){
 															class="form-control form-control-sm bg-white border border-dark"
 															id="ca_cif_id_1"
 															th:value="${customerRequest?.ca_cif_id_1}"
-															name="ca_cif_id_1" autocomplete="off" />
+															name="ca_cif_id_1" autocomplete="off" readonly />
 													</div>
 
 												</div>
@@ -4396,7 +4454,7 @@ function gotocorporate(){
 															class="form-control form-control-sm bg-white border border-dark"
 															maxlength="10" name="ca_primary_branch_1"
 															th:value="${customerRequest?.ca_primary_branch_1}"
-															id="ca_primary_branch_1" autocomplete="off" />
+															id="ca_primary_branch_1" autocomplete="off" readonly />
 
 													</div>
 													<div class="col-sm-1"></div>
@@ -4409,7 +4467,7 @@ function gotocorporate(){
 															th:value="${customerRequest?.ca_branch_name_1}"
 															class="form-control form-control-sm bg-white border border-dark"
 															maxlength="13" name="ca_branch_name_1"
-															id="ca_branch_name_1" autocomplete="off" />
+															id="ca_branch_name_1" autocomplete="off" readonly />
 													</div>
 												</div>
 												<div class="row formline ml-4 mt-1">
@@ -4566,8 +4624,8 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
-															id="ca_customer_type_2" name="ca_customer_type_2"
-															autocomplete="off"
+															id="ca_customer_type_2" readonly
+															name="ca_customer_type_2" autocomplete="off"
 															th:value="${customerRequest?.ca_customer_type_2}"
 															required />
 													</div>
@@ -4580,7 +4638,8 @@ function gotocorporate(){
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
 															id="cif_id_2" name="ca_cif_id_2" autocomplete="off"
-															th:value="${customerRequest?.ca_cif_id_2}" required />
+															th:value="${customerRequest?.ca_cif_id_2}" required
+															readonly />
 													</div>
 
 												</div>
@@ -4593,7 +4652,7 @@ function gotocorporate(){
 															class="form-control form-control-sm bg-white border border-dark"
 															maxlength="10" id="ca_primary_branch_2"
 															th:value="${customerRequest?.ca_primary_branch_2}"
-															name="ca_primary_branch_2" autocomplete="off" />
+															name="ca_primary_branch_2" autocomplete="off" readonly />
 
 
 													</div>
@@ -4607,7 +4666,7 @@ function gotocorporate(){
 															class="form-control form-control-sm bg-white border border-dark"
 															maxlength="13" id="ca_branch_name_2"
 															th:value="${customerRequest?.ca_branch_name_2}"
-															name="ca_branch_name_2" autocomplete="off" />
+															name="ca_branch_name_2" autocomplete="off" readonly />
 													</div>
 												</div>
 												<div class="row formline ml-4 mt-1">
@@ -4615,12 +4674,15 @@ function gotocorporate(){
 														<label for="sche_type">Salutation </label>
 													</div>
 													<div class="col-sm-2">
-
-														<input type="text"
-															class="form-control form-control-sm bg-white border border-dark"
-															id="ca_first_name_2" name="ca_salutation_2"
-															th:value="${customerRequest?.ca_salutation_2}"
-															autocomplete="off" required />
+														<select
+															class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
+															style="font-size: 15px;"
+															th:value="${customerRequest?.ca_salutation_2}">
+															<option value="MR"
+																th:selected="${customerRequest?.ca_salutation_2 == 'MR'}">MR</option>
+															<option value="MS"
+																th:selected="${customerRequest?.ca_salutation_2 == 'MS'}">MS</option>
+														</select>
 													</div>
 													<div class="col-sm-1"></div>
 													<div class="col-sm-2">
@@ -4630,6 +4692,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onkeyup="this.value = this.value.toUpperCase();handleIn(this);handleAddress(this)"
 															id="ca_first_name_2" name="ca_first_name_2"
 															th:value="${customerRequest?.ca_first_name_2}"
 															autocomplete="off" required />
@@ -4644,6 +4707,7 @@ function gotocorporate(){
 
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onkeyup="this.value = this.value.toUpperCase();handleIn(this);handleAddress(this)"
 															id="ca_middle_name_2" name="ca_middle_name_2"
 															th:value="${customerRequest?.ca_middle_name_2}"
 															autocomplete="off" />
@@ -4655,6 +4719,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onkeyup="this.value = this.value.toUpperCase();handleIn(this);handleAddress(this)"
 															id="ca_last_name_2" name="ca_last_name_2"
 															th:value="${customerRequest?.ca_last_name_2}"
 															autocomplete="off" />
@@ -4669,7 +4734,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
-															id="ca_full_name_2" name="ca_full_name_2"
+															id="ca_full_name_2" readonly name="ca_full_name_2"
 															th:value="${customerRequest?.ca_full_name_2}"
 															autocomplete="off" required />
 													</div>
@@ -4680,6 +4745,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onkeyup="this.value = this.value.toUpperCase();handleIn(this);handleAddress(this)"
 															id="ca_short_name_2" name="ca_short_name_2"
 															th:value="${customerRequest?.ca_short_name_2}"
 															autocomplete="off" />
@@ -4694,18 +4760,20 @@ function gotocorporate(){
 
 														<input type="text" oninput="Annual_Income()"
 															class="form-control form-control-sm bg-white border border-dark"
+															onchange="formatAndSetValue(this)"
 															id="ca_annual_income_2" name="ca_annual_income_2"
 															th:value="${customerRequest?.ca_annual_income_2}"
 															autocomplete="off" />
 													</div>
 													<div class="col-sm-1"></div>
-													<div class="col-sm-2">
+						 							<div class="col-sm-2">
 														<label for="sche_code">Monthly Income</label>
 													</div>
 													<div class="col-sm-2">
-														<input type="text"
+														<input type="text" onchange="formatAndSetValue(this)"
 															class="form-control form-control-sm bg-white border border-dark"
-															id="ca_monthly_income_2" name="ca_monthly_income_2"
+															id="ca_monthly_income_2" readonly
+															name="ca_monthly_income_2"
 															th:value="${customerRequest?.ca_monthly_income_2}"
 															autocomplete="off" />
 													</div>
@@ -4717,7 +4785,7 @@ function gotocorporate(){
 														<label for="sche_type">Loan Obligations </label>
 													</div>
 													<div class="col-sm-2">
-														<input type="text"
+														<input type="text" onchange="formatAndSetValue(this)"
 															class="form-control form-control-sm bg-white border border-dark"
 															id="ca_loan_obligations_2" name="ca_loan_obligations_2"
 															th:value="${customerRequest?.ca_loan_obligations_2}"
@@ -4728,7 +4796,7 @@ function gotocorporate(){
 														<label for="sche_code">Family Maintenance</label>
 													</div>
 													<div class="col-sm-2">
-														<input type="text"
+														<input type="text" onchange="formatAndSetValue(this)"
 															class="form-control form-control-sm bg-white border border-dark"
 															id="ca_family_maintenance_2"
 															th:value="${customerRequest?.ca_family_maintenance_2}"
@@ -4755,8 +4823,8 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
-															id="ca_customer_type_3" name="ca_customer_type_3"
-															autocomplete="off"
+															id="ca_customer_type_3" readonly
+															name="ca_customer_type_3" autocomplete="off"
 															th:value="${customerRequest?.ca_customer_type_3}"
 															data-toggle="tooltip" required />
 													</div>
@@ -4768,7 +4836,8 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
-															id="cif_id_3" name="ca_cif_id_3" autocomplete="off"
+															id="cif_id_3" readonly name="ca_cif_id_3"
+															autocomplete="off"
 															th:value="${customerRequest?.ca_cif_id_3}" required />
 													</div>
 
@@ -4782,7 +4851,7 @@ function gotocorporate(){
 															class="form-control form-control-sm bg-white border border-dark"
 															maxlength="10" id="ca_primary_branch_3"
 															th:value="${customerRequest?.ca_customer_type_3}"
-															name="ca_primary_branch_3" autocomplete="off" />
+															readonly name="ca_primary_branch_3" autocomplete="off" />
 
 
 													</div>
@@ -4795,7 +4864,7 @@ function gotocorporate(){
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
 															maxlength="13" id="ca_branch_name_3"
-															th:value="${customerRequest?.ca_branch_name_3}"
+															th:value="${customerRequest?.ca_branch_name_3}" readonly
 															name="ca_branch_name_3" autocomplete="off" />
 													</div>
 												</div>
@@ -4805,11 +4874,15 @@ function gotocorporate(){
 													</div>
 													<div class="col-sm-2">
 
-														<input type="text"
-															class="form-control form-control-sm bg-white border border-dark"
-															id="ca_first_name_3" name="ca_salutation_3"
-															th:value="${customerRequest?.ca_salutation_3}"
-															autocomplete="off" required />
+													<select
+															class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
+															style="font-size: 15px;"
+															th:value="${customerRequest?.ca_salutation_3}">
+															<option value="MR"
+																th:selected="${customerRequest?.ca_salutation_3 == 'MR'}">MR</option>
+															<option value="MS"
+																th:selected="${customerRequest?.ca_salutation_3 == 'MS'}">MS</option>
+														</select>
 													</div>
 													<div class="col-sm-1"></div>
 													<div class="col-sm-2">
@@ -4819,6 +4892,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onkeyup="this.value = this.value.toUpperCase();handleIn(this);handleAddress(this)"
 															id="ca_first_name_3" name="ca_first_name_3"
 															th:value="${customerRequest?.ca_first_name_3}"
 															autocomplete="off" required />
@@ -4833,6 +4907,7 @@ function gotocorporate(){
 
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onkeyup="this.value = this.value.toUpperCase();handleIn(this);handleAddress(this)"
 															id="ca_middle_name_3" name="ca_middle_name_3"
 															th:value="${customerRequest?.ca_middle_name_3}"
 															autocomplete="off" />
@@ -4844,6 +4919,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onkeyup="this.value = this.value.toUpperCase();handleIn(this);handleAddress(this)"
 															id="ca_last_name_3" name="ca_last_name_3"
 															th:value="${customerRequest?.ca_last_name_3}"
 															autocomplete="off" />
@@ -4858,7 +4934,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
-															id="ca_full_name_3" name="ca_full_name_3"
+															id="ca_full_name_3" readonly name="ca_full_name_3"
 															th:value="${customerRequest?.ca_full_name_3}"
 															autocomplete="off" required />
 													</div>
@@ -4869,6 +4945,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onkeyup="this.value = this.value.toUpperCase();handleIn(this);handleAddress(this)"
 															id="ca_short_name_3" name="ca_short_name_3"
 															th:value="${customerRequest?.ca_short_name_3}"
 															autocomplete="off" />
@@ -4894,7 +4971,8 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
-															id="ca_monthly_income_3" name="ca_monthly_income_3"
+															id="ca_monthly_income_3" readonly
+															name="ca_monthly_income_3"
 															th:value="${customerRequest?.ca_monthly_income_3}"
 															autocomplete="off" />
 													</div>
@@ -4942,8 +5020,8 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
-															id="ca_customer_type_4" name="ca_customer_type_4"
-															autocomplete="off"
+															id="ca_customer_type_4" readonly
+															name="ca_customer_type_4" autocomplete="off"
 															th:value="${customerRequest?.ca_customer_type_4}"
 															data-toggle="tooltip" required />
 													</div>
@@ -4955,7 +5033,8 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
-															id="cif_id_4" name="ca_cif_id_4" autocomplete="off"
+															id="cif_id_4" readonly name="ca_cif_id_4"
+															autocomplete="off"
 															th:value="${customerRequest?.ca_cif_id_4}" required />
 													</div>
 
@@ -4969,7 +5048,7 @@ function gotocorporate(){
 															class="form-control form-control-sm bg-white border border-dark"
 															maxlength="10" id="ca_primary_branch_4"
 															th:value="${customerRequest?.ca_customer_type_4}"
-															name="ca_primary_branch_4" autocomplete="off" />
+															readonly name="ca_primary_branch_4" autocomplete="off" />
 
 
 													</div>
@@ -4983,7 +5062,7 @@ function gotocorporate(){
 															class="form-control form-control-sm bg-white border border-dark"
 															maxlength="13" id="ca_branch_name_4"
 															th:value="${customerRequest?.ca_customer_type_4}"
-															name="ca_branch_name_4" autocomplete="off" />
+															readonly name="ca_branch_name_4" autocomplete="off" />
 													</div>
 												</div>
 												<div class="row formline ml-4">
@@ -4991,12 +5070,15 @@ function gotocorporate(){
 														<label for="sche_type">Salutation </label>
 													</div>
 													<div class="col-sm-2">
-
-														<input type="text"
-															class="form-control form-control-sm bg-white border border-dark"
-															id="ca_first_name_4" name="ca_salutation_4"
-															th:value="${customerRequest?.ca_salutation_4}"
-															autocomplete="off" required />
+<select
+															class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
+															style="font-size: 15px;"
+															th:value="${customerRequest?.ca_salutation_4}">
+															<option value="MR"
+																th:selected="${customerRequest?.ca_salutation_4 == 'MR'}">MR</option>
+															<option value="MS"
+																th:selected="${customerRequest?.ca_salutation_4 == 'MS'}">MS</option>
+														</select>
 													</div>
 													<div class="col-sm-1"></div>
 													<div class="col-sm-2">
@@ -5006,6 +5088,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onkeyup="this.value = this.value.toUpperCase();handleIn(this);handleAddress(this)"
 															id="ca_first_name_4" name="ca_first_name_4"
 															th:value="${customerRequest?.ca_first_name_4}"
 															autocomplete="off" required />
@@ -5020,6 +5103,7 @@ function gotocorporate(){
 
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onkeyup="this.value = this.value.toUpperCase();handleIn(this);handleAddress(this)"
 															id="ca_middle_name_4" name="ca_middle_name_4"
 															th:value="${customerRequest?.ca_middle_name_4}"
 															autocomplete="off" />
@@ -5031,6 +5115,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onkeyup="this.value = this.value.toUpperCase();handleIn(this);handleAddress(this)"
 															id="ca_last_name_4" name="ca_last_name_4"
 															th:value="${customerRequest?.ca_last_name_4}"
 															autocomplete="off" />
@@ -5045,7 +5130,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
-															id="ca_full_name_4" name="ca_full_name_4"
+															id="ca_full_name_4" readonly name="ca_full_name_4"
 															th:value="${customerRequest?.ca_full_name_4}"
 															autocomplete="off" required />
 													</div>
@@ -5056,6 +5141,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onkeyup="this.value = this.value.toUpperCase();handleIn(this);handleAddress(this)"
 															id="ca_short_name_4" name="ca_short_name_4"
 															th:value="${customerRequest?.ca_short_name_4}"
 															autocomplete="off" />
@@ -5081,7 +5167,8 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
-															id="ca_monthly_income_4" name="ca_monthly_income_4"
+															id="ca_monthly_income_4" readonly
+															name="ca_monthly_income_4"
 															th:value="${customerRequest?.ca_monthly_income_4}"
 															autocomplete="off" />
 													</div>
@@ -5133,8 +5220,8 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
-															id="ca_customer_type_5" name="ca_customer_type_5"
-															autocomplete="off"
+															id="ca_customer_type_5" readonly
+															name="ca_customer_type_5" autocomplete="off"
 															th:value="${customerRequest?.ca_customer_type_5}"
 															data-toggle="tooltip" required />
 													</div>
@@ -5146,7 +5233,8 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
-															id="cif_id_5" name="ca_cif_id_5" autocomplete="off"
+															id="cif_id_5" readonly name="ca_cif_id_5"
+															autocomplete="off"
 															th:value="${customerRequest?.ca_cif_id_5}" required />
 													</div>
 
@@ -5160,7 +5248,7 @@ function gotocorporate(){
 															class="form-control form-control-sm bg-white border border-dark"
 															maxlength="10" id="ca_primary_branch_5"
 															th:value="${customerRequest?.ca_customer_type_5}"
-															name="ca_primary_branch_5" autocomplete="off" />
+															readonly name="ca_primary_branch_5" autocomplete="off" />
 
 
 													</div>
@@ -5174,7 +5262,7 @@ function gotocorporate(){
 															class="form-control form-control-sm bg-white border border-dark"
 															maxlength="13" id="ca_branch_name_5"
 															th:value="${customerRequest?.ca_customer_type_5}"
-															name="ca_branch_name_5" autocomplete="off" />
+															readonly name="ca_branch_name_5" autocomplete="off" />
 													</div>
 												</div>
 												<div class="row formline ml-4 mt-1">
@@ -5182,12 +5270,15 @@ function gotocorporate(){
 														<label for="sche_type">Salutation </label>
 													</div>
 													<div class="col-sm-2">
-
-														<input type="text"
-															class="form-control form-control-sm bg-white border border-dark"
-															id="ca_first_name_5" name="ca_salutation_5"
-															th:value="${customerRequest?.ca_salutation_5}"
-															autocomplete="off" required />
+<select
+															class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
+															style="font-size: 15px;"
+															th:value="${customerRequest?.ca_salutation_5}">
+															<option value="MR"
+																th:selected="${customerRequest?.ca_salutation_5 == 'MR'}">MR</option>
+															<option value="MS"
+																th:selected="${customerRequest?.ca_salutation_5 == 'MS'}">MS</option>
+														</select>
 													</div>
 													<div class="col-sm-1"></div>
 													<div class="col-sm-2">
@@ -5197,6 +5288,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onkeyup="this.value = this.value.toUpperCase();handleIn(this);handleAddress(this)"
 															id="ca_first_name_5" name="ca_first_name_5"
 															th:value="${customerRequest?.ca_first_name_5}"
 															autocomplete="off" required />
@@ -5211,6 +5303,7 @@ function gotocorporate(){
 
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onkeyup="this.value = this.value.toUpperCase();handleIn(this);handleAddress(this)"
 															id="ca_middle_name_5" name="ca_middle_name_5"
 															th:value="${customerRequest?.ca_middle_name_5}"
 															autocomplete="off" />
@@ -5222,6 +5315,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onkeyup="this.value = this.value.toUpperCase();handleIn(this);handleAddress(this)"
 															id="ca_last_name_5" name="ca_last_name_5"
 															th:value="${customerRequest?.ca_last_name_5}"
 															autocomplete="off" />
@@ -5236,7 +5330,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
-															id="ca_full_name_5" name="ca_full_name_5"
+															id="ca_full_name_5" readonly name="ca_full_name_5"
 															th:value="${customerRequest?.ca_full_name_5}"
 															autocomplete="off" required />
 													</div>
@@ -5247,6 +5341,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onkeyup="this.value = this.value.toUpperCase();handleIn(this);handleAddress(this)"
 															id="ca_short_name_5" name="ca_short_name_5"
 															th:value="${customerRequest?.ca_short_name_5}"
 															autocomplete="off" />
@@ -5272,7 +5367,8 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
-															id="ca_monthly_income_5" name="ca_monthly_income_5"
+															id="ca_monthly_income_5" readonly
+															name="ca_monthly_income_5"
 															th:value="${customerRequest?.ca_monthly_income_5}"
 															autocomplete="off" />
 													</div>
@@ -5320,8 +5416,8 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
-															id="ca_customer_type_6" name="ca_customer_type_6"
-															autocomplete="off"
+															id="ca_customer_type_6" readonly
+															name="ca_customer_type_6" autocomplete="off"
 															th:value="${customerRequest?.ca_customer_type_6}"
 															data-toggle="tooltip" required />
 													</div>
@@ -5333,7 +5429,8 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
-															id="cif_id_6" name="ca_cif_id_6" autocomplete="off"
+															id="cif_id_6" readonly name="ca_cif_id_6"
+															autocomplete="off"
 															th:value="${customerRequest?.ca_cif_id_6}" required />
 													</div>
 
@@ -5347,7 +5444,7 @@ function gotocorporate(){
 															class="form-control form-control-sm bg-white border border-dark"
 															maxlength="10" id="ca_primary_branch_6"
 															th:value="${customerRequest?.ca_customer_type_6}"
-															name="ca_primary_branch_6" autocomplete="off" />
+															readonly name="ca_primary_branch_6" autocomplete="off" />
 
 
 													</div>
@@ -5361,7 +5458,7 @@ function gotocorporate(){
 															class="form-control form-control-sm bg-white border border-dark"
 															maxlength="13" id="ca_branch_name_6"
 															th:value="${customerRequest?.ca_customer_type_6}"
-															name="ca_branch_name_6" autocomplete="off" />
+															readonly name="ca_branch_name_6" autocomplete="off" />
 													</div>
 												</div>
 												<div class="row formline ml-4 mt-1">
@@ -5369,12 +5466,15 @@ function gotocorporate(){
 														<label for="sche_type">Salutation </label>
 													</div>
 													<div class="col-sm-2">
-
-														<input type="text"
-															class="form-control form-control-sm bg-white border border-dark"
-															id="ca_first_name_6" name="ca_salutation_6"
-															th:value="${customerRequest?.ca_salutation_6}"
-															autocomplete="off" required />
+<select
+															class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
+															style="font-size: 15px;"
+															th:value="${customerRequest?.ca_salutation_6}">
+															<option value="MR"
+																th:selected="${customerRequest?.ca_salutation_6 == 'MR'}">MR</option>
+															<option value="MS"
+																th:selected="${customerRequest?.ca_salutation_6 == 'MS'}">MS</option>
+														</select>
 													</div>
 													<div class="col-sm-1"></div>
 													<div class="col-sm-2">
@@ -5384,6 +5484,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onkeyup="this.value = this.value.toUpperCase();handleIn(this);handleAddress(this)"
 															id="ca_first_name_6" name="ca_first_name_6"
 															th:value="${customerRequest?.ca_first_name_6}"
 															autocomplete="off" required />
@@ -5398,6 +5499,7 @@ function gotocorporate(){
 
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onkeyup="this.value = this.value.toUpperCase();handleIn(this);handleAddress(this)"
 															id="ca_middle_name_6" name="ca_middle_name_6"
 															th:value="${customerRequest?.ca_middle_name_6}"
 															autocomplete="off" />
@@ -5409,6 +5511,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onkeyup="this.value = this.value.toUpperCase();handleIn(this);handleAddress(this)"
 															id="ca_last_name_6" name="ca_last_name_6"
 															th:value="${customerRequest?.ca_last_name_6}"
 															autocomplete="off" />
@@ -5423,7 +5526,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
-															id="ca_full_name_6" name="ca_full_name_6"
+															id="ca_full_name_6" readonly name="ca_full_name_6"
 															th:value="${customerRequest?.ca_full_name_6}"
 															autocomplete="off" required />
 													</div>
@@ -5434,6 +5537,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onkeyup="this.value = this.value.toUpperCase();handleIn(this);handleAddress(this)"
 															id="ca_short_name_6" name="ca_short_name_6"
 															th:value="${customerRequest?.ca_short_name_6}"
 															autocomplete="off" />
@@ -5459,7 +5563,8 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
-															id="ca_monthly_income_6" name="ca_monthly_income_6"
+															id="ca_monthly_income_6" readonly
+															name="ca_monthly_income_6"
 															th:value="${customerRequest?.ca_monthly_income_6}"
 															autocomplete="off" />
 													</div>
@@ -5507,8 +5612,8 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
-															id="ca_customer_type_7" name="ca_customer_type_7"
-															autocomplete="off"
+															id="ca_customer_type_7" readonly
+															name="ca_customer_type_7" autocomplete="off"
 															th:value="${customerRequest?.ca_customer_type_7}"
 															data-toggle="tooltip" required />
 													</div>
@@ -5520,7 +5625,8 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
-															id="cif_id_7" name="ca_cif_id_7" autocomplete="off"
+															id="cif_id_7" readonly name="ca_cif_id_7"
+															autocomplete="off"
 															th:value="${customerRequest?.ca_cif_id_7}" required />
 													</div>
 
@@ -5534,7 +5640,7 @@ function gotocorporate(){
 															class="form-control form-control-sm bg-white border border-dark"
 															maxlength="10" id="ca_primary_branch_7"
 															th:value="${customerRequest?.ca_customer_type_7}"
-															name="ca_primary_branch_7" autocomplete="off" />
+															readonly name="ca_primary_branch_7" autocomplete="off" />
 
 
 													</div>
@@ -5548,7 +5654,7 @@ function gotocorporate(){
 															class="form-control form-control-sm bg-white border border-dark"
 															maxlength="13" id="ca_branch_name_7"
 															th:value="${customerRequest?.ca_customer_type_7}"
-															name="ca_branch_name_7" autocomplete="off" />
+															readonly name="ca_branch_name_7" autocomplete="off" />
 													</div>
 												</div>
 												<div class="row formline ml-4 mt-1">
@@ -5556,12 +5662,15 @@ function gotocorporate(){
 														<label for="sche_type">Salutation </label>
 													</div>
 													<div class="col-sm-2">
-
-														<input type="text"
-															class="form-control form-control-sm bg-white border border-dark"
-															id="ca_first_name_7" name="ca_salutation_7"
-															th:value="${customerRequest?.ca_salutation_7}"
-															autocomplete="off" required />
+<select
+															class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
+															style="font-size: 15px;"
+															th:value="${customerRequest?.ca_salutation_7}">
+															<option value="MR"
+																th:selected="${customerRequest?.ca_salutation_7 == 'MR'}">MR</option>
+															<option value="MS"
+																th:selected="${customerRequest?.ca_salutation_7 == 'MS'}">MS</option>
+														</select>
 													</div>
 													<div class="col-sm-1"></div>
 													<div class="col-sm-2">
@@ -5571,6 +5680,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onkeyup="this.value = this.value.toUpperCase();handleIn(this);handleAddress(this)"
 															id="ca_first_name_7" name="ca_first_name_7"
 															th:value="${customerRequest?.ca_first_name_7}"
 															autocomplete="off" required />
@@ -5585,6 +5695,7 @@ function gotocorporate(){
 
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onkeyup="this.value = this.value.toUpperCase();handleIn(this);handleAddress(this)"
 															id="ca_middle_name_7" name="ca_middle_name_7"
 															th:value="${customerRequest?.ca_middle_name_7}"
 															autocomplete="off" />
@@ -5596,6 +5707,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onkeyup="this.value = this.value.toUpperCase();handleIn(this);handleAddress(this)"
 															id="ca_last_name_7" name="ca_last_name_7"
 															th:value="${customerRequest?.ca_last_name_7}"
 															autocomplete="off" />
@@ -5610,7 +5722,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
-															id="ca_full_name_7" name="ca_full_name_7"
+															id="ca_full_name_7" readonly name="ca_full_name_7"
 															th:value="${customerRequest?.ca_full_name_7}"
 															autocomplete="off" required />
 													</div>
@@ -5621,6 +5733,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onkeyup="this.value = this.value.toUpperCase();handleIn(this);handleAddress(this)"
 															id="ca_short_name_7" name="ca_short_name_7"
 															th:value="${customerRequest?.ca_short_name_7}"
 															autocomplete="off" />
@@ -5646,7 +5759,8 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
-															id="ca_monthly_income_7" name="ca_monthly_income_7"
+															id="ca_monthly_income_7" readonly
+															name="ca_monthly_income_7"
 															th:value="${customerRequest?.ca_monthly_income_7}"
 															autocomplete="off" />
 													</div>
@@ -5694,8 +5808,8 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
-															id="ca_customer_type_8" name="ca_customer_type_8"
-															autocomplete="off"
+															id="ca_customer_type_8" readonly
+															name="ca_customer_type_8" autocomplete="off"
 															th:value="${customerRequest?.ca_customer_type_8}"
 															data-toggle="tooltip" required />
 													</div>
@@ -5707,7 +5821,8 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
-															id="cif_id_8" name="ca_cif_id_8" autocomplete="off"
+															id="cif_id_8" readonly name="ca_cif_id_8"
+															autocomplete="off"
 															th:value="${customerRequest?.ca_cif_id_8}" required />
 													</div>
 
@@ -5721,7 +5836,7 @@ function gotocorporate(){
 															class="form-control form-control-sm bg-white border border-dark"
 															maxlength="10" id="ca_primary_branch_8"
 															th:value="${customerRequest?.ca_customer_type_8}"
-															name="ca_primary_branch_8" autocomplete="off" />
+															readonly name="ca_primary_branch_8" autocomplete="off" />
 
 
 													</div>
@@ -5735,7 +5850,7 @@ function gotocorporate(){
 															class="form-control form-control-sm bg-white border border-dark"
 															maxlength="13" id="ca_branch_name_8"
 															th:value="${customerRequest?.ca_customer_type_8}"
-															name="ca_branch_name_8" autocomplete="off" />
+															readonly name="ca_branch_name_8" autocomplete="off" />
 													</div>
 												</div>
 												<div class="row formline ml-4 mt-1">
@@ -5743,12 +5858,15 @@ function gotocorporate(){
 														<label for="sche_type">Salutation </label>
 													</div>
 													<div class="col-sm-2">
-
-														<input type="text"
-															class="form-control form-control-sm bg-white border border-dark"
-															id="ca_first_name_8" name="ca_salutation_8"
-															th:value="${customerRequest?.ca_salutation_8}"
-															autocomplete="off" required />
+<select
+															class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
+															style="font-size: 15px;"
+															th:value="${customerRequest?.ca_salutation_8}">
+															<option value="MR"
+																th:selected="${customerRequest?.ca_salutation_8 == 'MR'}">MR</option>
+															<option value="MS"
+																th:selected="${customerRequest?.ca_salutation_8 == 'MS'}">MS</option>
+														</select>
 													</div>
 													<div class="col-sm-1"></div>
 													<div class="col-sm-2">
@@ -5758,6 +5876,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onkeyup="this.value = this.value.toUpperCase();handleIn(this);handleAddress(this)"
 															id="ca_first_name_8" name="ca_first_name_8"
 															th:value="${customerRequest?.ca_first_name_8}"
 															autocomplete="off" required />
@@ -5772,6 +5891,7 @@ function gotocorporate(){
 
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onkeyup="this.value = this.value.toUpperCase();handleIn(this);handleAddress(this)"
 															id="ca_middle_name_8" name="ca_middle_name_8"
 															th:value="${customerRequest?.ca_middle_name_8}"
 															autocomplete="off" />
@@ -5783,6 +5903,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onkeyup="this.value = this.value.toUpperCase();handleIn(this);handleAddress(this)"
 															id="ca_last_name_8" name="ca_last_name_8"
 															th:value="${customerRequest?.ca_last_name_8}"
 															autocomplete="off" />
@@ -5797,7 +5918,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
-															id="ca_full_name_8" name="ca_full_name_8"
+															id="ca_full_name_8" readonly name="ca_full_name_8"
 															th:value="${customerRequest?.ca_full_name_8}"
 															autocomplete="off" required />
 													</div>
@@ -5808,6 +5929,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onkeyup="this.value = this.value.toUpperCase();handleIn(this);handleAddress(this)"
 															id="ca_short_name_8" name="ca_short_name_8"
 															th:value="${customerRequest?.ca_short_name_8}"
 															autocomplete="off" />
@@ -5833,7 +5955,8 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
-															id="ca_monthly_income_8" name="ca_monthly_income_8"
+															id="ca_monthly_income_8" readonly
+															name="ca_monthly_income_8"
 															th:value="${customerRequest?.ca_monthly_income_8}"
 															autocomplete="off" />
 													</div>
@@ -5881,8 +6004,8 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
-															id="ca_customer_type_9" name="ca_customer_type_9"
-															autocomplete="off"
+															id="ca_customer_type_9" readonly
+															name="ca_customer_type_9" autocomplete="off"
 															th:value="${customerRequest?.ca_customer_type_9}"
 															data-toggle="tooltip" required />
 													</div>
@@ -5894,7 +6017,8 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
-															id="cif_id_9" name="ca_cif_id_9" autocomplete="off"
+															id="cif_id_9" readonly name="ca_cif_id_9"
+															autocomplete="off"
 															th:value="${customerRequest?.ca_cif_id_9}" required />
 													</div>
 
@@ -5908,7 +6032,7 @@ function gotocorporate(){
 															class="form-control form-control-sm bg-white border border-dark"
 															maxlength="10" id="ca_primary_branch_9"
 															th:value="${customerRequest?.ca_customer_type_9}"
-															name="ca_primary_branch_9" autocomplete="off" />
+															readonly name="ca_primary_branch_9" autocomplete="off" />
 
 
 													</div>
@@ -5922,7 +6046,7 @@ function gotocorporate(){
 															class="form-control form-control-sm bg-white border border-dark"
 															maxlength="13" id="ca_branch_name_9"
 															th:value="${customerRequest?.ca_customer_type_9}"
-															name="ca_branch_name_9" autocomplete="off" />
+															readonly name="ca_branch_name_9" autocomplete="off" />
 													</div>
 												</div>
 												<div class="row formline ml-4 mt-1">
@@ -5930,12 +6054,15 @@ function gotocorporate(){
 														<label for="sche_type">Salutation </label>
 													</div>
 													<div class="col-sm-2">
-
-														<input type="text"
-															class="form-control form-control-sm bg-white border border-dark"
-															id="ca_first_name_9" name="ca_salutation_9"
-															th:value="${customerRequest?.ca_salutation_9}"
-															autocomplete="off" required />
+<select
+															class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
+															style="font-size: 15px;"
+															th:value="${customerRequest?.ca_salutation_9}">
+															<option value="MR"
+																th:selected="${customerRequest?.ca_salutation_9 == 'MR'}">MR</option>
+															<option value="MS"
+																th:selected="${customerRequest?.ca_salutation_9 == 'MS'}">MS</option>
+														</select>
 													</div>
 													<div class="col-sm-1"></div>
 													<div class="col-sm-2">
@@ -5945,6 +6072,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onkeyup="this.value = this.value.toUpperCase();handleIn(this);handleAddress(this)"
 															id="ca_first_name_9" name="ca_first_name_9"
 															th:value="${customerRequest?.ca_first_name_9}"
 															autocomplete="off" required />
@@ -5959,6 +6087,7 @@ function gotocorporate(){
 
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onkeyup="this.value = this.value.toUpperCase();handleIn(this);handleAddress(this)"
 															id="ca_middle_name_9" name="ca_middle_name_9"
 															th:value="${customerRequest?.ca_middle_name_9}"
 															autocomplete="off" />
@@ -5970,6 +6099,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onkeyup="this.value = this.value.toUpperCase();handleIn(this);handleAddress(this)"
 															id="ca_last_name_9" name="ca_last_name_9"
 															th:value="${customerRequest?.ca_last_name_9}"
 															autocomplete="off" />
@@ -5984,7 +6114,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
-															id="ca_full_name_9" name="ca_full_name_9"
+															id="ca_full_name_9" readonly name="ca_full_name_9"
 															th:value="${customerRequest?.ca_full_name_9}"
 															autocomplete="off" required />
 													</div>
@@ -5995,6 +6125,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onkeyup="this.value = this.value.toUpperCase();handleIn(this);handleAddress(this)"
 															id="ca_short_name_9" name="ca_short_name_9"
 															th:value="${customerRequest?.ca_short_name_9}"
 															autocomplete="off" />
@@ -6020,7 +6151,8 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
-															id="ca_monthly_income_9" name="ca_monthly_income_9"
+															id="ca_monthly_income_9" readonly
+															name="ca_monthly_income_9"
 															th:value="${customerRequest?.ca_monthly_income_9}"
 															autocomplete="off" />
 													</div>
@@ -6068,8 +6200,8 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
-															id="ca_customer_type_10" name="ca_customer_type_10"
-															autocomplete="off"
+															id="ca_customer_type_10" readonly
+															name="ca_customer_type_10" autocomplete="off"
 															th:value="${customerRequest?.ca_customer_type_10}"
 															data-toggle="tooltip" required />
 													</div>
@@ -6081,7 +6213,8 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
-															id="cif_id_10" name="ca_cif_id_10" autocomplete="off"
+															id="cif_id_10" readonly name="ca_cif_id_10"
+															autocomplete="off"
 															th:value="${customerRequest?.ca_cif_id_10}" required />
 													</div>
 
@@ -6095,7 +6228,7 @@ function gotocorporate(){
 															class="form-control form-control-sm bg-white border border-dark"
 															maxlength="10" id="ca_primary_branch_10"
 															th:value="${customerRequest?.ca_customer_type_10}"
-															name="ca_primary_branch_10" autocomplete="off" />
+															readonly name="ca_primary_branch_10" autocomplete="off" />
 
 
 													</div>
@@ -6109,7 +6242,7 @@ function gotocorporate(){
 															class="form-control form-control-sm bg-white border border-dark"
 															maxlength="13" id="ca_branch_name_10"
 															th:value="${customerRequest?.ca_customer_type_10}"
-															name="ca_branch_name_10" autocomplete="off" />
+															readonly name="ca_branch_name_10" autocomplete="off" />
 													</div>
 												</div>
 												<div class="row formline ml-4 mt-1">
@@ -6117,12 +6250,15 @@ function gotocorporate(){
 														<label for="sche_type">Salutation </label>
 													</div>
 													<div class="col-sm-2">
-
-														<input type="text"
-															class="form-control form-control-sm bg-white border border-dark"
-															id="ca_first_name_10" name="ca_salutation_10"
-															th:value="${customerRequest?.ca_salutation_10}"
-															autocomplete="off" required />
+<select
+															class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
+															style="font-size: 15px;"
+															th:value="${customerRequest?.ca_salutation_10}">
+															<option value="MR"
+																th:selected="${customerRequest?.ca_salutation_10 == 'MR'}">MR</option>
+															<option value="MS"
+																th:selected="${customerRequest?.ca_salutation_10 == 'MS'}">MS</option>
+														</select>
 													</div>
 													<div class="col-sm-1"></div>
 													<div class="col-sm-2">
@@ -6132,6 +6268,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onkeyup="this.value = this.value.toUpperCase();handleIn(this);handleAddress(this)"
 															id="ca_first_name_10" name="ca_first_name_10"
 															th:value="${customerRequest?.ca_first_name_10}"
 															autocomplete="off" required />
@@ -6146,6 +6283,7 @@ function gotocorporate(){
 
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onkeyup="this.value = this.value.toUpperCase();handleIn(this);handleAddress(this)"
 															id="ca_middle_name_10" name="ca_middle_name_10"
 															th:value="${customerRequest?.ca_middle_name_10}"
 															autocomplete="off" />
@@ -6157,6 +6295,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onkeyup="this.value = this.value.toUpperCase();handleIn(this);handleAddress(this)"
 															id="ca_last_name_10" name="ca_last_name_10"
 															th:value="${customerRequest?.ca_last_name_10}"
 															autocomplete="off" />
@@ -6171,7 +6310,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
-															id="ca_full_name_10" name="ca_full_name_10"
+															id="ca_full_name_10" readonly name="ca_full_name_10"
 															th:value="${customerRequest?.ca_full_name_10}"
 															autocomplete="off" required />
 													</div>
@@ -6182,6 +6321,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onkeyup="this.value = this.value.toUpperCase();handleIn(this);handleAddress(this)"
 															id="ca_short_name_10" name="ca_short_name_10"
 															th:value="${customerRequest?.ca_short_name_10}"
 															autocomplete="off" />
@@ -6207,7 +6347,8 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
-															id="ca_monthly_income_10" name="ca_monthly_income_10"
+															id="ca_monthly_income_10" readonly
+															name="ca_monthly_income_10"
 															th:value="${customerRequest?.ca_monthly_income_10}"
 															autocomplete="off" />
 													</div>
@@ -6379,8 +6520,7 @@ function gotocorporate(){
 												<h6 style="color: black; margin: 0;">SIGNATURE DETAILS
 												</h6>
 											</div>
-											<div class=""
-												>
+											<div class="">
 												<table class="mt-4 table-bordered"
 													style="height: 200px; width: 100%">
 													<thead>
@@ -6409,7 +6549,8 @@ function gotocorporate(){
 
 														</tr>
 													</thead>
-													<tbody id="signbody" style="background-color: #eeeeee; overflow: auto; height: 200px">
+													<tbody id="signbody"
+														style="background-color: #eeeeee; overflow: auto; height: 200px">
 														<tr id="row0" th:each="sign : ${SIGNATURE}">
 															<td><input id="group" type="text" maxlength="10"
 																th:value="${sign[0]}" name="img_access_code" readonly
@@ -6420,24 +6561,24 @@ function gotocorporate(){
 																class="form-control form-control-sm bg-white border border-dark bg-white border border-dark "
 																style="margin-left: 30px; width: 200px"></td>
 															<td><input id="keyword" type="text" maxlength="10"
-																th:value="${sign[2]}" name="keyword"
-																 readonly
+																th:value="${sign[2]}" name="keyword" readonly
 																class="form-control form-control-sm bg-white border border-dark bg-white border border-dark "
 																style="margin-left: 30px; width: 200px"></td>
-										    <td th:if="${sign[3] != null and sign[3] != ''}">
-                                                             <img th:src="'data:image/png;base64,' + ${sign[3]}"  name="photo"
-                                                             	alt="Photo" style="max-width: 100px; max-height: 100px;">
-                                            </td>
-                                             <td th:if="${sign[4] != null and sign[4] != ''}">
-                                                             <img th:src="'data:image/png;base64,' + ${sign[4]}" 
-                                                             	alt="Signature" style="max-width: 100px; max-height: 100px;background-color:white;">
-                                            </td>
-                                                 <td hidden><input id="srl_no" type="text" maxlength="10"
-																th:value="${sign[5]}" name="srl_no"
-																 readonly 
+															<td th:if="${sign[3] != null and sign[3] != ''}"><img
+																th:src="'data:image/png;base64,' + ${sign[3]}"
+																name="photo" alt="Photo"
+																style="max-width: 100px; max-height: 100px;"></td>
+															<td th:if="${sign[4] != null and sign[4] != ''}"><img
+																th:src="'data:image/png;base64,' + ${sign[4]}"
+																alt="Signature"
+																style="max-width: 100px; max-height: 100px; background-color: white;">
+															</td>
+															<td hidden><input id="srl_no" type="text"
+																maxlength="10" th:value="${sign[5]}" name="srl_no"
+																readonly
 																class="form-control form-control-sm bg-white border border-dark bg-white border border-dark "
 																style="margin-left: 30px; width: 200px"></td>
-                            
+
 															<td class="text-center h-50"><i
 																class="fa fa-trash custom-icon" aria-hidden="true"
 																id="deletefunction" onclick="rowdeletesignature(this);"></i></td>
@@ -6899,6 +7040,7 @@ function gotocorporate(){
 
 														<input type="text" oninput="Annual_Income()"
 															class="form-control form-control-sm bg-white border border-dark"
+															onchange="formatAndSetValue(this)"
 															id="ca_annual_income_2" name="ca_annual_income_2"
 															th:value="${customerRequest?.ca_annual_income_2}"
 															autocomplete="off" readonly />
@@ -6910,6 +7052,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onchange="formatAndSetValue(this)"
 															id="ca_monthly_income_2" name="ca_monthly_income_2"
 															th:value="${customerRequest?.ca_monthly_income_2}"
 															autocomplete="off" readonly />
@@ -6924,6 +7067,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onchange="formatAndSetValue(this)"
 															id="ca_loan_obligations_2" name="ca_loan_obligations_2"
 															th:value="${customerRequest?.ca_loan_obligations_2}"
 															autocomplete="off" required readonly />
@@ -6935,6 +7079,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onchange="formatAndSetValue(this)"
 															id="ca_family_maintenance_2"
 															th:value="${customerRequest?.ca_family_maintenance_2}"
 															name="ca_family_maintenance_2" autocomplete="off"
@@ -7090,6 +7235,7 @@ function gotocorporate(){
 
 														<input type="text" oninput="Annual_Income()"
 															class="form-control form-control-sm bg-white border border-dark"
+															onchange="formatAndSetValue(this)"
 															id="ca_annual_income_3" name="ca_annual_income_3"
 															th:value="${customerRequest?.ca_annual_income_3}"
 															autocomplete="off" readonly />
@@ -7101,6 +7247,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onchange="formatAndSetValue(this)"
 															id="ca_monthly_income_3" name="ca_monthly_income_3"
 															th:value="${customerRequest?.ca_monthly_income_3}"
 															autocomplete="off" readonly />
@@ -7115,6 +7262,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onchange="formatAndSetValue(this)"
 															id="ca_loan_obligations_3" name="ca_loan_obligations_3"
 															th:value="${customerRequest?.ca_loan_obligations_3}"
 															autocomplete="off" required readonly />
@@ -7126,6 +7274,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onchange="formatAndSetValue(this)"
 															id="ca_family_maintenance_3"
 															th:value="${customerRequest?.ca_family_maintenance_3}"
 															name="ca_family_maintenance_3" autocomplete="off"
@@ -7279,6 +7428,7 @@ function gotocorporate(){
 
 														<input type="text" oninput="Annual_Income()"
 															class="form-control form-control-sm bg-white border border-dark"
+															onchange="formatAndSetValue(this)"
 															id="ca_annual_income_4" name="ca_annual_income_4"
 															th:value="${customerRequest?.ca_annual_income_4}"
 															autocomplete="off" readonly />
@@ -7290,6 +7440,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onchange="formatAndSetValue(this)"
 															id="ca_monthly_income_4" name="ca_monthly_income_4"
 															th:value="${customerRequest?.ca_monthly_income_4}"
 															autocomplete="off" readonly />
@@ -7304,6 +7455,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onchange="formatAndSetValue(this)"
 															id="ca_loan_obligations_4" name="ca_loan_obligations_4"
 															th:value="${customerRequest?.ca_loan_obligations_4}"
 															autocomplete="off" required readonly />
@@ -7315,6 +7467,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onchange="formatAndSetValue(this)"
 															id="ca_family_maintenance_4"
 															th:value="${customerRequest?.ca_family_maintenance_4}"
 															name="ca_family_maintenance_4" autocomplete="off"
@@ -7472,6 +7625,7 @@ function gotocorporate(){
 
 														<input type="text" oninput="Annual_Income()"
 															class="form-control form-control-sm bg-white border border-dark"
+															onchange="formatAndSetValue(this)"
 															id="ca_annual_income_5" name="ca_annual_income_5"
 															th:value="${customerRequest?.ca_annual_income_5}"
 															autocomplete="off" readonly />
@@ -7483,6 +7637,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onchange="formatAndSetValue(this)"
 															id="ca_monthly_income_5" name="ca_monthly_income_5"
 															th:value="${customerRequest?.ca_monthly_income_5}"
 															autocomplete="off" readonly />
@@ -7497,6 +7652,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onchange="formatAndSetValue(this)"
 															id="ca_loan_obligations_5" name="ca_loan_obligations_5"
 															th:value="${customerRequest?.ca_loan_obligations_5}"
 															autocomplete="off" required readonly />
@@ -7508,6 +7664,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onchange="formatAndSetValue(this)"
 															id="ca_family_maintenance_5"
 															th:value="${customerRequest?.ca_family_maintenance_5}"
 															name="ca_family_maintenance_5" autocomplete="off"
@@ -7661,6 +7818,7 @@ function gotocorporate(){
 
 														<input type="text" oninput="Annual_Income()"
 															class="form-control form-control-sm bg-white border border-dark"
+															onchange="formatAndSetValue(this)"
 															id="ca_annual_income_6" name="ca_annual_income_6"
 															th:value="${customerRequest?.ca_annual_income_6}"
 															autocomplete="off" />
@@ -7672,6 +7830,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onchange="formatAndSetValue(this)"
 															id="ca_monthly_income_6" name="ca_monthly_income_6"
 															th:value="${customerRequest?.ca_monthly_income_6}"
 															autocomplete="off" />
@@ -7686,6 +7845,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onchange="formatAndSetValue(this)"
 															id="ca_loan_obligations_6" name="ca_loan_obligations_6"
 															th:value="${customerRequest?.ca_loan_obligations_6}"
 															autocomplete="off" required readonly />
@@ -7697,6 +7857,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onchange="formatAndSetValue(this)"
 															id="ca_family_maintenance_6"
 															th:value="${customerRequest?.ca_family_maintenance_6}"
 															name="ca_family_maintenance_6" autocomplete="off"
@@ -7850,6 +8011,7 @@ function gotocorporate(){
 
 														<input type="text" oninput="Annual_Income()"
 															class="form-control form-control-sm bg-white border border-dark"
+															onchange="formatAndSetValue(this)"
 															id="ca_annual_income_7" name="ca_annual_income_7"
 															th:value="${customerRequest?.ca_annual_income_7}"
 															autocomplete="off" readonly />
@@ -7861,6 +8023,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onchange="formatAndSetValue(this)"
 															id="ca_monthly_income_7" name="ca_monthly_income_7"
 															th:value="${customerRequest?.ca_monthly_income_7}"
 															autocomplete="off" readonly />
@@ -7875,6 +8038,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onchange="formatAndSetValue(this)"
 															id="ca_loan_obligations_7" name="ca_loan_obligations_7"
 															th:value="${customerRequest?.ca_loan_obligations_7}"
 															autocomplete="off" required readonly />
@@ -7886,6 +8050,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onchange="formatAndSetValue(this)"
 															id="ca_family_maintenance_7"
 															th:value="${customerRequest?.ca_family_maintenance_7}"
 															name="ca_family_maintenance_7" autocomplete="off"
@@ -8039,6 +8204,7 @@ function gotocorporate(){
 
 														<input type="text" oninput="Annual_Income()"
 															class="form-control form-control-sm bg-white border border-dark"
+															onchange="formatAndSetValue(this)"
 															id="ca_annual_income_8" name="ca_annual_income_8"
 															th:value="${customerRequest?.ca_annual_income_8}"
 															autocomplete="off" readonly />
@@ -8050,6 +8216,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onchange="formatAndSetValue(this)"
 															id="ca_monthly_income_8" name="ca_monthly_income_8"
 															th:value="${customerRequest?.ca_monthly_income_8}"
 															autocomplete="off" readonly />
@@ -8064,6 +8231,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onchange="formatAndSetValue(this)"
 															id="ca_loan_obligations_8" name="ca_loan_obligations_8"
 															th:value="${customerRequest?.ca_loan_obligations_8}"
 															autocomplete="off" required readonly />
@@ -8075,6 +8243,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onchange="formatAndSetValue(this)"
 															id="ca_family_maintenance_8"
 															th:value="${customerRequest?.ca_family_maintenance_8}"
 															name="ca_family_maintenance_8" autocomplete="off"
@@ -8228,6 +8397,7 @@ function gotocorporate(){
 
 														<input type="text" oninput="Annual_Income()"
 															class="form-control form-control-sm bg-white border border-dark"
+															onchange="formatAndSetValue(this)"
 															id="ca_annual_income_9" name="ca_annual_income_9"
 															th:value="${customerRequest?.ca_annual_income_9}"
 															autocomplete="off" readonly />
@@ -8239,6 +8409,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onchange="formatAndSetValue(this)"
 															id="ca_monthly_income_9" name="ca_monthly_income_9"
 															th:value="${customerRequest?.ca_monthly_income_9}"
 															autocomplete="off" readonly />
@@ -8253,6 +8424,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onchange="formatAndSetValue(this)"
 															id="ca_loan_obligations_9" name="ca_loan_obligations_9"
 															th:value="${customerRequest?.ca_loan_obligations_9}"
 															autocomplete="off" required readonly />
@@ -8264,6 +8436,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onchange="formatAndSetValue(this)"
 															id="ca_family_maintenance_9"
 															th:value="${customerRequest?.ca_family_maintenance_9}"
 															name="ca_family_maintenance_9" autocomplete="off"
@@ -8417,6 +8590,7 @@ function gotocorporate(){
 
 														<input type="text" oninput="Annual_Income()"
 															class="form-control form-control-sm bg-white border border-dark"
+															onchange="formatAndSetValue(this)"
 															id="ca_annual_income_10" name="ca_annual_income_10"
 															th:value="${customerRequest?.ca_annual_income_10}"
 															autocomplete="off" readonly />
@@ -8428,6 +8602,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onchange="formatAndSetValue(this)"
 															id="ca_monthly_income_10" name="ca_monthly_income_10"
 															th:value="${customerRequest?.ca_monthly_income_10}"
 															autocomplete="off" readonly />
@@ -8442,6 +8617,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onchange="formatAndSetValue(this)"
 															id="ca_loan_obligations_10" name="ca_loan_obligations_10"
 															th:value="${customerRequest?.ca_loan_obligations_10}"
 															autocomplete="off" required readonly />
@@ -8453,6 +8629,7 @@ function gotocorporate(){
 													<div class="col-sm-2">
 														<input type="text"
 															class="form-control form-control-sm bg-white border border-dark"
+															onchange="formatAndSetValue(this)"
 															id="ca_family_maintenance_10"
 															th:value="${customerRequest?.ca_family_maintenance_10}"
 															name="ca_family_maintenance_10" autocomplete="off"
@@ -9037,19 +9214,20 @@ function tranactionscreens(a) {
 
 
 	<div class="modal fade" data-backdrop="false" data-keyboard="false"
-	tabindex="-1" role="dialog" aria-hidden="true"
-	style="padding-right: 850px" id="mypopup">
-	<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
-		style="height: 20%">
-		<div class="modal-content">
-			<div class="modal-body" style="text-align: center">
-				<p id="mypopup_alertmsg"></p>
-				<button type="button" class="btn btn-primary" data-dismiss="modal"
-					onclick="openTab(event, 'tab2')">Close</button>
+		tabindex="-1" role="dialog" aria-hidden="true"
+		style="padding-right: 850px" id="mypopup">
+		<div
+			class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+			style="height: 20%">
+			<div class="modal-content">
+				<div class="modal-body" style="text-align: center">
+					<p id="mypopup_alertmsg"></p>
+					<button type="button" class="btn btn-primary" data-dismiss="modal"
+						onclick="openTab(event, 'tab2')">Close</button>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
 	<div class="modal" id="myleasecal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" data-backdrop="false"
 		aria-hidden="true">
@@ -9820,8 +9998,9 @@ function base64ToUint8Array(base64) {
 <!--signature -->
 <div class="modal fade" data-backdrop="false" data-keyboard="false"
 	tabindex="-1" role="dialog" aria-hidden="true"
-	style="padding-left: 10%;padding-top:15%;" id="signature_pop">
-	<div class="modal-dialog modal-diaCap At Maturity ? log-centered modal-dialog-scrollable"
+	style="padding-left: 10%; padding-top: 15%;" id="signature_pop">
+	<div
+		class="modal-dialog modal-diaCap At Maturity ? log-centered modal-dialog-scrollable"
 		style="height: 20%">
 		<div class="modal-content">
 			<div class="modal-body" style="text-align: center">
@@ -9845,5 +10024,219 @@ function base64ToUint8Array(base64) {
 			</div>
 		</div>
 	</div>
+	<script>
+	document.addEventListener("DOMContentLoaded", function() {
+	    // Get the input field
+	    var dateInput = document.getElementById('date_incorporation');
+
+	    if (dateInput) {
+	        // Get today's date in YYYY-MM-DD format
+	        var today = new Date().toISOString().split('T')[0];
+
+	        // Set the max attribute to today's date
+	        dateInput.setAttribute('max', today);
+	    }
+	});
+
+    </script>
+	<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    	
+        function updateFullName(index) {
+            var firstName = document.getElementById('ca_first_name_' + index).value;
+            var middleName = document.getElementById('ca_middle_name_' + index).value;
+            var lastName = document.getElementById('ca_last_name_' + index).value;
+            
+            
+            var fullName = firstName;
+
+            if (middleName) {
+                fullName += ' ' + middleName;
+            }
+
+            if (lastName) {
+                fullName += ' ' + lastName;
+            }
+
+            document.getElementById('ca_full_name_' + index).value = fullName;
+        }
+
+        // Add event listeners to the input fields in a loop
+        for (let i = 1; i <= 10; i++) {
+            let firstNameField = document.getElementById('ca_first_name_' + i);
+            let middleNameField = document.getElementById('ca_middle_name_' + i);
+            let lastNameField = document.getElementById('ca_last_name_' + i);
+
+            // Check if the fields exist before adding event listeners
+            if (firstNameField && middleNameField && lastNameField) {
+                firstNameField.addEventListener('input', function() {
+                    updateFullName(i);
+                });
+                middleNameField.addEventListener('input', function() {
+                    updateFullName(i);
+                });
+                lastNameField.addEventListener('input', function() {
+                    updateFullName(i);
+                });
+            }
+        }
+    });
+	function handleIn(input) {
+		// Remove special characters using regex
+		input.value = input.value.replace(/[^\w\s]/gi, '').toUpperCase();
+	}
+	function handleAddress(input) {
+		input.value = input.value.replace(/[^a-zA-Z0-9\s,]/g, '').toUpperCase();
+	}
+    </script>
+	<script>
+        // Function to format and set value
+        function formatAndSetValue(inputField) {
+            // Remove any commas from the value (for number input types only)
+            let rawValue = inputField.value.replace(/,/g, '');
+            // Ensure the value has decimal precision
+            let formattedValue = formatForNumbers(rawValue);
+
+            // If it's a number input, avoid commas in the input field value (parse as number)
+            if (inputField.type === 'number') {
+                inputField.value = parseFloat(formattedValue); // Assign the raw number value without commas
+            } else {
+                inputField.value = formatNumberWithIndianSeparationForOninput(formattedValue); // Apply Indian separation for text input
+            }
+        }
+
+        // Function to format number with Indian separation
+        function formatNumberWithIndianSeparationForOninput(value) {
+            if (!value) return '';
+
+            let [integerPart, decimalPart] = value.split('.');
+
+            let lastThreeDigits = integerPart.slice(-3);
+            let otherDigits = integerPart.slice(0, -3);
+
+            if (otherDigits !== '') {
+                lastThreeDigits = ',' + lastThreeDigits;
+            }
+
+            let formattedIntegerPart = otherDigits.replace(/\B(?=(\d{2})+(?!\d))/g, ',') + lastThreeDigits;
+
+            return decimalPart !== undefined ? `${formattedIntegerPart}.${decimalPart}` : formattedIntegerPart;
+        }
+
+        // Function to ensure the number has two decimal places
+        function formatForNumbers(value) {
+            let num = parseFloat(value);
+            return isNaN(num) ? '0.00' : num.toFixed(2); // Ensure two decimal places for consistent formatting
+        }
+        
+        
+    
+    </script>
+	<!--    <script>
+    function calculateMonthlyIncome() {
+        var annualIncome = document.getElementById('ca_annual_income_2').value;
+        console.log(annualIncome)
+        if (annualIncome) {
+        	var annualIncomeValue = parseFloat(annualIncome.replace(/,/g, ''));
+
+            // Calculate the monthly income
+            var monthlyIncome = (annualIncomeValue / 12).toFixed(2);
+           
+          console.log(monthlyIncome)
+          document.getElementById('ca_monthly_income_2').value = (formatNumberWithIndianSeparationForOninput1(monthlyIncome));
+            
+        } else {
+            document.getElementById('ca_monthly_income_2').value = ''; // Clear monthly income if annual income is empty
+        }
+    }
+    function formatNumberWithIndianSeparationForOninput1(value) {
+        if (!value && value !== 0) return ''; // Handle empty or null values
+
+        // Ensure the value is a string before calling split()
+        let valueStr = value.toString();
+
+        // Split integer and decimal parts
+        let [integerPart, decimalPart] = valueStr.split('.');
+
+        // Format the integer part with Indian number system
+        let lastThreeDigits = integerPart.slice(-3);
+        let otherDigits = integerPart.slice(0, -3);
+
+        if (otherDigits !== '') {
+            lastThreeDigits = ',' + lastThreeDigits;
+        }
+
+        let formattedIntegerPart = otherDigits.replace(/\B(?=(\d{2})+(?!\d))/g, ',') + lastThreeDigits;
+
+        // Return formatted value with decimal part if any
+        return decimalPart !== undefined ? `${formattedIntegerPart}.${decimalPart}` : formattedIntegerPart;
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+    	calculateMonthlyIncome();
+        document.getElementById('ca_annual_income_2').addEventListener('input', calculateMonthlyIncome);
+
+    });
+    
+</script> -->
+	<script>
+  function calculateMonthlyIncome(annualIncomeId, monthlyIncomeId) {
+	    // Get the value of the annual income field
+	    var annualIncome = document.getElementById(annualIncomeId).value;
+
+	    // Ensure the value is a valid number
+	    if (!isNaN(annualIncome) && annualIncome !== '') {
+	        // Calculate the monthly income
+	        var monthlyIncome = (annualIncome / 12).toFixed(2);
+
+	        // Set the value of the monthly income field
+	        document.getElementById(monthlyIncomeId).value = formatNumberWithIndianSeparation(monthlyIncome); // Set to 2 decimal places if needed
+	    } else {
+	        // Clear the monthly income field if the input is not a valid number
+	        document.getElementById(monthlyIncomeId).value = '';
+	    }
+	}
+
+	function formatNumberWithIndianSeparation(value) {
+	    if (!value && value !== 0) return ''; // Handle empty or null values
+
+	    // Ensure the value is a string before calling split()
+	    let valueStr = value.toString();
+
+	    // Split integer and decimal parts
+	    let [integerPart, decimalPart] = valueStr.split('.');
+
+	    // Format the integer part with Indian number system
+	    let lastThreeDigits = integerPart.slice(-3);
+	    let otherDigits = integerPart.slice(0, -3);
+
+	    if (otherDigits !== '') {
+	        lastThreeDigits = ',' + lastThreeDigits;
+	    }
+
+	    let formattedIntegerPart = otherDigits.replace(/\B(?=(\d{2})+(?!\d))/g, ',') + lastThreeDigits;
+
+	    // Return formatted value with decimal part if any
+	    return decimalPart !== undefined ? `${formattedIntegerPart}.${decimalPart}` : formattedIntegerPart;
+	}
+
+	document.addEventListener("DOMContentLoaded", function() {
+	    // Loop through fields from 2 to 10
+	    for (let i = 2; i <= 10; i++) {
+	        let annualIncomeId = `ca_annual_income_${i}`;
+	        let monthlyIncomeId = `ca_monthly_income_${i}`;
+
+	        calculateMonthlyIncome(annualIncomeId, monthlyIncomeId);
+	        
+	        document.getElementById(annualIncomeId).addEventListener('input', function() {
+	            calculateMonthlyIncome(annualIncomeId, monthlyIncomeId);
+	        });
+	    }
+	});
+	document.addEventListener("DOMContentLoaded", function() {
+		calculateMonthlyIncome();
+	});
+    
+</script>
 </div>
 </html>
