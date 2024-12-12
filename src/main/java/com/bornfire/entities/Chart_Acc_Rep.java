@@ -13,15 +13,11 @@ public interface Chart_Acc_Rep extends JpaRepository<Chart_Acc_Entity, String>{
 	
 
 
-	@Query(value = "SELECT SUM(TRY_CAST(total_balance AS NUMERIC)) \r\n"
-			+ "FROM BGLS_GL_WORK \r\n"
-			+ "WHERE TRY_CAST(total_balance AS NUMERIC) < 0;", nativeQuery = true)
-    String getacctbaldebit();
-	
-	@Query(value = "SELECT SUM(TRY_CAST(total_balance AS NUMERIC)) \r\n"
-			+ "FROM BGLS_GL_WORK \r\n"
-			+ "WHERE TRY_CAST(total_balance AS NUMERIC) > 0;", nativeQuery = true)
-    String getacctbalcredit();
+	@Query(value = "SELECT SUM(CASE WHEN TO_NUMBER(total_balance) < 0 THEN TO_NUMBER(total_balance) ELSE 0 END) FROM BGLS_GL_WORK WHERE total_balance IS NOT NULL", nativeQuery = true)
+	String getacctbaldebit();
+
+	@Query(value = "SELECT SUM(CASE WHEN TO_NUMBER(total_balance) > 0 THEN TO_NUMBER(total_balance) ELSE 0 END) FROM BGLS_GL_WORK WHERE total_balance IS NOT NULL", nativeQuery = true)
+	String getacctbalcredit();
 	
 	@Query(value = "SELECT SUM(ACCT_BAL) FROM COA WHERE ACCT_BAL <0", nativeQuery = true)
     String getGLbaldebit();
@@ -29,7 +25,7 @@ public interface Chart_Acc_Rep extends JpaRepository<Chart_Acc_Entity, String>{
 	@Query(value = "SELECT SUM(ACCT_BAL) FROM COA WHERE ACCT_BAL >0", nativeQuery = true)
     String getGLbalcredit();
 	
-	@Query(value = "SELECT COUNT(ACCT_BAL) AS ACCT_BAL,SUM(ACCT_BAL) AS SUM_BAL FROM BGLS_CHART_OF_ACCOUNTS WHERE ACCT_CLS_FLG='N';", nativeQuery = true)
+	@Query(value = "SELECT COUNT(ACCT_BAL) AS ACCT_BAL,SUM(ACCT_BAL) AS SUM_BAL FROM BGLS_CHART_OF_ACCOUNTS WHERE ACCT_CLS_FLG='N'", nativeQuery = true)
     Object[] getaccbalance();
 
 	

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface Lease_Loan_Work_Repo  extends JpaRepository<Lease_Loan_Work_Entity, String>  {
 	
-	@Query(value = "select * from Loan_AccountMaster_Work where del_flg = 'N' union all select * from Loan_AccountMaster where del_flg = 'N' ORDER BY LOAN_ACCOUNTNO", nativeQuery = true)
+	@Query(value = "SELECT * FROM ( SELECT * FROM Loan_AccountMaster_Work WHERE del_flg = 'N' UNION ALL SELECT * FROM Loan_AccountMaster WHERE del_flg = 'N')ORDER BY LOAN_ACCOUNTNO", nativeQuery = true)
 	List<Lease_Loan_Work_Entity> getLeaseAccountList();
 	
 	@Query(value = "select * from Loan_AccountMaster_Work where del_flg = 'N' and loan_accountno=?1  union all select * from Loan_AccountMaster where del_flg = 'N' and loan_accountno=?1", nativeQuery = true)

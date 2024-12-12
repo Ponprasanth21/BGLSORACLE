@@ -1138,6 +1138,9 @@ public class BGLSRestController {
 			String nextSerialNumber = tRAN_MAIN_TRM_WRK_REP.gettrmRefUUID(); // Fetch the next SRLNO
 			transaction.setSrl_no(nextSerialNumber); // Set the serial number manually
 
+			String data1 = transaction.getFlow_code();
+			System.out.println("The flow code is "+data1);
+			
 			String accountNumber = transaction.getAcct_num();
 			System.out.println("Account Number : " + accountNumber);
 			String partitionFlag = chart_Acc_Rep.getpartitionFlag(accountNumber);

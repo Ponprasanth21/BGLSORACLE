@@ -144,49 +144,21 @@ List<BigDecimal> findLatestTRAN_DATE_BALByAccountNumber(@Param("accountNum") Str
 
 	
 	
-@Query(value = "SELECT COUNT(TRAN_AMT) AS COUNTAMT, SUM(TRAN_AMT) AS TRANAMT " +
-        "FROM BGLS_TRM_WRK_TRANSACTIONS " +
-        "WHERE DEL_FLG != 'Y' " +
-        "AND PART_TRAN_TYPE = 'debit' " +
-        "AND TRAN_STATUS = 'POSTED' " +
-        "AND CAST(TRAN_DATE AS DATE) = CAST(GETDATE() AS DATE)", nativeQuery = true)
+@Query(value = "SELECT COUNT(TRAN_AMT) AS COUNTAMT, SUM(TRAN_AMT) AS TRANAMT FROM BGLS_TRM_WRK_TRANSACTIONS WHERE DEL_FLG != 'Y' AND PART_TRAN_TYPE = 'debit' AND TRAN_STATUS = 'POSTED' AND TRUNC(TRAN_DATE) = TRUNC(SYSDATE)", nativeQuery = true)
 List<Object[]> getWoforDebitValues();
 
 	
-@Query(value = "SELECT COUNT(TRAN_AMT) AS COUNTAMT, SUM(TRAN_AMT) AS TRANAMT " +
-        "FROM BGLS_TRM_WRK_TRANSACTIONS " +
-        "WHERE DEL_FLG != 'Y' " +
-        "AND PART_TRAN_TYPE = 'credit' " +
-        "AND TRAN_STATUS = 'POSTED' " +
-        "AND CAST(TRAN_DATE AS DATE) = CAST(GETDATE() AS DATE)", nativeQuery = true)
+@Query(value = "SELECT COUNT(TRAN_AMT) AS COUNTAMT, SUM(TRAN_AMT) AS TRANAMT FROM BGLS_TRM_WRK_TRANSACTIONS WHERE DEL_FLG != 'Y' AND PART_TRAN_TYPE = 'credit' AND TRAN_STATUS = 'POSTED' AND TRUNC(TRAN_DATE) = TRUNC(SYSDATE)", nativeQuery = true)
 List<Object[]> getWoforcreditValues();
 
 
 	
-@Query(value = "SELECT COUNT(DISTINCT acct_num) AS COUNTACCTNUM, " +
-        "COUNT(TRAN_AMT) AS COUNTAMT, " +
-        "SUM(TRAN_AMT) AS TRANAMT " +
-        "FROM BGLS_TRM_WRK_TRANSACTIONS " +
-        "WHERE DEL_FLG != 'Y' " +
-        "AND TRAN_STATUS = 'POSTED' " +
-        "AND CAST(TRAN_DATE AS DATE) = CAST(GETDATE() AS DATE)", nativeQuery = true)
+@Query(value = "SELECT COUNT(DISTINCT acct_num) AS COUNTACCTNUM,COUNT(TRAN_AMT) AS COUNTAMT,SUM(TRAN_AMT) AS TRANAMT FROM BGLS_TRM_WRK_TRANSACTIONS WHERE DEL_FLG != 'Y' AND TRAN_STATUS = 'POSTED' AND TRUNC(TRAN_DATE) = TRUNC(SYSDATE)", nativeQuery = true)
 Object[] getWoforTotalValues();
 
 
 
-@Query(value = "SELECT acct_num, " +
-        "acct_name, " +  // Include acct_name
-        "COUNT(TRAN_AMT) AS COUNTAMT, " +
-        "SUM(CASE WHEN PART_TRAN_TYPE = 'credit' THEN TRAN_AMT ELSE 0 END) AS TOTAL_CREDIT, " +
-        "SUM(CASE WHEN PART_TRAN_TYPE = 'debit' THEN TRAN_AMT ELSE 0 END) AS TOTAL_DEBIT, " +
-        "SUM(CASE WHEN PART_TRAN_TYPE = 'credit' THEN TRAN_AMT " +
-        "          WHEN PART_TRAN_TYPE = 'debit' THEN -TRAN_AMT " +
-        "          ELSE 0 END) AS NETAMT " +
-        "FROM BGLS_TRM_WRK_TRANSACTIONS " +
-        "WHERE DEL_FLG != 'Y' " +
-        "AND TRAN_STATUS = 'POSTED' " +
-        "AND CAST(TRAN_DATE AS DATE) = CAST(:tranDate AS DATE) " +
-        "GROUP BY acct_num, acct_name",  // Group by acct_name as well
+@Query(value = "SELECT acct_num,acct_name,COUNT(TRAN_AMT) AS COUNTAMT,SUM(CASE WHEN PART_TRAN_TYPE = 'credit' THEN TRAN_AMT ELSE 0 END) AS TOTAL_CREDIT, SUM(CASE WHEN PART_TRAN_TYPE = 'debit' THEN TRAN_AMT ELSE 0 END) AS TOTAL_DEBIT, SUM(CASE WHEN PART_TRAN_TYPE = 'credit' THEN TRAN_AMT WHEN PART_TRAN_TYPE = 'debit' THEN -TRAN_AMT ELSE 0 END) AS NETAMT FROM BGLS_TRM_WRK_TRANSACTIONS WHERE DEL_FLG != 'Y' AND TRAN_STATUS = 'POSTED' AND TRUNC(TRAN_DATE) = TRUNC(TO_DATE(:tranDate, 'YYYY-MM-DD')) GROUP BY acct_num, acct_name",  // Group by acct_name as well
         nativeQuery = true)
 List<Object[]> getNetDebitCreditWithCountForCurrentDate(@Param("tranDate") String tranDate);
 
@@ -223,13 +195,7 @@ List<Object[]> getNetDebitCreditWithCountForCurrentDate1();
 
 
 
-@Query(value = "SELECT " +
-        "SUM(CASE WHEN PART_TRAN_TYPE = 'credit' THEN TRAN_AMT ELSE 0 END) - " +
-        "SUM(CASE WHEN PART_TRAN_TYPE = 'debit' THEN TRAN_AMT ELSE 0 END) AS NET_TOTAL " +
-    "FROM BGLS_TRM_WRK_TRANSACTIONS " +
-    "WHERE DEL_FLG != 'Y' " +
-    "AND TRAN_STATUS = 'POSTED' " +
-    "AND CAST(TRAN_DATE AS DATE) = CAST(:tranDate AS DATE)", nativeQuery = true)
+@Query(value = "SELECT SUM(CASE WHEN PART_TRAN_TYPE = 'credit' THEN TRAN_AMT ELSE 0 END) - SUM(CASE WHEN PART_TRAN_TYPE = 'debit' THEN TRAN_AMT ELSE 0 END) AS NET_TOTAL FROM BGLS_TRM_WRK_TRANSACTIONS WHERE DEL_FLG != 'Y' AND TRAN_STATUS = 'POSTED' AND TRUNC(TRAN_DATE) = TRUNC(TO_DATE(:tranDate, 'YYYY-MM-DD'))", nativeQuery = true)
 BigDecimal getTotalValues(@Param("tranDate") String tranDate);
 
 
@@ -256,15 +222,7 @@ BigDecimal getTotalTransactionCount1();
         ") AS AccountCounts", nativeQuery = true)
 BigDecimal getTotalTransactionCount_before();
 
-@Query(value = "SELECT SUM(COUNTAMT) AS TOTAL_COUNT " +
-        "FROM ( " +
-        "    SELECT COUNT(TRAN_AMT) AS COUNTAMT " +
-        "    FROM BGLS_TRM_WRK_TRANSACTIONS " +
-        "    WHERE DEL_FLG != 'Y' " +
-        "    AND TRAN_STATUS = 'POSTED' " +
-        "    AND CAST(TRAN_DATE AS DATE) = CAST(:tranDate AS DATE) " + // Use parameter for transaction date
-        "    GROUP BY acct_num " +
-        ") AS AccountCounts", nativeQuery = true)
+@Query(value = "SELECT SUM(COUNTAMT) AS TOTAL_COUNT FROM ( SELECT COUNT(TRAN_AMT) AS COUNTAMT FROM BGLS_TRM_WRK_TRANSACTIONS WHERE DEL_FLG != 'Y' AND TRAN_STATUS = 'POSTED' AND TRUNC(TRAN_DATE) = TRUNC(TO_DATE(:tranDate, 'YYYY-MM-DD')) GROUP BY acct_num) AccountCounts", nativeQuery = true)
 Object getTotalTransactionCount(@Param("tranDate") String tranDate);
 
 
@@ -277,12 +235,7 @@ Object getTotalTransactionCount(@Param("tranDate") String tranDate);
         "AND CAST(TRAN_DATE AS DATE) = CAST(GETDATE() AS DATE)", nativeQuery = true)
 BigDecimal getTotalCredit_before();
 
-@Query(value = "SELECT SUM(TRAN_AMT) AS TOTAL_CREDIT " +
-        "FROM BGLS_TRM_WRK_TRANSACTIONS " +
-        "WHERE DEL_FLG != 'Y' " +
-        "AND PART_TRAN_TYPE = 'credit' " +
-        "AND TRAN_STATUS = 'POSTED' " +
-        "AND CAST(TRAN_DATE AS DATE) = CAST(:tranDate AS DATE)", nativeQuery = true)
+@Query(value = "SELECT SUM(TRAN_AMT) AS TOTAL_CREDIT FROM BGLS_TRM_WRK_TRANSACTIONS WHERE DEL_FLG != 'Y' AND PART_TRAN_TYPE = 'credit' AND TRAN_STATUS = 'POSTED' AND TRUNC(TRAN_DATE) = TRUNC(TO_DATE(:tranDate, 'YYYY-MM-DD'))", nativeQuery = true)
 BigDecimal getTotalCredit(@Param("tranDate") String tranDate);
 
 
@@ -296,12 +249,7 @@ BigDecimal getTotalCredit(@Param("tranDate") String tranDate);
 nativeQuery = true)
 BigDecimal getTotalDebit_before();
 
-@Query(value = "SELECT SUM(TRAN_AMT * -1) AS TOTAL_DEBIT " +
-        "FROM BGLS_TRM_WRK_TRANSACTIONS " +
-        "WHERE DEL_FLG != 'Y' " +
-        "AND PART_TRAN_TYPE = 'debit' " +
-        "AND TRAN_STATUS = 'POSTED' " +
-        "AND CAST(TRAN_DATE AS DATE) = CAST(:tranDate AS DATE)", 
+@Query(value = "SELECT SUM(TRAN_AMT * -1) AS TOTAL_DEBIT FROM BGLS_TRM_WRK_TRANSACTIONS WHERE DEL_FLG != 'Y' AND PART_TRAN_TYPE = 'debit' AND TRAN_STATUS = 'POSTED' AND TRUNC(TRAN_DATE) = TRUNC(TO_DATE(:tranDate, 'YYYY-MM-DD'))", 
         nativeQuery = true)
 BigDecimal getTotalDebit(@Param("tranDate") String tranDate);
 
@@ -317,9 +265,7 @@ List<TRAN_MAIN_TRM_WRK_ENTITY> set_dab_acc_num(@Param("acctnum") List<String> ac
 	@Query(value = "SELECT COUNT(TRAN_AMT) as COUNTAMT,SUM(TRAN_AMT) AS TRANAMT FROM BGLS_TRM_WRK_TRANSACTIONS WHERE DEL_FLG !='Y' AND PART_TRAN_TYPE='credit' AND TRAN_STATUS='POSTED'", nativeQuery = true)
 	Object[] getwoforcreditvalues();
 
-	@Query(value = "SELECT COUNT(TRAN_AMT) AS COUNTAMT, " + "SUM(CASE WHEN PART_TRAN_TYPE = 'Debit' THEN -1 * TRAN_AMT "
-			+ "WHEN PART_TRAN_TYPE = 'Credit' THEN 1 * TRAN_AMT ELSE 0 END) AS TRANAMT "
-			+ "FROM BGLS_TRM_WRK_TRANSACTIONS WHERE DEL_FLG != 'Y' AND TRAN_STATUS='POSTED'", nativeQuery = true)
+	@Query(value = "SELECT COUNT(TRAN_AMT) AS COUNTAMT, SUM(CASE WHEN PART_TRAN_TYPE = 'Debit' THEN -1 * TRAN_AMT  WHEN PART_TRAN_TYPE = 'Credit' THEN 1 * TRAN_AMT ELSE 0 END) AS TRANAMT  FROM BGLS_TRM_WRK_TRANSACTIONS WHERE DEL_FLG != 'Y' AND TRAN_STATUS = 'POSTED'", nativeQuery = true)
 	Object[] getTransactionValues();
 	
 	@Query(value = "SELECT COUNT(PART_TRAN_TYPE) as TRAN_TYPE FROM BGLS_TRM_WRK_TRANSACTIONS WHERE DEL_FLG='Y'", nativeQuery = true)
@@ -359,13 +305,13 @@ List<TRAN_MAIN_TRM_WRK_ENTITY> set_dab_acc_num(@Param("acctnum") List<String> ac
 	@Query(value = "select tran_id,Part_tran_id from BGLS_TRM_WRK_TRANSACTIONS aa where aa.acct_num = ?1", nativeQuery = true)
 	TRAN_MAIN_TRM_WRK_ENTITY gettranpopvalues(String acct_num);
 	
-	@Query(value = "select tran_amt from BGLS_TRM_WRK_TRANSACTIONS WHERE part_tran_type = 'CREDIT' AND TRAN_ID = ?1 AND PART_TRAN_ID=?2", nativeQuery = true)
+	@Query(value = "select tran_amt from BGLS_TRM_WRK_TRANSACTIONS WHERE part_tran_type = 'Credit' AND TRAN_ID = ?1 AND PART_TRAN_ID=?2", nativeQuery = true)
 	BigDecimal getcredit(String tran_id,BigDecimal partTranID);
 	
-	@Query(value = "select tran_amt from BGLS_TRM_WRK_TRANSACTIONS WHERE part_tran_type = 'DEBIT' AND TRAN_ID = ?1 AND PART_TRAN_ID=?2", nativeQuery = true)
+	@Query(value = "select tran_amt from BGLS_TRM_WRK_TRANSACTIONS WHERE part_tran_type = 'Debit' AND TRAN_ID = ?1 AND PART_TRAN_ID=?2", nativeQuery = true)
 	BigDecimal getdebit(String tran_id,BigDecimal partTranID);
 	
-	@Query(value = "SELECT TRAN_DATE,TRAN_ID + '/' + CAST(PART_TRAN_ID AS VARCHAR(50)) AS TRANSACTION_ID, TRAN_PARTICULAR,ACCT_CRNCY, TRAN_AMT,CASE PART_TRAN_TYPE WHEN 'credit' THEN TRAN_AMT ELSE 0 END as Credit,CASE PART_TRAN_TYPE  WHEN 'debit' THEN TRAN_AMT ELSE 0 END as Debit FROM BGLS_TRM_WRK_TRANSACTIONS WHERE acct_num =?1 AND TRAN_STATUS='POSTED' ORDER BY TRAN_DATE, TRAN_ID, PART_TRAN_ID", nativeQuery = true)
+	@Query(value = "SELECT TRAN_DATE,TRAN_ID || '/' || TO_CHAR(PART_TRAN_ID) AS TRANSACTION_ID,TRAN_PARTICULAR,ACCT_CRNCY,TRAN_AMT,CASE WHEN PART_TRAN_TYPE = 'credit' THEN TRAN_AMT ELSE 0 END AS Credit,CASE WHEN PART_TRAN_TYPE = 'debit' THEN TRAN_AMT ELSE 0 END AS Debit FROM BGLS_TRM_WRK_TRANSACTIONS WHERE ACCT_NUM = '1500001000' AND TRAN_STATUS = 'POSTED' ORDER BY TRAN_DATE, TRAN_ID, PART_TRAN_ID", nativeQuery = true)
 	List<Object[]> getList(@Param("acct_num") String acct_num);
 	
 	@Query(value = "select * from BGLS_TRM_WRK_TRANSACTIONS aa where aa.acct_num = ?1", nativeQuery = true)
