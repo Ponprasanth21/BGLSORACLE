@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
@@ -2113,7 +2114,7 @@ public class BGLSNavigationController {
 			model.addAttribute("managelist", collateral_management_Repo.getlist());
 		} else if (formmode.equals("modify")) {
 			model.addAttribute("formmode", "modify");
-			model.addAttribute("viewmanage", collateral_management_Repo.getbyid(customer_id));
+			model.addAttribute("modimanage", collateral_management_Repo.getbyid(customer_id));
 			// String userNum = userProfileRep.getUSERIDNumMax();
 			/*
 			 * String userNumStart; if (user != null) { userNumStart = "USER00" +
@@ -3397,7 +3398,29 @@ public class BGLSNavigationController {
 	    return "Interest_Summary";
 	}
 
-	
-
+	@PostMapping(value = "SubmitcollamanageModify1")
+	@ResponseBody
+	public String SubmitcollamanageModify1( // Change parameter name to user_id
+			Model md, HttpServletRequest rq,
+			@ModelAttribute Collateral_management_Entity collateral_management_Entity) {
+		String userID = (String) rq.getSession().getAttribute("USERID");
+		
+		String msg = "";
+		Collateral_management_Entity up = collateral_management_Repo.getbyid(collateral_management_Entity.getCustomer_id());
+		if (Objects.nonNull(up)) {
+			up = collateral_management_Entity;
+			up.setDel_flg("N");
+			up.setEntity_flg("N");
+			up.setModify_flg("N");
+			up.setGen_verify_flg("N");
+			up.setEntry_user(userID);
+			up.setEntry_time(new Date());
+			collateral_management_Repo.save(up);
+			msg = "Modify Successfully";
+		} else {
+			msg = "Data Not Found";
+		}
+		return msg;
+	}
 
 }
