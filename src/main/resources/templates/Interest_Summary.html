@@ -312,6 +312,7 @@ input:hover+.password-info {
 													th:text="${#numbers.formatDecimal(chartacc?.loan_sanctioned, 1, 'COMMA', 2, 'POINT')}"></td>
 												<td style="text-align: right"
 													th:text="${chartacc?.effective_interest_rate}"></td>
+													
 												<td
 													th:text="${#numbers.formatDecimal(allAccBalances[iter.index], 1, 'COMMA', 2, 'POINT')}"
 													style="text-align: right"></td>

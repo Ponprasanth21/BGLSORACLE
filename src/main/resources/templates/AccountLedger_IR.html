@@ -627,17 +627,20 @@ input:hover+.password-info {
 
 		function navigate(a) {
 			var navi = a.getAttribute('data-resource');
-			//alert(navi)
-			var parts = navi.split('/');
+/* 			alert(navi)
+ */			var parts = navi.split('/');
 			var navi1 = parts[0];
-			//alert(navi1)
-			var navi2 = parts[1];
-
-			var acctnum = a.getAttribute('data-resource1');
-			//alert(acctnum)
-
-			location.href = './journalEntries?formmode=view&tran_id=' + navi1
+/* 			alert(navi1)
+ */			var navi2 = parts[1];
+/* alert(navi2)
+ */			var acctnum = a.getAttribute('data-resource1');
+/* 			alert(acctnum)
+ */
+			var url = 'journalEntries?formmode=view&tran_id=' + navi1
 				+ '&part_tran_id=' + navi2 + '&acct_num=' + acctnum;
+			 
+
+		location.href = url;
 		}
 
 
