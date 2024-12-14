@@ -480,6 +480,35 @@ input:hover+.password-info {
 		location.href = 'organizationDetails?formmode=viewrecord&record_srl='
 				+ record_srl;
 	}
+	
+	
+	
+	function getCheckedValues1() {
+	    // Get all the checked record dates from the table
+	    var holidayDates = [];
+	    $('#AssosiateTable tbody tr').each(function() {
+	        var isChecked = $(this).find('td').eq(0).hasClass('hover-underline'); // or check another condition
+	        if (isChecked) {
+	            var recordDate = $(this).find('td').eq(3).text(); // Assuming the record_date is in the 4th column
+	            holidayDates.push(recordDate);
+	        }
+	    });
+
+	    console.log("Holiday Dates"+holidayDates);
+	    // Send the list of dates to the backend via AJAX
+	     $.ajax({
+	        url: '/updateCalmaster',  // Adjust with your controller URL
+	        type: 'POST',
+	        contentType: 'application/json',
+	        data: JSON.stringify(holidayDates), // Send the array as JSON
+	        success: function(response) {
+	            alert('Successfully updated the calendar!');
+	        },
+	        error: function(xhr, status, error) {
+	            alert('Error updating the calendar!');
+	        }
+	    }); 
+	}
 </script>
 </head>
 
@@ -915,7 +944,7 @@ input:hover+.password-info {
 								<div class="card-footer text-center "
 									style="background-color: #e9ecef">
 									<button class="btn btn-primary p-2" onclick="Home();">Home</button>
-									<button class="btn btn-primary p-2" onclick="Modify();">Modify</button>
+									<button class="btn btn-primary p-2" onclick="Modify1();">Modify</button>
 									<button class="btn btn-primary p-2" onclick="Back();">Back</button>
 								</div>
 							</div>
@@ -1047,14 +1076,14 @@ input:hover+.password-info {
 									<div class="col-sm-1"></div>
 									<div class="col-sm-2">Organization</div>
 									<div class="col-sm-2">
-										<input type="text" name="" id="" readonly
+										<input type="text" name="" id="" 
 											class="form-control form-control-sm bg-white border border-dark" />
 
 									</div>
 									<div class="col-sm-1"></div>
 									<div class="col-sm-2">Location</div>
 									<div class="col-sm-2">
-										<input type="text" name="" id="" readonly
+										<input type="text" name="" id="" 
 											class="form-control form-control-sm bg-white border border-dark" />
 									</div>
 								</div>
@@ -1063,13 +1092,13 @@ input:hover+.password-info {
 									<div class="col-sm-1"></div>
 									<div class="col-sm-2">Calendar Year</div>
 									<div class="col-sm-2">
-										<input type="text" name="" id="" readonly
+										<input type="text" name="" id="" 
 											class="form-control form-control-sm bg-white border border-dark" />
 									</div>
 									<div class="col-sm-1"></div>
 									<div class="col-sm-2">Month</div>
 									<div class="col-sm-2">
-										<input type="text" name="" id="" readonly
+										<input type="text" name="" id="" 
 											class="form-control form-control-sm bg-white border border-dark" />
 									</div>
 								</div>
@@ -1078,13 +1107,13 @@ input:hover+.password-info {
 									<div class="col-sm-1"></div>
 									<div class="col-sm-2">Record No</div>
 									<div class="col-sm-2">
-										<input type="text" name="" id="" readonly
+										<input type="text" name="" id="" 
 											class="form-control form-control-sm bg-white border border-dark" />
 									</div>
 									<div class="col-sm-1"></div>
 									<div class="col-sm-2">Date</div>
 									<div class="col-sm-2">
-										<input type="text" name="" id="" readonly
+										<input type="text" name="" id="" 
 											class="form-control form-control-sm bg-white border border-dark" />
 									</div>
 								</div>
@@ -1093,14 +1122,14 @@ input:hover+.password-info {
 									<div class="col-sm-1"></div>
 									<div class="col-sm-2">Description</div>
 									<div class="col-sm-2">
-										<input type="text" name="" id="" readonly
+										<input type="text" name="" id="" 
 											class="form-control form-control-sm bg-white border border-dark" />
 
 									</div>
 									<div class="col-sm-1"></div>
 									<div class="col-sm-2">Remarks</div>
 									<div class="col-sm-2">
-										<input type="text" name="" id="" readonly
+										<input type="text" name="" id="" 
 											class="form-control form-control-sm bg-white border border-dark" />
 
 									</div>
@@ -1110,7 +1139,7 @@ input:hover+.password-info {
 									<div class="col-sm-1"></div>
 									<div class="col-sm-2">Holiday Flag</div>
 									<div class="col-sm-2">
-										<input type="text" name="" id="" readonly
+										<input type="text" name="" id="" 
 											class="form-control form-control-sm bg-white border border-dark" />
 
 									</div>
@@ -1118,7 +1147,7 @@ input:hover+.password-info {
 									<div class="col-sm-2">Record Status</div>
 									<div class="col-sm-2">
 
-										<input type="text" name="" id="" readonly
+										<input type="text" name="" id="" 
 											class="form-control form-control-sm bg-white border border-dark" />
 
 									</div>
@@ -1247,7 +1276,7 @@ input:hover+.password-info {
 									<div class="col-sm-1"></div>
 									<div class="col-sm-2">Date</div>
 									<div class="col-sm-2">
-										<input type="text" name="" id="" readonly
+										<input type="text" name="" id="" 
 											class="form-control form-control-sm bg-white border border-dark" />
 									</div>
 								</div>
@@ -1256,14 +1285,14 @@ input:hover+.password-info {
 									<div class="col-sm-1"></div>
 									<div class="col-sm-2">Description</div>
 									<div class="col-sm-2">
-										<input type="text" name="" id="" readonly
+										<input type="text" name="" id="" 
 											class="form-control form-control-sm bg-white border border-dark" />
 
 									</div>
 									<div class="col-sm-1"></div>
 									<div class="col-sm-2">Remarks</div>
 									<div class="col-sm-2">
-										<input type="text" name="" id="" readonly
+										<input type="text" name="" id="" 
 											class="form-control form-control-sm bg-white border border-dark" />
 
 									</div>
@@ -1272,7 +1301,7 @@ input:hover+.password-info {
 									<div class="col-sm-1"></div>
 									<div class="col-sm-2">Holiday Flag</div>
 									<div class="col-sm-2">
-										<input type="text" name="" id="" readonly
+										<input type="text" name="" id="" 
 											class="form-control form-control-sm bg-white border border-dark" />
 
 									</div>
@@ -1280,7 +1309,7 @@ input:hover+.password-info {
 									<div class="col-sm-2">Record Status</div>
 									<div class="col-sm-2">
 
-										<input type="text" name="" id="" readonly
+										<input type="text" name="" id="" 
 											class="form-control form-control-sm bg-white border border-dark" />
 
 									</div>
@@ -1364,7 +1393,7 @@ input:hover+.password-info {
 								style="background-color: #e9ecef">
 								<button class="btn btn-primary p-2" onclick="Home();">Home</button>
 								<button class="btn btn-primary p-2" id="submitBtn"
-									onclick="getCheckedValues()">Submit</button>
+									onclick="getCheckedValues1()">Submit</button>
 								<button class="btn btn-primary p-2" onclick="Back();">Back</button>
 							</div>
 						</div>
