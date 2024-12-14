@@ -187,7 +187,7 @@ input:hover+.password-info {
 	
 	function modifyuser(a) {
 		var acctno = a.getAttribute("data-attr"); 
-		location.href = 'chartOfAccounts?formmode=edit&acct_num=' + acctno;
+		location.href = 'chartOfAccounts?formmode=modify&acct_num=' + acctno;
 	}
 
 	function enquiryuser(a) {
@@ -465,14 +465,14 @@ function verifysubmit(a) {
 										<thead class="thead-light">
 											<tr class="filters">
 												<th style="width: 6%"><input type="text"
-													class="form-control font-weight-bold"
-													placeholder="HEAD" disabled></th>
+													class="form-control font-weight-bold" placeholder="HEAD"
+													disabled></th>
 												<th><input type="text"
 													class="form-control font-weight-bold" placeholder="GL"
 													disabled></th>
-													<th style="width: 9%"><input type="text"
-													class="form-control font-weight-bold" placeholder="SCHEME CODE"
-													disabled></th>
+												<th style="width: 9%"><input type="text"
+													class="form-control font-weight-bold"
+													placeholder="SCHEME CODE" disabled></th>
 												<th><input type="text"
 													class="form-control font-weight-bold"
 													placeholder="ACCT NUM" disabled></th>
@@ -504,8 +504,9 @@ function verifysubmit(a) {
 												<td th:text="${chartacc?.classification}"></td>
 												<td th:text="${chartacc?.gl_code}"></td>
 												<td th:text="${chartacc?.schm_code}"></td>
-												<td th:text="${chartacc?.acct_num}" class="text-primary"	th:attr="data-attr=${chartacc?.acct_num}"
-											onclick="enquiryuser(this);"	></td>
+												<td th:text="${chartacc?.acct_num}" class="text-primary"
+													th:attr="data-attr=${chartacc?.acct_num}"
+													onclick="enquiryuser(this);"></td>
 												<td th:text="${chartacc?.acct_name}"></td>
 												<td th:text="${chartacc?.acct_crncy}"></td>
 												<td
@@ -625,19 +626,19 @@ function verifysubmit(a) {
 											class="form-control form-control-sm bg-white border border-dark" />
 									</div>
 								</div>
-								
+
 								<div class="row formline" style="padding: 0px 0px 2px 0px;">
 									<div class="col-sm-1"></div>
-									<div class="col-sm-2 d-flex align-items-center">GL Sub Head
-										</div>
+									<div class="col-sm-2 d-flex align-items-center">GL Sub
+										Head</div>
 									<div class="col-sm-2 d-flex align-items-center">
 										<input type="text" name="glsh_code" id="glsh_code"
 											class="form-control form-control-sm bg-white border border-dark" />
 									</div>
 
 									<div class="col-sm-1"></div>
-									<div class="col-sm-2 d-flex align-items-center">GL Sub Head Description
-										</div>
+									<div class="col-sm-2 d-flex align-items-center">GL Sub
+										Head Description</div>
 									<div class="col-sm-2 d-flex align-items-center">
 										<input type="text" name="glsh_desc" id="glsh_desc"
 											class="form-control form-control-sm bg-white border border-dark" />
@@ -730,7 +731,7 @@ function verifysubmit(a) {
 										<input type="text" name="acct_crncy" id="acct_crncy"
 											class="form-control form-control-sm bg-white border border-dark" />
 									</div>
-									
+
 								</div>
 
 								<div class="row formline" style="padding: 0px 0px 2px 0px;">
@@ -844,13 +845,10 @@ function verifysubmit(a) {
 					</div>
 				</div>
 
-				<div th:if="${formmode}=='view'">
+				<div th:if="${formmode}=='modify'">
 					<div class="card">
-
-
 						<div class="card-header"
 							style="height: 50px; background-color: #e9ecef;">
-
 							<h6 style="font-size: 1.2rem; color: black;">CHART OF
 								ACCOUNTS</h6>
 						</div>
@@ -897,21 +895,23 @@ function verifysubmit(a) {
 											th:value="${chartaccount?.gl_desc}" />
 									</div>
 								</div>
-								
+
 								<div class="row formline" style="padding: 0px 0px 2px 0px;">
 									<div class="col-sm-1"></div>
-									<div class="col-sm-2 d-flex align-items-center">GL Sub Head
-										</div>
+									<div class="col-sm-2 d-flex align-items-center">GL Sub
+										Head</div>
 									<div class="col-sm-2 d-flex align-items-center">
-										<input type="text" name="glsh_code" id="glsh_code" th:value="${chartaccount?.glsh_code}"
+										<input type="text" name="glsh_code" id="glsh_code"
+											th:value="${chartaccount?.glsh_code}"
 											class="form-control form-control-sm bg-white border border-dark" />
 									</div>
 
 									<div class="col-sm-1"></div>
-									<div class="col-sm-2 d-flex align-items-center">GL Sub Head Description
-										</div>
+									<div class="col-sm-2 d-flex align-items-center">GL Sub
+										Head Description</div>
 									<div class="col-sm-2 d-flex align-items-center">
-										<input type="text" name="glsh_desc" id="glsh_desc" th:value="${chartaccount?.glsh_desc}"
+										<input type="text" name="glsh_desc" id="glsh_desc"
+											th:value="${chartaccount?.glsh_desc}"
 											class="form-control form-control-sm bg-white border border-dark" />
 									</div>
 								</div>
@@ -990,7 +990,7 @@ function verifysubmit(a) {
 											class="form-control form-control-sm bg-white border border-dark"
 											th:value="${chartaccount?.ref_crncy}" />
 									</div>
-									
+
 									<div class="col-sm-1"></div>
 									<div class="col-sm-2 d-flex align-items-center">Home
 										Currency</div>
@@ -999,7 +999,273 @@ function verifysubmit(a) {
 											class="form-control form-control-sm bg-white border border-dark"
 											th:value="${chartaccount?.acct_crncy}" />
 									</div>
-									
+
+								</div>
+
+								<div class="row formline" style="padding: 0px 0px 2px 0px;">
+									<div class="col-sm-1"></div>
+									<div class="col-sm-2 d-flex align-items-center">Ref Code</div>
+									<div class="col-sm-2 d-flex align-items-center">
+										<input type="text" name="ref_code" id="ref_code"
+											class="form-control form-control-sm bg-white border border-dark"
+											th:value="${chartaccount?.ref_code}" />
+									</div>
+									<div class="col-sm-1"></div>
+									<div class="col-sm-2 d-flex align-items-center">Ref
+										Description</div>
+									<div class="col-sm-2 d-flex align-items-center">
+										<input type="text" name="ref_desc" id="ref_desc"
+											class="form-control form-control-sm bg-white border border-dark"
+											th:value="${chartaccount?.ref_desc}" />
+									</div>
+								</div>
+
+								<div class="row formline" style="padding: 0px 0px 2px 0px;">
+									<div class="col-sm-1"></div>
+									<div class="col-sm-2 d-flex align-items-center">Report
+										Code</div>
+									<div class="col-sm-2 d-flex align-items-center">
+										<input type="text" name="rpt_code" id="rpt_code"
+											class="form-control form-control-sm bg-white border border-dark"
+											th:value="${chartaccount?.rpt_code}" />
+									</div>
+									<div class="col-sm-1"></div>
+									<div class="col-sm-2 d-flex align-items-center">Account
+										Status</div>
+									<div class="col-sm-2 d-flex align-items-center">
+
+										<input type="text" name="acct_status" id="acct_status"
+											class="form-control form-control-sm bg-white border border-dark"
+											th:value="${chartaccount?.acct_status}" />
+
+									</div>
+								</div>
+
+								<div class="row formline" style="padding: 0px 0px 2px 0px;">
+									<div class="col-sm-1"></div>
+									<div class="col-sm-2 d-flex align-items-center">Ownership</div>
+									<div class="col-sm-2 d-flex align-items-center">
+
+										<input type="text" name="own_type" id="own_type"
+											class="form-control form-control-sm bg-white border border-dark"
+											th:value="${chartaccount?.own_type}" />
+
+									</div>
+									<div class="col-sm-1"></div>
+									<div class="col-sm-2 d-flex align-items-center">Remarks</div>
+									<div class="col-sm-2 d-flex align-items-center">
+										<input type="text" name="own_remarks" id="own_remarks"
+											class="form-control form-control-sm bg-white border border-dark"
+											th:value="${chartaccount?.own_remarks}" />
+									</div>
+								</div>
+
+								<div class="row formline" style="padding: 0px 0px 2px 0px;">
+									<div class="col-sm-1"></div>
+									<div class="col-sm-2 d-flex align-items-center">Total
+										Credit Balance</div>
+									<div class="col-sm-2 d-flex align-items-center">
+										<input type="text" name="cr_amt" id="cr_amt"
+											class="form-control form-control-sm bg-white border border-dark"
+											th:value="${chartaccount?.cr_amt}" readonly />
+									</div>
+									<div class="col-sm-1"></div>
+									<div class="col-sm-2 d-flex align-items-center">Total
+										Debit Balance</div>
+									<div class="col-sm-2 d-flex align-items-center">
+										<input type="text" name="dr_amt" id="dr_amt"
+											class="form-control form-control-sm bg-white border border-dark"
+											th:value="${chartaccount?.dr_amt}" readonly />
+									</div>
+								</div>
+								<div class="row formline" style="padding: 0px 0px 10px 0px;">
+									<div class="col-sm-1"></div>
+									<div class="col-sm-2 d-flex align-items-center">Account
+										Balance</div>
+									<div class="col-sm-2 d-flex align-items-center">
+										<input type="text" name="acct_bal" id="acct_bal"
+											class="form-control form-control-sm bg-white border border-dark"
+											th:value="${chartaccount?.acct_bal}" readonly />
+									</div>
+									<div class="col-sm-1"></div>
+									<div class="col-sm-2 d-flex align-items-center">Ref
+										Currency Balance</div>
+									<div class="col-sm-2 d-flex align-items-center">
+										<input type="text" name="ref_crncy_bal" id="ref_crncy_bal"
+											class="form-control form-control-sm bg-white border border-dark"
+											th:value="${chartaccount?.ref_crncy_bal}" readonly />
+									</div>
+								</div>
+
+							</form>
+						</div>
+						<div class="card-footer text-center"
+							style="background-color: #e9ecef">
+							<button type="button" class="btn btn-xs btn-primary mr-2"
+								id="btnHome" onclick="home();">Home</button>
+							<button type="button" class="btn btn-primary p-2"
+								onclick="modifysubmit(this);">Submit</button>
+							<button type="button" class="btn btn-xs btn-primary ml-2"
+								id="btnBack" onclick="Back();">Back</button>
+						</div>
+					</div>
+				</div>
+
+				<div th:if="${formmode}=='view'">
+					<div class="card">
+						<div class="card-header"
+							style="height: 50px; background-color: #e9ecef;">
+							<h6 style="font-size: 1.2rem; color: black;">CHART OF
+								ACCOUNTS</h6>
+						</div>
+						<div class="card-body">
+							<form class=" border border-secondary" action="#" method="post"
+								id="caid" autocomplete="off">
+
+								<div class="row formline" style="padding: 10px 0px 2px 0px;">
+									<div class="col-sm-1"></div>
+									<div class="col-sm-2 d-flex align-items-center">classification</div>
+									<div class="col-sm-2 d-flex align-items-center">
+
+										<input type="text" name="classification" id="classification"
+											class="form-control form-control-sm bg-white border border-dark"
+											th:value="${chartaccount?.classification}" />
+									</div>
+
+									<div class="col-sm-1"></div>
+									<div class="col-sm-2 d-flex align-items-center">Account
+										Type</div>
+									<div class="col-sm-2 d-flex align-items-center">
+										<input type="text" name="acct_type" id="acct_type"
+											class="form-control form-control-sm bg-white border border-dark"
+											th:value="${chartaccount?.acct_type}" />
+									</div>
+								</div>
+
+								<div class="row formline" style="padding: 0px 0px 2px 0px;">
+									<div class="col-sm-1"></div>
+									<div class="col-sm-2 d-flex align-items-center">General
+										Ledger</div>
+									<div class="col-sm-2 d-flex align-items-center">
+										<input type="text" name="gl_code" id="gl_code"
+											class="form-control form-control-sm bg-white border border-dark"
+											th:value="${chartaccount?.gl_code}" />
+									</div>
+
+									<div class="col-sm-1"></div>
+									<div class="col-sm-2 d-flex align-items-center">GL
+										Description</div>
+									<div class="col-sm-2 d-flex align-items-center">
+										<input type="text" name="gl_desc" id="gl_desc"
+											class="form-control form-control-sm bg-white border border-dark"
+											th:value="${chartaccount?.gl_desc}" />
+									</div>
+								</div>
+
+								<div class="row formline" style="padding: 0px 0px 2px 0px;">
+									<div class="col-sm-1"></div>
+									<div class="col-sm-2 d-flex align-items-center">GL Sub
+										Head</div>
+									<div class="col-sm-2 d-flex align-items-center">
+										<input type="text" name="glsh_code" id="glsh_code"
+											th:value="${chartaccount?.glsh_code}"
+											class="form-control form-control-sm bg-white border border-dark" />
+									</div>
+
+									<div class="col-sm-1"></div>
+									<div class="col-sm-2 d-flex align-items-center">GL Sub
+										Head Description</div>
+									<div class="col-sm-2 d-flex align-items-center">
+										<input type="text" name="glsh_desc" id="glsh_desc"
+											th:value="${chartaccount?.glsh_desc}"
+											class="form-control form-control-sm bg-white border border-dark" />
+									</div>
+								</div>
+
+								<div class="row formline" style="padding: 0px 0px 2px 0px;">
+
+
+									<div class="col-sm-1"></div>
+									<div class="col-sm-2 d-flex align-items-center">Scheme
+										Type</div>
+
+									<div class="col-sm-2 d-flex align-items-center">
+										<input type="text" name="schm_type" id="schm_type"
+											class="form-control form-control-sm bg-white border border-dark"
+											th:value="${chartaccount?.schm_type}" />
+
+									</div>
+
+									<div class="col-sm-1"></div>
+									<div class="col-sm-2 d-flex align-items-center">Scheme
+										Code</div>
+									<div class="col-sm-2 d-flex align-items-center">
+										<input type="text" name="schm_code" id="schm_code"
+											class="form-control form-control-sm bg-white border border-dark"
+											th:value="${chartaccount?.schm_code}" />
+									</div>
+								</div>
+
+								<div class="row formline" style="padding: 0px 0px 2px 0px;">
+									<div class="col-sm-1"></div>
+									<div class="col-sm-2 d-flex align-items-center">Account
+										Number</div>
+									<div class="col-sm-2 d-flex align-items-center">
+										<input type="text" name="acct_num" id="acct_num"
+											class="form-control form-control-sm bg-white border border-dark"
+											th:value="${chartaccount?.acct_num}" />
+									</div>
+									<div class="col-sm-1"></div>
+									<div class="col-sm-2 d-flex align-items-center">Account
+										Name</div>
+									<div class="col-sm-2 d-flex align-items-center">
+										<input type="text" name="acct_name" id="acct_name"
+											class="form-control form-control-sm bg-white border border-dark"
+											th:value="${chartaccount?.acct_name}" />
+									</div>
+								</div>
+
+								<div class="row formline" style="padding: 0px 0px 2px 0px;">
+									<div class="col-sm-1"></div>
+									<div class="col-sm-2 d-flex align-items-center">Additional
+										Details Required</div>
+									<div class="col-sm-2 d-flex align-items-center">
+										<input type="text" name="add_det_flg" id="add_det_flg"
+											class="form-control form-control-sm bg-white border border-dark"
+											th:value="${chartaccount?.add_det_flg}" />
+
+									</div>
+									<div class="col-sm-1"></div>
+									<div class="col-sm-2 d-flex align-items-center">Account
+										Partitioning</div>
+									<div class="col-sm-2 d-flex align-items-center">
+
+										<input type="text" name="acct_partition" id="acct_partition"
+											class="form-control form-control-sm bg-white border border-dark"
+											th:value="${chartaccount?.acct_partition}" />
+
+									</div>
+								</div>
+
+								<div class="row formline" style="padding: 0px 0px 2px 0px;">
+									<div class="col-sm-1"></div>
+									<div class="col-sm-2 d-flex align-items-center">Account
+										Currency</div>
+									<div class="col-sm-2 d-flex align-items-center">
+										<input type="text" name="ref_crncy" id="ref_crncy"
+											class="form-control form-control-sm bg-white border border-dark"
+											th:value="${chartaccount?.ref_crncy}" />
+									</div>
+
+									<div class="col-sm-1"></div>
+									<div class="col-sm-2 d-flex align-items-center">Home
+										Currency</div>
+									<div class="col-sm-2 d-flex align-items-center">
+										<input type="text" name="acct_crncy" id="acct_crncy"
+											class="form-control form-control-sm bg-white border border-dark"
+											th:value="${chartaccount?.acct_crncy}" />
+									</div>
+
 								</div>
 
 								<div class="row formline" style="padding: 0px 0px 2px 0px;">
@@ -1163,27 +1429,27 @@ function verifysubmit(a) {
 											th:value="${chartaccount?.gl_desc}" />
 									</div>
 								</div>
-								
+
 								<div class="row formline" style="padding: 0px 0px 2px 0px;">
 									<div class="col-sm-1"></div>
-									<div class="col-sm-2 d-flex align-items-center">GL Sub Head
-										</div>
+									<div class="col-sm-2 d-flex align-items-center">GL Sub
+										Head</div>
 									<div class="col-sm-2 d-flex align-items-center">
-										<input type="text" name="glsh_code" id="glsh_code" 
-											class="form-control form-control-sm bg-white border border-dark" 
-											th:value="${chartaccount?.glsh_code}"/>
+										<input type="text" name="glsh_code" id="glsh_code"
+											class="form-control form-control-sm bg-white border border-dark"
+											th:value="${chartaccount?.glsh_code}" />
 									</div>
 
 									<div class="col-sm-1"></div>
-									<div class="col-sm-2 d-flex align-items-center">GL Sub Head Description
-										</div>
+									<div class="col-sm-2 d-flex align-items-center">GL Sub
+										Head Description</div>
 									<div class="col-sm-2 d-flex align-items-center">
 										<input type="text" name="glsh_desc" id="glsh_desc"
-											class="form-control form-control-sm bg-white border border-dark" 
-											th:value="${chartaccount?.glsh_desc}"/>
+											class="form-control form-control-sm bg-white border border-dark"
+											th:value="${chartaccount?.glsh_desc}" />
 									</div>
 								</div>
-								
+
 
 								<div class="row formline" style="padding: 0px 0px 2px 0px;">
 
@@ -1259,7 +1525,7 @@ function verifysubmit(a) {
 											class="form-control form-control-sm bg-white border border-dark"
 											th:value="${chartaccount?.ref_crncy}" />
 									</div>
-									
+
 									<div class="col-sm-1"></div>
 									<div class="col-sm-2 d-flex align-items-center">Home
 										Currency</div>
@@ -1268,7 +1534,7 @@ function verifysubmit(a) {
 											class="form-control form-control-sm bg-white border border-dark"
 											th:value="${chartaccount?.acct_crncy}" />
 									</div>
-									
+
 								</div>
 
 								<div class="row formline" style="padding: 0px 0px 2px 0px;">
@@ -1379,9 +1645,9 @@ function verifysubmit(a) {
 						</div>
 					</div>
 				</div>
-				<div th:if="${formmode}=='modify'">
-					<div class="card">
 
+				<!-- 	<div th:if="${formmode}=='modify'">
+					<div class="card">
 
 						<div class="card-header"
 							style="padding: 1px 0px 0px 1px; background-color: #e9ecef;">
@@ -1431,19 +1697,19 @@ function verifysubmit(a) {
 											class="form-control form-control-sm bg-white border border-dark" />
 									</div>
 								</div>
-								
+
 								<div class="row formline" style="padding: 0px 0px 2px 0px;">
 									<div class="col-sm-1"></div>
-									<div class="col-sm-2 d-flex align-items-center">GL Sub Head
-										</div>
+									<div class="col-sm-2 d-flex align-items-center">GL Sub
+										Head</div>
 									<div class="col-sm-2 d-flex align-items-center">
-										<input type="text" name="glsh_code" id="glsh_code" 
+										<input type="text" name="glsh_code" id="glsh_code"
 											class="form-control form-control-sm bg-white border border-dark" />
 									</div>
 
 									<div class="col-sm-1"></div>
-									<div class="col-sm-2 d-flex align-items-center">GL Sub Head Description
-										</div>
+									<div class="col-sm-2 d-flex align-items-center">GL Sub
+										Head Description</div>
 									<div class="col-sm-2 d-flex align-items-center">
 										<input type="text" name="glsh_desc" id="glsh_desc"
 											class="form-control form-control-sm bg-white border border-dark" />
@@ -1523,7 +1789,7 @@ function verifysubmit(a) {
 									<div class="col-sm-2 d-flex align-items-center">
 										<input type="text" name="ref_crncy" id="ref_crncy"
 											class="form-control form-control-sm bg-white border border-dark" />
-									</div> 
+									</div>
 									<div class="col-sm-1"></div>
 									<div class="col-sm-2 d-flex align-items-center">Home
 										Currency</div>
@@ -1636,13 +1902,13 @@ function verifysubmit(a) {
 							<button type="button" class="btn btn-primary p-2" id="btnHome"
 								onclick="home();">Home</button>
 							<button type="button" class="btn btn-primary p-2"
-								onclick="addsubmit(this);">Submit</button>
+								onclick="addsubmit1(this);">Submit</button>
 							<button type="button" class="btn btn-primary p-2" id="btnBack"
 								onclick="Back();">Back</button>
 						</div>
 
 					</div>
-				</div>
+				</div> -->
 
 			</div>
 		</div>

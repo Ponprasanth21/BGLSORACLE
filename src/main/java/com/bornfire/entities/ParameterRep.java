@@ -22,8 +22,12 @@ public interface ParameterRep extends JpaRepository<ParametersDetails, String> {
 	@Query(value = "select * from BACP_PARAMETER where del_flg = 'N' ", nativeQuery = true)
 	List<ParametersDetails> listofvalue();
 
-	@Query(value = "SELECT MAX(CAST(numeric_part AS INT)) AS max_numeric_part FROM (SELECT REPLACE(REPLACE(REPLACE(REF_NUMBER, 'REF', ''), '-', ''), '.', '') AS numeric_part FROM BACP_PARAMETER WHERE ISNUMERIC(REPLACE(REPLACE(REPLACE(REF_NUMBER, 'REF', ''), '-', ''), '.', '')) = 1) AS numeric_parts;\r\n"
-			+ "", nativeQuery = true)
+	@Query(value = "SELECT MAX(TO_NUMBER(numeric_part)) AS max_numeric_part\r\n" + 
+			"FROM (\r\n" + 
+			"    SELECT REPLACE(REPLACE(REPLACE(REF_NUMBER, 'REF', ''), '-', ''), '.', '') AS numeric_part\r\n" + 
+			"    FROM BACP_PARAMETER\r\n" + 
+			"    WHERE REGEXP_LIKE(REPLACE(REPLACE(REPLACE(REF_NUMBER, 'REF', ''), '-', ''), '.', ''), '^[0-9]+')\r\n" + 
+			") numeric_parts", nativeQuery = true)
 	String getParamRef();
 
 }

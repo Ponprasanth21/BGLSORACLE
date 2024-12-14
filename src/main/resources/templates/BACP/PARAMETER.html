@@ -1309,12 +1309,10 @@ function modifyTab(evt, tabName) {
 															<a type="button" class="dropdown-item" id="btndelete"
 																th:attr="data-refnumber=${tabledata.refnumber}"
 																style="text-align: center;" onclick="Modifyuser(this);">Modify</a>
-															<div class="dropdown-divider"></div>
 															<a type="button" class="dropdown-item" id="btndelete"
 																th:attr="data-refnumber=${tabledata.refnumber}"
 																th:if="${tabledata.verify_flg}=='N'"
 																style="text-align: center;" onclick="Verifyuser(this);">Verify</a>
-															<div class="dropdown-divider"></div>
 															<a type="button" class="dropdown-item" id="btnEnquiry"
 																th:attr="data-refnumber=${tabledata.refnumber}"
 																onclick="listradioclick(this);"
@@ -2608,22 +2606,17 @@ function modifyTab(evt, tabName) {
 
 					<div id="tab3" class="tabcontent">
 						<div class="card">
-
 							<div class="card-header"
 								style="background-color: #e9ecef; height: 50px">
 								<div class="float-left">
 									<h6 style="font-size: 1.2rem; color: black;">LOAN
 										PARAMETER</h6>
 								</div>
-
 							</div>
-							<div class="card-body ml-5 mr-5 ">
-
-								<form action="#" th:object="${Parameterform}" method="POST"
-									autocomplete="off" id="Parameterform"
-									th:fragment="finuserapply" class="border border-secondary"
-									name="Parameterform">
-
+							<form action="#" th:object="${Parameterform}" method="POST"
+								autocomplete="off" id="Parameterform" th:fragment="finuserapply"
+								class="border border-secondary" name="Parameterform">
+								<div class="card-body ml-5 mr-5 ">
 									<div class="form-row mt-4">
 										<div class="col-sm-1"></div>
 										<label class="col-sm-2 d-flex align-items-center"
@@ -2807,7 +2800,7 @@ function modifyTab(evt, tabName) {
 											name="recovery_placeholder"
 											class="col-sm-2 d-flex align-items-center" required>
 									</div>
-							</div>
+								</div>
 
 
 
@@ -5415,7 +5408,8 @@ function modifyTab(evt, tabName) {
 											style="font-size: 15px; font-weight: 500;">Branch
 											Name </label> <input type="text"
 											class="col-sm-2 form-control form-control-sm bg-white border border-dark"
-											name="branchdesc" id="branchdesc" readonly />
+											th:value="${OtherServicess?.branchdesc}" name="branchdesc"
+											id="branchdesc" readonly />
 									</div>
 
 									<div class="form-row mt-1">
@@ -5474,12 +5468,16 @@ function modifyTab(evt, tabName) {
 											style="font-size: 15px; font-weight: 500;">Customer
 											Template</label> <select
 											class="col-sm-2 form-control form-control-sm bg-white border border-dark"
-											name="cus_temp" id="cus_temp">
-											<option class="">SELECT</option>
-											<option value="CUSTMP001">CUSTMP001</option>
-											<option value="CUSTMP002">CUSTMP002</option>
-											<option value="CUSTMP003">CUSTMP003</option>
-											<option value="CUSTMP004">CUSTMP004</option>
+											name="cus_temp" id="cus_temp"
+											th:value="${OtherServicess?.cus_temp}">
+											<option value="CUSTMP001"
+												th:selected="${OtherServicess?.cus_temp}=='CUSTMP001'">CUSTMP001</option>
+											<option value="CUSTMP002"
+												th:selected="${OtherServicess?.cus_temp}=='CUSTMP002'">CUSTMP002</option>
+											<option value="CUSTMP003"
+												th:selected="${OtherServicess?.cus_temp}=='CUSTMP003'">CUSTMP003</option>
+											<option value="CUSTMP004"
+												th:selected="${OtherServicess?.cus_temp}=='CUSTMP004'">CUSTMP004</option>
 										</select>
 										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
 											fill="currentColor" class="bi bi-info-circle"
@@ -5501,10 +5499,12 @@ function modifyTab(evt, tabName) {
 											Opening Format</label> <select
 											class="col-sm-2 d-flex align-items-center" name="aof"
 											id="aof">
-											<option class="">SELECT</option>
-											<option value="AOF002">AOF002</option>
-											<option value="AOF002">AOF003</option>
-											<option value="AOF002">AOF004</option>
+											<option value="AOF002"
+												th:selected="${OtherServicess?.aof}=='AOF002'">CUSTMP003</option>
+											<option value="AOF003"
+												th:selected="${OtherServicess?.aof}=='AOF003'">CUSTMP004</option>
+											<option value="AOF004"
+												th:selected="${OtherServicess?.aof}=='AOF004'">AOF004</option>
 										</select>
 										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
 											fill="currentColor" class="bi bi-info-circle"
@@ -5523,11 +5523,14 @@ function modifyTab(evt, tabName) {
 											Template</label> <select
 											class=" col-sm-2 form-control form-control-sm bg-white border border-dark"
 											name="acc_temp" id="acc_temp">
-											<option class="">SELECT</option>
-											<option value="ACCTMP001">ACCTMP001</option>
-											<option value="ACCTMP002">ACCTMP002</option>
-											<option value="ACCTMP003">ACCTMP003</option>
-											<option value="ACCTMP004">ACCTMP004</option>
+											<option value="ACCTMP001"
+												th:selected="${OtherServicess?.acc_temp}=='ACCTMP001'">ACCTMP001</option>
+											<option value="ACCTMP002"
+												th:selected="${OtherServicess?.acc_temp}=='ACCTMP002'">ACCTMP002</option>
+											<option value="ACCTMP003"
+												th:selected="${OtherServicess?.acc_temp}=='ACCTMP003'">ACCTMP003</option>
+											<option value="ACCTMP004"
+												th:selected="${OtherServicess?.acc_temp}=='ACCTMP004'">ACCTMP004</option>
 										</select>
 
 										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -5547,7 +5550,6 @@ function modifyTab(evt, tabName) {
 											style="font-size: 15px; font-weight: 500;">GL Code </label> <select
 											class="col-sm-2 d-flex align-items-center" name="gl_code"
 											id="gl_code">
-											<option value="">SELECT</option>
 											<option th:each="city : ${gl_code}" th:value="${city.ref_id}"
 												th:text="${city.ref_id}"></option>
 										</select>
@@ -5558,7 +5560,6 @@ function modifyTab(evt, tabName) {
 											Code </label> <select
 											class="col-sm-2 form-control form-control-sm bg-white border border-dark"
 											name="glsh" id="glsh" onchange="Onglshcode()">
-											<option value="">SELECT</option>
 											<option th:each="city : ${glsh}" th:value="${city.ref_id}"
 												th:text="${city.ref_id}"></option>
 										</select>
@@ -8035,7 +8036,7 @@ function modifyTab(evt, tabName) {
 												<td>Default Value</td>
 											</tr>
 										</thead>
-																				<tbody style="text-align: left">
+										<tbody style="text-align: left">
 											<tr>
 												<td>1</td>
 												<td>Account Open Date</td>
@@ -8044,9 +8045,9 @@ function modifyTab(evt, tabName) {
 														<label> <input type="radio" name="mandatory"
 															value="MANDATORY" onclick="handleIn(this)">
 															MANDATORY
-														</label> <label style="margin-left: 20px"> <input type="radio" name="mandatory"
-															value="NOT MANDATORY" onclick="handleIn(this)">
-															NOT MANDATORY
+														</label> <label style="margin-left: 20px"> <input
+															type="radio" name="mandatory" value="NOT MANDATORY"
+															onclick="handleIn(this)"> NOT MANDATORY
 														</label>
 													</div>
 												</td>
@@ -8063,13 +8064,14 @@ function modifyTab(evt, tabName) {
 														<label> <input type="radio" name="mandatory"
 															value="MANDATORY" onclick="handleIn(this)">
 															MANDATORY
-														</label> <label style="margin-left: 20px"> <input type="radio" name="mandatory"
-															value="NOT MANDATORY" onclick="handleIn(this)">
-															NOT MANDATORY
+														</label> <label style="margin-left: 20px"> <input
+															type="radio" name="mandatory" value="NOT MANDATORY"
+															onclick="handleIn(this)"> NOT MANDATORY
 														</label>
 													</div>
 												</td>
-												<td><input type="text" class="form-control" value="SEYCHELLES" ></td>
+												<td><input type="text" class="form-control"
+													value="SEYCHELLES"></td>
 											</tr>
 											<tr>
 												<td>3</td>
@@ -8079,9 +8081,9 @@ function modifyTab(evt, tabName) {
 														<label> <input type="radio" name="mandatory"
 															value="MANDATORY" onclick="handleIn(this)">
 															MANDATORY
-														</label> <label style="margin-left: 20px"> <input type="radio" name="mandatory"
-															value="NOT MANDATORY" onclick="handleIn(this)">
-															NOT MANDATORY
+														</label> <label style="margin-left: 20px"> <input
+															type="radio" name="mandatory" value="NOT MANDATORY"
+															onclick="handleIn(this)"> NOT MANDATORY
 														</label>
 													</div>
 												</td>
@@ -8102,9 +8104,9 @@ function modifyTab(evt, tabName) {
 														<label> <input type="radio" name="mandatory"
 															value="MANDATORY" onclick="handleIn(this)">
 															MANDATORY
-														</label> <label style="margin-left: 20px"> <input type="radio" name="mandatory"
-															value="NOT MANDATORY" onclick="handleIn(this)">
-															NOT MANDATORY
+														</label> <label style="margin-left: 20px"> <input
+															type="radio" name="mandatory" value="NOT MANDATORY"
+															onclick="handleIn(this)"> NOT MANDATORY
 														</label>
 													</div>
 												</td>
@@ -8112,10 +8114,10 @@ function modifyTab(evt, tabName) {
 													onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
 													class="form-control">
 														<option>SELECT</option>
-														<option value="MAILING">MAILING</option> 
+														<option value="MAILING">MAILING</option>
 														<option value="PERMANENT">PERMANENT</option>
 												</select></td>
-											</tr> 
+											</tr>
 										</tbody>
 									</table>
 								</form>
@@ -8181,9 +8183,9 @@ function modifyTab(evt, tabName) {
 														<label> <input type="radio" name="mandatory"
 															value="MANDATORY" onclick="handleIn(this)">
 															MANDATORY
-														</label> <label style="margin-left: 20px"> <input type="radio" name="mandatory"
-															value="NOT MANDATORY" onclick="handleIn(this)">
-															NOT MANDATORY
+														</label> <label style="margin-left: 20px"> <input
+															type="radio" name="mandatory" value="NOT MANDATORY"
+															onclick="handleIn(this)"> NOT MANDATORY
 														</label>
 													</div>
 												</td>
@@ -8200,13 +8202,14 @@ function modifyTab(evt, tabName) {
 														<label> <input type="radio" name="mandatory"
 															value="MANDATORY" onclick="handleIn(this)">
 															MANDATORY
-														</label> <label style="margin-left: 20px"> <input type="radio" name="mandatory"
-															value="NOT MANDATORY" onclick="handleIn(this)">
-															NOT MANDATORY
+														</label> <label style="margin-left: 20px"> <input
+															type="radio" name="mandatory" value="NOT MANDATORY"
+															onclick="handleIn(this)"> NOT MANDATORY
 														</label>
 													</div>
 												</td>
-												<td><input type="text" class="form-control" value="SEYCHELLES" ></td>
+												<td><input type="text" class="form-control"
+													value="SEYCHELLES"></td>
 											</tr>
 											<tr>
 												<td>3</td>
@@ -8216,9 +8219,9 @@ function modifyTab(evt, tabName) {
 														<label> <input type="radio" name="mandatory"
 															value="MANDATORY" onclick="handleIn(this)">
 															MANDATORY
-														</label> <label style="margin-left: 20px"> <input type="radio" name="mandatory"
-															value="NOT MANDATORY" onclick="handleIn(this)">
-															NOT MANDATORY
+														</label> <label style="margin-left: 20px"> <input
+															type="radio" name="mandatory" value="NOT MANDATORY"
+															onclick="handleIn(this)"> NOT MANDATORY
 														</label>
 													</div>
 												</td>
@@ -8239,9 +8242,9 @@ function modifyTab(evt, tabName) {
 														<label> <input type="radio" name="mandatory"
 															value="MANDATORY" onclick="handleIn(this)">
 															MANDATORY
-														</label> <label style="margin-left: 20px"> <input type="radio" name="mandatory"
-															value="NOT MANDATORY" onclick="handleIn(this)">
-															NOT MANDATORY
+														</label> <label style="margin-left: 20px"> <input
+															type="radio" name="mandatory" value="NOT MANDATORY"
+															onclick="handleIn(this)"> NOT MANDATORY
 														</label>
 													</div>
 												</td>
@@ -8249,10 +8252,10 @@ function modifyTab(evt, tabName) {
 													onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
 													class="form-control">
 														<option>SELECT</option>
-														<option value="MAILING">MAILING</option> 
+														<option value="MAILING">MAILING</option>
 														<option value="PERMANENT">PERMANENT</option>
 												</select></td>
-											</tr> 
+											</tr>
 										</tbody>
 									</table>
 								</form>
@@ -9919,11 +9922,8 @@ function modifyTab(evt, tabName) {
 											name="recovery_placeholder"
 											class="col-sm-2 d-flex align-items-center" required>
 									</div>
+								</form>
 							</div>
-
-
-
-							</form>
 						</div>
 
 						<!-- -------------------------------------------------------------------------------------------------------------------------- -->
@@ -10388,7 +10388,6 @@ function clearCheckList() {
 
 function modify() {
     var refnumber = document.getElementById('ref_number_edit').value;
-    
 
     // Ensure the form element exists
     var formElement = document.getElementById('Parameterformedit');

@@ -842,6 +842,7 @@ public class CustOnboardinController {
 			// for check list
 			ParametersDetails check = parameterrep.findbyId(refnumber);
 			String checklist = check.getCheck_list();
+			
 			List<String> valuesList = checklist != null ? Arrays.asList(checklist.split(",")) : new ArrayList<>();
 			md.addAttribute("valuesList", valuesList);
 
