@@ -513,6 +513,10 @@ input:hover+.password-info {
 		function back() {
 		    window.history.back();
 		}
+		
+		function back1() {
+		    window.history.back();
+		}
 		</script>
 <script>
 		function Home() {
@@ -1702,8 +1706,6 @@ function gotocorporate(){
 							</div>
 							<div class="card-footer text-center"
 								style="background-color: #e9ecef">
-
-
 								<button class="btn btn-primary p-2" onclick="Home();">Home</button>
 								<button class="btn btn-primary p-2" onclick="back()">Back</button>
 
@@ -1745,7 +1747,7 @@ function gotocorporate(){
 										<thead>
 											<tr class="filters">
 												<th style="width: 8%"><input type="text"
-													class="form-control font-weight-bold" placeholder="S.NO"
+													class="form-control font-weight-bold" placeholder="S.No"
 													disabled></th>
 												<th><input type="text"
 													class="form-control font-weight-bold"
@@ -1768,7 +1770,6 @@ function gotocorporate(){
 												<th><input type="text"
 													class="form-control font-weight-bold"
 													placeholder="Email Id" disabled></th>
-
 												<th><input type="text"
 													class="form-control font-weight-bold" placeholder="Status"
 													disabled></th>
@@ -1822,10 +1823,10 @@ function gotocorporate(){
 													th:text="${customerrequest.ca_email_id_1}">Full Name</span></td>
 
 												<th:block th:switch="${customerrequest.status}">
-													<td th:case="'APPROVED'" align="center"
+													<td th:case="'APPROVED'" align="left"
 														style="color: green; font-size: 12px; font-weight: bold;">
 														APPROVED</td>
-													<td th:case="*" align="center"
+													<td th:case="*" align="left"
 														style="color: red; font-size: 12px; font-weight: bold;">NOT
 														APPROVED</td>
 												</th:block>
@@ -1834,7 +1835,7 @@ function gotocorporate(){
                        								 data-account_type = ${customerrequest?.ca_acct_type},
                        								 data-rec_no = ${customerrequest?.rec_no},
                        								 data-status =${customerrequest.status}"
-													onclick="buttonfnRetail(this)"
+													onclick="buttonfnRetail(this)" 
 													class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
 													autocomplete="off" /> <!-- <div class="dropdown">
 														<button class="btn btn-secondary dropdown-toggle"
@@ -1968,15 +1969,19 @@ function gotocorporate(){
 													th:attr="data-appl_ref_no = ${customerrequest?.appl_ref_no},
                        								 data-account_type = ${customerrequest?.ca_acct_type},
                        								 data-rec_no = ${customerrequest?.rec_no}"
-													onclick="ClickCustType(this);" th:text="${customerrequest.ca_cif_id_1}">
-												<td style="font-size: 14px" th:text="${customerrequest.corporateName}"></td>
+													onclick="ClickCustType(this);"
+													th:text="${customerrequest.ca_cif_id_1}">
+												<td style="font-size: 14px"
+													th:text="${customerrequest.corporateName}"></td>
 
 												<td style="font-size: 14px"
 													th:text="${customerrequest.ca_solid}">TEST</td>
 
-												<td style="font-size: 14px" th:text="${customerrequest.ca_mobile_no_1}"></td>
+												<td style="font-size: 14px"
+													th:text="${customerrequest.ca_mobile_no_1}"></td>
 
-												<td style="font-size: 14px"th:text="${customerrequest.ca_email_id_1}"> </td>
+												<td style="font-size: 14px"
+													th:text="${customerrequest.ca_email_id_1}"></td>
 
 												<td style="font-size: 14px"
 													th:text="${customerrequest.business_registration}">l</td>
@@ -1984,18 +1989,17 @@ function gotocorporate(){
 													<td th:case="'APPROVED'" align="center"
 														style="color: green; font-size: 12px; font-weight: bold;">
 														APPROVED</td>
-													<td th:case="*"  align="center"
+													<td th:case="*" align="center"
 														style="color: red; font-size: 12px; font-weight: bold;">NOT
 														APPROVED</td>
 												</th:block>
-												<td align="center"><input type="radio" class="text-center"
+												<td align="center"><input type="radio"
+													class="text-center"
 													th:attr="data-appl_ref_no = ${customerrequest?.appl_ref_no},
                        								 data-account_type = ${customerrequest?.ca_acct_type},
                        								 data-rec_no = ${customerrequest?.rec_no},
                        								 data-status =${customerrequest.status}"
-													onclick="buttonfnCorporate(this)"
-													
-													autocomplete="off" /> <!-- <div class="dropdown">
+													onclick="buttonfnCorporate(this)" autocomplete="off" /> <!-- <div class="dropdown">
 														<button class="btn btn-secondary dropdown-toggle"
 															type="button" id="dropdownMenuButton"
 															style="line-height: 0.7; width: 64px; font-size: 11px; color: #3a4550; background: #e3e3e4;"
@@ -2034,12 +2038,9 @@ function gotocorporate(){
 										</tbody>
 									</table>
 								</div>
-
 							</div>
 							<div class="card-footer text-center"
 								style="background-color: #e9ecef">
-
-
 								<button class="btn btn-primary p-2" onclick="Home();">Home</button>
 								<button class="btn btn-primary p-2" onclick="back()">Back</button>
 
@@ -2052,7 +2053,7 @@ function gotocorporate(){
 				</div>
 
 				<!-- ------------------------------------VIEWCUST--------------------------------- -->
-				<div th:if="${formmode}=='viewCust'" class="mt-5">
+				<div th:if="${formmode}=='viewCust'">
 
 					<div class="card">
 						<div class="card-header"
@@ -2061,9 +2062,6 @@ function gotocorporate(){
 								<h6 style="font-size: 1.2rem;" class="ml-3">CUSTOMER
 									MAINTENANCE - VIEW</h6>
 							</div>
-
-
-
 						</div>
 						<div class="card-body">
 							<form action="#" th:object="${customerRequest}" method="post"
@@ -2097,667 +2095,658 @@ function gotocorporate(){
 											onclick="openTab(event, 'tab5')">Account Details</button>
 									</div>
 								</div>
-								<div class="">
-									<div id="tab1" class="tabcontent" style="display: block;">
-										<div class="card ">
-											<div class="card-body ">
-												<div class="row formline ">
-													<input type="hidden" id="gooom"
-														th:value="${customerRequest?.appl_ref_no}"> <label
-														class="col-sm-2">Customer Type </label>
-													<div class="col-sm-2">
-														<input type="text" id="la_customer_type"
-															onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
-															class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
-															th:value="${customerRequest?.la_customer_type}"
-															name="la_customer_type" autocomplete="off" readonly>
-														<span id="merchant_name_vali" class="reqError"></span>
-													</div>
-													<div class="col-sm-1"></div>
-													<label class="col-sm-2">Cif Id </label>
-													<div class="col-sm-2">
-														<input type="text" id="cif_id"
-															onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
-															class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
-															th:value="${customerRequest?.cif_id}" name="cif_id"
-															autocomplete="off" readonly> <span
-															id="merchant_name_vali" class="reqError"></span>
-													</div>
+								<div id="tab1" class="tabcontent" style="display: block;">
+									<div class="card ">
+										<div class="card-body ">
+											<div class="row formline ">
+												<input type="hidden" id="gooom"
+													th:value="${customerRequest?.appl_ref_no}"> <label
+													class="col-sm-2">Customer Type </label>
+												<div class="col-sm-2">
+													<input type="text" id="la_customer_type"
+														onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+														class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
+														th:value="${customerRequest?.la_customer_type}"
+														name="la_customer_type" autocomplete="off" readonly>
+													<span id="merchant_name_vali" class="reqError"></span>
 												</div>
-												<div class="row formline mt-2">
-													<label class="col-sm-2">Primary Branch </label>
-													<div class="col-sm-2">
-														<input type="text" id="ca_solid"
-															onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
-															class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
-															th:value="${customerRequest?.ca_solid}" name="ca_solid"
-															autocomplete="off" readonly> <span
-															id="merchant_name_vali" class="reqError"></span>
-													</div>
-													<div class="col-sm-1"></div>
-													<label class="col-sm-2">Branch Name </label>
-													<div class="col-sm-2">
-														<input type="text" id="branch_desc"
-															onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
-															class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
-															th:value="${customerRequest?.branch_desc}"
-															name="branch_desc" autocomplete="off" readonly> <span
-															id="merchant_name_vali" class="reqError"></span>
-													</div>
+												<div class="col-sm-1"></div>
+												<label class="col-sm-2">Cif Id </label>
+												<div class="col-sm-2">
+													<input type="text" id="cif_id"
+														onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+														class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
+														th:value="${customerRequest?.cif_id}" name="cif_id"
+														autocomplete="off" readonly> <span
+														id="merchant_name_vali" class="reqError"></span>
 												</div>
-												<div class="row formline mt-2">
-													<label class="col-sm-2">Salutation </label>
-													<div class="col-sm-2">
-														<input type="text" id="ca_saluation"
-															class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
-															th:value="${customerRequest?.ca_saluation}"
-															onkeyup="this.value = this.value.toUpperCase();handleIn(this) "
-															name="ca_saluation" autocomplete="off" readonly>
-														<span id="merchant_corp_name_vali" class="reqError"></span>
-													</div>
-													<div class="col-sm-1"></div>
-													<label class="col-sm-2">First Name </label>
-													<div class="col-sm-2">
-														<input type="text" id="ca_first_name"
-															class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
-															th:value="${customerRequest?.ca_first_name}"
-															onkeyup="this.value = this.value.toUpperCase();handleIn(this);"
-															name="ca_first_name" autocomplete="off" readonly>
-														<span id="merchant_corp_name_vali" class="reqError"></span>
-													</div>
+											</div>
+											<div class="row formline mt-2">
+												<label class="col-sm-2">Primary Branch </label>
+												<div class="col-sm-2">
+													<input type="text" id="ca_solid"
+														onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+														class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
+														th:value="${customerRequest?.ca_solid}" name="ca_solid"
+														autocomplete="off" readonly> <span
+														id="merchant_name_vali" class="reqError"></span>
 												</div>
-												<div class="row formline mt-2">
-													<label class="col-sm-2">Middle Name </label>
-													<div class="col-sm-2">
-														<input type="text" id="mid_name"
-															onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
-															class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
-															th:value="${customerRequest?.mid_name}" name="mid_name"
-															autocomplete="off" readonly> <span
-															id="merchant_name_vali" class="reqError"></span>
-													</div>
-													<div class="col-sm-1"></div>
-													<label class="col-sm-2">Last Name </label>
-													<div class="col-sm-2">
-														<input type="text" id="ca_last_name"
-															onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
-															class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
-															th:value="${customerRequest?.ca_last_name}"
-															name="ca_last_name" autocomplete="off" readonly>
-														<span id="merchant_name_vali" class="reqError"></span>
-													</div>
+												<div class="col-sm-1"></div>
+												<label class="col-sm-2">Branch Name </label>
+												<div class="col-sm-2">
+													<input type="text" id="branch_desc"
+														onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+														class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
+														th:value="${customerRequest?.branch_desc}"
+														name="branch_desc" autocomplete="off" readonly> <span
+														id="merchant_name_vali" class="reqError"></span>
 												</div>
-												<div class="row formline mt-2">
-													<label class="col-sm-2">Full Name </label>
-													<div class="col-sm-2">
-														<input type="text" id="ca_first_name"
-															onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
-															class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
-															th:value="${customerRequest?.ca_first_name}"
-															name="ca_first_name" autocomplete="off" readonly>
-														<span id="merchant_name_vali" class="reqError"></span>
-													</div>
-													<div class="col-sm-1"></div>
-													<label class="col-sm-2">Short Name </label>
-													<div class="col-sm-2">
-														<input type="text" id="ca_preferred_name"
-															onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
-															class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
-															th:value="${customerRequest?.ca_preferred_name}"
-															name="ca_preferred_name" autocomplete="off" readonly>
-														<span id="merchant_name_vali" class="reqError"></span>
-													</div>
+											</div>
+											<div class="row formline mt-2">
+												<label class="col-sm-2">Salutation </label>
+												<div class="col-sm-2">
+													<input type="text" id="ca_saluation"
+														class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
+														th:value="${customerRequest?.ca_saluation}"
+														onkeyup="this.value = this.value.toUpperCase();handleIn(this) "
+														name="ca_saluation" autocomplete="off" readonly> <span
+														id="merchant_corp_name_vali" class="reqError"></span>
 												</div>
-												<div class="row formline mt-2">
-													<label class="col-sm-2">Occupation </label>
-													<div class="col-sm-2">
-														<input type="text" id="merchant_city"
-															onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
-															class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
-															th:value="${customerRequest?.ca_occupation1}"
-															name="merchant_city" autocomplete="off" readonly>
-														<span id="merchant_name_vali" class="reqError"></span>
-													</div>
-													<div class="col-sm-1"></div>
-													<label class="col-sm-2">Gender </label>
-													<div class="col-sm-2">
-														<input type="text" id="ca_gender"
-															onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
-															class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
-															th:value="${customerRequest?.ca_gender}" name="ca_gender"
-															autocomplete="off" readonly> <span
-															id="merchant_name_vali" class="reqError"></span>
-													</div>
+												<div class="col-sm-1"></div>
+												<label class="col-sm-2">First Name </label>
+												<div class="col-sm-2">
+													<input type="text" id="ca_first_name"
+														class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
+														th:value="${customerRequest?.ca_first_name}"
+														onkeyup="this.value = this.value.toUpperCase();handleIn(this);"
+														name="ca_first_name" autocomplete="off" readonly>
+													<span id="merchant_corp_name_vali" class="reqError"></span>
 												</div>
-												<div class="row formline mt-2">
-													<label class="col-sm-2">Marital Status </label>
-													<div class="col-sm-2">
-														<input type="text" id="ca_martial_staus"
-															onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
-															class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
-															th:value="${customerRequest?.ca_martial_staus}"
-															name="ca_martial_staus" autocomplete="off" readonly>
-														<span id="ca_martial_staus" class="reqError"></span>
-													</div>
-													<div class="col-sm-1"></div>
-													<label class="col-sm-2">Date Of Birth </label>
-													<div class="col-sm-2">
-														<input type="text" id="ca_date_of_birth"
-															onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
-															class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
-															th:value="${#dates.format(customerRequest?.ca_date_of_birth, 'dd-MM-yyyy')}"
-															name="ca_date_of_birth" autocomplete="off" readonly>
-														<span id="merchant_addr_vali" class="reqError"></span>
-													</div>
+											</div>
+											<div class="row formline mt-2">
+												<label class="col-sm-2">Middle Name </label>
+												<div class="col-sm-2">
+													<input type="text" id="mid_name"
+														onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+														class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
+														th:value="${customerRequest?.mid_name}" name="mid_name"
+														autocomplete="off" readonly> <span
+														id="merchant_name_vali" class="reqError"></span>
 												</div>
-												<div class="row formline mt-2">
-													<label class="col-sm-2">Annual Income </label>
-													<div class="col-sm-2">
-														<input type="text" id="annual_income"
-															onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
-															class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
-															th:value="${customerRequest?.annual_income}"
-															name="annual_income" autocomplete="off" readonly>
-														<span id="merchant_name_vali" class="reqError"></span>
-													</div>
-													<div class="col-sm-1"></div>
-													<label class="col-sm-2">Monthly Income </label>
-													<div class="col-sm-2">
-														<input type="text" id="monthly_income"
-															onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
-															class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
-															th:value="${customerRequest?.monthly_income}"
-															name="monthly_income" autocomplete="off" readonly>
-														<span id="merchant_name_vali" class="reqError"></span>
-													</div>
+												<div class="col-sm-1"></div>
+												<label class="col-sm-2">Last Name </label>
+												<div class="col-sm-2">
+													<input type="text" id="ca_last_name"
+														onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+														class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
+														th:value="${customerRequest?.ca_last_name}"
+														name="ca_last_name" autocomplete="off" readonly> <span
+														id="merchant_name_vali" class="reqError"></span>
 												</div>
-												<div class="row formline mt-2">
-													<label class="col-sm-2">Loan Obligations</label>
-													<div class="col-sm-2">
-														<input type="text" id="loan_obligations"
-															onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
-															class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
-															th:value="${customerRequest?.loan_obligations}"
-															name="loan_obligations" autocomplete="off" readonly>
-														<span id="merchant_name_vali" class="reqError"></span>
-													</div>
-													<div class="col-sm-1"></div>
-													<label class="col-sm-2">Family Maintenance</label>
-													<div class="col-sm-2">
-														<input type="text" id="family_maintenance"
-															onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
-															class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
-															th:value="${customerRequest?.family_maintenance}"
-															name="family_maintenance" autocomplete="off" readonly>
-														<span id="merchant_name_vali" class="reqError"></span>
-													</div>
+											</div>
+											<div class="row formline mt-2">
+												<label class="col-sm-2">Full Name </label>
+												<div class="col-sm-2">
+													<input type="text" id="ca_first_name"
+														onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+														class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
+														th:value="${customerRequest?.ca_first_name}"
+														name="ca_first_name" autocomplete="off" readonly>
+													<span id="merchant_name_vali" class="reqError"></span>
 												</div>
-												<div class="row formline mt-2">
-													<label class="col-sm-2">Email ID </label>
-													<div class="col-sm-2">
-														<input type="text" id="ca_email_id"
-															class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
-															name="ca_email_id"
-															th:value="${customerRequest?.ca_email_id}"
-															onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
-															autocomplete="off" readonly>
-													</div>
-													<div class="col-sm-1"></div>
-													<label class="col-sm-2">Mobile No </label>
-													<div class="col-sm-2">
-														<div class="input-group">
-															<div class="input-group-prepend">
-																<input type="text" id="ca_countrycode_1"
-																	name="ca_countrycode_1"
-																	th:value="${customerRequest?.ca_countrycode_1}"
-																	class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
-																	value="+248" maxlength="5" style="width: 60px;"
-																	readonly="readonly" />
-															</div>
-															<input type="number" id="mobno" name="ca_mobile_number"
-																autocomplete="off" maxlength="7"
-																th:value="${customerRequest?.ca_mobile_number}"
+												<div class="col-sm-1"></div>
+												<label class="col-sm-2">Short Name </label>
+												<div class="col-sm-2">
+													<input type="text" id="ca_preferred_name"
+														onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+														class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
+														th:value="${customerRequest?.ca_preferred_name}"
+														name="ca_preferred_name" autocomplete="off" readonly>
+													<span id="merchant_name_vali" class="reqError"></span>
+												</div>
+											</div>
+											<div class="row formline mt-2">
+												<label class="col-sm-2">Occupation </label>
+												<div class="col-sm-2">
+													<input type="text" id="merchant_city"
+														onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+														class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
+														th:value="${customerRequest?.ca_occupation1}"
+														name="merchant_city" autocomplete="off" readonly>
+													<span id="merchant_name_vali" class="reqError"></span>
+												</div>
+												<div class="col-sm-1"></div>
+												<label class="col-sm-2">Gender </label>
+												<div class="col-sm-2">
+													<input type="text" id="ca_gender"
+														onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+														class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
+														th:value="${customerRequest?.ca_gender}" name="ca_gender"
+														autocomplete="off" readonly> <span
+														id="merchant_name_vali" class="reqError"></span>
+												</div>
+											</div>
+											<div class="row formline mt-2">
+												<label class="col-sm-2">Marital Status </label>
+												<div class="col-sm-2">
+													<input type="text" id="ca_martial_staus"
+														onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+														class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
+														th:value="${customerRequest?.ca_martial_staus}"
+														name="ca_martial_staus" autocomplete="off" readonly>
+													<span id="ca_martial_staus" class="reqError"></span>
+												</div>
+												<div class="col-sm-1"></div>
+												<label class="col-sm-2">Date Of Birth </label>
+												<div class="col-sm-2">
+													<input type="text" id="ca_date_of_birth"
+														onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+														class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
+														th:value="${#dates.format(customerRequest?.ca_date_of_birth, 'dd-MM-yyyy')}"
+														name="ca_date_of_birth" autocomplete="off" readonly>
+													<span id="merchant_addr_vali" class="reqError"></span>
+												</div>
+											</div>
+											<div class="row formline mt-2">
+												<label class="col-sm-2">Annual Income </label>
+												<div class="col-sm-2">
+													<input type="text" id="annual_income"
+														onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+														class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
+														th:value="${customerRequest?.annual_income}"
+														name="annual_income" autocomplete="off" readonly>
+													<span id="merchant_name_vali" class="reqError"></span>
+												</div>
+												<div class="col-sm-1"></div>
+												<label class="col-sm-2">Monthly Income </label>
+												<div class="col-sm-2">
+													<input type="text" id="monthly_income"
+														onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+														class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
+														th:value="${customerRequest?.monthly_income}"
+														name="monthly_income" autocomplete="off" readonly>
+													<span id="merchant_name_vali" class="reqError"></span>
+												</div>
+											</div>
+											<div class="row formline mt-2">
+												<label class="col-sm-2">Loan Obligations</label>
+												<div class="col-sm-2">
+													<input type="text" id="loan_obligations"
+														onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+														class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
+														th:value="${customerRequest?.loan_obligations}"
+														name="loan_obligations" autocomplete="off" readonly>
+													<span id="merchant_name_vali" class="reqError"></span>
+												</div>
+												<div class="col-sm-1"></div>
+												<label class="col-sm-2">Family Maintenance</label>
+												<div class="col-sm-2">
+													<input type="text" id="family_maintenance"
+														onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+														class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
+														th:value="${customerRequest?.family_maintenance}"
+														name="family_maintenance" autocomplete="off" readonly>
+													<span id="merchant_name_vali" class="reqError"></span>
+												</div>
+											</div>
+											<div class="row formline mt-2">
+												<label class="col-sm-2">Email ID </label>
+												<div class="col-sm-2">
+													<input type="text" id="ca_email_id"
+														class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
+														name="ca_email_id"
+														th:value="${customerRequest?.ca_email_id}"
+														onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+														autocomplete="off" readonly>
+												</div>
+												<div class="col-sm-1"></div>
+												<label class="col-sm-2">Mobile No </label>
+												<div class="col-sm-2">
+													<div class="input-group">
+														<div class="input-group-prepend">
+															<input type="text" id="ca_countrycode_1"
+																name="ca_countrycode_1"
+																th:value="${customerRequest?.ca_countrycode_1}"
 																class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
-																style="width: 100px;" readonly />
+																value="+248" maxlength="5" style="width: 60px;"
+																readonly="readonly" />
 														</div>
+														<input type="number" id="mobno" name="ca_mobile_number"
+															autocomplete="off" maxlength="7"
+															th:value="${customerRequest?.ca_mobile_number}"
+															class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
+															style="width: 100px;" readonly />
 													</div>
 												</div>
 											</div>
 										</div>
-										<div class="card-footer text-center">
-											<button class="btn btn-primary p-2" onclick="home();">Home</button>
-											<button class="btn btn-primary p-2" onclick="back();">Back</button>
-										</div>
 									</div>
+									<div class="card-footer text-center">
+										<button class="btn btn-primary p-2" onclick="home();">Home</button>
+										<button class="btn btn-primary p-2" onclick="back();">Back</button>
+									</div>
+								</div>
 
-									<div id="tab2" class="tabcontent" style="display: none;">
+								<div id="tab2" class="tabcontent" style="display: none;">
 
-										<div class="card ">
-											<div class="card-body">
+									<div class="card ">
+										<div class="card-body">
 
-												<div id="myModaldoc" class="modaldoc" style="display: none">
-													<div class="modal-contentdoc">
-														<span class="closedoc" id="closeModaldoc"
-															onclick=closeDoc(this)>&times;</span>
-														<div id="popup1" class="overlay "
-															style="z-index: 1001; display: flex; justify-content: center; align-items: center;">
-															<div class="popupw-img">
-																<a class="imageclosedoc" href="#"></a>
-																<div class="card-bodydoc">
-																	<div id="imgCapture11"></div>
-																</div>
+											<div id="myModaldoc" class="modaldoc" style="display: none">
+												<div class="modal-contentdoc">
+													<span class="closedoc" id="closeModaldoc"
+														onclick=closeDoc(this)>&times;</span>
+													<div id="popup1" class="overlay "
+														style="z-index: 1001; display: flex; justify-content: center; align-items: center;">
+														<div class="popupw-img">
+															<a class="imageclosedoc" href="#"></a>
+															<div class="card-bodydoc">
+																<div id="imgCapture11"></div>
 															</div>
 														</div>
 													</div>
 												</div>
+											</div>
 
-												<div style="background-color: #eeeeee;">
-													<table class="table  table-bordered  table-hover table-sm"
-														style="table-layout: fixed; width: 100%; font-size: initial;">
+											<div style="background-color: #eeeeee;">
+												<table class="table  table-bordered  table-hover table-sm"
+													style="table-layout: fixed; width: 100%; font-size: initial;">
+													<tr>
+														<td><b>Document Type</td>
+														<td><b>Document Code</b></td>
+														<td><b>Document Description</b></td>
+														<td><b>Place of issue</b></td>
+														<td><b>Unique Id</b></td>
+														<td><b>Issue Date</b></td>
+														<td><b>Expiry Date</b></td>
+														<td><b>Document View</b></td>
+													</tr>
+													<tbody id="dataTables">
+														<tr th:each="Doocument : ${DocumentList}">
+
+															<td th:text="${Doocument?.document_type}"
+																class="rowDataField" style="width: 150px;">Address
+															</td>
+															<td th:text="${Doocument?.document_code}"
+																class="rowDataField" style="width: 120px;">ADD001</td>
+															<td th:text="${Doocument?.document_type_desc}"
+																class="rowDataField" style="width: 160px;">Passport
+															</td>
+															<td th:text="${Doocument?.place_of_issue}"
+																class="rowDataField" style="width: 120px;">Madurai
+															</td>
+															<td th:text="${Doocument?.unique_id}"
+																class="rowDataField" style="width: 120px;">
+																D324234234</td>
+															<td th:text="${Doocument?.issue_date}"
+																class="rowDataField" style="width: 120px;">
+																18-JUN-2018</td>
+															<td th:text="${Doocument?.expiry_date}"
+																class="rowDataField" style="width: 120px;">
+																15-JUN-2023</td>
+															<td
+																th:if="${Doocument?.file_name != null && (Doocument.file_name.endsWith('.jpeg') || Doocument.file_name.endsWith('.jfif') || Doocument.file_name.endsWith('.jpg'))}">
+																<i class="fa fa-info-circle" aria-hidden="true"
+																onclick="show1(this)" id="openModaldoc"
+																th:attr="data-doc_type=${Doocument?.unique_id}"
+																style='font-size: 20px; color: DodgerBlue; width: 50px; margin-left: 30px'
+																data-toggle="modal" data-target=".bd-example-modal-lg"></i>
+															</td>
+															<td
+																th:if="${Doocument?.file_name == null || !(Doocument.file_name.endsWith('.jpeg') || Doocument.file_name.endsWith('.jfif') || Doocument.file_name.endsWith('.jpg'))}">
+																<a th:href="@{'/' + ${Doocument?.unique_id}}"
+																style="text-decoration: none; color: DodgerBlue;"> <i
+																	class="fa fa-info-circle" aria-hidden="true"
+																	style='font-size: 20px; color: DodgerBlue; width: 50px; margin-left: 30px'></i>
+
+															</a>
+
+															</td>
+
+															<td th:text="${Doocument?.file_name}"
+																class="rowDataField" style="width: 100px;" hidden>
+															</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+									<div class="card-footer text-center">
+										<button class="btn btn-primary p-2" onclick="home();">Home</button>
+										<button class="btn btn-primary p-2" onclick="back()">Back</button>
+									</div>
+								</div>
+								<div id="tab3" class="tabcontent" style="display: none;">
+									<div class="card">
+										<div class="card-body">
+											<div class="p-2"
+												style="background-color: #eeeeee; overflow: auto; height: 180px">
+												<table>
+													<thead>
 														<tr>
-															<td><b>Document Type</td>
-															<td><b>Document Code</b></td>
-															<td><b>Document Description</b></td>
-															<td><b>Place of issue</b></td>
-															<td><b>Unique Id</b></td>
-															<td><b>Issue Date</b></td>
-															<td><b>Expiry Date</b></td>
-															<td><b>Document View</b></td>
+															<th></th>
+															<th style="width: 800px; text-align: center">NAME :</th>
 														</tr>
-														<tbody id="dataTables">
-															<tr th:each="Doocument : ${DocumentList}">
+													</thead>
+													<tbody id="sign">
+														<tr th:each="sign : ${SIGNATURE}">
+															<th></th>
+															<td th:text="${sign?.keyword}"
+																style="width: 800px; text-align: center"></td>
 
-																<td th:text="${Doocument?.document_type}"
-																	class="rowDataField" style="width: 150px;">Address
-																</td>
-																<td th:text="${Doocument?.document_code}"
-																	class="rowDataField" style="width: 120px;">ADD001
-																</td>
-																<td th:text="${Doocument?.document_type_desc}"
-																	class="rowDataField" style="width: 160px;">Passport
-																</td>
-																<td th:text="${Doocument?.place_of_issue}"
-																	class="rowDataField" style="width: 120px;">Madurai
-																</td>
-																<td th:text="${Doocument?.unique_id}"
-																	class="rowDataField" style="width: 120px;">
-																	D324234234</td>
-																<td th:text="${Doocument?.issue_date}"
-																	class="rowDataField" style="width: 120px;">
-																	18-JUN-2018</td>
-																<td th:text="${Doocument?.expiry_date}"
-																	class="rowDataField" style="width: 120px;">
-																	15-JUN-2023</td>
-																<td
-																	th:if="${Doocument?.file_name != null && (Doocument.file_name.endsWith('.jpeg') || Doocument.file_name.endsWith('.jfif') || Doocument.file_name.endsWith('.jpg'))}">
-																	<i class="fa fa-info-circle" aria-hidden="true"
-																	onclick="show1(this)" id="openModaldoc"
-																	th:attr="data-doc_type=${Doocument?.unique_id}"
-																	style='font-size: 20px; color: DodgerBlue; width: 50px; margin-left: 30px'
-																	data-toggle="modal" data-target=".bd-example-modal-lg"></i>
-																</td>
-																<td
-																	th:if="${Doocument?.file_name == null || !(Doocument.file_name.endsWith('.jpeg') || Doocument.file_name.endsWith('.jfif') || Doocument.file_name.endsWith('.jpg'))}">
-																	<a th:href="@{'/' + ${Doocument?.unique_id}}"
-																	style="text-decoration: none; color: DodgerBlue;">
-																		<i class="fa fa-info-circle" aria-hidden="true"
-																		style='font-size: 20px; color: DodgerBlue; width: 50px; margin-left: 30px'></i>
+															<td class="p-2">
+																<div id="photoCapture1"
+																	style="border: 1px solid #ccc; height: 60px; width: 100px;">
+																</div>
+															</td>
+															<td>
+																<div
+																	style="padding-left: 50px; height: 60px; width: 100px;"
+																	id="imgCapture1"></div>
 
-																</a>
+															</td>
 
-																</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+									<div class="card-footer text-center">
+										<button class="btn btn-primary p-2" onclick="home();">Home</button>
+										<button class="btn btn-primary p-2" onclick="back()">Back</button>
+									</div>
+								</div>
+								<!--  start tab4-->
 
-																<td th:text="${Doocument?.file_name}"
-																	class="rowDataField" style="width: 100px;" hidden>
-																</td>
-															</tr>
-														</tbody>
-													</table>
+								<div id="tab4" class="tabcontent panel panel-primary filterable"
+									style="display: none;">
+									<div class="card panel panel-primary filterable">
+
+										<div class="p-2">
+											<button type="button"
+												class="btn btn-xs btn-primary btns p-2 border btn-filter float-right">Filter</button>
+										</div>
+										<div class="customer-container" style="font-weight: 500;">
+											<div>
+												<label style="font-size: 13px">CUSTOEMER ID</label>
+												<div class="col-sm-2">
+													<input type="text"
+														class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
+														th:value="${customerRequest?.cif_id}" readonly>
+												</div>
+												<div class="col-sm-1"></div>
+												<label style="font-size: 13px">CUSTOEMER NAME</label>
+												<div class="col-sm-2">
+													<input type="text"
+														class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
+														th:value="${customerRequest?.ca_preferred_name}" readonly>
 												</div>
 											</div>
 										</div>
+										<div class="table-responsive mt-2">
+											<table class="table table-bordered  table-hover table-sm">
+												<thead>
+													<tr class="filters">
+														<th style="width: 8%"><input type="text"
+															class="form-control font-weight-bold"
+															placeholder="Tran Date" disabled></th>
+														<th><input type="text"
+															class="form-control font-weight-bold"
+															placeholder="Tran Id" disabled></th>
+														<th><input type="text"
+															class="form-control font-weight-bold"
+															placeholder="Part Tran Id" disabled></th>
+														<th><input type="text"
+															class="form-control font-weight-bold"
+															placeholder="Part Tran Type" disabled></th>
+														<th><input type="text" style="text-align: right"
+															class="form-control font-weight-bold"
+															placeholder="Amount" disabled></th>
+														<th><input type="text"
+															class="form-control font-weight-bold pl-3"
+															placeholder="Account No" disabled></th>
+														<th><input type="text"
+															class="form-control font-weight-bold"
+															placeholder="Account Name" disabled></th>
+													</tr>
+												</thead>
+												<tbody id="approvaltbody" style="font-size: 15px">
+
+													<tr th:each="details : ${jour}">
+
+														<td
+															th:text="${details.tran_date != null ? #dates.format(details.tran_date,'dd-MM-yyyy') : ''}">
+														</td>
+
+														<td th:text="${details.tran_id}"></td>
+														<td th:text="${details.part_tran_id}"></td>
+														<td
+															th:text="${details.part_tran_type != null ? details.part_tran_type.toUpperCase() : ''}">
+														</td>
+
+														<td style="text-align: right;"
+															th:text="${details?.tran_amt == 0 ? '0.00' :#numbers.formatDecimal(details?.tran_amt, 0, 'COMMA', 2, 'POINT')}">
+														</td>
+														<td class="pl-3" th:text="${details.acct_num}"></td>
+														<td th:text="${details.acct_name}"></td>
+													</tr>
+
+												</tbody>
+											</table>
+										</div>
+
+										<div class="card-footer text-center">
+											<button class="btn btn-primary p-2" onclick="home();">Home</button>
+											<button class="btn btn-primary p-2"
+												onclick="addFormSubmit(this)" id="addSubmitData">Submit</button>
+											<button class="btn btn-primary p-2" onclick="back()">Back</button>
+										</div>
+									</div>
+								</div>
+								<!--tab4 end  -->
+								<!-- tab5 start -->
+								<div id="tab5" class="tabcontent panel panel-primary filterable"
+									style="display: none;">
+									<div class="card  panel panel-primary filterable">
+										<div class="">
+											<button type="button"
+												class="btn btn-xs btn-primary btns p-2 border btn-filter float-right mr-2 mt-2 mb-2">Filter</button>
+										</div>
+										<div class="customer-container" style="font-weight: 500;">
+											<div>
+												<label style="font-size: 13px">CUSTOEMER ID</label>
+												<div class="col-sm-2">
+													<input type="text"
+														class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
+														th:value="${customerRequest?.cif_id}" readonly>
+												</div>
+												<div class="col-sm-1"></div>
+												<label style="font-size: 13px">CUSTOEMER NAME</label>
+												<div class="col-sm-2">
+													<input type="text"
+														class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
+														th:value="${customerRequest?.ca_preferred_name}" readonly>
+												</div>
+											</div>
+										</div>
+										<div class="table-responsive mt-2">
+											<table class="table table-bordered  table-hover table-sm"
+												style="table-layout: fixed; width: 100%;">
+												<thead>
+													<tr class="filters">
+														<th style="width: 8%"><input type="text"
+															class="form-control font-weight-bold"
+															placeholder="Branch Id" disabled></th>
+														<th><input type="text"
+															class="form-control font-weight-bold"
+															placeholder="Account No" disabled></th>
+														<th><input type="text"
+															class="form-control font-weight-bold"
+															placeholder="Account Name" disabled></th>
+														<th><input type="text"
+															class="form-control font-weight-bold"
+															placeholder="Date of Opening" disabled></th>
+														<th><input type="text"
+															class="form-control font-weight-bold"
+															placeholder="Account Balance" disabled></th>
+														<th><input type="text"
+															class="form-control font-weight-bold"
+															placeholder="Bal Ind" disabled></th>
+													</tr>
+												</thead>
+												<tbody id="approvaltbody" style="font-size: 15px">
+													<tr th:if="${getDDDetailsLa1.ca_schemetype == 'LA'}"
+														th:each="getDDDet : ${getDDDetailsLa}">
+														<td th:text="${getDDDet.branch_id}"></td>
+														<td th:text="${getDDDet.loan_accountno}"></td>
+														<td th:text="${getDDDet.customer_name}"></td>
+														<td
+															th:text="${getDDDet.date_of_loan != null ? #dates.format(getDDDet.date_of_loan,'dd-MM-yyyy') : ''}">
+														</td>
+														<td style="text-align: right;" th:text="${Chartacctbal}">
+														</td>
+														<td><span
+															th:switch="${ChartbalIndicator?.add_det_flg}"> <span
+																th:case="'C'">CREDIT</span> <span th:case="'N'">CREDIT</span>
+																<span th:case="'D'">DEBIT</span> <!-- Default case if no match -->
+														</span></td>
+													</tr>
+													<tr th:if="${getDDDetailsTd1.ca_schemetype == 'TD'}"
+														th:each="getDDDet : ${getDDDetailsTd}" id="TD">
+														<td th:text="${getDDDet.branch_id}"></td>
+														<td th:text="${getDDDet.depo_actno}"></td>
+														<td th:text="${getDDDet.cust_name}"></td>
+														<td
+															th:text="${getDDDet.deposit_date != null ? #dates.format(getDDDet.deposit_date,'dd-MM-yyyy') : ''}">
+														</td>
+														<td style="text-align: right;" th:text="${Chartacctbal}">
+														</td>
+														<td><span
+															th:switch="${ChartbalIndicator?.add_det_flg}"> <span
+																th:case="'C'">CREDIT</span> <span th:case="'N'">CREDIT</span>
+																<span th:case="'D'">DEBIT</span> <!-- Default case if no match -->
+														</span></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+
 										<div class="card-footer text-center">
 											<button class="btn btn-primary p-2" onclick="home();">Home</button>
 											<button class="btn btn-primary p-2" onclick="back()">Back</button>
 										</div>
 									</div>
-									<div id="tab3" class="tabcontent" style="display: none;">
-										<div class="card">
-											<div class="card-body">
-												<div class="p-2"
-													style="background-color: #eeeeee; overflow: auto; height: 180px">
-													<table>
-														<thead>
-															<tr>
-																<th></th>
-																<th style="width: 800px; text-align: center">NAME
-																	:</th>
-															</tr>
-														</thead>
-														<tbody id="sign">
-															<tr th:each="sign : ${SIGNATURE}">
-																<th></th>
-																<td th:text="${sign?.keyword}"
-																	style="width: 800px; text-align: center"></td>
-
-																<td class="p-2">
-																	<div id="photoCapture1"
-																		style="border: 1px solid #ccc; height: 60px; width: 100px;">
-																	</div>
-																</td>
-																<td>
-																	<div
-																		style="padding-left: 50px; height: 60px; width: 100px;"
-																		id="imgCapture1"></div>
-
-																</td>
-
-															</tr>
-														</tbody>
-													</table>
-												</div>
-											</div>
-										</div>
-										<div class="card-footer text-center">
-											<button class="btn btn-primary p-2" onclick="home();">Home</button>
-											<button class="btn btn-primary p-2" onclick="back()">Back</button>
-										</div>
-									</div>
-									<!--  start tab4-->
-
-									<div id="tab4"
-										class="tabcontent panel panel-primary filterable"
-										style="display: none;">
-										<div class="card panel panel-primary filterable">
-
-											<div class="p-2">
-												<button type="button"
-													class="btn btn-xs btn-primary btns p-2 border btn-filter float-right">Filter</button>
-											</div>
-											<div class="customer-container" style="font-weight: 500;">
-												<div>
-													<label style="font-size: 13px">CUSTOEMER ID</label>
-													<div class="col-sm-2">
-														<input type="text"
-															class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
-															th:value="${customerRequest?.cif_id}" readonly>
-													</div>
-													<div class="col-sm-1"></div>
-													<label style="font-size: 13px">CUSTOEMER NAME</label>
-													<div class="col-sm-2">
-														<input type="text"
-															class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
-															th:value="${customerRequest?.ca_preferred_name}" readonly>
-													</div>
-												</div>
-											</div>
-											<div class="table-responsive mt-2">
-												<table class="table table-bordered  table-hover table-sm">
-													<thead>
-														<tr class="filters">
-															<th style="width: 8%"><input type="text"
-																class="form-control font-weight-bold"
-																placeholder="Tran Date" disabled></th>
-															<th><input type="text"
-																class="form-control font-weight-bold"
-																placeholder="Tran Id" disabled></th>
-															<th><input type="text"
-																class="form-control font-weight-bold"
-																placeholder="Part Tran Id" disabled></th>
-															<th><input type="text"
-																class="form-control font-weight-bold"
-																placeholder="Part Tran Type" disabled></th>
-															<th><input type="text" style="text-align: right"
-																class="form-control font-weight-bold"
-																placeholder="Amount" disabled></th>
-															<th><input type="text"
-																class="form-control font-weight-bold pl-3"
-																placeholder="Account No" disabled></th>
-															<th><input type="text"
-																class="form-control font-weight-bold"
-																placeholder="Account Name" disabled></th>
-														</tr>
-													</thead>
-													<tbody id="approvaltbody" style="font-size: 15px">
-
-														<tr th:each="details : ${jour}">
-
-															<td
-																th:text="${details.tran_date != null ? #dates.format(details.tran_date,'dd-MM-yyyy') : ''}">
-															</td>
-
-															<td th:text="${details.tran_id}"></td>
-															<td th:text="${details.part_tran_id}"></td>
-															<td
-																th:text="${details.part_tran_type != null ? details.part_tran_type.toUpperCase() : ''}">
-															</td>
-
-															<td style="text-align: right;"
-																th:text="${details?.tran_amt == 0 ? '0.00' :#numbers.formatDecimal(details?.tran_amt, 0, 'COMMA', 2, 'POINT')}">
-															</td>
-															<td class="pl-3" th:text="${details.acct_num}"></td>
-															<td th:text="${details.acct_name}"></td>
-														</tr>
-
-													</tbody>
-												</table>
-											</div>
-
-											<div class="card-footer text-center">
-												<button class="btn btn-primary p-2" onclick="home();">Home</button>
-												<button class="btn btn-primary p-2"
-													onclick="addFormSubmit(this)" id="addSubmitData">Submit</button>
-												<button class="btn btn-primary p-2" onclick="back()">Back</button>
-											</div>
-										</div>
-									</div>
-									<!--tab4 end  -->
-									<!-- tab5 start -->
-									<div id="tab5"
-										class="tabcontent panel panel-primary filterable"
-										style="display: none;">
-										<div class="card  panel panel-primary filterable">
-											<div class="">
-												<button type="button"
-													class="btn btn-xs btn-primary btns p-2 border btn-filter float-right mr-2 mt-2 mb-2">Filter</button>
-											</div>
-											<div class="customer-container" style="font-weight: 500;">
-												<div>
-													<label style="font-size: 13px">CUSTOEMER ID</label>
-													<div class="col-sm-2">
-														<input type="text"
-															class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
-															th:value="${customerRequest?.cif_id}" readonly>
-													</div>
-													<div class="col-sm-1"></div>
-													<label style="font-size: 13px">CUSTOEMER NAME</label>
-													<div class="col-sm-2">
-														<input type="text"
-															class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
-															th:value="${customerRequest?.ca_preferred_name}" readonly>
-													</div>
-												</div>
-											</div>
-											<div class="table-responsive mt-2">
-												<table class="table table-bordered  table-hover table-sm"
-													style="table-layout: fixed; width: 100%;">
-													<thead>
-														<tr class="filters">
-															<th style="width: 8%"><input type="text"
-																class="form-control font-weight-bold"
-																placeholder="Branch Id" disabled></th>
-															<th><input type="text"
-																class="form-control font-weight-bold"
-																placeholder="Account No" disabled></th>
-															<th><input type="text"
-																class="form-control font-weight-bold"
-																placeholder="Account Name" disabled></th>
-															<th><input type="text"
-																class="form-control font-weight-bold"
-																placeholder="Date of Opening" disabled></th>
-															<th><input type="text"
-																class="form-control font-weight-bold"
-																placeholder="Account Balance" disabled></th>
-															<th><input type="text"
-																class="form-control font-weight-bold"
-																placeholder="Bal Ind" disabled></th>
-														</tr>
-													</thead>
-													<tbody id="approvaltbody" style="font-size: 15px">
-														<tr th:if="${getDDDetailsLa1.ca_schemetype == 'LA'}"
-															th:each="getDDDet : ${getDDDetailsLa}">
-															<td th:text="${getDDDet.branch_id}"></td>
-															<td th:text="${getDDDet.loan_accountno}"></td>
-															<td th:text="${getDDDet.customer_name}"></td>
-															<td
-																th:text="${getDDDet.date_of_loan != null ? #dates.format(getDDDet.date_of_loan,'dd-MM-yyyy') : ''}">
-															</td>
-															<td style="text-align: right;" th:text="${Chartacctbal}">
-															</td>
-															<td><span
-																th:switch="${ChartbalIndicator?.add_det_flg}"> <span
-																	th:case="'C'">CREDIT</span> <span th:case="'N'">CREDIT</span>
-																	<span th:case="'D'">DEBIT</span> <!-- Default case if no match -->
-															</span></td>
-														</tr>
-														<tr th:if="${getDDDetailsTd1.ca_schemetype == 'TD'}"
-															th:each="getDDDet : ${getDDDetailsTd}" id="TD">
-															<td th:text="${getDDDet.branch_id}"></td>
-															<td th:text="${getDDDet.depo_actno}"></td>
-															<td th:text="${getDDDet.cust_name}"></td>
-															<td
-																th:text="${getDDDet.deposit_date != null ? #dates.format(getDDDet.deposit_date,'dd-MM-yyyy') : ''}">
-															</td>
-															<td style="text-align: right;" th:text="${Chartacctbal}">
-															</td>
-															<td><span
-																th:switch="${ChartbalIndicator?.add_det_flg}"> <span
-																	th:case="'C'">CREDIT</span> <span th:case="'N'">CREDIT</span>
-																	<span th:case="'D'">DEBIT</span> <!-- Default case if no match -->
-															</span></td>
-														</tr>
-													</tbody>
-												</table>
-											</div>
-
-
-											<div class="card-footer text-center">
-												<button class="btn btn-primary p-2" onclick="home();">Home</button>
-												<button class="btn btn-primary p-2" onclick="back()">Back</button>
-											</div>
-										</div>
-									</div>
-
-									<!-- tab 5 end -->
-
 								</div>
-								<div class="container-fluid card">
-									<div class="">
-										<div class="card-body text-center">
-											<div class="form-group ">
-												<div class="container-fluid">
-													<div class="row row-cols-2 row-cols-lg-3">
-														<div class="col-sm-2"
-															style="font-size: 15px; font-weight: 500; padding: 0px 0px 2px 0px;">
-															<label>Entry User:</label>
-														</div>
-														<div class="col-sm-2">
-															<input type="text"
-																th:value="${customerRequest?.entry_user}"
-																class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
-																autocomplete="off" />
-														</div>
-														<div class="col-sm-2"
-															style="font-size: 15px; font-weight: 500; padding: 0px 0px 2px 0px;">
-															<label>Modify User:</label>
-														</div>
-														<div class="col-sm-2">
-															<input type="text"
-																th:value="${customerRequest?.modify_user}"
-																class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
-																autocomplete="off" />
-														</div>
-
-														<div class="col-sm-2"
-															style="font-size: 15px; font-weight: 500; padding: 0px 0px 2px 0px;">
-															<label>Verify User:</label>
-														</div>
-														<div class="col-sm-2">
-															<input type="text"
-																th:value="${customerRequest?.verify_user}"
-																class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
-																autocomplete="off" />
-														</div>
-													</div>
-
-													<div class="row row-cols-2 row-cols-lg-3">
-														<div class="col-sm-2"
-															style="font-size: 15px; font-weight: 500; padding: 0px 0px 2px 0px;">
-															<label>Entry Date:</label>
-														</div>
-														<div class="col-sm-2">
-															<input type="hidden"
-																class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
-																autocomplete="off" /> <input type="text"
-																th:value="${#dates.format(customerRequest?.entry_time, 'dd-MM-yyyy HH:mm:ss')}"
-																class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
-																autocomplete="off" />
-														</div>
-
-														<div class="col-sm-2"
-															style="font-size: 15px; font-weight: 500; padding: 0px 0px 2px 0px;">
-															<label>Modify Date:</label>
-														</div>
-														<div class="col-sm-2">
-															<input type="text"
-																th:value="${#dates.format(customerRequest?.modify_time, 'dd-MM-yyyy HH:mm:ss')}"
-																class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
-																autocomplete="off" />
-														</div>
-
-														<div class="col-sm-2"
-															style="font-size: 15px; font-weight: 500; padding: 0px 0px 2px 0px;">
-															<label>Verify Date:</label>
-														</div>
-														<div class="col-sm-2">
-															<input type="text"
-																th:value="${#dates.format(customerRequest?.verify_time, 'dd-MM-yyyy HH:mm:ss')}"
-																class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
-																autocomplete="off" />
-														</div>
-													</div>
-
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
+								<!-- tab 5 end -->
 							</form>
+						</div>
+
+						<div class="card-footer text-center">
+							<button class="btn btn-primary p-2" onclick="home();">Home</button>
+							<button class="btn btn-primary p-2" onclick="back()">Back</button>
+						</div>
+						<div class="container-fluid card">
+							<div class="">
+								<div class="card-body text-center">
+									<div class="form-group ">
+										<div class="container-fluid">
+											<div class="row row-cols-2 row-cols-lg-3">
+												<div class="col-sm-2"
+													style="font-size: 15px; font-weight: 500; padding: 0px 0px 2px 0px;">
+													<label>Entry User:</label>
+												</div>
+												<div class="col-sm-2">
+													<input type="text"
+														th:value="${customerRequest?.entry_user}"
+														class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
+														autocomplete="off" />
+												</div>
+												<div class="col-sm-2"
+													style="font-size: 15px; font-weight: 500; padding: 0px 0px 2px 0px;">
+													<label>Modify User:</label>
+												</div>
+												<div class="col-sm-2">
+													<input type="text"
+														th:value="${customerRequest?.modify_user}"
+														class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
+														autocomplete="off" />
+												</div>
+
+												<div class="col-sm-2"
+													style="font-size: 15px; font-weight: 500; padding: 0px 0px 2px 0px;">
+													<label>Verify User:</label>
+												</div>
+												<div class="col-sm-2">
+													<input type="text"
+														th:value="${customerRequest?.verify_user}"
+														class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
+														autocomplete="off" />
+												</div>
+											</div>
+
+											<div class="row row-cols-2 row-cols-lg-3">
+												<div class="col-sm-2"
+													style="font-size: 15px; font-weight: 500; padding: 0px 0px 2px 0px;">
+													<label>Entry Date:</label>
+												</div>
+												<div class="col-sm-2">
+													<input type="hidden"
+														class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
+														autocomplete="off" /> <input type="text"
+														th:value="${#dates.format(customerRequest?.entry_time, 'dd-MM-yyyy HH:mm:ss')}"
+														class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
+														autocomplete="off" />
+												</div>
+
+												<div class="col-sm-2"
+													style="font-size: 15px; font-weight: 500; padding: 0px 0px 2px 0px;">
+													<label>Modify Date:</label>
+												</div>
+												<div class="col-sm-2">
+													<input type="text"
+														th:value="${#dates.format(customerRequest?.modify_time, 'dd-MM-yyyy HH:mm:ss')}"
+														class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
+														autocomplete="off" />
+												</div>
+
+												<div class="col-sm-2"
+													style="font-size: 15px; font-weight: 500; padding: 0px 0px 2px 0px;">
+													<label>Verify Date:</label>
+												</div>
+												<div class="col-sm-2">
+													<input type="text"
+														th:value="${#dates.format(customerRequest?.verify_time, 'dd-MM-yyyy HH:mm:ss')}"
+														class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
+														autocomplete="off" />
+												</div>
+											</div>
+
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
 
 				<!------- EDITCUST ---------------->
 
-				<div th:if="${formmode}=='EditCust'" class="mt-5">
+				<div th:if="${formmode}=='EditCust'">
 
 					<div class="card">
 						<div class="card-header"
 							style="background-color: #e9ecef; height: 50px">
 							<div class="float-left">
 								<h6 style="font-size: 1.2rem;" class="ml-3">CUSTOMER
-									MAINTENANCE - EDIT</h6>
+									MAINTENANCE - MODIFY</h6>
 							</div>
-
-
-
 						</div>
 						<div class="card-body">
 							<form action="#" th:object="${customerRequest}" method="post"
 								id="edit_forform" autocomplete="off" th:fragment="finuserapply">
-
-
-
 								<div class="tab row formline ml-3"
 									style="padding: 4px 4px; position: relative; font-size: 13px; width: 98%; display: flex; justify-content: space-between;">
 									<!-- Tab buttons -->
@@ -2767,7 +2756,6 @@ function gotocorporate(){
 											style="width: 200px;" onclick="openTab(event, 'tab1')">Personal
 											Details</button>
 									</div>
-
 									<div class="col-sm-2">
 										<button class="tablinks" id="smooth2" style="width: 200px;"
 											onclick="openTab(event, 'tab2')">Document Master</button>
@@ -2776,449 +2764,445 @@ function gotocorporate(){
 										<button class="tablinks" id="smooth3" style="width: 200px;"
 											onclick="openTab(event, 'tab3')">Signature</button>
 									</div>
-
-
 								</div>
-								<div class="">
+								<div id="tab1" class="tabcontent" style="display: block;">
 
-									<div id="tab1" class="tabcontent" style="display: block;">
+									<div class="card ">
+										<div class="card-body ">
 
-										<div class="card ">
-											<div class="card-body ">
+											<div class="row formline ">
+												<input type="hidden" id="gooom"
+													th:value="${customerRequest?.appl_ref_no}"> <label
+													class="col-sm-2">Customer Type </label>
+												<div class="col-sm-2">
+													<input type="text" id="la_customer_type"
+														onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+														class="form-control form-control-sm bg-white border border-dark"
+														th:value="${customerRequest?.la_customer_type}"
+														name="la_customer_type" autocomplete="off" readonly>
+													<span id="merchant_name_vali" class="reqError"></span>
+												</div>
+												<div class="col-sm-1"></div>
+												<label class="col-sm-2">Cif Id </label>
+												<div class="col-sm-2">
+													<input type="text" id="cif_id"
+														onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+														class="form-control form-control-sm bg-white border border-dark"
+														th:value="${customerRequest?.cif_id}" name="cif_id"
+														autocomplete="off" readonly></span>
+												</div>
+											</div>
+											<div class="row formline mt-2">
+												<label class="col-sm-2">Primary Branch </label>
+												<div class="col-sm-2">
+													<input type="text" id="ca_solid"
+														onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+														class="form-control form-control-sm bg-white border border-dark"
+														th:value="${customerRequest?.ca_solid}" name="ca_solid"
+														autocomplete="off" readonly> <span
+														id="merchant_name_vali" class="reqError"></span>
+												</div>
+												<div class="col-sm-1"></div>
+												<label class="col-sm-2">Branch Name </label>
+												<div class="col-sm-2">
+													<input type="text" id="branch_desc"
+														onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+														class="form-control form-control-sm bg-white border border-dark"
+														th:value="${customerRequest?.branch_desc}"
+														name="branch_desc" autocomplete="off" readonly> <span
+														id="merchant_name_vali" class="reqError"></span>
+												</div>
+											</div>
+											<div class="row formline mt-2">
+												<label class="col-sm-2">Salutation </label>
+												<div class="col-sm-2">
+													<select id="imgaccesscode"
+														class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
+														style="font-size: 15px;"
+														th:value="${customerRequest?.ca_saluation}">
+														<option value="MR"
+															th:selected="${customerRequest?.ca_saluation == 'MR'}">MR</option>
+														<option value="MS"
+															th:selected="${customerRequest?.ca_saluation == 'MS'}">MS</option>
 
-												<div class="row formline ">
-													<input type="hidden" id="gooom"
-														th:value="${customerRequest?.appl_ref_no}"> <label
-														class="col-sm-2">Customer Type </label>
-													<div class="col-sm-2">
-														<input type="text" id="la_customer_type"
-															onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
-															class="form-control form-control-sm bg-white border border-dark"
-															th:value="${customerRequest?.la_customer_type}"
-															name="la_customer_type" autocomplete="off" readonly>
-														<span id="merchant_name_vali" class="reqError"></span>
-													</div>
-													<div class="col-sm-1"></div>
-													<label class="col-sm-2">Cif Id </label>
-													<div class="col-sm-2">
-														<input type="text" id="cif_id"
-															onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
-															class="form-control form-control-sm bg-white border border-dark"
-															th:value="${customerRequest?.cif_id}" name="cif_id"
-															autocomplete="off" readonly></span>
-													</div>
+													</select>
 												</div>
-												<div class="row formline mt-2">
-													<label class="col-sm-2">Primary Branch </label>
-													<div class="col-sm-2">
-														<input type="text" id="ca_solid"
-															onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
-															class="form-control form-control-sm bg-white border border-dark"
-															th:value="${customerRequest?.ca_solid}" name="ca_solid"
-															autocomplete="off" readonly> <span
-															id="merchant_name_vali" class="reqError"></span>
-													</div>
-													<div class="col-sm-1"></div>
-													<label class="col-sm-2">Branch Name </label>
-													<div class="col-sm-2">
-														<input type="text" id="branch_desc"
-															onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
-															class="form-control form-control-sm bg-white border border-dark"
-															th:value="${customerRequest?.branch_desc}"
-															name="branch_desc" autocomplete="off" readonly> <span
-															id="merchant_name_vali" class="reqError"></span>
-													</div>
+												<div class="col-sm-1"></div>
+												<label class="col-sm-2">First Name </label>
+												<div class="col-sm-2">
+													<input type="text" id="ca_first_name"
+														class="form-control form-control-sm bg-white border border-dark"
+														th:value="${customerRequest?.ca_first_name}"
+														onkeyup="this.value = this.value.toUpperCase();handleIn(this) "
+														name="ca_first_name" autocomplete="off"> <span
+														id="merchant_corp_name_vali" class="reqError"></span>
 												</div>
-												<div class="row formline mt-2">
-													<label class="col-sm-2">Salutation </label>
-													<div class="col-sm-2">
-														<select id="imgaccesscode"
-															class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
-															style="font-size: 15px;"
-															th:value="${customerRequest?.ca_saluation}">
-															<option value="MR"
-																th:selected="${customerRequest?.ca_saluation == 'MR'}">MR</option>
-															<option value="MS"
-																th:selected="${customerRequest?.ca_saluation == 'MS'}">MS</option>
+											</div>
+											<div class="row formline mt-2">
+												<label class="col-sm-2">Middle Name </label>
+												<div class="col-sm-2">
+													<input type="text" id="mid_name"
+														onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+														class="form-control form-control-sm bg-white border border-dark"
+														th:value="${customerRequest?.mid_name}" name="mid_name"
+														autocomplete="off"> <span id="merchant_name_vali"
+														class="reqError"></span>
+												</div>
+												<div class="col-sm-1"></div>
+												<label class="col-sm-2">Last Name </label>
+												<div class="col-sm-2">
+													<input type="text" id="ca_last_name"
+														onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+														class="form-control form-control-sm bg-white border border-dark"
+														th:value="${customerRequest?.ca_last_name}"
+														name="ca_last_name" autocomplete="off"> <span
+														id="merchant_name_vali" class="reqError"></span>
+												</div>
+											</div>
+											<div class="row formline mt-2">
+												<label class="col-sm-2">Full Name </label>
+												<div class="col-sm-2">
+													<input type="text" id="ca_preferred_name"
+														onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+														class="form-control form-control-sm bg-white border border-dark"
+														th:value="${customerRequest?.ca_preferred_name}"
+														name="ca_first_name" autocomplete="off" readonly>
+													<span id="merchant_name_vali" class="reqError"></span>
+												</div>
+												<div class="col-sm-1"></div>
+												<label class="col-sm-2">Short Name </label>
+												<div class="col-sm-2">
+													<input type="text" id="ca_preferred_name"
+														onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+														class="form-control form-control-sm bg-white border border-dark"
+														th:value="${customerRequest?.ca_preferred_name}"
+														name="ca_preferred_name" autocomplete="off"> <span
+														id="merchant_name_vali" class="reqError"></span>
+												</div>
+											</div>
+											<div class="row formline mt-2">
+												<label class="col-sm-2">Occupation </label>
+												<div class="col-sm-2">
 
-														</select>
-													</div>
-													<div class="col-sm-1"></div>
-													<label class="col-sm-2">First Name </label>
-													<div class="col-sm-2">
-														<input type="text" id="ca_first_name"
-															class="form-control form-control-sm bg-white border border-dark"
-															th:value="${customerRequest?.ca_first_name}"
-															onkeyup="this.value = this.value.toUpperCase();handleIn(this) "
-															name="ca_first_name" autocomplete="off"> <span
-															id="merchant_corp_name_vali" class="reqError"></span>
-													</div>
+													<select
+														class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
+														style="font-size: 15px;"
+														th:value="${customerRequest?.ca_occupation1}">
+														<option value="SELF EMPLOYED"
+															th:selected="${customerRequest?.ca_occupation1 == 'SELF EMPLOYED'}">SELF
+															EMPLOYED</option>
+														<option value="SALARIED"
+															th:selected="${customerRequest?.ca_occupation1 == 'SALARIED'}">SALARIED</option>
+													</select>
 												</div>
-												<div class="row formline mt-2">
-													<label class="col-sm-2">Middle Name </label>
-													<div class="col-sm-2">
-														<input type="text" id="mid_name"
-															onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
-															class="form-control form-control-sm bg-white border border-dark"
-															th:value="${customerRequest?.mid_name}" name="mid_name"
-															autocomplete="off"> <span id="merchant_name_vali"
-															class="reqError"></span>
-													</div>
-													<div class="col-sm-1"></div>
-													<label class="col-sm-2">Last Name </label>
-													<div class="col-sm-2">
-														<input type="text" id="ca_last_name"
-															onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
-															class="form-control form-control-sm bg-white border border-dark"
-															th:value="${customerRequest?.ca_last_name}"
-															name="ca_last_name" autocomplete="off"> <span
-															id="merchant_name_vali" class="reqError"></span>
-													</div>
-												</div>
-												<div class="row formline mt-2">
-													<label class="col-sm-2">Full Name </label>
-													<div class="col-sm-2">
-														<input type="text" id="ca_preferred_name"
-															onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
-															class="form-control form-control-sm bg-white border border-dark"
-															th:value="${customerRequest?.ca_preferred_name}"
-															name="ca_first_name" autocomplete="off" readonly>
-														<span id="merchant_name_vali" class="reqError"></span>
-													</div>
-													<div class="col-sm-1"></div>
-													<label class="col-sm-2">Short Name </label>
-													<div class="col-sm-2">
-														<input type="text" id="ca_preferred_name"
-															onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
-															class="form-control form-control-sm bg-white border border-dark"
-															th:value="${customerRequest?.ca_preferred_name}"
-															name="ca_preferred_name" autocomplete="off"> <span
-															id="merchant_name_vali" class="reqError"></span>
-													</div>
-												</div>
-												<div class="row formline mt-2">
-													<label class="col-sm-2">Occupation </label>
-													<div class="col-sm-2">
+												<div class="col-sm-1"></div>
+												<label class="col-sm-2">Gender </label>
+												<div class="col-sm-2">
 
-														<select
-															class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
-															style="font-size: 15px;"
-															th:value="${customerRequest?.ca_occupation1}">
-															<option value="SELF EMPLOYED"
-																th:selected="${customerRequest?.ca_occupation1 == 'SELF EMPLOYED'}">SELF
-																EMPLOYED</option>
-															<option value="SALARIED"
-																th:selected="${customerRequest?.ca_occupation1 == 'SALARIED'}">SALARIED</option>
-														</select>
-													</div>
-													<div class="col-sm-1"></div>
-													<label class="col-sm-2">Gender </label>
-													<div class="col-sm-2">
+													<select
+														class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
+														style="font-size: 15px;"
+														th:value="${customerRequest?.ca_gender}">
+														<option value="MALE"
+															th:selected="${customerRequest?.ca_gender == 'MALE'}">MALE</option>
+														<option value="FEMALE"
+															th:selected="${customerRequest?.ca_gender == 'FEMALE'}">FEMALE</option>
+													</select>
+												</div>
+											</div>
+											<div class="row formline mt-2">
+												<label class="col-sm-2">Marital Status </label>
+												<div class="col-sm-2">
+													<select
+														class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
+														style="font-size: 15px;"
+														th:value="${customerRequest?.ca_martial_staus}">
+														<option value="MALE"
+															th:selected="${customerRequest?.ca_martial_staus == 'SINGLE'}">SINGLE</option>
+														<option value="FEMALE"
+															th:selected="${customerRequest?.ca_martial_staus == 'MARRIED'}">MARRIED</option>
+													</select>
 
-														<select
-															class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
-															style="font-size: 15px;"
-															th:value="${customerRequest?.ca_gender}">
-															<option value="MALE"
-																th:selected="${customerRequest?.ca_gender == 'MALE'}">MALE</option>
-															<option value="FEMALE"
-																th:selected="${customerRequest?.ca_gender == 'FEMALE'}">FEMALE</option>
-														</select>
-													</div>
 												</div>
-												<div class="row formline mt-2">
-													<label class="col-sm-2">Marital Status </label>
-													<div class="col-sm-2">
-														<select
-															class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
-															style="font-size: 15px;"
-															th:value="${customerRequest?.ca_martial_staus}">
-															<option value="MALE"
-																th:selected="${customerRequest?.ca_martial_staus == 'SINGLE'}">SINGLE</option>
-															<option value="FEMALE"
-																th:selected="${customerRequest?.ca_martial_staus == 'MARRIED'}">MARRIED</option>
-														</select>
-														
-													</div>
-													<div class="col-sm-1"></div>
-													<label class="col-sm-2">Date Of Birth </label>
-													<div class="col-sm-2">
-														<input type="text" id="ca_date_of_birth"
-															class="form-control form-control-sm bg-white border border-dark"
-															th:value="${#dates.format(customerRequest?.ca_date_of_birth, 'dd-MM-yyyy')}"
-															name="ca_date_of_birth" autocomplete="off"> <span
-															id="merchant_addr_vali" class="reqError"></span>
-													</div>
+												<div class="col-sm-1"></div>
+												<label class="col-sm-2">Date Of Birth </label>
+												<div class="col-sm-2">
+													<input type="text" id="ca_date_of_birth"
+														class="form-control form-control-sm bg-white border border-dark"
+														th:value="${#dates.format(customerRequest?.ca_date_of_birth, 'dd-MM-yyyy')}"
+														name="ca_date_of_birth" autocomplete="off"> <span
+														id="merchant_addr_vali" class="reqError"></span>
 												</div>
-												<div class="row formline mt-2">
-													<label class="col-sm-2">Annual Income </label>
-													<div class="col-sm-2">
-														<input type="text" id="annual_income"
-															onchange="formatAndSetValue(this)"
-															class="form-control form-control-sm bg-white border border-dark"
-															th:value="${customerRequest?.annual_income}"
-															name="annual_income" autocomplete="off"> <span
-															id="merchant_name_vali" class="reqError"></span>
-													</div>
-													<div class="col-sm-1"></div>
-													<label class="col-sm-2">Monthly Income </label>
-													<div class="col-sm-2">
-														<input type="text" id="monthly_income"
-															onchange="formatAndSetValue(this)"
-															class="form-control form-control-sm bg-white border border-dark"
-															th:value="${customerRequest?.monthly_income}"
-															name="monthly_income" autocomplete="off" readonly>
-														<span id="merchant_name_vali" class="reqError"></span>
-													</div>
+											</div>
+											<div class="row formline mt-2">
+												<label class="col-sm-2">Annual Income </label>
+												<div class="col-sm-2">
+													<input type="text" id="annual_income"
+														onchange="formatAndSetValue(this)"
+														class="form-control form-control-sm bg-white border border-dark"
+														th:value="${customerRequest?.annual_income}"
+														name="annual_income" autocomplete="off"> <span
+														id="merchant_name_vali" class="reqError"></span>
 												</div>
-												<div class="row formline mt-2">
-													<label class="col-sm-2">Loan Obligations</label>
-													<div class="col-sm-2">
-														<input type="text" id="loan_obligations"
-															onchange="formatAndSetValue(this)"
-															class="form-control form-control-sm bg-white border border-dark"
-															th:value="${customerRequest?.loan_obligations}"
-															name="loan_obligations" autocomplete="off"> <span
-															id="merchant_name_vali" class="reqError"></span>
-													</div>
-													<div class="col-sm-1"></div>
-													<label class="col-sm-2">Family Maintenance</label>
-													<div class="col-sm-2">
-														<input type="text" id="family_maintenance"
-															class="form-control form-control-sm bg-white border border-dark"
-															th:value="${customerRequest?.family_maintenance}"
-															name="family_maintenance" autocomplete="off"> <span
-															id="merchant_name_vali" class="reqError"></span>
-													</div>
+												<div class="col-sm-1"></div>
+												<label class="col-sm-2">Monthly Income </label>
+												<div class="col-sm-2">
+													<input type="text" id="monthly_income"
+														onchange="formatAndSetValue(this)"
+														class="form-control form-control-sm bg-white border border-dark"
+														th:value="${customerRequest?.monthly_income}"
+														name="monthly_income" autocomplete="off" readonly>
+													<span id="merchant_name_vali" class="reqError"></span>
 												</div>
-												<div class="row formline mt-2">
-													<label class="col-sm-2">Email ID </label>
-													<div class="col-sm-2">
-														<input type="text" id="ca_email_id"
-															class="form-control form-control-sm bg-white border border-dark"
-															name="ca_email_id"
-															th:value="${customerRequest?.ca_email_id}"
-															autocomplete="off">
-													</div>
-													<div class="col-sm-1"></div>
-													<label class="col-sm-2">Mobile No </label>
-													<div class="col-sm-2">
-														<div class="input-group">
-															<div class="input-group-prepend">
-																<input type="text" id="ca_countrycode_1"
-																	name="ca_countrycode_1"
-																	th:value="${customerRequest?.ca_countrycode_1}"
-																	class="form-control form-control-sm bg-white border border-dark"
-																	value="+248" maxlength="5" style="width: 60px;"
-																	readonly />
-															</div>
-															<input type="number" id="mobno" name="ca_mobile_number"
-																autocomplete="off" maxlength="7"
-																th:value="${customerRequest?.ca_mobile_number}"
+											</div>
+											<div class="row formline mt-2">
+												<label class="col-sm-2">Loan Obligations</label>
+												<div class="col-sm-2">
+													<input type="text" id="loan_obligations"
+														onchange="formatAndSetValue(this)"
+														class="form-control form-control-sm bg-white border border-dark"
+														th:value="${customerRequest?.loan_obligations}"
+														name="loan_obligations" autocomplete="off"> <span
+														id="merchant_name_vali" class="reqError"></span>
+												</div>
+												<div class="col-sm-1"></div>
+												<label class="col-sm-2">Family Maintenance</label>
+												<div class="col-sm-2">
+													<input type="text" id="family_maintenance"
+														class="form-control form-control-sm bg-white border border-dark"
+														th:value="${customerRequest?.family_maintenance}"
+														name="family_maintenance" autocomplete="off"> <span
+														id="merchant_name_vali" class="reqError"></span>
+												</div>
+											</div>
+											<div class="row formline mt-2">
+												<label class="col-sm-2">Email ID </label>
+												<div class="col-sm-2">
+													<input type="text" id="ca_email_id"
+														class="form-control form-control-sm bg-white border border-dark"
+														name="ca_email_id"
+														th:value="${customerRequest?.ca_email_id}"
+														autocomplete="off">
+												</div>
+												<div class="col-sm-1"></div>
+												<label class="col-sm-2">Mobile No </label>
+												<div class="col-sm-2">
+													<div class="input-group">
+														<div class="input-group-prepend">
+															<input type="text" id="ca_countrycode_1"
+																name="ca_countrycode_1"
+																th:value="${customerRequest?.ca_countrycode_1}"
 																class="form-control form-control-sm bg-white border border-dark"
-																style="width: 100px;" />
+																value="+248" maxlength="5" style="width: 60px;" readonly />
 														</div>
+														<input type="number" id="mobno" name="ca_mobile_number"
+															autocomplete="off" maxlength="7"
+															th:value="${customerRequest?.ca_mobile_number}"
+															class="form-control form-control-sm bg-white border border-dark"
+															style="width: 100px;" />
 													</div>
 												</div>
 											</div>
 										</div>
-										<div class="card-footer text-center">
-											<button class="btn btn-primary p-2" onclick="home();">Home</button>
-											<button class="btn btn-primary p-2"
-												onclick="PersonalDetilsForEdit(this)"
-												th:attr="data-refnumber=${appreNO}" id="addSubmitData">Submit</button>
-											<button class="btn btn-primary p-2" onclick="back()">Back</button>
-										</div>
 									</div>
+									<div class="card-footer text-center">
+										<button class="btn btn-primary p-2" onclick="home();">Home</button>
+										<button class="btn btn-primary p-2"
+											onclick="PersonalDetilsForEdit(this)"
+											th:attr="data-refnumber=${appreNO}" id="addSubmitData">Submit</button>
+										<button class="btn btn-primary p-2" onclick="back()">Back</button>
+									</div>
+								</div>
 
-									<div id="tab2" class="tabcontent" style="display: none;">
+								<div id="tab2" class="tabcontent" style="display: none;">
 
-										<div class="card ">
-											<div class="card-body">
+									<div class="card ">
+										<div class="card-body">
 
-												<div id="myModaldoc" class="modaldoc" style="display: none">
-													<div class="modal-contentdoc">
-														<span class="closedoc" id="closeModaldoc"
-															onclick=closeDoc(this)>&times;</span>
-														<div id="popup1" class="overlay "
-															style="z-index: 1001; display: flex; justify-content: center; align-items: center;">
-															<div class="popupw-img">
-																<a class="imageclosedoc" href="#"></a>
-																<div class="card-bodydoc">
-																	<div id="imgCapture11"></div>
-																</div>
+											<div id="myModaldoc" class="modaldoc" style="display: none">
+												<div class="modal-contentdoc">
+													<span class="closedoc" id="closeModaldoc"
+														onclick=closeDoc(this)>&times;</span>
+													<div id="popup1" class="overlay "
+														style="z-index: 1001; display: flex; justify-content: center; align-items: center;">
+														<div class="popupw-img">
+															<a class="imageclosedoc" href="#"></a>
+															<div class="card-bodydoc">
+																<div id="imgCapture11"></div>
 															</div>
 														</div>
 													</div>
 												</div>
-
-												<div style="background-color: #eeeeee;">
-													<table class="table  table-bordered  table-hover table-sm"
-														style="table-layout: fixed; width: 100%; font-size: initial;">
-														<tr>
-															<td><b>Document Type</b></td>
-															<td><b>Document Code</b></td>
-															<td><b>Document Description</b></td>
-
-															<td><b>Unique Id</b></td>
-															<td><b>Place of issue</b></td>
-															<td><b>Issue Date</b></td>
-															<td><b>Expiry Date</b></td>
-															<td><b>Document View</b></td>
-														</tr>
-														<tbody id="click1">
-															<tr th:each="Doocument : ${DocumentList}">
-
-																<td style="background-color: unset;"><input
-																	type="text" id="document_type" name="document_type"
-																	maxlength="10" autocomplete="off"
-																	th:value="${Doocument?.document_type}" readonly /> <span
-																	id="document_type" class="reqError"></span></td>
-
-																<td><input type="text" id="document_code"
-																	name="document_code" maxlength="10" autocomplete="off"
-																	th:value="${Doocument?.document_code}" readonly /> <span
-																	id="document_code" class="reqError"></span></td>
-
-
-																<td><input type="text" id="document_type_desc"
-																	name="document_type_desc" maxlength="10"
-																	autocomplete="off"
-																	th:value="${Doocument?.document_type_desc}" readonly />
-																	<span id="document_type_desc" class="reqError"></span></td>
-																<td><input type="text" id="unique_id0"
-																	name="unique_id" maxlength="10" autocomplete="off"
-																	th:value="${Doocument?.unique_id}" readonly /> <span
-																	id="unique_id" class="reqError"></span></td>
-
-																<td><input type="text" id="place_of_issue"
-																	name="place_of_issue" maxlength="10" autocomplete="off"
-																	th:value="${Doocument?.place_of_issue}" readonly /> <span
-																	id="place_of_issue" class="reqError"></span></td>
-
-
-																<td><input type="date" id="issue_date"
-																	style="width: 160px" name="issue_date" maxlength="10"
-																	autocomplete="off" th:value="${Doocument?.issue_date}"
-																	readonly /> <span id="issue_date" class="reqError"></span>
-																</td>
-
-																<td><input type="date" id="expiry_date"
-																	style="width: 160px" name="expiry_date" maxlength="10"
-																	autocomplete="off" th:value="${Doocument?.expiry_date}"
-																	readonly /> <span id="expiry_date" class="reqError"></span>
-																</td>
-
-																<td
-																	th:if="${Doocument?.file_name != null && (Doocument.file_name.endsWith('.jpeg') || Doocument.file_name.endsWith('.jfif') || Doocument.file_name.endsWith('.jpg'))}">
-																	<i class="fa fa-info-circle" aria-hidden="true"
-																	onclick="show1(this)" id="openModaldoc"
-																	th:attr="data-doc_type=${Doocument?.unique_id}"
-																	style='font-size: 20px; color: DodgerBlue; width: 50px; margin-left: 30px'
-																	data-toggle="modal" data-target=".bd-example-modal-lg"></i>
-																</td>
-																<td
-																	th:if="${Doocument?.file_name == null || !(Doocument.file_name.endsWith('.jpeg') || Doocument.file_name.endsWith('.jfif') || Doocument.file_name.endsWith('.jpg'))}">
-																	<a th:href="@{'/' + ${Doocument?.unique_id}}"
-																	style="text-decoration: none; color: DodgerBlue;">
-																		<i class="fa fa-info-circle" aria-hidden="true"
-																		style='font-size: 20px; color: DodgerBlue; width: 50px; margin-left: 30px'></i>
-
-																</a>
-
-																</td>
-
-																<td th:text="${Doocument?.file_name}"
-																	class="rowDataField" style="width: 100px;" hidden>
-																</td>
-																<td class="text-center"><i class="fa fa-trash"
-																	aria-hidden="true" id="deletefunction"
-																	onclick="rowdelete(this);"></i></td>
-															</tr>
-														</tbody>
-													</table>
-												</div>
-												<div class="text-center card-footer">
-													<button class="btn btn-primary p-2" type="button"
-														onclick="rowadd()">Add</button>
-													<button class="btn btn-primary p-2" type="button"
-														th:attr="data-refnumber=${appreNO}"
-														onclick="submitfileForEdit(this)">Submit</button>
-													<input type="text" hidden id="rec_no_for_indi"
-														th:value="${customerRequest?.rec_no}" />
-												</div>
 											</div>
-										</div>
 
-									</div>
-									<div id="tab3" class="tabcontent" style="display: none;">
-										<div class="card">
-											<div class="card-body">
-			<table class="mt-4 table-bordered"
-													style="height: 200px; width: 100%">
-													<thead>
-														<tr>
-															<th class=""
-																style="text-align: left; vertical-align: 22px; margin-top: 12px; font-size: 15px; padding-left: 30px">
-																Image Access Group</th>
-															<th class=""
-																style="text-align: left; vertical-align: 22px; font-size: 15px; padding-left: 30px;">
-																Group</th>
-															<th class=""
-																style="text-align: left; vertical-align: 22px; font-size: 15px; padding-left: 30px;">
-																Keyword<span id="KEYWORD"
-																style="color: red; font-size: 20px;"> *</span>
-															</th>
-															<th class=""
-																style="text-align: left; vertical-align: 22px; font-size: 15px; padding-left: 68px;">
-																Photo<span id="pic_val"
-																style="color: red; font-size: 20px;"> *</span>
-															</th>
-															<th class=""
-																style="text-align: left; vertical-align: 22px; font-size: 15px; padding-left: 35px;">
-																Signature<span id="sign_val"
-																style="color: red; font-size: 20px;"> *</span>
-															</th>
+											<div style="background-color: #eeeeee;">
+												<table class="table  table-bordered  table-hover table-sm"
+													style="table-layout: fixed; width: 100%; font-size: initial;">
+													<tr>
+														<td><b>Document Type</b></td>
+														<td><b>Document Code</b></td>
+														<td><b>Document Description</b></td>
 
-														</tr>
-													</thead>
-													<tbody id="signbody" style="background-color: #eeeeee; overflow: auto; height: 200px">
-														<tr id="row0" th:each="sign : ${SIGNATURE}">
-															<td><input id="group" type="text" maxlength="10"
-																th:value="${sign[0]}" name="img_access_code" readonly
-																class="form-control form-control-sm bg-white border border-dark bg-white border border-dark "
-																style="margin-left: 30px; width: 200px"></td>
-															<td><input id="group" type="text" maxlength="10"
-																th:value="${sign[1]}" readonly name="img_group"
-																class="form-control form-control-sm bg-white border border-dark bg-white border border-dark "
-																style="margin-left: 30px; width: 200px"></td>
-															<td><input id="keyword" type="text" maxlength="10"
-																th:value="${sign[2]}" name="keyword"
-																 readonly
-																class="form-control form-control-sm bg-white border border-dark bg-white border border-dark "
-																style="margin-left: 30px; width: 200px"></td>
-										    <td th:if="${sign[3] != null and sign[3] != ''}">
-                                                             <img th:src="'data:image/png;base64,' + ${sign[3]}"  name="photo"
-                                                             	alt="Photo" style="max-width: 100px; max-height: 100px;">
-                                            </td>
-                                             <td th:if="${sign[4] != null and sign[4] != ''}">
-                                                             <img th:src="'data:image/png;base64,' + ${sign[4]}" 
-                                                             	alt="Signature" style="max-width: 100px; max-height: 100px;background-color:white;">
-                                            </td>
-                                                 <td hidden><input id="srl_no" type="text" maxlength="10"
-																th:value="${sign[5]}" name="srl_no"
-																 readonly 
-																class="form-control form-control-sm bg-white border border-dark bg-white border border-dark "
-																style="margin-left: 30px; width: 200px"></td>
-                            
-															<td class="text-center h-50"><i
-																class="fa fa-trash custom-icon" aria-hidden="true"
-																id="deletefunction" onclick="rowdeletesignature(this);"></i></td>
+														<td><b>Unique Id</b></td>
+														<td><b>Place of issue</b></td>
+														<td><b>Issue Date</b></td>
+														<td><b>Expiry Date</b></td>
+														<td><b>Document View</b></td>
+													</tr>
+													<tbody id="click1">
+														<tr th:each="Doocument : ${DocumentList}">
 
+															<td style="background-color: unset;"><input
+																type="text" id="document_type" name="document_type"
+																maxlength="10" autocomplete="off"
+																th:value="${Doocument?.document_type}" readonly /> <span
+																id="document_type" class="reqError"></span></td>
+
+															<td><input type="text" id="document_code"
+																name="document_code" maxlength="10" autocomplete="off"
+																th:value="${Doocument?.document_code}" readonly /> <span
+																id="document_code" class="reqError"></span></td>
+
+
+															<td><input type="text" id="document_type_desc"
+																name="document_type_desc" maxlength="10"
+																autocomplete="off"
+																th:value="${Doocument?.document_type_desc}" readonly />
+																<span id="document_type_desc" class="reqError"></span></td>
+															<td><input type="text" id="unique_id0"
+																name="unique_id" maxlength="10" autocomplete="off"
+																th:value="${Doocument?.unique_id}" readonly /> <span
+																id="unique_id" class="reqError"></span></td>
+
+															<td><input type="text" id="place_of_issue"
+																name="place_of_issue" maxlength="10" autocomplete="off"
+																th:value="${Doocument?.place_of_issue}" readonly /> <span
+																id="place_of_issue" class="reqError"></span></td>
+
+
+															<td><input type="date" id="issue_date"
+																style="width: 160px" name="issue_date" maxlength="10"
+																autocomplete="off" th:value="${Doocument?.issue_date}"
+																readonly /> <span id="issue_date" class="reqError"></span>
+															</td>
+
+															<td><input type="date" id="expiry_date"
+																style="width: 160px" name="expiry_date" maxlength="10"
+																autocomplete="off" th:value="${Doocument?.expiry_date}"
+																readonly /> <span id="expiry_date" class="reqError"></span>
+															</td>
+
+															<td
+																th:if="${Doocument?.file_name != null && (Doocument.file_name.endsWith('.jpeg') || Doocument.file_name.endsWith('.jfif') || Doocument.file_name.endsWith('.jpg'))}">
+																<i class="fa fa-info-circle" aria-hidden="true"
+																onclick="show1(this)" id="openModaldoc"
+																th:attr="data-doc_type=${Doocument?.unique_id}"
+																style='font-size: 20px; color: DodgerBlue; width: 50px; margin-left: 30px'
+																data-toggle="modal" data-target=".bd-example-modal-lg"></i>
+															</td>
+															<td
+																th:if="${Doocument?.file_name == null || !(Doocument.file_name.endsWith('.jpeg') || Doocument.file_name.endsWith('.jfif') || Doocument.file_name.endsWith('.jpg'))}">
+																<a th:href="@{'/' + ${Doocument?.unique_id}}"
+																style="text-decoration: none; color: DodgerBlue;"> <i
+																	class="fa fa-info-circle" aria-hidden="true"
+																	style='font-size: 20px; color: DodgerBlue; width: 50px; margin-left: 30px'></i>
+
+															</a>
+
+															</td>
+
+															<td th:text="${Doocument?.file_name}"
+																class="rowDataField" style="width: 100px;" hidden>
+															</td>
+															<td class="text-center"><i class="fa fa-trash"
+																aria-hidden="true" id="deletefunction"
+																onclick="rowdelete(this);"></i></td>
 														</tr>
 													</tbody>
 												</table>
 											</div>
+											<div class="text-center card-footer">
+												<button class="btn btn-primary p-2" type="button"
+													onclick="rowadd()">Add</button>
+												<button class="btn btn-primary p-2" type="button"
+													th:attr="data-refnumber=${appreNO}"
+													onclick="submitfileForEdit(this)">Submit</button>
+												<input type="text" hidden id="rec_no_for_indi"
+													th:value="${customerRequest?.rec_no}" />
+											</div>
+										</div>
+									</div>
+								</div>
+
+
+								<div id="tab3" class="tabcontent" style="display: none;">
+									<div class="card">
+										<div class="card-body">
+											<table class="mt-4 table-bordered"
+												style="height: 200px; width: 100%">
+												<thead>
+													<tr>
+														<th class=""
+															style="text-align: left; vertical-align: 22px; margin-top: 12px; font-size: 15px; padding-left: 30px">
+															Image Access Group</th>
+														<th class=""
+															style="text-align: left; vertical-align: 22px; font-size: 15px; padding-left: 30px;">
+															Group</th>
+														<th class=""
+															style="text-align: left; vertical-align: 22px; font-size: 15px; padding-left: 30px;">
+															Keyword<span id="KEYWORD"
+															style="color: red; font-size: 20px;"> *</span>
+														</th>
+														<th class=""
+															style="text-align: left; vertical-align: 22px; font-size: 15px; padding-left: 68px;">
+															Photo<span id="pic_val"
+															style="color: red; font-size: 20px;"> *</span>
+														</th>
+														<th class=""
+															style="text-align: left; vertical-align: 22px; font-size: 15px; padding-left: 35px;">
+															Signature<span id="sign_val"
+															style="color: red; font-size: 20px;"> *</span>
+														</th>
+
+													</tr>
+												</thead>
+												<tbody id="signbody"
+													style="background-color: #eeeeee; overflow: auto; height: 200px">
+													<tr id="row0" th:each="sign : ${SIGNATURE}">
+														<td><input id="group" type="text" maxlength="10"
+															th:value="${sign[0]}" name="img_access_code" readonly
+															class="form-control form-control-sm bg-white border border-dark bg-white border border-dark "
+															style="margin-left: 30px; width: 200px"></td>
+														<td><input id="group" type="text" maxlength="10"
+															th:value="${sign[1]}" readonly name="img_group"
+															class="form-control form-control-sm bg-white border border-dark bg-white border border-dark "
+															style="margin-left: 30px; width: 200px"></td>
+														<td><input id="keyword" type="text" maxlength="10"
+															th:value="${sign[2]}" name="keyword" readonly
+															class="form-control form-control-sm bg-white border border-dark bg-white border border-dark "
+															style="margin-left: 30px; width: 200px"></td>
+														<td th:if="${sign[3] != null and sign[3] != ''}"><img
+															th:src="'data:image/png;base64,' + ${sign[3]}"
+															name="photo" alt="Photo"
+															style="max-width: 100px; max-height: 100px;"></td>
+														<td th:if="${sign[4] != null and sign[4] != ''}"><img
+															th:src="'data:image/png;base64,' + ${sign[4]}"
+															alt="Signature"
+															style="max-width: 100px; max-height: 100px; background-color: white;">
+														</td>
+														<td hidden><input id="srl_no" type="text"
+															maxlength="10" th:value="${sign[5]}" name="srl_no"
+															readonly
+															class="form-control form-control-sm bg-white border border-dark bg-white border border-dark "
+															style="margin-left: 30px; width: 200px"></td>
+
+														<td class="text-center h-50"><i
+															class="fa fa-trash custom-icon" aria-hidden="true"
+															id="deletefunction" onclick="rowdeletesignature(this);"></i></td>
+
+													</tr>
+												</tbody>
+											</table>
 										</div>
 										<div class="card-footer text-center">
 											<button class="btn btn-primary p-2" onclick="home();">Home</button>
@@ -3231,165 +3215,155 @@ function gotocorporate(){
 											<button class="btn btn-primary p-2" onclick="back()">Back</button>
 										</div>
 									</div>
+								</div>
 
-
-
-
-
-									<div id="tab5" class="tabcontent" style="display: none;">
-										<div class="card">
-											<div class="float-right">
-												<button type="button"
-													class="btn btn-xs btn-primary btns p-2 border btn-filter float-right mr-2 mt-2 mb-2">Filter</button>
-											</div>
-											<div class="customer-container" style="font-weight: 500;">
-												<div>
-													<label style="font-size: 13px">CUSTOEMER ID</label>
-													<div class="col-sm-3">
-														<input type="text"
-															class="form-control form-control-sm bg-white border border-dark"
-															th:value="${customerRequest?.cif_id}" readonly>
-													</div>
-													<div class="col-sm-1"></div>
-													<label style="font-size: 13px">CUSTOEMER NAME</label>
-													<div class="col-sm-3">
-														<input type="text"
-															class="form-control form-control-sm bg-white border border-dark"
-															th:value="${customerRequest?.ca_preferred_name}" readonly>
-													</div>
+								<div id="tab5" class="tabcontent" style="display: none;">
+									<div class="card">
+										<div class="float-right">
+											<button type="button"
+												class="btn btn-xs btn-primary btns p-2 border btn-filter float-right mr-2 mt-2 mb-2">Filter</button>
+										</div>
+										<div class="customer-container" style="font-weight: 500;">
+											<div>
+												<label style="font-size: 13px">CUSTOEMER ID</label>
+												<div class="col-sm-3">
+													<input type="text"
+														class="form-control form-control-sm bg-white border border-dark"
+														th:value="${customerRequest?.cif_id}" readonly>
+												</div>
+												<div class="col-sm-1"></div>
+												<label style="font-size: 13px">CUSTOEMER NAME</label>
+												<div class="col-sm-3">
+													<input type="text"
+														class="form-control form-control-sm bg-white border border-dark"
+														th:value="${customerRequest?.ca_preferred_name}" readonly>
 												</div>
 											</div>
-											<div class="table-responsive mt-2">
-												<table class="table table-bordered  table-hover table-sm"
-													style="table-layout: fixed; width: 100%;">
-													<thead>
-														<tr class="filters">
-															<th style="width: 8%"><input type="text"
-																class="form-control font-weight-bold"
-																placeholder="Branch Id" disabled></th>
-															<th><input type="text"
-																class="form-control font-weight-bold"
-																placeholder="Account No" disabled></th>
-															<th><input type="text"
-																class="form-control font-weight-bold"
-																placeholder="Account Name" disabled></th>
-															<th><input type="text"
-																class="form-control font-weight-bold"
-																placeholder="Date of Opening" disabled></th>
-															<th><input type="text"
-																class="form-control font-weight-bold"
-																placeholder="Account Balance" disabled></th>
-															<th><input type="text"
-																class="form-control font-weight-bold"
-																placeholder="Bal Ind" disabled></th>
-														</tr>
-													</thead>
-													<tbody id="approvaltbody" style="font-size: 15px">
-														<tr th:if="${getDDDetailsLa1.ca_schemetype == 'LA'}"
-															th:each="getDDDet : ${getDDDetailsLa}">
-															<td th:text="${getDDDet.branch_id}"></td>
-															<td th:text="${getDDDet.loan_accountno}"></td>
-															<td th:text="${getDDDet.customer_name}"></td>
-															<td
-																th:text="${getDDDet.date_of_loan != null ? #dates.format(getDDDet.date_of_loan,'dd-MM-yyyy') : ''}">
-															</td>
-															<td style="text-align: right;" th:text="${Chartacctbal}">
-															</td>
-															<td><span
-																th:switch="${ChartbalIndicator?.add_det_flg}"> <span
-																	th:case="'C'">CREDIT</span> <span th:case="'N'">CREDIT</span>
-																	<span th:case="'D'">DEBIT</span> <!-- Default case if no match -->
-															</span></td>
-														</tr>
-														<tr th:if="${getDDDetailsTd1.ca_schemetype == 'TD'}"
-															th:each="getDDDet : ${getDDDetailsTd}" id="TD">
-															<td th:text="${getDDDet.branch_id}"></td>
-															<td th:text="${getDDDet.depo_actno}"></td>
-															<td th:text="${getDDDet.cust_name}"></td>
-															<td
-																th:text="${getDDDet.deposit_date != null ? #dates.format(getDDDet.deposit_date,'dd-MM-yyyy') : ''}">
-															</td>
-															<td style="text-align: right;" th:text="${Chartacctbal}">
-															</td>
-															<td><span
-																th:switch="${ChartbalIndicator?.add_det_flg}"> <span
-																	th:case="'C'">CREDIT</span> <span th:case="'N'">CREDIT</span>
-																	<span th:case="'D'">DEBIT</span> <!-- Default case if no match -->
-															</span></td>
-														</tr>
-													</tbody>
-												</table>
-											</div>
-
-
-											<div class="card-footer text-center">
-												<button class="btn btn-primary p-2" onclick="home();">Home</button>
-												<button class="btn btn-primary p-2" onclick="back()">Back</button>
-											</div>
+										</div>
+										<div class="table-responsive mt-2">
+											<table class="table table-bordered  table-hover table-sm"
+												style="table-layout: fixed; width: 100%;">
+												<thead>
+													<tr class="filters">
+														<th style="width: 8%"><input type="text"
+															class="form-control font-weight-bold"
+															placeholder="Branch Id" disabled></th>
+														<th><input type="text"
+															class="form-control font-weight-bold"
+															placeholder="Account No" disabled></th>
+														<th><input type="text"
+															class="form-control font-weight-bold"
+															placeholder="Account Name" disabled></th>
+														<th><input type="text"
+															class="form-control font-weight-bold"
+															placeholder="Date of Opening" disabled></th>
+														<th><input type="text"
+															class="form-control font-weight-bold"
+															placeholder="Account Balance" disabled></th>
+														<th><input type="text"
+															class="form-control font-weight-bold"
+															placeholder="Bal Ind" disabled></th>
+													</tr>
+												</thead>
+												<tbody id="approvaltbody" style="font-size: 15px">
+													<tr th:if="${getDDDetailsLa1.ca_schemetype == 'LA'}"
+														th:each="getDDDet : ${getDDDetailsLa}">
+														<td th:text="${getDDDet.branch_id}"></td>
+														<td th:text="${getDDDet.loan_accountno}"></td>
+														<td th:text="${getDDDet.customer_name}"></td>
+														<td
+															th:text="${getDDDet.date_of_loan != null ? #dates.format(getDDDet.date_of_loan,'dd-MM-yyyy') : ''}">
+														</td>
+														<td style="text-align: right;" th:text="${Chartacctbal}">
+														</td>
+														<td><span
+															th:switch="${ChartbalIndicator?.add_det_flg}"> <span
+																th:case="'C'">CREDIT</span> <span th:case="'N'">CREDIT</span>
+																<span th:case="'D'">DEBIT</span> <!-- Default case if no match -->
+														</span></td>
+													</tr>
+													<tr th:if="${getDDDetailsTd1.ca_schemetype == 'TD'}"
+														th:each="getDDDet : ${getDDDetailsTd}" id="TD">
+														<td th:text="${getDDDet.branch_id}"></td>
+														<td th:text="${getDDDet.depo_actno}"></td>
+														<td th:text="${getDDDet.cust_name}"></td>
+														<td
+															th:text="${getDDDet.deposit_date != null ? #dates.format(getDDDet.deposit_date,'dd-MM-yyyy') : ''}">
+														</td>
+														<td style="text-align: right;" th:text="${Chartacctbal}">
+														</td>
+														<td><span
+															th:switch="${ChartbalIndicator?.add_det_flg}"> <span
+																th:case="'C'">CREDIT</span> <span th:case="'N'">CREDIT</span>
+																<span th:case="'D'">DEBIT</span> <!-- Default case if no match -->
+														</span></td>
+													</tr>
+												</tbody>
+											</table>
 										</div>
 									</div>
-
-
 								</div>
-								<table
-									Style="border: 1px solid #ccc; width: 100%; max-width: 100%; margin: 0 auto; box-sizing: border-box;">
-									<tr>
-										<td class="col-sm-2" style="text-align: center;"><font
-											size="2"><B>Entry User :</B></font></td>
-										<td class="col-sm-2" style="width: 112px; margin-right: 20px;"><input
-											type="text" id="entryuser" th:value="${user}"
-											name="ub.entryuser"
-											style="border: none; outline: none; background-color: transparent; font-size: 12px;"
-											readonly></td>
-										<td class="col-sm-2" style="text-align: center;"><font
-											size="2"><B>Modify User :</B></font></td>
-										<td class="col-sm-2" style="width: 112px;"><input
-											type="text" id="modifyuser" th:value="${user}"
-											name="ub.modifyuser" value="MMR"
-											style="border: none; outline: none; background-color: transparent; font-size: 12px;"
-											readonly></td>
-										<td class="col-sm-2" style="text-align: center;"><font
-											size="2"><B>Verify User :</B></font></td>
-										<td class="col-sm-2" style="width: 112px;"><input
-											type="text" id="verifyuser" name="ub.verifyuser"
-											style="border: none; outline: none; background-color: transparent; font-size: 12px;"
-											readonly></td>
-									</tr>
-									<tr>
-										<td style="text-align: center;"><font size="2"><B>Entry
-													Time :</B></font></td>
-										<td style="width: 112px"><input type="text"
-											id="entrytime" name="ub.entrytime"
-											th:value="${#dates.format(currentDate, 'dd-MM-yyyy HH:mm:ss')}"
-											readonly
-											style="border: none; outline: none; background-color: transparent; font-size: 12px; margin-left: 14px;">
-										</td>
-										<td style="text-align: center;"><font size="2"><B>Modify
-													Time :</B></font></td>
-										<td style="width: 112px"><input type="text"
-											id="modifytime" name="ub.modifytime"
-											th:value="${#dates.format(currentDate, 'dd-MM-yyyy HH:mm:ss')}"
-											style="border: none; outline: none; background-color: transparent; font-size: 12px; margin-left: 14px;"
-											readonly></td>
-										<td style="text-align: center; font-size: 15px;"><font
-											size="2"><B>Verify Time :</B></font></td>
-										<td style="width: 112px"><input type="text"
-											id="verifytime" name="ub.verifytime"
-											style="border: none; outline: none; background-color: transparent; font-size: 12px; margin-left: 14px;"
-											readonly></td>
-									</tr>
-								</table>
-
-
-
 							</form>
 						</div>
+						<div class="card-footer text-center">
+							<button class="btn btn-primary p-2" onclick="home();">Home</button>
+							<button class="btn btn-primary p-2" onclick="back()">Back</button>
+						</div>
+
+						<table
+							Style="border: 1px solid #ccc; width: 100%; max-width: 100%; margin: 0 auto; box-sizing: border-box;">
+							<tr>
+								<td class="col-sm-2" style="text-align: center;"><font
+									size="2"><B>Entry User :</B></font></td>
+								<td class="col-sm-2" style="width: 112px; margin-right: 20px;"><input
+									type="text" id="entryuser" th:value="${user}"
+									name="ub.entryuser"
+									style="border: none; outline: none; background-color: transparent; font-size: 12px;"
+									readonly></td>
+								<td class="col-sm-2" style="text-align: center;"><font
+									size="2"><B>Modify User :</B></font></td>
+								<td class="col-sm-2" style="width: 112px;"><input
+									type="text" id="modifyuser" th:value="${user}"
+									name="ub.modifyuser" value="MMR"
+									style="border: none; outline: none; background-color: transparent; font-size: 12px;"
+									readonly></td>
+								<td class="col-sm-2" style="text-align: center;"><font
+									size="2"><B>Verify User :</B></font></td>
+								<td class="col-sm-2" style="width: 112px;"><input
+									type="text" id="verifyuser" name="ub.verifyuser"
+									style="border: none; outline: none; background-color: transparent; font-size: 12px;"
+									readonly></td>
+							</tr>
+							<tr>
+								<td style="text-align: center;"><font size="2"><B>Entry
+											Time :</B></font></td>
+								<td style="width: 112px"><input type="text" id="entrytime"
+									name="ub.entrytime"
+									th:value="${#dates.format(currentDate, 'dd-MM-yyyy HH:mm:ss')}"
+									readonly
+									style="border: none; outline: none; background-color: transparent; font-size: 12px; margin-left: 14px;">
+								</td>
+								<td style="text-align: center;"><font size="2"><B>Modify
+											Time :</B></font></td>
+								<td style="width: 112px"><input type="text" id="modifytime"
+									name="ub.modifytime"
+									th:value="${#dates.format(currentDate, 'dd-MM-yyyy HH:mm:ss')}"
+									style="border: none; outline: none; background-color: transparent; font-size: 12px; margin-left: 14px;"
+									readonly></td>
+								<td style="text-align: center; font-size: 15px;"><font
+									size="2"><B>Verify Time :</B></font></td>
+								<td style="width: 112px"><input type="text" id="verifytime"
+									name="ub.verifytime"
+									style="border: none; outline: none; background-color: transparent; font-size: 12px; margin-left: 14px;"
+									readonly></td>
+							</tr>
+						</table>
 					</div>
 				</div>
 
 				<!--VERIFYCUST  -->
 
-				<div th:if="${formmode}=='VerifyCust'" class="mt-5">
+				<div th:if="${formmode}=='VerifyCust'">
 
 					<div class="card">
 						<div class="card-header"
@@ -3695,25 +3669,19 @@ function gotocorporate(){
 														<tr th:each="Doocument : ${DocumentList}">
 
 															<td th:text="${Doocument?.document_type}"
-																class="rowDataField" style="width: 150px;">Address
-															</td>
+																class="rowDataField" style="width: 150px;">Address</td>
 															<td th:text="${Doocument?.document_code}"
 																class="rowDataField" style="width: 120px;">ADD001</td>
 															<td th:text="${Doocument?.document_type_desc}"
-																class="rowDataField" style="width: 160px;">Passport
-															</td>
+																class="rowDataField" style="width: 160px;">Passport</td>
 															<td th:text="${Doocument?.place_of_issue}"
-																class="rowDataField" style="width: 120px;">Madurai
-															</td>
+																class="rowDataField" style="width: 120px;">Madurai</td>
 															<td th:text="${Doocument?.unique_id}"
-																class="rowDataField" style="width: 120px;">
-																D324234234</td>
+																class="rowDataField" style="width: 120px;">D324234234</td>
 															<td th:text="${Doocument?.issue_date}"
-																class="rowDataField" style="width: 120px;">
-																18-JUN-2018</td>
+																class="rowDataField" style="width: 120px;">18-JUN-2018</td>
 															<td th:text="${Doocument?.expiry_date}"
-																class="rowDataField" style="width: 120px;">
-																15-JUN-2023</td>
+																class="rowDataField" style="width: 120px;">15-JUN-2023</td>
 															<td
 																th:if="${Doocument?.file_name != null && (Doocument.file_name.endsWith('.jpeg') || Doocument.file_name.endsWith('.jfif') || Doocument.file_name.endsWith('.jpg'))}">
 																<i class="fa fa-info-circle" aria-hidden="true"
@@ -3734,8 +3702,7 @@ function gotocorporate(){
 															</td>
 
 															<td th:text="${Doocument?.file_name}"
-																class="rowDataField" style="width: 100px;" hidden>
-															</td>
+																class="rowDataField" style="width: 100px;" hidden></td>
 														</tr>
 													</tbody>
 												</table>
@@ -3780,71 +3747,67 @@ function gotocorporate(){
 										</div>
 									</div>
 								</div>
-								<div class="card-footer text-center">
-									<button class="btn btn-primary p-2" onclick="home();">Home</button>
-									<button class="btn btn-primary p-2"
-										onclick="addsubmitverify(event)">Verify</button>
-									<button class="btn btn-primary p-2" onclick="back()">Back</button>
-								</div>
-								<table
-									Style="border: 1px solid #ccc; width: 100%; max-width: 100%; margin: 0 auto; box-sizing: border-box;">
-									<tr>
-										<td class="col-sm-2" style="text-align: center;"><font
-											size="2"><B>Entry User :</B></font></td>
-										<td class="col-sm-2" style="width: 112px; margin-right: 20px;"><input
-											type="text" id="entryuser"
-											th:value="${customerRequest?.entry_user}"
-											style="border: none; outline: none; background-color: transparent; font-size: 12px;"
-											readonly></td>
-										<td class="col-sm-2" style="text-align: center;"><font
-											size="2"><B>Modify User :</B></font></td>
-										<td class="col-sm-2" style="width: 112px;"><input
-											type="text" id="modifyuser"
-											th:value="${customerRequest?.modify_user}"
-											style="border: none; outline: none; background-color: transparent; font-size: 12px;"
-											readonly></td>
-										<td class="col-sm-2" style="text-align: center;"><font
-											size="2"><B>Verify User :</B></font></td>
-										<td class="col-sm-2" style="width: 112px;"><input
-											th:value="${user}" type="text" id="verifyuser"
-											name="ub.verifyuser"
-											style="border: none; outline: none; background-color: transparent; font-size: 12px;"
-											readonly></td>
-									</tr>
-									<tr>
-										<td style="text-align: center;"><font size="2"><B>Entry
-													Time :</B></font></td>
-										<td style="width: 112px"><input type="text"
-											id="entrytime" name="ub.entrytime"
-											th:value="${#dates.format(customerRequest?.entry_time, 'dd-MM-yyyy HH:mm:ss')}"
-											readonly
-											style="border: none; outline: none; background-color: transparent; font-size: 12px; margin-left: 14px;">
-										</td>
-										<td style="text-align: center;"><font size="2"><B>Modify
-													Time :</B></font></td>
-										<td style="width: 112px"><input type="text"
-											id="modifytime" name="ub.modifytime"
-											th:value="${#dates.format(customerRequest?.modify_time, 'dd-MM-yyyy HH:mm:ss')}"
-											style="border: none; outline: none; background-color: transparent; font-size: 12px; margin-left: 14px;"
-											readonly></td>
-										<td style="text-align: center; font-size: 15px;"><font
-											size="2"><B>Verify Time :</B></font></td>
-										<td style="width: 112px"><input type="text"
-											id="verifytime" name="ub.verifytime"
-											th:value="${#dates.format(currentDate, 'dd-MM-yyyy HH:mm:ss')}"
-											style="border: none; outline: none; background-color: transparent; font-size: 12px; margin-left: 14px;"
-											readonly></td>
-									</tr>
-								</table>
-
-
-
 							</form>
 						</div>
+						<div class="card-footer text-center">
+							<button class="btn btn-primary p-2" onclick="home();">Home</button>
+							<button class="btn btn-primary p-2"
+								onclick="addsubmitverify(event)">Verify</button>
+							<button class="btn btn-primary p-2" onclick="back1()">Back</button>
+						</div>
+						<table
+							Style="border: 1px solid #ccc; width: 100%; max-width: 100%; margin: 0 auto; box-sizing: border-box;">
+							<tr>
+								<td class="col-sm-2" style="text-align: center;"><font
+									size="2"><B>Entry User :</B></font></td>
+								<td class="col-sm-2" style="width: 112px; margin-right: 20px;"><input
+									type="text" id="entryuser"
+									th:value="${customerRequest?.entry_user}"
+									style="border: none; outline: none; background-color: transparent; font-size: 12px;"
+									readonly></td>
+								<td class="col-sm-2" style="text-align: center;"><font
+									size="2"><B>Modify User :</B></font></td>
+								<td class="col-sm-2" style="width: 112px;"><input
+									type="text" id="modifyuser"
+									th:value="${customerRequest?.modify_user}"
+									style="border: none; outline: none; background-color: transparent; font-size: 12px;"
+									readonly></td>
+								<td class="col-sm-2" style="text-align: center;"><font
+									size="2"><B>Verify User :</B></font></td>
+								<td class="col-sm-2" style="width: 112px;"><input
+									th:value="${user}" type="text" id="verifyuser"
+									name="ub.verifyuser"
+									style="border: none; outline: none; background-color: transparent; font-size: 12px;"
+									readonly></td>
+							</tr>
+							<tr>
+								<td style="text-align: center;"><font size="2"><B>Entry
+											Time :</B></font></td>
+								<td style="width: 112px"><input type="text" id="entrytime"
+									name="ub.entrytime"
+									th:value="${#dates.format(customerRequest?.entry_time, 'dd-MM-yyyy HH:mm:ss')}"
+									readonly
+									style="border: none; outline: none; background-color: transparent; font-size: 12px; margin-left: 14px;">
+								</td>
+								<td style="text-align: center;"><font size="2"><B>Modify
+											Time :</B></font></td>
+								<td style="width: 112px"><input type="text" id="modifytime"
+									name="ub.modifytime"
+									th:value="${#dates.format(customerRequest?.modify_time, 'dd-MM-yyyy HH:mm:ss')}"
+									style="border: none; outline: none; background-color: transparent; font-size: 12px; margin-left: 14px;"
+									readonly></td>
+								<td style="text-align: center; font-size: 15px;"><font
+									size="2"><B>Verify Time :</B></font></td>
+								<td style="width: 112px"><input type="text" id="verifytime"
+									name="ub.verifytime"
+									th:value="${#dates.format(currentDate, 'dd-MM-yyyy HH:mm:ss')}"
+									style="border: none; outline: none; background-color: transparent; font-size: 12px; margin-left: 14px;"
+									readonly></td>
+							</tr>
+						</table>
 					</div>
 				</div>
 				<!--END  -->
-
 
 			</div>
 		</div>
@@ -4645,8 +4608,9 @@ $(function () {
 
 <div class="modal fade" data-backdrop="false" data-keyboard="false"
 	tabindex="-1" role="dialog" aria-hidden="true"
-	style="padding-left: 10%;padding-top:15%;" id="signature_pop">
-	<div class="modal-dialog modal-diaCap At Maturity ? log-centered modal-dialog-scrollable"
+	style="padding-left: 10%; padding-top: 15%;" id="signature_pop">
+	<div
+		class="modal-dialog modal-diaCap At Maturity ? log-centered modal-dialog-scrollable"
 		style="height: 20%">
 		<div class="modal-content">
 			<div class="modal-body" style="text-align: center">

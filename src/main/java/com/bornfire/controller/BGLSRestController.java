@@ -105,6 +105,7 @@ import com.bornfire.services.InterestCalculationServices;
 import com.bornfire.services.LeaseLoanService;
 import com.bornfire.services.LoginServices;
 import com.bornfire.services.RepaymentScheduleServices;
+import com.ibm.icu.text.DateFormat;
 import com.ibm.icu.text.SimpleDateFormat;
 
 @RestController
@@ -288,7 +289,7 @@ public class BGLSRestController {
 
 	@RequestMapping(value = "employeeAdd1", method = RequestMethod.POST)
 	@ResponseBody
-	public String employeeAddPhoto(@RequestParam(required = false) MultipartFile photoFile,
+	public String employeeAddPhoto(@RequestParam("photoFile") MultipartFile photoFile,
 			@RequestParam String employeeId, HttpServletRequest rq) {
 
 		System.out.println("Uploading photo for employee ID: " + employeeId);
@@ -654,61 +655,143 @@ public class BGLSRestController {
 	@RequestMapping(value = "OrgBranchAdd", method = RequestMethod.POST)
 	@ResponseBody
 	public String OrgBranchAdd(Model md, HttpServletRequest rq,
-			@ModelAttribute Organization_Branch_Entity organization_Branch_Entity) {
+			@ModelAttribute Organization_Branch_Entity organization_Branch_Entity,
+			@RequestParam(required = false) MultipartFile photoFile) {
 		String userid = (String) rq.getSession().getAttribute("USERID");
 		List<String> existingdata = organization_Branch_Rep.getexistingData();
 		if (existingdata.contains(organization_Branch_Entity.getBranch_name())) {
 			return "Branch Name Already Exist";
 		} else {
-			Organization_Branch_Entity up = organization_Branch_Entity;
-			up.setEntity_flg("N");
-			up.setModify_flg("N");
-			up.setDel_flg("N");
-			up.setEntry_user(userid);
-			up.setEntry_time(new Date());
-			organization_Branch_Rep.save(up);
 
-			BGLSBusinessTable_Entity audit = new BGLSBusinessTable_Entity();
-			audit.setFunc_code("BRANCH");
-			Long auditID = bglsBusinessTable_Rep.getAuditRefUUID();
-			Optional<UserProfile> up1 = userProfileRep.findById(userid);
-			UserProfile user = up1.get();
 
-			LocalDateTime currentDateTime = LocalDateTime.now();
-			Date dateValue = Date.from(currentDateTime.atZone(ZoneId.systemDefault()).toInstant());
-			audit.setAudit_date(new Date());
-			audit.setEntry_time(dateValue);
-			audit.setEntry_user(user.getUserid());
+			try {
+				Organization_Branch_Entity up = organization_Branch_Entity;
+				 
+				 
+				 if (photoFile != null && !photoFile.isEmpty()) {
+				       
+				            byte[] photoBytes = photoFile.getBytes(); // Convert the MultipartFile to byte array
+				            up.setPhoto(photoBytes); // Set the byte array to the photo field
+				        
+				    } else {
+				        // Handle the case where no file was selected
+				        return "No file selected";
+				    }
+				
+				up.setEntity_flg("N");
+				up.setModify_flg("N");
+				up.setDel_flg("N");
+				up.setEntry_user(userid);
+				up.setEntry_time(new Date());
+				organization_Branch_Rep.save(up);
 
-			audit.setRemarks("Branch Added Successfully");
-			audit.setAudit_table("BGLS_ORG_BRANCH");
-			audit.setAudit_screen("Organization Details");
-			audit.setEvent_id(user.getUserid());
-			audit.setEvent_name(user.getUsername());
-			// audit.setModi_details("Login Successfully");
-			UserProfile auth_user = userProfileRep.getRole(user.getUserid());
-			String auth_user_val = auth_user.getAuth_user();
-			Date auth_user_date = auth_user.getAuth_time();
-			audit.setAuth_user(auth_user_val);
-			audit.setAuth_time(auth_user_date);
-			audit.setAudit_ref_no(auditID.toString());
-			audit.setField_name("-");
+				BGLSBusinessTable_Entity audit = new BGLSBusinessTable_Entity();
+				audit.setFunc_code("BRANCH");
+				Long auditID = bglsBusinessTable_Rep.getAuditRefUUID();
+				Optional<UserProfile> up1 = userProfileRep.findById(userid);
+				UserProfile user = up1.get();
 
-			bglsBusinessTable_Rep.save(audit);
+				LocalDateTime currentDateTime = LocalDateTime.now();
+				Date dateValue = Date.from(currentDateTime.atZone(ZoneId.systemDefault()).toInstant());
+				audit.setAudit_date(new Date());
+				audit.setEntry_time(dateValue);
+				audit.setEntry_user(user.getUserid());
 
-			return "Saved Successfully";
+				audit.setRemarks("Branch Added Successfully");
+				audit.setAudit_table("BGLS_ORG_BRANCH");
+				audit.setAudit_screen("Organization Details");
+				audit.setEvent_id(user.getUserid());
+				audit.setEvent_name(user.getUsername());
+				// audit.setModi_details("Login Successfully");
+				UserProfile auth_user = userProfileRep.getRole(user.getUserid());
+				String auth_user_val = auth_user.getAuth_user();
+				Date auth_user_date = auth_user.getAuth_time();
+				audit.setAuth_user(auth_user_val);
+				audit.setAuth_time(auth_user_date);
+				audit.setAudit_ref_no(auditID.toString());
+				audit.setField_name("-");
+
+				bglsBusinessTable_Rep.save(audit);
+			
+
+				return "Added successfully.";
+			} catch (IOException e) {
+				e.printStackTrace();
+				return "Error processing the image.";
+			}
+			
+
+		
 		}
+	}
+	/* tab2Del */
+
+	@RequestMapping(value = "tab2Del", method = RequestMethod.POST)
+	@ResponseBody
+	public String tab2Del(Model md, HttpServletRequest rq,
+			@ModelAttribute Organization_Branch_Entity organization_Branch_Entity) {
+		String userid = (String) rq.getSession().getAttribute("USERID");
+
+		Organization_Branch_Entity up = organization_Branch_Entity;
+		up.setEntity_flg("N");
+		up.setModify_flg("N");
+		up.setDel_flg("Y");
+		up.setEntry_user(userid);
+		up.setEntry_time(new Date());
+		organization_Branch_Rep.save(up);
+
+		BGLSBusinessTable_Entity audit = new BGLSBusinessTable_Entity();
+		audit.setFunc_code("BRANCH-DELETE");
+		Long auditID = bglsBusinessTable_Rep.getAuditRefUUID();
+		Optional<UserProfile> up1 = userProfileRep.findById(userid);
+		UserProfile user = up1.get();
+
+		LocalDateTime currentDateTime = LocalDateTime.now();
+		Date dateValue = Date.from(currentDateTime.atZone(ZoneId.systemDefault()).toInstant());
+		audit.setAudit_date(new Date());
+		audit.setEntry_time(dateValue);
+		audit.setEntry_user(user.getUserid());
+
+		audit.setRemarks("Branch Added Successfully");
+		audit.setAudit_table("BGLS_ORG_BRANCH");
+		audit.setAudit_screen("Organization Details");
+		audit.setEvent_id(user.getUserid());
+		audit.setEvent_name(user.getUsername());
+		// audit.setModi_details("Login Successfully");
+		UserProfile auth_user = userProfileRep.getRole(user.getUserid());
+		String auth_user_val = auth_user.getAuth_user();
+		Date auth_user_date = auth_user.getAuth_time();
+		audit.setAuth_user(auth_user_val);
+		audit.setAuth_time(auth_user_date);
+		audit.setAudit_ref_no(auditID.toString());
+		audit.setField_name("-");
+
+		bglsBusinessTable_Rep.save(audit);
+
+		return "Deleted Successfully";
+
 	}
 
 	/* Thanveer */
 	@RequestMapping(value = "tab1modify", method = RequestMethod.POST)
 	@ResponseBody
-	public String tab1modify(Model md, HttpServletRequest rq, @ModelAttribute Organization_Entity organization_Entity) {
+	public String tab1modify(Model md, HttpServletRequest rq, @ModelAttribute Organization_Entity organization_Entity)
+			throws ParseException {
 
 		Optional<Organization_Entity> up = organization_Repo.findById(organization_Entity.getOrg_name());
 		BGLSBusinessTable_Entity audit = new BGLSBusinessTable_Entity();
 		String userid = (String) rq.getSession().getAttribute("USERID");
 		Long auditID = bglsBusinessTable_Rep.getAuditRefUUID();
+		System.out.println(organization_Entity.getAs_on() + "uigiu");
+		DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+		String formattedDate = dateFormat.format(organization_Entity.getAs_on());
+
+		try {
+			Date parsedDate = dateFormat.parse(formattedDate); // Parse the String back to Date
+			System.out.println("Parsed Date: " + parsedDate); // Prints the Date object
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 
 		// Organization_Entity up = organization_Entity;
 		String msg = "";
@@ -1114,10 +1197,12 @@ public class BGLSRestController {
 	@RequestMapping(value = "GeneralLedgerAdd", method = RequestMethod.POST)
 	@ResponseBody
 	public String GeneralLedgerAdd(@RequestParam("formmode") String formmode,
-			@RequestParam(required = false) String glcode, @ModelAttribute GeneralLedgerEntity generalLedgerEntity,
+			@RequestParam(required = false) String glcode,
+			@RequestParam(required = false) String glsh_code,@ModelAttribute GeneralLedgerEntity generalLedgerEntity,
 			Model md, HttpServletRequest rq) {
 		String userid = (String) rq.getSession().getAttribute("USERID");
-		String msg = adminOperServices.addGeneralLedger(generalLedgerEntity, formmode, glcode, userid);
+		System.out.println("the glcode is here "+glcode);
+		String msg = adminOperServices.addGeneralLedger(generalLedgerEntity, formmode,glsh_code, glcode, userid);
 		return msg;
 	}
 
@@ -4096,6 +4181,107 @@ public class BGLSRestController {
 	}
 	
 	
+	/* Thanveer */
+	@RequestMapping(value = "DeleteScreens", method = RequestMethod.POST)
 
+	@ResponseBody
+	public String DeleteScreens(Model md, HttpServletRequest rq, @ModelAttribute Chart_Acc_Entity chart_Acc_Entity,
+			@RequestParam(required = false) String acct_num) {
+		String msg = "";
+		Chart_Acc_Entity up = chart_Acc_Rep.getaedit(acct_num);
+		System.out.println("the getting account no is " + acct_num);
+		if (Objects.nonNull(up)) {
+			up = chart_Acc_Entity;
+			up.setDel_flg("Y");
+			chart_Acc_Rep.save(up);
+			msg = "Deleted Successfully";
+		} else {
+			msg = "Data Not Found";
+		}
+		String userid = (String) rq.getSession().getAttribute("USERID");
+		// FOR AUIDT
+		Long auditID = bglsBusinessTable_Rep.getAuditRefUUID();
+		Optional<UserProfile> up1 = userProfileRep.findById(userid);
+		UserProfile user = up1.get();
+
+		BGLSBusinessTable_Entity audit = new BGLSBusinessTable_Entity();
+		LocalDateTime currentDateTime = LocalDateTime.now();
+		Date dateValue = Date.from(currentDateTime.atZone(ZoneId.systemDefault()).toInstant());
+		audit.setAudit_date(new Date());
+		audit.setEntry_time(dateValue);
+		audit.setEntry_user(user.getUserid());
+
+		audit.setRemarks("Deleted Successfully");
+		audit.setAudit_table("BGLS_CHART_OF_ACCOUNTS");
+		audit.setAudit_screen("CHART OF ACCOUNTS - DELETE");
+		audit.setEvent_id(user.getUserid());
+		audit.setEvent_name(user.getUsername());
+		// audit.setModi_details("Login Successfully");
+		UserProfile auth_user = userProfileRep.getRole(user.getUserid());
+		String auth_user_val = auth_user.getAuth_user();
+		Date auth_user_date = auth_user.getAuth_time();
+		audit.setAuth_user(auth_user_val);
+		audit.setAuth_time(auth_user_date);
+		audit.setAudit_ref_no(auditID.toString());
+		audit.setField_name("-");
+
+		bglsBusinessTable_Rep.save(audit);
+		return msg;
+
+	}
+
+	/* Thanveer */
+	@RequestMapping(value = "ModifyScreens", method = RequestMethod.POST)
+
+	@ResponseBody
+	public String ModifyScreens(Model md, HttpServletRequest rq, @ModelAttribute Chart_Acc_Entity chart_Acc_Entity,
+			@RequestParam(required = false) String acct_num) {
+		String userid = (String) rq.getSession().getAttribute("USERID");
+		System.out.println("THE GETT");
+		String msg = "";
+
+		Chart_Acc_Entity up = chart_Acc_Rep.getaedit(acct_num);
+
+		if (Objects.nonNull(up)) {
+			up = chart_Acc_Entity;
+			up.setDel_flg("N");
+			up.setEntity_flg("N");
+			chart_Acc_Rep.save(up);
+			msg = "Modify Successfully";
+		} else {
+			msg = "Data Not Found";
+		}
+		// FOR AUIDT
+		Long auditID = bglsBusinessTable_Rep.getAuditRefUUID();
+		Optional<UserProfile> up1 = userProfileRep.findById(userid);
+		UserProfile user = up1.get();
+
+		BGLSBusinessTable_Entity audit = new BGLSBusinessTable_Entity();
+		LocalDateTime currentDateTime = LocalDateTime.now();
+		Date dateValue = Date.from(currentDateTime.atZone(ZoneId.systemDefault()).toInstant());
+		audit.setAudit_date(new Date());
+		audit.setEntry_time(dateValue);
+		audit.setEntry_user(user.getUserid());
+
+		audit.setRemarks("Modify Successfully");
+		audit.setAudit_table("BGLS_CHART_OF_ACCOUNTS");
+		audit.setAudit_screen("CHART OF ACCOUNTS - MODIFY");
+		audit.setEvent_id(user.getUserid());
+		audit.setEvent_name(user.getUsername());
+		// audit.setModi_details("Login Successfully");
+		UserProfile auth_user = userProfileRep.getRole(user.getUserid());
+		String auth_user_val = auth_user.getAuth_user();
+		Date auth_user_date = auth_user.getAuth_time();
+		audit.setAuth_user(auth_user_val);
+		audit.setAuth_time(auth_user_date);
+		audit.setAudit_ref_no(auditID.toString());
+		audit.setField_name("-");
+
+		bglsBusinessTable_Rep.save(audit);
+
+		return msg;
+	}
+
+	
 
 }

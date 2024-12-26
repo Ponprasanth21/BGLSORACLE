@@ -7,6 +7,7 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +58,8 @@ public class AdminOperServices {
 		return chart_Acc_Rep.getaedit(acct_num);
 	}
 	
-	public String addGeneralLedger(GeneralLedgerEntity getGeneralLedger, String formmode , String GL_CODE ,String userid ) {
+	public String addGeneralLedger(GeneralLedgerEntity getGeneralLedger, String formmode , String GL_CODE ,
+			 String glsh_code ,String userid ) {
 
 		String msg = "";
 		 BGLSBusinessTable_Entity audit = new BGLSBusinessTable_Entity();
@@ -103,26 +105,24 @@ public class AdminOperServices {
 
 		}
 		else if (formmode.equals("edit")) {
-
-			GeneralLedgerEntity user =	generalLedgerRep.getRefMaster(GL_CODE);
-			if(user.getGlCode().equals(getGeneralLedger.getGlCode()) && user.getGlDescription().equals(getGeneralLedger.getGlDescription()) && user.getRemarks().equals(getGeneralLedger.getRemarks())){
-				msg="No Modification More";
-		}
-		else {
-			GeneralLedgerEntity up = generalLedgerRep.getRefMaster(GL_CODE);
+			System.out.println("the getting  gl code is " + GL_CODE);
+			System.out.println("the getting glsh code is " + glsh_code);
+			
+			GeneralLedgerEntity up = generalLedgerRep.getsinglevaluedata(GL_CODE,glsh_code);
+			if (Objects.nonNull(up)) {
 				up.setGlCode(getGeneralLedger.getGlCode());
 				up.setGlDescription(getGeneralLedger.getGlDescription());
 				up.setModifyFlg("Y");
 				up.setDelFlg("N");
 				generalLedgerRep.save(up);
-
-			msg = "Edited Successfully";
-			
-		}
-		
+				msg = "Modify Successfully";
+			} else {
+				msg = "Data Not Found";
+			}
+			return msg;
 		}
 		else if (formmode.equals("delete")) {
-
+			System.out.println("the getting gl code is "+GL_CODE);
 			GeneralLedgerEntity up =generalLedgerRep.getRefMaster(GL_CODE);
 			up.setDelFlg("Y");
 			generalLedgerRep.save(up);

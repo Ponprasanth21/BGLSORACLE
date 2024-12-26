@@ -350,7 +350,7 @@ body {
 							style="background-color: #e9ecef; height: 50px">
 							<div class="float-left">
 								<h6 style="font-size: 1.2rem; color: black;">COLLATERAL
-									MAINTANCE LIST</h6>
+									MAINTANCE - LIST</h6>
 							</div>
 							<div class="float-right">
 								<!--<button class="btn btn-primary p-2" onclick="addcolla()">Inspection</button>-->
@@ -363,18 +363,18 @@ body {
 									<table class="table  table-bordered  table-hover table-sm"
 										style="margin-bottom: 0px; font-size: initial;" id="usertable">
 										<thead class="thead-light">
-											<tr>
-												<th>BRANCH ID</th>
-												<th>CUSTOMER ID</th>
-												<th>CUSTOMER NAME</th>
-												<th style="width: 7%;">LOAN A/C NO</th>
-												<th style="width: 7%;">DATE OF LOAN</th>
-												<th>LOAN OUTSTANDING</th>
-												<th>COLLATERAL TYPE</th>
-												<th>COLLATERAL REF NO</th>
-												<th>COLLATERAL SRL NO</th>
-												<th>COLLATERAL VALUE</th>
-												<th>SELECT</th>
+											<tr style="font-weight: bold;">
+												<th>Branch Id</th>
+												<th>Customer Id</th>
+												<th>Customer Name</th>
+												<th style="width: 7%;">Loan A/C No</th>
+												<th style="width: 7%;">Date Of Loan</th>
+												<th>Loan Outstanding</th>
+												<th>Collateral Type</th>
+												<th>Collateral Ref No</th>
+												<th>Collateral Srl No</th>
+												<th>Collateral Value</th>
+												<th>Select</th>
 											</tr>
 										</thead>
 										<tbody id="placelist1">
@@ -425,8 +425,7 @@ body {
 				<!----------------------------------------------------------------Add page------------------------------------------------------------>
 				<div th:if="${formmode}=='modify'">
 					<div class="card w-100 border">
-						<div class="card-header"
-							style="padding: 8px 8px; display: flex; justify-content: space-around;">
+						<div class="card-header">
 							<div class="float-left">
 								<h6 style="font-size: 1.2rem; color: black;">COLLATERAL
 									MANAGEMENT-MODIFY</h6>

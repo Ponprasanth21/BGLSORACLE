@@ -5,6 +5,7 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 @Entity
@@ -38,6 +39,16 @@ public class Organization_Branch_Entity {
 	private String	del_flg;
 	private String	modify_flg;
 	private String	entity_flg;
+	@Lob
+	private byte[]	photo;
+	
+	public byte[] getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(byte[] photo) {
+		this.photo = photo;
+	}
 
 	public String getBranch_code() {
 		return branch_code;
@@ -255,11 +266,12 @@ public class Organization_Branch_Entity {
 		this.entity_flg = entity_flg;
 	}
 
+	
 	public Organization_Branch_Entity(String branch_code, String branch_name, String add_1, String add_2, String city,
 			String state, String country, String zip_code, String swift_code, String pic_no, String land_line,
 			String fax, BigDecimal mobile, String cont_person, String website, String mail_id, String branch_head,
 			String designation, String entry_user, String modify_user, String verify_user, Date entry_time,
-			Date modify_time, Date verify_time, String del_flg, String modify_flg, String entity_flg) {
+			Date modify_time, Date verify_time, String del_flg, String modify_flg, String entity_flg, byte[] photo) {
 		super();
 		this.branch_code = branch_code;
 		this.branch_name = branch_name;
@@ -288,6 +300,7 @@ public class Organization_Branch_Entity {
 		this.del_flg = del_flg;
 		this.modify_flg = modify_flg;
 		this.entity_flg = entity_flg;
+		this.photo = photo;
 	}
 
 	public Organization_Branch_Entity() {

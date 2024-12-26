@@ -444,23 +444,22 @@ $(document)
 									<thead class="thead-light">
 										<tr class="filters">
 											<th><input type="text"
-												class="form-control font-weight-bold" placeholder="GL HEAD"
+												class="form-control font-weight-bold" placeholder="Gl Head"
 												disabled></th>
 											<th><input type="text"
-												class="form-control font-weight-bold" placeholder="GL DESC"
+												class="form-control font-weight-bold" placeholder="Gl Desc"
 												disabled></th>
 											<th><input type="text"
 												class="form-control font-weight-bold"
-												placeholder="NO OF ACCT" disabled></th>
+												placeholder="No Of Acct" disabled></th>
 											<th><input type="text"
-												class="form-control font-weight-bold" placeholder="CURRENCY"
+												class="form-control font-weight-bold" placeholder="Currency"
 												disabled></th>
 											<th style="text-align: right; width: 15%"><input
 												type="text" class="form-control font-weight-bold"
-												style="text-align: right" placeholder="AMOUNT" disabled>
+												style="text-align: right" placeholder="Amount" disabled>
 											</th>
 										</tr>
-
 									</thead>
 									<tbody id="income">
 										<tr th:each="chartacc : ${balancesheet1}">
@@ -519,30 +518,28 @@ $(document)
 								</div>
 							</div>
 
-
 							<div class="table-responsive">
 								<table class="table table-bordered table-hover table-sm"
 									style="margin-bottom: 0px; font-size: initial;" id="usertable">
 									<thead class="thead-light">
 										<tr class="filters">
 											<th><input type="text"
-												class="form-control font-weight-bold" placeholder="GL HEAD"
+												class="form-control font-weight-bold" placeholder="Gl Head"
 												disabled></th>
 											<th><input type="text"
-												class="form-control font-weight-bold" placeholder="GL DESC"
+												class="form-control font-weight-bold" placeholder="Gl Desc"
 												disabled></th>
-											<th><input type="text"
+											<th style="text-align: right; width: 15%"><input type="text"
 												class="form-control font-weight-bold"
-												placeholder="NO OF ACCT" disabled></th>
+												placeholder="No Of Acct" disabled></th>
 											<th><input type="text"
-												class="form-control font-weight-bold" placeholder="CURRENCY"
+												class="form-control font-weight-bold" placeholder="Currency"
 												disabled></th>
 											<th style="text-align: right; width: 15%"><input
 												type="text" class="form-control font-weight-bold"
-												style="text-align: right" placeholder="AMOUNT" disabled>
+												style="text-align: right" placeholder="Amount" disabled>
 											</th>
 										</tr>
-
 									</thead>
 									<tbody id="liability">
 										<tr th:each="chartacc : ${balancesheet2}">

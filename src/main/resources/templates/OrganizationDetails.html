@@ -293,6 +293,9 @@ input:hover+.password-info {
 
 		location.href = './organizationDetails?formmode=ModifyHead';
 	}
+	
+	
+	
 </script>
 
 <script>
@@ -303,11 +306,17 @@ input:hover+.password-info {
 				+ branch;
 	}
 
-	function modify(a) {
-		var branch = a.getAttribute('data-resource');
 
-		location.href = './organizationDetails?formmode=modify&branch_name='
+	function branchfunction(a){
+		var branch = a.getAttribute('data-resource');
+		var mod_flg = a.getAttribute('data-modify_flg');
+		if(mod_flg == "Y"){
+			location.href = './organizationDetails?formmode=DeleteBranch&branch_name='
 				+ branch;
+		}else{
+			location.href = './organizationDetails?formmode=modify&branch_name='
+				+ branch;
+		}
 	}
 
 	/* 	function openTab(evt, tabName) {
@@ -327,32 +336,97 @@ input:hover+.password-info {
 
 	 //document.getElementById("submitBtn").style.display = (tabName === 'tab2') ? 'block' : 'none';
 	 } */
+	 function showError(element, message) {
+		    var errorSpan = $('<span class="error-message"></span>').text(message);
+		    errorSpan.css('color', 'red');
+		    element.after(errorSpan);
+		}
+
+		function hideError(element) {
+		    element.next('.error-message').remove();
+		}
+
+		function validateField(selector, message) {
+		    const element = $(selector);
+		    if (!element.val()) {
+		        showError(element, message);
+		        return true;
+		    } else {
+		        hideError(element);
+		        return false;
+		    }
+		}
 
 	function AddSubmit() {
-
-		const branchName = document.getElementById("branch_name").value.trim();
-
-		if (branchName === "") {
-			$("#alertmsg1").text("Please fill out the Branch Name field.");
-			$('#alert1').modal("show");
-		} else {
+		 let hasError = false;
+		  //for customer check
+		  
+		  /*  hasError = validateField("#branch_head", 'Required') || hasError; 
+		   hasError = validateField("#branch_code", 'Required') || hasError; 
+	       hasError = validateField("#swift_code", 'Required') || hasError; 
+		   hasError = validateField("#designation", 'Required') || hasError; 
+           hasError = validateField("#land_line", 'Required') || hasError; 
+		   hasError =validateField("#branch_name", 'Required') || hasError;
+		   hasError =  validateField("#mobile", 'Required') || hasError; 
+		   hasError =  validateField("#photo", 'Required') || hasError; 
+		   hasError =  validateField("#cont_person", 'Required') || hasError; 
+		   hasError =  validateField("#fax", 'Required') || hasError;  */
+		   
+		
+		   if (hasError) {
+		        $('#alert1').modal("toggle");
+		        $('#alertmsg1').text("Enter the Required fields..");
+		        return; // Exit the function if there are validation errors
+		    }
+		   var formElement = document.getElementById('assosiateForm1'); // Get the form element
+		   var formData = new FormData(formElement); 
+	       var photoInput = formElement.querySelector("input[name='photo']");
+		   alert(photoInput)
+	        
+		   if (photoInput && photoInput.files.length > 0) {
+	            formData.append("photoFile", photoInput.files[0]);
+	        }else {
+	            console.error("Photo input not found or no file selected.");
+	            $('#alert1').modal("toggle");
+	            $('#alertmsg1').text("Please select a photo.");
+	            return; // Exit the function if the photo input is not found or no file is selected
+	        }  
 			$.ajax({
 				url : './OrgBranchAdd',
-				data : $("#assosiateForm1").serialize(),
-				type : 'POST',
+				data: formData,
+			    type: 'POST',
+			    processData: false,  // Don't process the data
+			    contentType: false, 
 				success : function(data) {
 					$("#alertmsg").text(data);
 					$('#alert').modal("show");
 				}
 			});
-		}
+		
 	}
 
-	function ModifyTab1Submit() {
+	 function ModifyTab1Submit() {
+
+		    $.ajax({
+		        url: './tab1modify',
+		        data: $("#tab1modify").serialize(),
+		        type: 'POST',
+		        success: function(data) {
+		            $("#alertmsg").text(data);
+		            $('#alert').modal("show");
+		        },
+		        error: function(jqXHR, textStatus, errorThrown) {
+		            console.error("Error in AJAX request: " + textStatus, errorThrown);
+		        }
+		    });
+		}
+
+
+	function ModifyTab2Submit() {
 
 		$.ajax({
-			url : './tab1modify',
-			data : $("#tab1modify").serialize(),
+			url : './tab2modify',
+			data : $("#tab2modify").serialize(),
 			type : 'POST',
 			success : function(data) {
 				$("#alertmsg").text(data);
@@ -361,12 +435,11 @@ input:hover+.password-info {
 		});
 
 	}
-
-	function ModifyTab2Submit() {
+	function del_bran() {
 
 		$.ajax({
-			url : './tab2modify',
-			data : $("#tab2modify").serialize(),
+			url : './tab2Del',
+			data : $("#tab2Del").serialize(),
 			type : 'POST',
 			success : function(data) {
 				$("#alertmsg").text(data);
@@ -417,6 +490,18 @@ input:hover+.password-info {
 		document.getElementById(subTabName).style.display = "block";
 		evt.currentTarget.className += " active";
 	}
+</script>
+<script>
+	$(function() {
+		$("#date_of_regn").datepicker({
+			dateFormat : "dd-mm-yy", // Format as 'DD-MM-YYYY'
+			changeMonth : true, // Allows changing month
+			changeYear : true, // Allows changing year
+			yearRange : "1900:2024", // Year range
+			maxDate : new Date()
+		// Restricts to today or earlier
+		});
+	});
 </script>
 <script>
 	function addHoliday() {
@@ -480,35 +565,44 @@ input:hover+.password-info {
 		location.href = 'organizationDetails?formmode=viewrecord&record_srl='
 				+ record_srl;
 	}
-	
-	
-	
-	function getCheckedValues1() {
-	    // Get all the checked record dates from the table
-	    var holidayDates = [];
-	    $('#AssosiateTable tbody tr').each(function() {
-	        var isChecked = $(this).find('td').eq(0).hasClass('hover-underline'); // or check another condition
-	        if (isChecked) {
-	            var recordDate = $(this).find('td').eq(3).text(); // Assuming the record_date is in the 4th column
-	            holidayDates.push(recordDate);
-	        }
-	    });
+</script>
+<script>
+	function validateNumericInput(input) {
+		const errorMessage = document.getElementById('errorMessage');
+		// Remove any non-numeric characters
+		input.value = input.value.replace(/[^0-9]/g, '');
 
-	    console.log("Holiday Dates"+holidayDates);
-	    // Send the list of dates to the backend via AJAX
-	     $.ajax({
-	        url: '/updateCalmaster',  // Adjust with your controller URL
-	        type: 'POST',
-	        contentType: 'application/json',
-	        data: JSON.stringify(holidayDates), // Send the array as JSON
-	        success: function(response) {
-	            alert('Successfully updated the calendar!');
-	        },
-	        error: function(xhr, status, error) {
-	            alert('Error updating the calendar!');
-	        }
-	    }); 
+		// Show an error message if needed (optional)
+		if (/[^0-9]/.test(input.value)) {
+			errorMessage.style.display = 'block';
+		} else {
+			errorMessage.style.display = 'none';
+		}
 	}
+	
+	function validatePanCard(input) {
+        const errorMessage = document.getElementById('errorMessage');
+        const value = input.value;
+
+        // Allow only alphanumeric characters
+        input.value = value.replace(/[^a-zA-Z0-9]/g, '');
+
+        // Check if the length is exactly 10
+        if (input.value.length !== 10) {
+            errorMessage.style.display = 'block';
+        } else {
+            errorMessage.style.display = 'none';
+        }
+    }
+	
+	function validateAddress(input) {
+        const value = input.value;
+
+        // Check if the length is less than 3 characters
+        if (value.length < 3 && value.length > 0) {
+            alert("Please fill in more than 3 letters.");
+        }
+    }
 </script>
 </head>
 
@@ -527,7 +621,7 @@ input:hover+.password-info {
 		<div class="row">
 
 
-			<div class="col-sm-11 ml-5 mt-2" style="font-size: 0.8rem;">
+			<div class="col-sm-11 ml-5mt-2 " style="font-size: 0.8rem;">
 
 
 				<!-- ------------------------------------Organization Main---------------------------------- -->
@@ -719,14 +813,20 @@ input:hover+.password-info {
 										<div class="col-sm-2">WebSite</div>
 
 
-										<div class="col-sm-2">
-											<input type="text" name="" id=""
+										<div class="col-sm-2 ">
+											<input type="" name="" id=""
 												th:value="${organization?.web_site}" readonly
 												class="form-control form-control-sm bg-white border border-dark" />
 
 										</div>
 
-										<div class="col-sm-1"></div>
+										<div class="col-sm-1 pl-3">
+											<a th:href="${organization?.web_site}" target="_blank"> <img
+												th:src="@{/images/link.png}" class="img-fluid"
+												style="max-width: 30px; max-height: 25px;" id="showmenu"
+												alt="Bornfire">
+											</a>
+										</div>
 										<div class="col-sm-2">Email</div>
 										<div class="col-sm-2">
 											<input type="text" name="" id=""
@@ -780,12 +880,12 @@ input:hover+.password-info {
 									<thead class="thead-light">
 
 										<tr>
-											<th>SRL NO</th>
-											<th>BRANCH CODE</th>
-											<th>BRANCH NAME</th>
-											<th>SWIFT CODE</th>
-											<th>BRANCH HEAD</th>
-											<th>SELECT</th>
+											<th>Srl No</th>
+											<th>Branch Code</th>
+											<th>Branch Name</th>
+											<th>Swift Code</th>
+											<th>Branch Head</th>
+											<th style="text-align: center">Select</th>
 										</tr>
 									</thead>
 
@@ -795,48 +895,18 @@ input:hover+.password-info {
 
 											<td th:text="${iterator.index +1}"></td>
 											<td th:text="${EmployeeData.branch_code}"></td>
-											<td th:text="${EmployeeData.branch_name}"></td>
+											<td th:text="${EmployeeData.branch_name}"
+												th:attr="data-resource=${EmployeeData.branch_name}"
+												class="text-primary" onclick="view(this)"></td>
 											<td th:text="${EmployeeData.swift_code}"></td>
 											<td th:text="${EmployeeData.branch_head}"></td>
 
 
-											<td>
-												<div class="dropdown">
-
-													<button class="bt btn-primary p-2 " type="button"
-														id="dropdownMenuButton" title="action"
-														style="line-height: 0.7; font-size: 11px;"
-														data-toggle="dropdown" aria-haspopup="true"
-														aria-expanded="false">Action</button>
-
-													<div class="dropdown-menu"
-														aria-labelledby="dropdownMenuButton"
-														style="background-color: #e3e3e4; color: #3a4550;">
-
-														<a class="dropdown-item" title="View"
-															th:attr="data-resource=${EmployeeData.branch_name}"
-															style="cursor: pointer; color: #3a4550; background: #e3e3e4; height: 16px; border-radius: .20rem; padding: 0px; text-align: center"
-															onclick="view(this)" id="view_btn">View </a>
-														<div class="dropdown-divider"></div>
-
-														<a class="dropdown-item" title=" Modify"
-															th:attr="data-resource=${EmployeeData.branch_name}"
-															style="cursor: pointer; color: #3a4550; background: #e3e3e4; height: 16px; border-radius: .20rem; padding: 0px; text-align: center"
-															id="edit_value" onclick="modify(this)">Modify</a>
-														<div class="dropdown-divider"></div>
-
-
-														<a class="dropdown-item" title=" Delete"
-															th:attr="data-resource=${EmployeeData.branch_name}"
-															style="cursor: pointer; color: #3a4550; background: #e3e3e4; height: 16px; border-radius: .20rem; padding: 0px; text-align: center"
-															id="delete" onclick="Delete(this)">Delete</a>
-
-
-
-													</div>
-
-												</div>
-											</td>
+											<td align="center"><input type="radio" name="" id=""
+												readonly
+												th:attr="data-resource=${EmployeeData.branch_name},
+										          data-modify_flg=${EmployeeData.modify_flg}	"
+												onclick="branchfunction(this)" /></td>
 										</tr>
 
 									</tbody>
@@ -871,7 +941,7 @@ input:hover+.password-info {
 									Master</button>
 							</div>
 
-							
+
 							<div id="tabCalendarMaster" class="subtabcontent"
 								style="display: block;">
 								<div class="card-body">
@@ -879,7 +949,7 @@ input:hover+.password-info {
 										method="post" id="assosiateForm" autocomplete="off">
 										<div style="width: 1000px; margin-left: 400px">
 											<div class="row formline" style="padding: 10px 0px 2px 0px;">
-											<div class="col-sm-1"></div>
+												<div class="col-sm-1"></div>
 												<div class="col-sm-2">Organization Name</div>
 												<div class="col-sm-1"></div>
 												<div class="col-sm-2">
@@ -907,16 +977,16 @@ input:hover+.password-info {
 
 												<!-- Start and End Times in Single col-sm-2 -->
 												<div class="col-sm-2 d-flex align-items-center">
-														<input type="text" name="startTime" id="startTime"
+													<input type="text" name="startTime" id="startTime"
 														style="width: 100px" value="8:00 AM" readonly
 														class="form-control form-control-sm bg-white border border-dark me-1" />
-														<input type="text" name="endTime"
-														id="endTime" style="width: 100px" value="5:00 PM"  readonly
+													<input type="text" name="endTime" id="endTime"
+														style="width: 100px" value="5:00 PM" readonly
 														class="form-control form-control-sm bg-white border border-dark ms-1" />
 												</div>
 											</div>
 											<div class="row formline" style="padding: 0px 0px 2px 0px;">
-											<div class="col-sm-1"></div>
+												<div class="col-sm-1"></div>
 												<div class="col-sm-2">Weekly Holiday</div>
 												<div class="col-sm-1"></div>
 												<div class="col-sm-2">
@@ -939,12 +1009,12 @@ input:hover+.password-info {
 
 											</div>
 										</div>
-										</form>
+									</form>
 								</div>
 								<div class="card-footer text-center "
 									style="background-color: #e9ecef">
 									<button class="btn btn-primary p-2" onclick="Home();">Home</button>
-									<button class="btn btn-primary p-2" onclick="Modify1();">Modify</button>
+									<button class="btn btn-primary p-2" onclick="Modify();">Modify</button>
 									<button class="btn btn-primary p-2" onclick="Back();">Back</button>
 								</div>
 							</div>
@@ -955,7 +1025,7 @@ input:hover+.password-info {
 									<form class=" border border-secondary" action="#" method="post"
 										id="assosiateForm" autocomplete="off">
 										<div class="row formline" style="padding: 10px 0px 2px 0px;">
-	
+
 
 											<div class="col-sm-1"></div>
 											<div class="col-sm-2">Organization</div>
@@ -1069,21 +1139,21 @@ input:hover+.password-info {
 
 						<div class="card-body">
 							<form class=" border border-secondary" action="#" method="post"
-								id="assosiateForm1" autocomplete="off">
+								id="" autocomplete="off" enctype="multipart/form-data">
 								<div class="row formline" style="padding: 10px 0px 2px 0px;">
 
 
 									<div class="col-sm-1"></div>
 									<div class="col-sm-2">Organization</div>
 									<div class="col-sm-2">
-										<input type="text" name="" id="" 
+										<input type="text" name="" id="" readonly
 											class="form-control form-control-sm bg-white border border-dark" />
 
 									</div>
 									<div class="col-sm-1"></div>
 									<div class="col-sm-2">Location</div>
 									<div class="col-sm-2">
-										<input type="text" name="" id="" 
+										<input type="text" name="" id="" readonly
 											class="form-control form-control-sm bg-white border border-dark" />
 									</div>
 								</div>
@@ -1092,13 +1162,13 @@ input:hover+.password-info {
 									<div class="col-sm-1"></div>
 									<div class="col-sm-2">Calendar Year</div>
 									<div class="col-sm-2">
-										<input type="text" name="" id="" 
+										<input type="text" name="" id="" readonly
 											class="form-control form-control-sm bg-white border border-dark" />
 									</div>
 									<div class="col-sm-1"></div>
 									<div class="col-sm-2">Month</div>
 									<div class="col-sm-2">
-										<input type="text" name="" id="" 
+										<input type="text" name="" id="" readonly
 											class="form-control form-control-sm bg-white border border-dark" />
 									</div>
 								</div>
@@ -1107,13 +1177,13 @@ input:hover+.password-info {
 									<div class="col-sm-1"></div>
 									<div class="col-sm-2">Record No</div>
 									<div class="col-sm-2">
-										<input type="text" name="" id="" 
+										<input type="text" name="" id="" readonly
 											class="form-control form-control-sm bg-white border border-dark" />
 									</div>
 									<div class="col-sm-1"></div>
 									<div class="col-sm-2">Date</div>
 									<div class="col-sm-2">
-										<input type="text" name="" id="" 
+										<input type="text" name="" id="" readonly
 											class="form-control form-control-sm bg-white border border-dark" />
 									</div>
 								</div>
@@ -1122,14 +1192,14 @@ input:hover+.password-info {
 									<div class="col-sm-1"></div>
 									<div class="col-sm-2">Description</div>
 									<div class="col-sm-2">
-										<input type="text" name="" id="" 
+										<input type="text" name="" id="" readonly
 											class="form-control form-control-sm bg-white border border-dark" />
 
 									</div>
 									<div class="col-sm-1"></div>
 									<div class="col-sm-2">Remarks</div>
 									<div class="col-sm-2">
-										<input type="text" name="" id="" 
+										<input type="text" name="" id="" readonly
 											class="form-control form-control-sm bg-white border border-dark" />
 
 									</div>
@@ -1139,7 +1209,7 @@ input:hover+.password-info {
 									<div class="col-sm-1"></div>
 									<div class="col-sm-2">Holiday Flag</div>
 									<div class="col-sm-2">
-										<input type="text" name="" id="" 
+										<input type="text" name="" id="" readonly
 											class="form-control form-control-sm bg-white border border-dark" />
 
 									</div>
@@ -1147,7 +1217,7 @@ input:hover+.password-info {
 									<div class="col-sm-2">Record Status</div>
 									<div class="col-sm-2">
 
-										<input type="text" name="" id="" 
+										<input type="text" name="" id="" readonly
 											class="form-control form-control-sm bg-white border border-dark" />
 
 									</div>
@@ -1217,7 +1287,7 @@ input:hover+.password-info {
 						</div>
 					</form>
 				</div>
-				
+
 				<div th:if="${formmode} =='ModifyHoliday'">
 					<div class="card">
 						<div class="card-header"
@@ -1276,7 +1346,7 @@ input:hover+.password-info {
 									<div class="col-sm-1"></div>
 									<div class="col-sm-2">Date</div>
 									<div class="col-sm-2">
-										<input type="text" name="" id="" 
+										<input type="text" name="" id="" readonly
 											class="form-control form-control-sm bg-white border border-dark" />
 									</div>
 								</div>
@@ -1285,14 +1355,14 @@ input:hover+.password-info {
 									<div class="col-sm-1"></div>
 									<div class="col-sm-2">Description</div>
 									<div class="col-sm-2">
-										<input type="text" name="" id="" 
+										<input type="text" name="" id="" readonly
 											class="form-control form-control-sm bg-white border border-dark" />
 
 									</div>
 									<div class="col-sm-1"></div>
 									<div class="col-sm-2">Remarks</div>
 									<div class="col-sm-2">
-										<input type="text" name="" id="" 
+										<input type="text" name="" id="" readonly
 											class="form-control form-control-sm bg-white border border-dark" />
 
 									</div>
@@ -1301,7 +1371,7 @@ input:hover+.password-info {
 									<div class="col-sm-1"></div>
 									<div class="col-sm-2">Holiday Flag</div>
 									<div class="col-sm-2">
-										<input type="text" name="" id="" 
+										<input type="text" name="" id="" readonly
 											class="form-control form-control-sm bg-white border border-dark" />
 
 									</div>
@@ -1309,7 +1379,7 @@ input:hover+.password-info {
 									<div class="col-sm-2">Record Status</div>
 									<div class="col-sm-2">
 
-										<input type="text" name="" id="" 
+										<input type="text" name="" id="" readonly
 											class="form-control form-control-sm bg-white border border-dark" />
 
 									</div>
@@ -1340,8 +1410,7 @@ input:hover+.password-info {
 							<div class="card-header"
 								style="background-color: #e9ecef; height: 70px">
 								<div class="float-left">
-									<h6 style="font-size: 1.2rem; color: black;">Holiday
-										Master-List</h6>
+									<h6 style="font-size: 1.2rem; color: black;">HOLIDAY MASTER - LIST</h6>
 								</div>
 
 							</div>
@@ -1354,13 +1423,13 @@ input:hover+.password-info {
 										<thead class="thead-light">
 
 											<tr>
-												<th>SRL NO</th>
-												<th>YEAR</th>
-												<th>MONTH</th>
-												<th>DATE</th>
-												<th>DAY</th>
-												<th>DESCRIPTION</th>
-												<th>REMARKS</th>
+												<th>Srl No</th>
+												<th>Year</th>
+												<th>Month</th>
+												<th>Date</th>
+												<th>Day</th>
+												<th>Description</th>
+												<th>Remarks</th>
 											</tr>
 										</thead>
 										<tbody id="placelist">
@@ -1393,7 +1462,7 @@ input:hover+.password-info {
 								style="background-color: #e9ecef">
 								<button class="btn btn-primary p-2" onclick="Home();">Home</button>
 								<button class="btn btn-primary p-2" id="submitBtn"
-									onclick="getCheckedValues1()">Submit</button>
+									onclick="getCheckedValues()">Submit</button>
 								<button class="btn btn-primary p-2" onclick="Back();">Back</button>
 							</div>
 						</div>
@@ -1540,7 +1609,7 @@ input:hover+.password-info {
 
 						<div class="card-body">
 							<form class=" border border-secondary" action="#" method="post"
-								id="assosiateForm1" autocomplete="off">
+								id="" autocomplete="off">
 								<div class="row formline" style="padding: 10px 0px 2px 0px;">
 
 
@@ -1777,7 +1846,257 @@ input:hover+.password-info {
 
 
 				</div>
+				<div th:if="${formmode}=='DeleteBranch'">
+					<div class="card ">
 
+						<div class="card-header"
+							style="background-color: #e9ecef; height: 50px">
+							<div class="float-left">
+								<h6 style="font-size: 1.2rem; color: black;">BRANCH -
+									DELETE</h6>
+							</div>
+
+						</div>
+
+						<div class="card-body">
+							<form class=" border border-secondary" action="#" method="post"
+								id="tab2Del" autocomplete="off">
+								<div class="row formline" style="padding: 10px 0px 2px 0px;">
+
+
+									<div class="col-sm-1"></div>
+									<div class="col-sm-2">Branch Code</div>
+
+
+									<div class="col-sm-2">
+										<input type="text" name="branch_code" id="branch_code"
+											th:value="${OrgBranch?.branch_code}" readonly
+											class="form-control form-control-sm bg-white border border-dark" />
+
+									</div>
+
+									<div class="col-sm-1"></div>
+									<div class="col-sm-2">Branch Name</div>
+									<div class="col-sm-2">
+										<input type="text" name="branch_name" id="branch_name"
+											th:value="${OrgBranch?.branch_name}" readonly
+											class="form-control form-control-sm bg-white border border-dark" />
+									</div>
+								</div>
+
+								<div class="row formline" style="padding: 0px 0px 2px 0px;">
+
+
+									<div class="col-sm-1"></div>
+									<div class="col-sm-2">Branch Head</div>
+
+
+									<div class="col-sm-2">
+										<input type="text" name="branch_head" id="branch_head"
+											th:value="${OrgBranch?.branch_head}" readonly
+											class="form-control form-control-sm bg-white border border-dark" />
+
+									</div>
+
+									<div class="col-sm-1"></div>
+									<div class="col-sm-2">Designation</div>
+									<div class="col-sm-2">
+
+										<input type="text" name="designation" id="designation"
+											th:value="${OrgBranch?.designation}" readonly
+											class="form-control form-control-sm bg-white border border-dark" />
+
+									</div>
+								</div>
+
+								<div class="row formline" style="padding: 0px 0px 2px 0px;">
+
+
+									<div class="col-sm-1"></div>
+									<div class="col-sm-2">Swift Code</div>
+
+
+									<div class="col-sm-2">
+										<input type="text" name="swift_code" id="swift_code"
+											th:value="${OrgBranch?.swift_code}" readonly
+											class="form-control form-control-sm bg-white border border-dark" />
+									</div>
+
+									<div class="col-sm-1"></div>
+									<div class="col-sm-2">Pic No</div>
+									<div class="col-sm-2">
+
+										<input type="text" name="pic_no" id="pic_no"
+											th:value="${OrgBranch?.pic_no}" readonly
+											class="form-control form-control-sm bg-white border border-dark" />
+
+
+									</div>
+								</div>
+
+								<div class="row formline" style="padding: 0px 0px 2px 0px;">
+
+
+									<div class="col-sm-1"></div>
+									<div class="col-sm-2">Land Line</div>
+
+
+									<div class="col-sm-2">
+										<input type="text" name="land_line" id="land_line"
+											th:value="${OrgBranch?.land_line}" readonly
+											class="form-control form-control-sm bg-white border border-dark" />
+
+									</div>
+
+									<div class="col-sm-1"></div>
+									<div class="col-sm-2">Fax</div>
+									<div class="col-sm-2">
+
+										<input type="text" name="fax" id="fax"
+											th:value="${OrgBranch?.fax}" readonly
+											class="form-control form-control-sm bg-white border border-dark" />
+
+									</div>
+								</div>
+
+								<div class="row formline" style="padding: 0px 0px 2px 0px;">
+
+
+									<div class="col-sm-1"></div>
+									<div class="col-sm-2">Mobile</div>
+
+
+									<div class="col-sm-2">
+										<input type="number" name="mobile" id="mobile"
+											th:value="${OrgBranch?.mobile}" readonly
+											class="form-control form-control-sm bg-white border border-dark" />
+
+									</div>
+
+									<div class="col-sm-1"></div>
+									<div class="col-sm-2">Contact Person</div>
+									<div class="col-sm-2">
+
+										<input type="text" name="cont_person" id="cont_person"
+											th:value="${OrgBranch?.cont_person}" readonly
+											class="form-control form-control-sm bg-white border border-dark" />
+
+									</div>
+								</div>
+								<div class="row formline" style="padding: 0px 0px 2px 0px;">
+
+
+									<div class="col-sm-1"></div>
+									<div class="col-sm-2">Web Site</div>
+
+
+									<div class="col-sm-2">
+										<input type="text" name="website" id="website"
+											th:value="${OrgBranch?.website}" readonly
+											class="form-control form-control-sm bg-white border border-dark" />
+
+									</div>
+
+									<div class="col-sm-1"></div>
+									<div class="col-sm-2">Mail Id</div>
+									<div class="col-sm-2">
+
+										<input type="text" name="mail_id" id="mail_id"
+											th:value="${OrgBranch?.mail_id}" readonly
+											class="form-control form-control-sm bg-white border border-dark" />
+
+									</div>
+								</div>
+
+								<div class="row formline" style="padding: 0px 0px 2px 0px;">
+
+
+									<div class="col-sm-1"></div>
+									<div class="col-sm-2">Address 1</div>
+
+
+									<div class="col-sm-2">
+										<input type="text" name="add_1" id="add_1"
+											th:value="${OrgBranch?.add_1}" readonly
+											class="form-control form-control-sm bg-white border border-dark" />
+
+									</div>
+
+									<div class="col-sm-1"></div>
+									<div class="col-sm-2">Address 2</div>
+									<div class="col-sm-2">
+										<input type="text" name="add_2" id="add_2"
+											th:value="${OrgBranch?.add_2}" readonly
+											class="form-control form-control-sm bg-white border border-dark" />
+
+
+									</div>
+								</div>
+
+								<div class="row formline" style="padding: 0px 0px 2px 0px;">
+
+
+									<div class="col-sm-1"></div>
+									<div class="col-sm-2">City</div>
+
+
+									<div class="col-sm-2">
+										<input type="text" name="city" id="city"
+											th:value="${OrgBranch?.city}" readonly
+											class="form-control form-control-sm bg-white border border-dark" />
+
+									</div>
+
+									<div class="col-sm-1"></div>
+									<div class="col-sm-2">State</div>
+									<div class="col-sm-2">
+										<input type="text" name="state" id="state"
+											th:value="${OrgBranch?.state}" readonly
+											class="form-control form-control-sm bg-white border border-dark" />
+									</div>
+								</div>
+
+								<div class="row formline" style="padding: 0px 0px 10px 0px;">
+
+
+									<div class="col-sm-1"></div>
+									<div class="col-sm-2">Country</div>
+
+
+									<div class="col-sm-2">
+										<input type="text" name="country" id="country"
+											th:value="${OrgBranch?.country}" readonly
+											class="form-control form-control-sm bg-white border border-dark" />
+
+									</div>
+
+									<div class="col-sm-1"></div>
+									<div class="col-sm-2">Zip Code</div>
+									<div class="col-sm-2">
+										<input type="text" name="zip_code" id="zip_code"
+											th:value="${OrgBranch?.zip_code}" readonly
+											class="form-control form-control-sm bg-white border border-dark" />
+									</div>
+								</div>
+
+
+							</form>
+
+						</div>
+						<div class="card-footer text-center "
+							style="background-color: #e9ecef">
+
+
+							<button class="btn btn-primary p-2" onclick="Home();">Home</button>
+							<button class="btn btn-primary p-2" onclick="del_bran();">Submit</button>
+							<button class="btn btn-primary p-2" onclick="Back();">Back</button>
+
+						</div>
+
+					</div>
+
+
+				</div>
 				<div th:if="${formmode}=='modify'">
 					<div class="card ">
 
@@ -2107,7 +2426,8 @@ input:hover+.password-info {
 
 									<div class="col-sm-2">
 										<input type="text" name="pan_card" id="pan_card"
-											th:value="${organization?.pan_card}"
+											th:value="${organization?.pan_card}" maxlength="10"
+											oninput="validatePanCard(this)"
 											class="form-control form-control-sm bg-white border border-dark" />
 									</div>
 
@@ -2131,6 +2451,7 @@ input:hover+.password-info {
 									<div class="col-sm-2">
 										<input type="text" name="no_of_emp" id="no_of_emp"
 											th:value="${organization?.no_of_emp}"
+											oninput="validateNumericInput(this)"
 											class="form-control form-control-sm bg-white border border-dark" />
 
 									</div>
@@ -2139,9 +2460,10 @@ input:hover+.password-info {
 									<div class="col-sm-2">As On</div>
 									<div class="col-sm-2">
 
-										<input type="text" name="as_on" id="as_on"
-											th:value="${#dates.format(organization?.as_on, 'dd-MM-yyyy')}"
+										<input type="date" name="as_on" id="as_on"
+											th:value="${#dates.format(organization?.as_on, 'yyyy-MM-dd')}"
 											class="form-control form-control-sm bg-white border border-dark" />
+
 
 									</div>
 								</div>
@@ -2155,6 +2477,7 @@ input:hover+.password-info {
 									<div class="col-sm-2">
 										<input type="text" name="reg_addr_1" id="reg_addr_1"
 											th:value="${organization?.reg_addr_1}"
+											oninput="validateAddress(this)"
 											class="form-control form-control-sm bg-white border border-dark" />
 
 									</div>
@@ -2165,6 +2488,7 @@ input:hover+.password-info {
 
 										<input type="text" name="reg_addr_2" id="reg_addr_2"
 											th:value="${organization?.reg_addr_2}"
+											oninput="validateAddress(this)"
 											class="form-control form-control-sm bg-white border border-dark" />
 
 									</div>
@@ -2180,6 +2504,7 @@ input:hover+.password-info {
 									<div class="col-sm-2">
 										<input type="text" name="corp_addr_1" id="corp_addr_1"
 											th:value="${organization?.corp_addr_1}"
+											oninput="validateAddress(this)"
 											class="form-control form-control-sm bg-white border border-dark" />
 
 									</div>
@@ -2189,6 +2514,7 @@ input:hover+.password-info {
 									<div class="col-sm-2">
 										<input type="text" name="cor_addr_2" id="cor_addr_2"
 											th:value="${organization?.cor_addr_2}"
+											oninput="validateAddress(this)"
 											class="form-control form-control-sm bg-white border border-dark" />
 
 
@@ -2251,23 +2577,28 @@ input:hover+.password-info {
 						</div>
 
 						<div class="card-body">
-							<form class=" border border-secondary" action="#" method="post"
+							<form class=" border border-secondary" action="#" method="post" enctype="multipart/form-data" 
 								id="assosiateForm1" autocomplete="off">
 								<div class="row formline" style="padding: 10px 0px 2px 0px;">
 
 
 									<div class="col-sm-1"></div>
-									<div class="col-sm-2">Branch Code</div>
+									<div class="col-sm-2">
+										Branch Code <span class="text-danger">*</span>
+									</div>
 
 
 									<div class="col-sm-2">
 										<input type="text" name="branch_code" id="branch_code"
 											class="form-control form-control-sm bg-white border border-dark" />
 
+
 									</div>
 
 									<div class="col-sm-1"></div>
-									<div class="col-sm-2">Branch Name</div>
+									<div class="col-sm-2">
+										Branch Name <span class="text-danger">*</span>
+									</div>
 									<div class="col-sm-2">
 										<input type="text" name="branch_name" id="branch_name"
 											class="form-control form-control-sm bg-white border border-dark" />
@@ -2278,7 +2609,9 @@ input:hover+.password-info {
 
 
 									<div class="col-sm-1"></div>
-									<div class="col-sm-2">Branch Head</div>
+									<div class="col-sm-2">
+										Branch Head <span class="text-danger">*</span>
+									</div>
 
 
 									<div class="col-sm-2">
@@ -2288,7 +2621,9 @@ input:hover+.password-info {
 									</div>
 
 									<div class="col-sm-1"></div>
-									<div class="col-sm-2">Designation</div>
+									<div class="col-sm-2">
+										Designation <span class="text-danger">*</span>
+									</div>
 									<div class="col-sm-2">
 
 										<input type="text" name="designation" id="designation"
@@ -2301,7 +2636,9 @@ input:hover+.password-info {
 
 
 									<div class="col-sm-1"></div>
-									<div class="col-sm-2">Swift Code</div>
+									<div class="col-sm-2">
+										Swift Code <span class="text-danger">*</span>
+									</div>
 
 
 									<div class="col-sm-2">
@@ -2310,21 +2647,25 @@ input:hover+.password-info {
 									</div>
 
 									<div class="col-sm-1"></div>
-									<div class="col-sm-2">Pic No</div>
 									<div class="col-sm-2">
-
-										<input type="text" name="pic_no" id="pic_no"
-											class="form-control form-control-sm bg-white border border-dark" />
-
-
+										Pic No <span class="text-danger">*</span>
 									</div>
+								<div class="col-sm-2 d-flex align-items-center">
+										
+											<input type="file" name="photo"
+												id="photo"
+												class="form-control form-control-sm bg-white border border-dark" />
+
+										</div>
 								</div>
 
 								<div class="row formline" style="padding: 0px 0px 2px 0px;">
 
 
 									<div class="col-sm-1"></div>
-									<div class="col-sm-2">Land Line</div>
+									<div class="col-sm-2">
+										Land Line <span class="text-danger">*</span>
+									</div>
 
 
 									<div class="col-sm-2">
@@ -2334,7 +2675,9 @@ input:hover+.password-info {
 									</div>
 
 									<div class="col-sm-1"></div>
-									<div class="col-sm-2">Fax</div>
+									<div class="col-sm-2">
+										Fax <span class="text-danger">*</span>
+									</div>
 									<div class="col-sm-2">
 
 										<input type="text" name="fax" id="fax"
@@ -2347,7 +2690,9 @@ input:hover+.password-info {
 
 
 									<div class="col-sm-1"></div>
-									<div class="col-sm-2">Mobile</div>
+									<div class="col-sm-2">
+										Mobile <span class="text-danger">*</span>
+									</div>
 
 
 									<div class="col-sm-2">
@@ -2357,7 +2702,9 @@ input:hover+.password-info {
 									</div>
 
 									<div class="col-sm-1"></div>
-									<div class="col-sm-2">Contact Person</div>
+									<div class="col-sm-2">
+										Contact Person <span class="text-danger">*</span>
+									</div>
 									<div class="col-sm-2">
 
 										<input type="text" name="cont_person" id="cont_person"
@@ -2510,7 +2857,17 @@ input:hover+.password-info {
 			</div>
 		</div>
 	</div>
-
+	<script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Get the input field
+            var dateInput = document.getElementById('as_on');            
+           
+                if (dateInput) {
+                	  var today = new Date().toISOString().split('T')[0];
+                	  dateInput.setAttribute('max', today); 
+                }
+        });
+    </script>
 </body>
 
 </html>

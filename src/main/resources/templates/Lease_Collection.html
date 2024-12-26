@@ -484,7 +484,7 @@
 
 			<div class="col-sm-10">
 
-				<div class="row" th:if="${formmode}=='upload'">
+				<div th:if="${formmode}=='upload'">
 					<form action="#" method="post" autocomplete="off" style="width: 100%">
 						<div class="card" style="margin-top: 90px;">
 							<div class="card-header" style="background-color: #BBC3CB;">
@@ -493,17 +493,12 @@
 							</div>
 							<div class="card-body p-0 mt-3">
 								<div class="panel-heading text-center">
-
-
-
 									<div class="form-group ">
 										<div class="row">
-
 											<div class="col-sm-3">
 												<label class="">Upload</label>
 											</div>
 											<div class="col-sm-2">
-
 												<input type="file" id="fileval" name="fileval" accept=".xlsx,.xls,.csv"
 													class="form-control form-control-sm">
 
@@ -538,9 +533,7 @@
 									<h6 style="font-size: 1.2rem; color: black;">COLLECTION
 										PROCESS-LIST</h6>
 								</div>
-
 							</div>
-
 							<div class="card-body">
 								<div class="card-header" style="background-color: #e9ecef; height: 50px">
 									<div class="float-left">
@@ -554,36 +547,36 @@
 										<thead class="thead-light">
 											<tr class="filters">
 												<th style="width: 15%"><input type="text"
-														class="form-control font-weight-bold" placeholder="BANK
+														class="form-control font-weight-bold" placeholder="Bank
 													" disabled></th>
 												<th style="width: 15%"><input type="text"
-														class="form-control font-weight-bold" placeholder="BRANCH
+														class="form-control font-weight-bold" placeholder="Branch
 													" disabled></th>
 												<th style="width: 10%"><input type="text"
-														class="form-control font-weight-bold" placeholder="SETACCOUNT NO
+														class="form-control font-weight-bold" placeholder="Set Account No
 													" disabled></th>
 												<th style="width: 8%"><input type="text"
-														class="form-control font-weight-bold" placeholder="AMOUNT
+														class="form-control font-weight-bold" placeholder="Amount
 													" disabled></th>
 												<th style="width: 15%;"><input type="text"
-														class="form-control font-weight-bold" placeholder="CUSTOMER NAME
+														class="form-control font-weight-bold" placeholder="Customer Name
 													" disabled></th>
 												<!--  <th style="width: 10%"><input type="text"
 													class="form-control font-weight-bold"
 													placeholder="ACCOUNT NO
 													" disabled></th>  -->
 												<th style="width: 10%"><input type="text"
-														class="form-control font-weight-bold" placeholder="MOBILE NO
+														class="form-control font-weight-bold" placeholder="Mobile No
 													" disabled></th>
 												<th style="width: 10%"><input type="text"
-														class="form-control font-weight-bold" placeholder="NIC NO"
+														class="form-control font-weight-bold" placeholder="Nic No"
 														disabled></th>
 												<th style="width: 10%"><input type="text"
-														class="form-control font-weight-bold" placeholder="AMOUNT"
+														class="form-control font-weight-bold" placeholder="Amount"
 														disabled></th>
 
 												<th style="width: 10%"><input type="text"
-														class="form-control font-weight-bold" placeholder="SELECT"
+														class="form-control font-weight-bold" placeholder="Select"
 														disabled></th>
 
 											</tr>
@@ -614,26 +607,20 @@
 									<div class="float-left">
 										<h6 style="font-size: 1.2rem; color: black;">ALLOCATION</h6>
 									</div>
-
 								</div>
 								<div class="table-responsive ">
 									<table class="table table-bordered table-sm mt-2 d-none"
 										style="margin-bottom: 0px; font-size: initial;" id="flowIdTable">
-
-
 										<thead class="thead-light">
-
-
 											<tr>
-												<th>CUSTOMER ID</th>
-												<th>ACCOUNT NO</th>
-												<th>ACCOUNT NAME</th>
-												<th>BALANCE</th>
-												<th>FLOW CODE</th>
-												<th>FLOW DATE</th>
-												<th>AMOUNT</th>
-												<th>ALLOCATION</th>
-
+												<th>Customer Id</th>
+												<th>Account No</th>
+												<th>Account Name</th>
+												<th>Balance</th>
+												<th>Flow Code</th>
+												<th>Flow Date</th>
+												<th>Amount</th>
+												<th>Allocation</th>
 											</tr>
 										</thead>
 

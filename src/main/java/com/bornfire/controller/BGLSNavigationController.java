@@ -365,6 +365,9 @@ public class BGLSNavigationController {
 			md.addAttribute("formmode", "ModifyHead");
 			List<Organization_Entity> organization = organization_Repo.getAllList();
 			md.addAttribute("organization", organization.get(0));
+		} else if (formmode.equals("DeleteBranch")) {
+			md.addAttribute("formmode", "DeleteBranch");
+			md.addAttribute("OrgBranch", organization_Branch_Rep.getOrgBranch(branch_name));
 		} else if (formmode.equals("AddBranch")) {
 			md.addAttribute("formmode", "AddBranch");
 		} else if (formmode.equals("modify")) {
@@ -471,7 +474,10 @@ public class BGLSNavigationController {
 		} else if (formmode.equals("verify")) {
 			md.addAttribute("chartaccount", chart_Acc_Rep.getaedit(acct_num));
 			md.addAttribute("formmode", "verify");
-		} else if (formmode.equals("view")) {
+		} else if (formmode.equals("delete")) {
+			md.addAttribute("formmode", "delete");
+			md.addAttribute("chartaccount", chart_Acc_Rep.getaedit(acct_num));
+		}else if (formmode.equals("view")) {
 			md.addAttribute("formmode", "view");
 			md.addAttribute("chartaccount", chart_Acc_Rep.getaedit(acct_num));
 			md.addAttribute("Chart1", reference_code_Rep.getReferenceCode("COA_01"));
@@ -1721,29 +1727,26 @@ public class BGLSNavigationController {
 
 			md.addAttribute("GeneralLedger", chart_Acc_Rep.getaedit(glcode));
 			System.out.println(chart_Acc_Rep.getaedit(glcode) + "GLCODE" + glcode);
-		} else if (formmode.equals("list1")) {
-
-			md.addAttribute("formmode", "list1");
+		} else if (formmode.equals("modify")) {
+			md.addAttribute("formmode", "modify");
 			md.addAttribute("BamGeneralLedger", generalLedgerRep.getRefCodelist());
 
 		} else if (formmode.equals("edit")) {
 
 			md.addAttribute("formmode", "edit");
-			md.addAttribute("GeneralLedger", adminOperServices.getGeneralLedger(glcode));
+			md.addAttribute("GeneralLedger", generalLedgerRep.getsinglevalue(glcode));
 
 		} else if (formmode.equals("add")) {
 
 			md.addAttribute("formmode", formmode);
 
 		} else if (formmode.equals("deleteList")) {
-
 			md.addAttribute("formmode", "deleteList");
 			md.addAttribute("BamGeneralLedger", generalLedgerRep.getRefCodelist());
-
 		} else if (formmode.equals("delete")) {
-
 			md.addAttribute("formmode", "delete");
-			md.addAttribute("GeneralLedger", adminOperServices.getGeneralLedger(glcode));
+			System.out.println("the gl code value is "+glcode);
+			md.addAttribute("GeneralLedger", generalLedgerRep.getsinglevalue(glcode));
 
 		} else if (formmode.equals("upload")) {
 

@@ -1874,7 +1874,7 @@ function rowadddcorporate() {
 		<div class="row">
 
 			<div class="col-sm-11 ml-5 mt-2" style="font-size: 0.8rem;">
-				<div th:if="${formmode}=='list'" class="mt-5">
+				<div th:if="${formmode}=='list'">
 					<div class="card">
 
 						<div class="card-header"
@@ -1888,7 +1888,6 @@ function rowadddcorporate() {
 
 							</div>-->
 
-
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">
@@ -1896,12 +1895,12 @@ function rowadddcorporate() {
 									style="margin-bottom: 0px; font-size: initial;" id="usertable">
 									<thead class="thead-light">
 										<tr class="filters">
-											<th class="pl-3">CUSTOMER ID</th>
-											<th>LOAN ACCT NO</th>
-											<th>BORROWER NAME</th>
-											<th>BRANCH ID</th>
+											<th class="pl-3">Customer Id</th>
+											<th>Loan Acct No</th>
+											<th>Borrower Name</th>
+											<th>Branch Id</th>
 											<th>Status</th>
-											<th><b>Action</b></th>
+											<th>Action</th>
 										</tr>
 
 
@@ -1945,7 +1944,6 @@ function rowadddcorporate() {
 															class="dropdown-item" title="verify"
 															style="cursor: pointer;" onclick="inquaryeditlistz(this)"
 															id="verify_btn">View </a>
-														<div class="dropdown-divider"></div>
 													</div>
 												</div>
 												<div class="dropdown" th:if="${getDDDet?.entity_flg != 'Y'}">
@@ -1968,7 +1966,7 @@ function rowadddcorporate() {
 															class="dropdown-item" title="view"
 															style="cursor: pointer;" onclick="inquaryeditlistz(this)"
 															id="verify_btn">View </a>
-														<div class="dropdown-divider"></div>
+														
 														<!--<a
 															th:attr="data-dd_notice_ref = ${getDDDet.loan_accountno},data-synd_fac_ref = ${getDDDet.loan_accountno}"
 															class="dropdown-item" title="Modify"
@@ -1998,7 +1996,7 @@ function rowadddcorporate() {
 					</div>
 				</div>
 
-				<div th:if="${formmode}=='add'" class="mt-5">
+				<div th:if="${formmode}=='add'">
 
 					<div class="card">
 						<div class="card-header"
@@ -2007,9 +2005,6 @@ function rowadddcorporate() {
 								<h6 style="font-size: 1.2rem;" class="ml-3">LEASE LOAN -
 									OPEN</h6>
 							</div>
-
-
-
 						</div>
 						<div class="card-body">
 							<form action="#" th:object="${drawDownDetails}" method="post"
@@ -2739,8 +2734,7 @@ function rowadddcorporate() {
 					</div>
 				</div>
 
-				<div th:if="${formmode}=='view' or ${formmode}=='verify'"
-					class="mt-5">
+				<div th:if="${formmode}=='view' or ${formmode}=='verify'">
 					<div class="card">
 						<div class="card-header"
 							style="background-color: #e9ecef; height: 50px">

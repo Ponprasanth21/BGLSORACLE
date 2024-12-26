@@ -12,7 +12,7 @@ public interface Organization_Branch_Rep extends CrudRepository<Organization_Bra
 	 @Query(value = "SELECT BRANCH_NAME FROM BGLS_ORG_BRANCH", nativeQuery = true)
 	 List<String> getexistingData();
 	 
-	 @Query(value = "SELECT * FROM BGLS_ORG_BRANCH", nativeQuery = true)
+	 @Query(value = "SELECT * FROM BGLS_ORG_BRANCH WHERE DEL_FLG ='N'", nativeQuery = true)
 	 List<Organization_Branch_Entity> getbranchlist();
 	 
 	 @Query(value = "SELECT * FROM BGLS_ORG_BRANCH where BRANCH_NAME =?1 ", nativeQuery = true)
