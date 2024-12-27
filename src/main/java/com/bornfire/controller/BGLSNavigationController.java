@@ -2139,13 +2139,15 @@ public class BGLSNavigationController {
 		LocalDate today = LocalDate.now(); // Get today's date
 		Date fromDateToUse; // Declare a variable for the date to use
 
+		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 		if (Fromdate != null) {
-			// If Fromdate has a value, use it
-			fromDateToUse = Fromdate;
+		    // If Fromdate has a value, use it
+		    fromDateToUse = Fromdate;
+		    System.out.println("if condition work " + formatter.format(fromDateToUse));
 		} else {
-
-			// If Fromdate has no value, use today's date
-			fromDateToUse = Date.from(today.atStartOfDay(ZoneId.systemDefault()).toInstant());
+		    // If Fromdate has no value, use today's date
+		    fromDateToUse = Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant());
+		    System.out.println("else condition work " + formatter.format(fromDateToUse));
 		}
 
 		if (formmode == null || formmode.equals("list")) {
@@ -2279,34 +2281,34 @@ public class BGLSNavigationController {
 		return "Added Successfully";
 	}
 
-	/* pon prasanth */
 	@RequestMapping(value = "OperationLogsval", method = { RequestMethod.GET, RequestMethod.POST })
 	public String OperationLogsval(@RequestParam(required = false) String formmode, Model model, String cust_id,
-			@RequestParam(required = false) @DateTimeFormat(pattern = "dd-MM-yyyy") Date Fromdate,
-			HttpServletRequest request) {
+	        @RequestParam(required = false) @DateTimeFormat(pattern = "dd-MM-yyyy") Date Fromdate,
+	        HttpServletRequest request) {
 
-		LocalDate today = LocalDate.now(); // Get today's date
-		Date fromDateToUse; // Declare a variable for the date to use
+	    LocalDate today = LocalDate.now(); // Get today's date
+	    java.sql.Date fromDateToUse; // Declare a variable for the date to use
 
-		if (Fromdate != null) {
-			// If Fromdate has a value, use it
-			fromDateToUse = Fromdate;
-		} else {
-			// If Fromdate has no value, use today's date
-			fromDateToUse = Date.from(today.atStartOfDay(ZoneId.systemDefault()).toInstant());
-		}
+	    SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+	    if (Fromdate != null) {
+	        // If Fromdate has a value, use it
+	        fromDateToUse = new java.sql.Date(Fromdate.getTime());  // Convert java.util.Date to java.sql.Date
+	        System.out.println("if condition work " + formatter.format(fromDateToUse));
+	    } else {
+	        // If Fromdate has no value, use today's date
+	        fromDateToUse = java.sql.Date.valueOf(today); // Convert LocalDate to java.sql.Date
+	        System.out.println("else condition work " + formatter.format(fromDateToUse));
+	    }
 
-		if (formmode == null || formmode.equals("list")) {
-			model.addAttribute("formmode", "list");
+	    if (formmode == null || formmode.equals("list")) {
+	        model.addAttribute("formmode", "list");
 
-			// Fetch the audit list based on the determined date
-			// model.addAttribute("AuditList",
-			// bGLSBusinessTable_Rep.getauditListLocalvaluesbusiness(fromDateToUse));
-			model.addAttribute("AuditList", AdminOperServices.getauditListLocal(fromDateToUse));
+	        // Fetch the audit list based on the determined date
+	        model.addAttribute("AuditList", AdminOperServices.getauditListLocal(fromDateToUse));
 
-		}
+	    }
 
-		return "BusinessTrail";
+	    return "BusinessTrail";
 	}
 
 	/* pon prasanth */

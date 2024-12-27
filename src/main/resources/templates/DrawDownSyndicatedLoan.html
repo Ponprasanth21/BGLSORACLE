@@ -293,6 +293,11 @@ input:hover+.password-info {
 	visibility: visible;
 	opacity: 0.8;
 }
+
+.table-responsive {
+	max-height: 650px;
+	overflow-y: auto;
+}
 </style>
 <script>
 		$(document).ready(function () {
@@ -2010,8 +2015,6 @@ function rowadddcorporate() {
 							<form action="#" th:object="${drawDownDetails}" method="post"
 								id="drawDownDetailsAdd" autocomplete="off"
 								name="drawDownDetailsData" th:fragment="finuserapply">
-
-
 
 
 

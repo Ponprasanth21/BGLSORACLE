@@ -303,8 +303,12 @@ body {
 	line-height: 0.5rem;
 }
 
-.table-bordered td, .table-bordered th {
+.table-bordered td {
 	font-size: smaller;
+}
+
+.table-bordered th {
+	font-size: medium;
 }
 
 .container-manager {
@@ -371,6 +375,11 @@ body {
 #myPieChart {
 	width: 100px;
 	height: 100px;
+}
+
+.table-responsive {
+	max-height: 650px;
+	overflow-y: auto;
 }
 </style>
 <style>
@@ -1724,56 +1733,59 @@ function gotocorporate(){
 
 						<div class="card w-100 border panel panel-primary filterable">
 							<div class="card-header"
-								style="background-color: #e9ecef; height: 50px">
+								style="background-color: #e9ecef; height: 50px; display: flex; justify-content: space-between; align-items: center;">
+								<!-- List Title -->
 								<div class="float-left">
-									<h6 style="font-size: 1.2rem;">CUSTOMER MAINTENANCE- LIST</h6>
+									<h6 style="font-size: 1.2rem;">CUSTOMER MAINTENANCE - LIST</h6>
 								</div>
-								<div style="float: right;">
-									<font Style="font-size: 13px; color: #3C6EAC"> <B>CUSTOMER
-											TYPE : </B></font> <input type="text"
-										Style="font-size: 13px; background-color: transparent; border: none; outline-style: none; box-shadow: none; width: 95px;"
+
+								<!-- Customer Type -->
+								<div style="font-size: 13px; color: #3C6EAC;">
+									<strong>CUSTOMER TYPE :</strong> <input type="text"
+										style="font-size: 13px; background-color: transparent; border: none; outline-style: none; box-shadow: none; width: 95px;"
 										id="acttype" value="RETAIL">
 								</div>
 
+								<!-- Filter Button -->
+								<div>
+									<button type="button"
+										class="btn btn-xs btn-primary btns p-2 border btn-filter">Filter</button>
+								</div>
 							</div>
 							<div class="card-body">
-								<div style="text-align: right;">
-									<button type="button"
-										class="btn btn-xs btn-primary btns p-2 border btn-filter ">Filter</button>
-								</div>
 
-								<div class="table-responsive mt-2">
+								<div class="table-responsive">
 									<table class="table table-bordered  table-hover table-sm">
 										<thead>
 											<tr class="filters">
-												<th style="width: 8%"><input type="text"
+												<th style="width: 5%"><input type="text"
 													class="form-control font-weight-bold" placeholder="S.No"
 													disabled></th>
-												<th><input type="text"
+												<th style="width: 7%"><input type="text"
 													class="form-control font-weight-bold"
 													placeholder="Cust Group    " disabled></th>
-												<th><input type="text"
+												<th style="width: 10%"><input type="text"
 													class="form-control font-weight-bold"
 													placeholder="Account Type" disabled></th>
-												<th style="width: 8%"><input type="text"
+												<th style="width: 10%"><input type="text"
 													class="form-control font-weight-bold" placeholder="Cust Id"
 													disabled></th>
-												<th><input type="text"
+												<th style="width: 23%"><input type="text"
 													class="form-control font-weight-bold"
 													placeholder="Cust Name" disabled></th>
-												<th><input type="text"
+												<th style="width: 7%"><input type="text"
 													class="form-control font-weight-bold"
 													placeholder="Branch Id" disabled></th>
-												<th><input type="text"
+												<th style="width: 7%"><input type="text"
 													class="form-control font-weight-bold" placeholder="Mob No"
 													disabled></th>
-												<th><input type="text"
+												<th style="width: 13%"><input type="text"
 													class="form-control font-weight-bold"
 													placeholder="Email Id" disabled></th>
-												<th><input type="text"
+												<th style="width: 9%"><input type="text"
 													class="form-control font-weight-bold" placeholder="Status"
 													disabled></th>
-												<th></th>
+												<th style="width: 7%; text-align: center;">Select</th>
 
 											</tr>
 										</thead>
@@ -1830,48 +1842,13 @@ function gotocorporate(){
 														style="color: red; font-size: 12px; font-weight: bold;">NOT
 														APPROVED</td>
 												</th:block>
-												<td><input type="radio"
+												<td style="text-align: center;"><input type="radio"
 													th:attr="data-appl_ref_no = ${customerrequest?.appl_ref_no},
-                       								 data-account_type = ${customerrequest?.ca_acct_type},
-                       								 data-rec_no = ${customerrequest?.rec_no},
-                       								 data-status =${customerrequest.status}"
-													onclick="buttonfnRetail(this)" 
-													class="form-control form-control-sm bg-white border border-dark bg-white border border-dark"
-													autocomplete="off" /> <!-- <div class="dropdown">
-														<button class="btn btn-secondary dropdown-toggle"
-															type="button" id="dropdownMenuButton"
-															style="line-height: 0.7; width: 64px; font-size: 11px; color: #3a4550; background: #e3e3e4;"
-															data-toggle="dropdown" aria-haspopup="true"
-															aria-expanded="false">Action</button>
-														<div class="dropdown-menu"
-															aria-labelledby="dropdownMenuButton"
-															style="background-color: #e3e3e4; color: #3a4550;">
-															<a class="dropdown-item" title="View"
-																th:attr="data-appl_ref_no = ${customerrequest?.appl_ref_no},
-                       								 data-account_type = ${customerrequest?.ca_acct_type},
-                       								 data-rec_no = ${customerrequest?.rec_no}"
-																style="cursor: pointer; height: 20px; width: 64px; color: #12161b; background: #e3e3e4; height: 16px; border-radius: .20rem; padding: 2px 10px; top: 10px;"
-																id="delete_value" onclick="Clickview(this)">View</a>
+                    data-account_type = ${customerrequest?.ca_acct_type},
+                    data-rec_no = ${customerrequest?.rec_no},
+                    data-status = ${customerrequest.status}"
+													onclick="buttonfnRetail(this)" autocomplete="off" /></td>
 
-															<div class="dropdown-divider"></div>
-															<a class="dropdown-item" title="Modify"
-																th:attr="data-appl_ref_no = ${customerrequest?.appl_ref_no},
-                       								 data-account_type = ${customerrequest?.ca_acct_type},
-                       								 data-rec_no = ${customerrequest?.rec_no}"
-																style="cursor: pointer; height: 20px; width: 64px; color: #12161b; background: #e3e3e4; height: 16px; border-radius: .20rem; padding: 2px 10px; top: 10px; padding-bottom: 22px"
-																id="edit_value" onclick="ClickEdit(this)">Modify</a>
-
-															<div class="dropdown-divider"></div>
-															<a class="dropdown-item" title="Verify"
-																th:attr="data-appl_ref_no = ${customerrequest?.appl_ref_no},
-                       								 data-account_type = ${customerrequest?.ca_acct_type},
-                       								 data-rec_no = ${customerrequest?.rec_no}"
-																style="cursor: pointer; height: 20px; width: 64px; color: #12161b; background: #e3e3e4; height: 16px; border-radius: .20rem; padding: 2px 10px; top: 10px;"
-																id="delete_value" onclick="ClickVerify(this)">Verify</a>
-
-
-														</div>
-													</div> --></td>
 											</tr>
 										</tbody>
 									</table>
@@ -1900,55 +1877,59 @@ function gotocorporate(){
 
 						<div class="card w-100 border panel panel-primary filterable">
 							<div class="card-header"
-								style="background-color: #e9ecef; height: 50px">
+								style="background-color: #e9ecef; height: 50px; display: flex; justify-content: space-between; align-items: center;">
 								<div class="float-left">
 									<h6 style="font-size: 1.2rem;">CUSTOMER MAINTENANCE</h6>
 								</div>
-								<div style="float: right;">
-									<font Style="font-size: 13px; color: #3C6EAC"> <B>CUSTOMER
-											TYPE : </B></font> <input type="text"
-										Style="font-size: 13px; background-color: transparent; border: none; outline-style: none; box-shadow: none; width: 95px;"
+								<div
+									style="text-align: center; flex-grow: 1; display: flex; justify-content: center;">
+									<!-- First: Customer List -->
+									<font style="font-size: 13px; color: #3C6EAC;"><b>CUSTOMER
+											TYPE:</b></font> <input type="text"
+										style="font-size: 13px; background-color: transparent; border: none; outline-style: none; box-shadow: none; width: 95px;"
 										id="acttype" value="CORPORATE">
+								</div>
+								<div style="text-align: right;">
+									<!-- Third: Filter Button -->
+									<button type="button"
+										class="btn btn-xs btn-primary btns p-2 border btn-filter">Filter</button>
 								</div>
 							</div>
 							<div class="card-body">
-								<div style="text-align: right;">
-									<button type="button"
-										class="btn btn-xs btn-primary btns p-2 border btn-filter ">Filter</button>
-								</div>
+
 
 								<div class="table-responsive mt-2">
 									<table class="table table-bordered  table-hover table-sm">
 										<thead>
 											<tr class="filters">
-												<th style="width: 8%"><input type="text"
+												<th style="width: 5%"><input type="text"
 													class="form-control font-weight-bold" placeholder="S.NO"
 													disabled></th>
-												<th><input type="text"
+												<th style="width: 7%"><input type="text"
 													class="form-control font-weight-bold"
 													placeholder="Cust Group    " disabled></th>
-												<th><input type="text"
+												<th style="width: 9%"><input type="text"
 													class="form-control font-weight-bold"
 													placeholder="Account Type" disabled></th>
-												<th style="width: 8%"><input type="text"
+												<th style="width: 10%"><input type="text"
 													class="form-control font-weight-bold" placeholder="Cust Id"
 													disabled></th>
-												<th><input type="text"
+												<th style="width: 25%"><input type="text"
 													class="form-control font-weight-bold"
 													placeholder="Cust Name" disabled></th>
-												<th><input type="text"
+												<th style="width: 8%"><input type="text"
 													class="form-control font-weight-bold"
 													placeholder="Branch Id" disabled></th>
-												<th><input type="text"
+												<th style="width: 8%"><input type="text"
 													class="form-control font-weight-bold" placeholder="Mob No"
 													disabled></th>
-												<th><input type="text"
+												<th style="width: 11%"><input type="text"
 													class="form-control font-weight-bold"
 													placeholder="Email Id" disabled></th>
-												<th><input type="text"
+												<th style="width: 8%"><input type="text"
 													class="form-control font-weight-bold" placeholder="BRN No"
 													disabled></th>
-												<th><input type="text"
+												<th style="width: 8%"><input type="text"
 													class="form-control font-weight-bold" placeholder="Status"
 													disabled></th>
 

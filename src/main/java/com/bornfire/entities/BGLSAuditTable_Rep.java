@@ -32,7 +32,7 @@ public interface BGLSAuditTable_Rep extends JpaRepository<BGLSAuditTable, String
 	@Query(value = "select * from BGLS_AUDIT_TABLE", nativeQuery = true)
 	List<BGLSAuditTable> getauditListLocalvals();
 	
-	@Query(value = "select * from BGLS_AUDIT_TABLE where audit_date = ?1", nativeQuery = true)
+	@Query(value = "SELECT * FROM BGLS_AUDIT_TABLE WHERE TRUNC(audit_date) = TRUNC(?1)", nativeQuery = true)
 	List<BGLSAuditTable> getauditListLocalvals(Date fromDateToUse);
 	
 	@Query(value = "select * from BGLS_AUDIT_TABLE where audit_date = ?1", nativeQuery = true)

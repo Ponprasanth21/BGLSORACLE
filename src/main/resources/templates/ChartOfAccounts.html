@@ -41,16 +41,17 @@
 	src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js"
 	th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
 
-
-
-
 <style>
 .btn {
 	line-height: 0.5rem;
 }
 
-.table-bordered td, .table-bordered th {
+.table-bordered td {
 	font-size: smaller;
+}
+
+.table-bordered th {
+font-size: medium;
 }
 
 .container-manager {
@@ -168,7 +169,41 @@ input:hover+.password-info {
 	color: #333;
 }
 </style>
+<style>
+.table-bordered td {
+	font-size: smaller;
+	padding: 8px;
+	text-align: left;
+	border: 1px solid #ddd;
+}
 
+.table-container {
+	position: relative;
+	max-height: 500px; /* Set the height of the scrollable area */
+	overflow-y: scroll; /* Force a vertical scrollbar */
+}
+
+.table-bordered {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.table-bordered thead th {
+	position: sticky;
+	top: 0; /* Keeps the header fixed */
+	background-color: #f1f1f1; /* Optional: header background color */
+	z-index: 1;
+}
+
+.table-responsive {
+	max-height: 650px;
+	overflow-y: auto;
+}
+
+.table-bordered tbody td {
+	background-color: #fff; /* Optional: body row background color */
+}
+</style>
 <script>
 	function Home() {
 
@@ -457,7 +492,6 @@ function verifysubmit(a) {
 	<div class="container-manager">
 		<div class="row">
 			<div class="col-sm-11 ml-5 mt-2">
-
 				<div th:if="${formmode}=='list'">
 					<div class="panel panel-primary filterable">
 						<div class="card w-100 border panel panel-primary filterable">
