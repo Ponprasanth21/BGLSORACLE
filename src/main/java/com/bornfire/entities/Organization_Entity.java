@@ -2,6 +2,7 @@ package com.bornfire.entities;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.lang.String;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -24,8 +25,9 @@ public class Organization_Entity {
 	private String gst_ref;
 	private String pf_ref;
 	private BigDecimal no_of_emp;
-	@DateTimeFormat(pattern = "dd-MM-yyyy")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date as_on;
+
 	private String reg_addr_1;
 	private String reg_addr_2;
 	private String corp_addr_1;
