@@ -625,7 +625,7 @@ input:hover+.password-info {
 				<div th:if="${formmode}=='add'">
 					<div class="card ">
 						<div class="card-header"
-							style="background-color: #e9ecef; height: 50px">
+							style="background-color: #f5a142; height: 50px">
 							<div class="float-left">
 								<h6 style="font-size: 1.2rem; color: black;">ORGANIZATION
 									DETAILS</h6>
@@ -812,13 +812,14 @@ input:hover+.password-info {
 
 										</div>
 
-										<div class="col-sm-1 pl-3">
+										<!-- <div class="col-sm-1 pl-3">
 											<a th:href="${organization?.web_site}" target="_blank"> <img
 												th:src="@{/images/link.png}" class="img-fluid"
 												style="max-width: 30px; max-height: 25px;" id="showmenu"
 												alt="Bornfire">
 											</a>
-										</div>
+										</div> -->
+										<div class="col-sm-1"></div>
 										<div class="col-sm-2">Email</div>
 										<div class="col-sm-2">
 											<input type="text" name="" id=""
@@ -834,13 +835,10 @@ input:hover+.password-info {
 
 							</div>
 							<div class="card-footer text-center "
-								style="background-color: #e9ecef">
-
-
+								style="background-color: #f5a142;">
 								<button class="btn btn-primary p-2" onclick="Home();">Home</button>
 								<button class="btn btn-primary p-2" onclick="Modify();">Modify</button>
 								<button class="btn btn-primary p-2" onclick="Back();">Back</button>
-
 							</div>
 						</div>
 
@@ -915,9 +913,6 @@ input:hover+.password-info {
 
 								</div>
 							</div>
-
-
-
 						</div>
 						<div id="tabCalendar" class="tabcontent" style="display: none;">
 							<div class="tab mt-2"
@@ -1004,7 +999,7 @@ input:hover+.password-info {
 									</form>
 								</div>
 								<div class="card-footer text-center "
-									style="background-color: #e9ecef">
+									style="background-color: #f48c30;">
 									<button class="btn btn-primary p-2" onclick="Home();">Home</button>
 									<button class="btn btn-primary p-2" onclick="Modify();">Modify</button>
 									<button class="btn btn-primary p-2" onclick="Back();">Back</button>
@@ -1102,7 +1097,7 @@ input:hover+.password-info {
 
 								</div>
 								<div class="card-footer text-center "
-									style="background-color: #e9ecef">
+									style="background-color: #f48c30">
 
 
 									<button class="btn btn-primary p-2" onclick="Home();">Home</button>
