@@ -829,6 +829,7 @@ public class CustOnboardinController {
 			md.addAttribute("userId", userId);
 		} else if (formmode.equals("modify")) {
 			md.addAttribute("formmode", "modify");
+			System.out.println("The getting ref number is "+refnumber);
 			md.addAttribute("OtherServicess", parameterrep.findbyId(refnumber));
 			md.addAttribute("parameterslist", parameterrep.findAll());
 			md.addAttribute("branch_id", reference_code_Rep.getBranch_Id());

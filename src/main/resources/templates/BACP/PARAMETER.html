@@ -40,7 +40,11 @@
 <script
 	src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js"
 	th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
+	
 <style>
+.btn {
+	line-height: 0.5rem;
+}
 .modal-dialog {
 	max-width: 90%; /* Adjust modal width as needed */
 }
@@ -78,10 +82,6 @@
 
 body {
 	font-size: 0.8rem;
-}
-
-.btn {
-	line-height: 0.5rem;
 }
 
 .table-bordered td {
@@ -1342,9 +1342,9 @@ function clearCheckList() {
 }
 
 
-function modify() {
+function modifydatas() {
     var refnumber = document.getElementById('ref_number_edit').value;
-
+alert(refnumber);
     // Ensure the form element exists
     var formElement = document.getElementById('Parameterformedit');
     if (!formElement) {
@@ -1508,10 +1508,8 @@ function updateDocumentCode(row) {
 }
 </script>
 </head>
-
-
 <body>
-	<div class="col-sm-2 d-flex align-items-center">
+	<div class="col-sm-2">
 		<div th:insert="BGLSHeaderMenu :: header"></div>
 	</div>
 	<!---------------------User List Starts------------------------------------------------------->
@@ -1526,7 +1524,7 @@ function updateDocumentCode(row) {
 					<div class="card ">
 
 						<div class="card-header"
-							style="background-color: #f48c30; height: 50px">
+							style="background-color: #f5a142;">
 							<div class="float-left">
 								<h4 style="font-size: 1.2rem; color: black;">SCHEME CODE -
 									LIST</h4>
@@ -1659,8 +1657,7 @@ function updateDocumentCode(row) {
 								</div>
 
 							</div>
-							<div class="card-body ml-5 mr-5"
-							>
+							<div class="card-body ml-5 mr-5">
 								<form name="Parameterform" action="#"
 									th:object="${Parameterform}" method="POST" autocomplete="off"
 									id="Parameterform" th:fragment="finuserapply"
@@ -2582,7 +2579,7 @@ function updateDocumentCode(row) {
 						<div class="card-footer text-center"
 							style="background-color: #f48c30">
 							<button class="btn btn-primary p-2" onclick="Home();">Home</button>
-							<button class="btn btn-primary p-2" onclick="nextdeposit()">Submit</button>
+							<button class="btn btn-primary p-2" onclick="nextloan()">Submit</button>
 							<button class="btn btn-primary p-2" onclick="Back();">Back</button>
 						</div>
 						<!-- <div class="table-responsive">
@@ -4979,7 +4976,8 @@ function updateDocumentCode(row) {
 
 				<!-- ---------------------------------------------------------------------------------------------------------- -->
 				<!--end view  -->
-				<!-- STATT VERIFY -->
+
+<!------------------------------------------------------verifydatas start------------------------------------------------------------------------->
 				<div th:if="${formmode}=='verify'" th:object="${OtherServicess}">
 
 					<!-- <div class="card">
@@ -7039,10 +7037,9 @@ function updateDocumentCode(row) {
 						</div>
 					</div>
 				</div>
+<!------------------------------------------------------Verifydatas End--------------------------------------------------------------------------->
 
-
-				<!-- END VERIFY -->
-				<!-- start modify -->
+<!------------------------------------------------------Modifydatas Start------------------------------------------------------------------------->
 				<div th:if="${formmode}=='modify'" th:object="${OtherServicess}">
 
 					<div id="tab1" class="tabcontent" style="display: block">
@@ -7465,7 +7462,6 @@ function updateDocumentCode(row) {
 										<button class="tablinks" onclick="openTab(event, 'tab3')"
 											style="font-size: 16px; padding: 4px 8px; height: 32px;">LOAN
 											PARAMETER</button>
-
 									</div>
 									<input autocomplete="false" name="hidden" type="text"
 										style="display: none;">
@@ -7715,7 +7711,6 @@ function updateDocumentCode(row) {
 										</select> <input id="home_curr_no" name="home_curr" value="SCR"
 											class="col-sm-2 form-control form-control-sm bg-white border border-dark "
 											style="display: block;">
-
 									</div>
 
 									<div class="row formline mt-1">
@@ -7809,8 +7804,7 @@ function updateDocumentCode(row) {
 
 
 								<button class="btn btn-primary p-2" onclick="Home();">Home</button>
-
-								<button class="btn btn-primary p-2" onclick="modify();">Submit</button>
+								<button class="btn btn-primary p-2" onclick="modifydatas(this);">Submit</button>
 								<button class="btn btn-primary p-2" onclick="Back();">Back</button>
 							</div>
 							<!-- 	<div class="table-responsive">
@@ -8867,9 +8861,7 @@ function updateDocumentCode(row) {
 												Max Amount </label> <input type="text"
 												class="col-sm-2 d-flex align-items-center"
 												name="dep_max_amt" id="dep_max_amt">
-
 										</div>
-
 										<div class="form-row mt-1">
 											<div class="col-sm-1"></div>
 											<label class="col-sm-2 d-flex align-items-center"
@@ -8886,8 +8878,6 @@ function updateDocumentCode(row) {
 												name="dep_max_period" id="dep_max_period">
 
 										</div>
-
-
 										<div class="form-row mt-1">
 											<div class="col-sm-1"></div>
 											<label class="col-sm-2 d-flex align-items-center "
@@ -8897,14 +8887,12 @@ function updateDocumentCode(row) {
 												name="interest_rate" id="interest_rate">
 
 											<div class="  col-sm-1 "></div>
-
 											<label class=" col-sm-2 d-flex align-items-center"
 												style="font-size: 15px; font-weight: 500;">Interest
 												Preferential </label><input type="text"
 												class="col-sm-2 d-flex align-items-center"
 												name="interest_pre" id="interest_pre">
 										</div>
-
 										<div class="form-row mt-1">
 											<div class="col-sm-1"></div>
 											<label class="col-sm-2 d-flex align-items-center"
@@ -8912,18 +8900,14 @@ function updateDocumentCode(row) {
 												Renewal Flg </label> <input type="text"
 												class="col-sm-2 d-flex align-items-center"
 												name="auto_renewal_flag" id="auto_renewal_flag">
-
 											<div class="col-sm-1"></div>
 											<label class="col-sm-2 d-flex align-items-center"
 												style="font-size: 15px; font-weight: 500;">Loan
 												Facility </label><input type="text"
 												class="col-sm-2 d-flex align-items-center"
 												name="loan_facility" id=""loan_facility"">
-
-
 											<div class="col-sm-2" id="glshdesc" style="margin-top: 10px"></div>
 										</div>
-
 										<div class="form-row mt-1">
 											<div class="col-sm-1"></div>
 											<label class="col-sm-2 d-flex align-items-center"
@@ -8931,7 +8915,6 @@ function updateDocumentCode(row) {
 												Booking Freq </label> <input type="text"
 												class="col-sm-2 d-flex align-items-center"
 												name="interest_booking_freq" id="interest_booking_freq">
-
 											<div class="col-sm-1"></div>
 											<label class="col-sm-2 d-flex align-items-center"
 												style="font-size: 15px; font-weight: 500;">Interest
@@ -8940,7 +8923,6 @@ function updateDocumentCode(row) {
 												name="interest_booking_placeholders"
 												id="interest_booking_placeholders">
 										</div>
-
 										<div class="form-row mt-1">
 											<div class="col-sm-1"></div>
 											<label class="col-sm-2 d-flex align-items-center"
@@ -8949,7 +8931,6 @@ function updateDocumentCode(row) {
 												class="col-sm-2 d-flex align-items-center"
 												name="interest_application_freq"
 												id="interest_application_freq">
-
 											<div class="col-sm-1"></div>
 											<label class="col-sm-2 d-flex align-items-center"
 												style="font-size: 15px; font-weight: 500;">Interest
@@ -8958,7 +8939,6 @@ function updateDocumentCode(row) {
 												name="interest_application_place"
 												id="interest_application_place">
 										</div>
-
 										<div class="form-row mt-1">
 											<div class="col-sm-1"></div>
 											<label class="col-sm-2 d-flex align-items-center"
@@ -8966,28 +8946,18 @@ function updateDocumentCode(row) {
 												Account </label> <input type="text"
 												class="col-sm-2 d-flex align-items-center"
 												name="plplaceholder" id="plplaceholder">
-
 											<div class="col-sm-1"></div>
 											<label class="col-sm-2 d-flex align-items-center"
 												style="font-size: 15px; font-weight: 500;">Overdue
 												GLSH </label> <input type="text"
 												class="col-sm-2 d-flex align-items-center"
 												name="overdue_glsh" id="overdue_glsh">
-
-
 											<div class="col-sm-2" id="glshdesc" style="margin-top: 10px"></div>
-
 										</div>
 									</div>
-
-
-
-
-
 								</form>
 							</div>
 
-							<!-- -------------------------------------------------------------------------------------------------------------------------- -->
 							<div class="card-footer text-center"
 								style="background-color: #f48c30">
 								<button class="btn btn-primary p-2" onclick="Home();">Home</button>
@@ -9923,11 +9893,8 @@ function updateDocumentCode(row) {
 						</div>
 					</div>
 				</div>
-
-				<!-- -------------------------------------------------------------------------------------------------------- -->
-
-				<!-- ----------------------------------------------------------------------------------------- -->
-				<!-- end modify -->
+<!------------------------------------------------------modifydatas end -------------------------------------------------------------------------->
+				
 				<!-- click to with -->
 
 				<div th:if="${formmode}=='with'">

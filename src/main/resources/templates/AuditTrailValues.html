@@ -437,8 +437,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 							<td th:text="${auditdata.audit_table}"></td>
 							<td th:text="${auditdata.func_code}"></td>
 							<td th:text="${auditdata.entry_user}"></td>
-							<td
-								th:text="${#dates.format(auditdata.entry_time, 'dd-MM-yyyy')}"></td>
+							<td th:text="${#dates.format(auditdata.entry_time, 'dd-MM-yyyy hh:mm a')}"></td>
 							<td th:text="${auditdata.auth_user}"></td>
 							<td th:text="${#dates.format(auditdata.auth_time, 'dd-MM-yyyy')}"></td>
 							<td th:text="${auditdata.modi_details}"></td>

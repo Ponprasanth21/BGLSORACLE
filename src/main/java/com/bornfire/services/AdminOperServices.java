@@ -58,8 +58,8 @@ public class AdminOperServices {
 		return chart_Acc_Rep.getaedit(acct_num);
 	}
 	
-	public String addGeneralLedger(GeneralLedgerEntity getGeneralLedger, String formmode , String GL_CODE ,
-			 String glsh_code ,String userid ) {
+	public String addGeneralLedger(GeneralLedgerEntity getGeneralLedger, String formmode ,String glsh_code ,
+			String GL_CODE ,String userid ) {
 
 		String msg = "";
 		 BGLSBusinessTable_Entity audit = new BGLSBusinessTable_Entity();
@@ -102,23 +102,29 @@ public class AdminOperServices {
 			audit.setField_name("-");
 			
 			bGLSBusinessTable_Rep.save(audit);
-
 		}
-		else if (formmode.equals("edit")) {
-			System.out.println("the getting  gl code is " + GL_CODE);
-			System.out.println("the getting glsh code is " + glsh_code);
+		else if ("edit".equalsIgnoreCase(formmode)) {
+			System.out.println("the service getting  gl code is " + GL_CODE);
+			System.out.println("the service getting  glsh code is " + glsh_code);
 			
-			GeneralLedgerEntity up = generalLedgerRep.getsinglevaluedata(GL_CODE,glsh_code);
-			if (Objects.nonNull(up)) {
-				up.setGlCode(getGeneralLedger.getGlCode());
-				up.setGlDescription(getGeneralLedger.getGlDescription());
-				up.setModifyFlg("Y");
-				up.setDelFlg("N");
-				generalLedgerRep.save(up);
-				msg = "Modify Successfully";
-			} else {
-				msg = "Data Not Found";
-			}
+			// Fetch existing entity based on GL_CODE and glsh_code
+	        GeneralLedgerEntity existingEntity = generalLedgerRep.getsinglevaluedata(GL_CODE, glsh_code);
+
+	        if (Objects.nonNull(existingEntity)) {
+	            // Update the existing entity with new values
+	            existingEntity.setGlCode(getGeneralLedger.getGlCode());
+	            existingEntity.setGlDescription(getGeneralLedger.getGlDescription());
+	            existingEntity.setModifyFlg("Y");
+	            existingEntity.setDelFlg("N");
+
+	            // Save the updated entity
+	            generalLedgerRep.save(existingEntity);
+
+	            msg = "Modify Successfully";
+	        } else {
+	            msg = "Data Not Found";
+	        }
+
 			return msg;
 		}
 		else if (formmode.equals("delete")) {

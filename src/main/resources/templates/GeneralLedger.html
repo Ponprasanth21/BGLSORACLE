@@ -255,30 +255,28 @@ tr td:first-child:before {
 	};
 
 	function modifyUserData() {
-		var glCode = document.getElementById("glCode").value;
-		var glshCode = document.getElementById("glsh_code").value;
+	    var glCode = document.getElementById("glCode").value;
+	    var glshCode = document.getElementById("glsh_code1").value;
 
-		alert(glCode);
-		alert(glshCode);
+	    alert(glCode);
+	    alert(glshCode);
 
-		if ($("#BamGeneralLedger").valid()) {
-			// Append both `glCode` and `glsh_code` to the URL
-			var url = "./GeneralLedgerAdd?formmode=edit&glcode="
-					+ encodeURIComponent(glCode) + "&glsh_code="
-					+ encodeURIComponent(glshCode);
-			$("#BamGeneralLedger").attr('action', url);
+	    if ($("#BamGeneralLedger").valid()) {
+	        // Append both `glCode` and `glsh_code` to the URL
+	        var url = "./GeneralLedgerAdd?formmode=edit&glcode=" + encodeURIComponent(glCode);
+	        $("#BamGeneralLedger").attr('action', url);
 
-			var options = {
-				success : showResponse
-			};
+	        var options = {
+	            success: showResponse
+	        };
 
-			$("#BamGeneralLedger").ajaxSubmit(options);
+	        $("#BamGeneralLedger").ajaxSubmit(options);
 
-			function showResponse(responseText, statusText, xhr, $form) {
-				$("#alertmsg").text(responseText);
-				$('#alert').modal("toggle");
-			}
-		}
+	        function showResponse(responseText, statusText, xhr, $form) {
+	            $("#alertmsg").text(responseText);
+	            $('#alert').modal("toggle");
+	        }
+	    }
 	}
 
 	function deleteUserData() {
@@ -959,7 +957,7 @@ tr td:first-child:before {
 												class="form-control form-control-sm bg-white border border-dark"
 												autocomplete="off" readonly
 												style="background-color: #f9fff6;" /> <input type="text"
-												id="glsh_code" th:if="${formmode}=='edit'"
+												id="glsh_code1" th:if="${formmode}=='edit'"
 												th:value="${GeneralLedger?.glsh_code}" name="glsh_code"
 												class="form-control form-control-sm bg-white border border-dark"
 												autocomplete="off" required readonly
@@ -1850,7 +1848,7 @@ tr td:first-child:before {
 				<div class="modal-body" style="text-align: center;">
 					<h6 id="alertmsg"></h6>
 					<button type="button" class="btn btn-primary"
-						onclick="$('#alert').modal('hide')">Close</button>
+						onclick="back(this)">Close</button>
 				</div>
 			</div>
 		</div>
