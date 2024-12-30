@@ -405,20 +405,16 @@ $(function() {
 						<tbody>
 							<tr th:each="auditdata : ${AuditList}" class="userlist">
 								<!-- <td th:text="${auditdata?.audit_ref_no}"></td> -->
-
 								<td
 									th:text="${#dates.format(auditdata.audit_date, 'dd/MM/yyyy')}"></td>
 								<td th:text="${auditdata.audit_table}"></td>
 								<td th:text="${auditdata.func_code}"></td>
 								<td th:text="${auditdata.entry_user}"></td>
-								<td
-									th:text="${#dates.format(auditdata.entry_time, 'dd-MM-yyyy')}"></td>
+								<td th:text="${#dates.format(auditdata.entry_time, 'dd-MM-yyyy hh:mm a')}"></td>
 								<td th:text="${auditdata?.auth_user}"></td>
 								<td>
     <p th:each="message : ${auditdata?.fieldName}" th:text="${#strings.isEmpty(message) ? '-' : message}"></p>
                                </td>
-
-
 						<td>
 							<p th:each="message:${auditdata?.oldvalue}" th:text="${message}"></p>
 						</td>

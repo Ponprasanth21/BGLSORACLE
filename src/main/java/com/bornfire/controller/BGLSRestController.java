@@ -1197,11 +1197,14 @@ public class BGLSRestController {
 	@RequestMapping(value = "GeneralLedgerAdd", method = RequestMethod.POST)
 	@ResponseBody
 	public String GeneralLedgerAdd(@RequestParam("formmode") String formmode,
-			@RequestParam(required = false) String glcode,
-			@RequestParam(required = false) String glsh_code,@ModelAttribute GeneralLedgerEntity generalLedgerEntity,
+			@RequestParam(required = false) String glcode,@ModelAttribute GeneralLedgerEntity generalLedgerEntity,
 			Model md, HttpServletRequest rq) {
 		String userid = (String) rq.getSession().getAttribute("USERID");
-		System.out.println("the glcode is here "+glcode);
+		
+		String glsh_code = generalLedgerEntity.getGlsh_code();
+		
+		System.out.println("the controller glcode is here "+glcode);
+		System.out.println("the controller glshcode is here "+glsh_code);
 		String msg = adminOperServices.addGeneralLedger(generalLedgerEntity, formmode,glsh_code, glcode, userid);
 		return msg;
 	}
