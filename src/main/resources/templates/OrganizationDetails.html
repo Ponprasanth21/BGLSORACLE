@@ -24,6 +24,9 @@
 <link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon">
 <link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
 
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/color_document.css}">
+
 <script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
 	th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
 <script src="/webjars/popper.js/1.14.7/umd/popper.min.js"
@@ -102,7 +105,7 @@ body {
 }
 
 .tablinks.active {
-	background-color: #2084a9;
+	background-color: #f5a142;
 	color: white;
 }
 
@@ -624,25 +627,23 @@ input:hover+.password-info {
 				<!-- ------------------------------------Organization Main---------------------------------- -->
 				<div th:if="${formmode}=='add'">
 					<div class="card ">
-						<div class="card-header"
-							style="background-color: #f5a142; height: 50px">
+						<div class="card-header">
 							<div class="float-left">
-								<h6 style="font-size: 1.2rem; color: white;">ORGANIZATION
-									DETAILS</h6>
+								<h4>ORGANIZATION DETAILS</h4>
 							</div>
 						</div>
 						<div class="tab mt-2"
-							style="background-color: #f5a142; padding: 4px 4px;position: relative; display: flex; justify-content: space-around; margin-top: 10px; width: 100%; height: 43px">
+							style="background-color: #f5a142; padding: 4px 4px; position: relative; display: flex; justify-content: space-around; margin-top: 10px; width: 100%; height: 43px">
 							<button class="tablinks" onclick="openTab(event, 'tab1')"
-								style="font-size: 16px; padding: 4px 8px; height: 32px;color:white;">Head
+								style="font-size: 16px; padding: 4px 8px; height: 32px; color: white;">Head
 								Office</button>
 							<button class="tablinks" onclick="openTab(event, 'tab2')"
-								style="font-size: 16px; padding: 4px 8px; height: 32px;color:white;">Branches</button>
+								style="font-size: 16px; padding: 4px 8px; height: 32px; color: white;">Branches</button>
 							<button class="tablinks" onclick="openTab(event, 'tabCalendar')"
-								style="font-size: 16px; padding: 4px 8px; height: 32px;color:white;">Calendar
+								style="font-size: 16px; padding: 4px 8px; height: 32px; color: white;">Calendar
 								Maintenance</button>
 							<button class="tablinks" onclick="openTab(event, 'tab3')"
-								style="font-size: 16px; padding: 4px 8px; height: 32px;color:white;">Exceptions</button>
+								style="font-size: 16px; padding: 4px 8px; height: 32px; color: white;">Exceptions</button>
 						</div>
 
 						<div id="tab1" class="tabcontent" style="display: block">
@@ -830,49 +831,28 @@ input:hover+.password-info {
 								</form>
 
 							</div>
-							<div class="card-footer text-center"
-								style="background-color: #f5a142;">
-								<button class="btn btn-primary p-2"
-									style="background-color: #f5a142; border: none; color: white; font-size: 17px;"
-									onmouseover="this.style.color='gray'"
-									onmouseout="this.style.color='white'" onclick="Home();">Homes</button>
-								<button class="btn btn-primary p-2"
-									style="background-color: #f5a142; border: none; color: white; font-size: 17px;"
-									onmouseover="this.style.color='gray'"
-									onmouseout="this.style.color='white'" onclick="Modify();">Modify</button>
-								<button class="btn btn-primary p-2"
-									style="background-color: #f5a142; border: none; color: white; font-size: 17px;"
-									onmouseover="this.style.color='gray'"
-									onmouseout="this.style.color='white'" onclick="Back();">Back</button>
+							<div class="card-footer text-center">
+								<button class="custom-btn" onclick="Home();">Home</button>
+								<button class="custom-btn" onclick="Modify();">Modify</button>
+								<button class="custom-btn" onclick="Back();">Back</button>
 							</div>
 						</div>
 
 						<div id="tab2" class="tabcontent" style="display: none">
-
 							<div class="card-body">
-								<div class="card-header "
-									style="background-color: #f5a142; HEIGHT: 50px">
-
+								<div class="card-header">
 									<div class="float-left">
-										<h6 style="font-size: 1.2rem; color: black;">LIST OF
-											BRANCHES</h6>
+										<h4>LIST OF BRANCHES</h4>
 									</div>
-
 									<div class="float-right">
-										<button class="btn btn-primary P-2" onclick="AddBranch();">Add</button>
-
-
-
-
-
+										<button class="custom-btn" onclick="AddBranch();">Add</button>
 									</div>
-
 								</div>
 
 								<table class="table table-bordered  table-hover table-sm"
 									style="margin-bottom: 0px; font-size: initial;"
 									id="AssosiateTable">
-									<thead class="thead-light">
+									<thead class="table-header">
 
 										<tr>
 											<th>Srl No</th>
@@ -887,7 +867,6 @@ input:hover+.password-info {
 									<tbody id="placelist">
 
 										<tr th:each="EmployeeData,iterator : ${OrgBranch}">
-
 											<td th:text="${iterator.index +1}"></td>
 											<td th:text="${EmployeeData.branch_code}"></td>
 											<td th:text="${EmployeeData.branch_name}"
@@ -909,27 +888,42 @@ input:hover+.password-info {
 								</table>
 
 
-								<div class="card-footer text-center"
-									style="background-color: #f5a142;">
-
-
-									<button class="btn btn-primary P-2" onclick="Home();">Home</button>
-									<button class="btn btn-primary P-2" onclick="Back();">Back</button>
-
+								<div class="card-footer text-center">
+									<button class="custom-btn" onclick="Home();">Home</button>
+									<button class="custom-btn" onclick="Back();">Back</button>
 								</div>
 							</div>
 						</div>
+
+						<div id="tab3" class="tabcontent" style="display: none">
+						<div class="card-header">
+									<div class="float-left">
+										<h4>EXCEPTIONS</h4>
+									</div>
+								</div>
+							<div class="card-body">
+								
+
+								
+							</div>
+							<div class="card-footer text-center">
+									<button class="custom-btn" onclick="Home();">Home</button>
+									<button class="custom-btn" onclick="Back();">Back</button>
+								</div>
+						</div>
+
 						<div id="tabCalendar" class="tabcontent" style="display: none;">
 							<div class="tab mt-2"
-								style="padding: 4px 4px; position: relative; display: flex; justify-content: space-around; margin-top: 10px; width: 100%; height: 43px">
+								style="padding: 4px 4px; position: relative; display: flex; justify-content: space-around;
+								 background-color: #f5a142;color:white; margin-top: 10px; width: 100%; height: 43px">
 								<!-- Submodule Tab buttons for Calendar Maintenance -->
 								<button class="subtablinks"
 									onclick="openSubTab(event, 'tabCalendarMaster')"
-									style="font-size: 16px; padding: 4px 8px; height: 32px;">Calendar
+									style="font-size: 16px; padding: 4px 8px; height: 32px;color:white;">Calendar
 									Master</button>
 								<button class="subtablinks"
 									onclick="openSubTab(event, 'tabHolidayMaster')"
-									style="font-size: 16px; padding: 4px 8px; height: 32px;">Holiday
+									style="font-size: 16px; padding: 4px 8px; height: 32px;color:white;">Holiday
 									Master</button>
 							</div>
 
@@ -1003,11 +997,10 @@ input:hover+.password-info {
 										</div>
 									</form>
 								</div>
-								<div class="card-footer text-center "
-									style="background-color: #f48c30;">
-									<button class="btn btn-primary p-2" onclick="Home();">Home</button>
-									<button class="btn btn-primary p-2" onclick="Modify();">Modify</button>
-									<button class="btn btn-primary p-2" onclick="Back();">Back</button>
+								<div class="card-footer text-center">
+									<button class="custom-btn" onclick="Home();">Home</button>
+									<button class="custom-btn" onclick="Modify();">Modify</button>
+									<button class="custom-btn" onclick="Back();">Back</button>
 								</div>
 							</div>
 
@@ -1101,17 +1094,13 @@ input:hover+.password-info {
 									</form>
 
 								</div>
-								<div class="card-footer text-center "
-									style="background-color: #f48c30">
-
-
-									<button class="btn btn-primary p-2" onclick="Home();">Home</button>
-									<button class="btn btn-primary p-2" onclick="addHoliday()">Add</button>
-									<button class="btn btn-primary p-2" onclick="UploadHoliday()">Upload</button>
-									<button class="btn btn-primary p-2" onclick="ModifyHoliday();">Modify</button>
-									<button class="btn btn-primary p-2" onclick="ListHoliday()">List</button>
-									<button class="btn btn-primary p-2" onclick="Back();">Back</button>
-
+								<div class="card-footer text-center ">
+									<button class="custom-btn" onclick="Home();">Home</button>
+									<button class="custom-btn" onclick="addHoliday()">Add</button>
+									<button class="custom-btn" onclick="UploadHoliday()">Upload</button>
+									<button class="custom-btn" onclick="ModifyHoliday();">Modify</button>
+									<button class="custom-btn" onclick="ListHoliday()">List</button>
+									<button class="custom-btn" onclick="Back();">Back</button>
 								</div>
 							</div>
 						</div>
@@ -1120,11 +1109,9 @@ input:hover+.password-info {
 				<!-- ---------------------------------------------------------------------------------------------------------------- -->
 				<div th:if="${formmode} =='addholiday'">
 					<div class="card">
-						<div class="card-header"
-							style="background-color: #f5a142; height: 50px">
+						<div class="card-header">
 							<div class="float-left">
-								<h6 style="font-size: 1.2rem; color: black;">Holiday
-									Master-Add</h6>
+								<h4>Holiday Master-Add</h4>
 							</div>
 
 						</div>
@@ -1218,16 +1205,10 @@ input:hover+.password-info {
 							</form>
 
 						</div>
-						<div class="card-footer text-center "
-							style="background-color: #f5a142">
-
-
-							<button class="btn btn-primary p-2" onclick="Home();">Home</button>
-							<button class="btn btn-primary p-2" id="submitBtn"
-								onclick="AddSubmit();">Submit</button>
-
-							<button class="btn btn-primary p-2" onclick="Back();">Back</button>
-
+						<div class="card-footer text-center ">
+							<button class="custom-btn" onclick="Home();">Home</button>
+							<button class="custom-btn" id="submitBtn" onclick="AddSubmit();">Submit</button>
+							<button class="custom-btn" onclick="Back();">Back</button>
 						</div>
 					</div>
 				</div>
@@ -1235,7 +1216,7 @@ input:hover+.password-info {
 					<form action="#" method="post" autocomplete="off"
 						style="width: 100%">
 						<div class="card">
-							<div class="card-header" style="background-color: #BBC3CB;">
+							<div class="card-header">
 								<div class="float-right"></div>
 								<h4>HOLIDAY MASTER - FILE UPLOAD</h4>
 							</div>
@@ -1265,15 +1246,12 @@ input:hover+.password-info {
 
 								</div>
 							</div>
-							<div class="card-footer text-center"
-								style="background-color: #BBC3CB;">
-								<button type="button" class="btn btn-primary" id="btnHome"
+							<div class="card-footer text-center">
+								<button type="button" class="custom-btn" id="btnHome"
 									onclick="home();">Home</button>
-
-								<button type="button" class="btn btn-primary" id="nav"
+								<button type="button" class="custom-btn" id="nav"
 									onclick="submitexcelgst(this)">Upload</button>
-
-								<button type="button" class="btn btn-primary" id="btnBack"
+								<button type="button" class="custom-btn" id="btnBack"
 									onclick="back();">Back</button>
 							</div>
 						</div>
@@ -1282,28 +1260,20 @@ input:hover+.password-info {
 
 				<div th:if="${formmode} =='ModifyHoliday'">
 					<div class="card">
-						<div class="card-header"
-							style="background-color: #f5a142; height: 50px">
+						<div class="card-header">
 							<div class="float-left">
-								<h6 style="font-size: 1.2rem; color: black;">Holiday
-									Master-Modify</h6>
+								<h4>Holiday Master-Modify</h4>
 							</div>
-
 						</div>
-
-
 						<div class="card-body">
 							<form class=" border border-secondary" action="#" method="post"
 								id="tab1modify" autocomplete="off">
 								<div class="row formline" style="padding: 10px 0px 2px 0px;">
-
-
 									<div class="col-sm-1"></div>
 									<div class="col-sm-2">Organization</div>
 									<div class="col-sm-2">
 										<input type="text" name="" id="" readonly
 											class="form-control form-control-sm bg-white border border-dark" />
-
 									</div>
 									<div class="col-sm-1"></div>
 									<div class="col-sm-2">Location</div>
@@ -1379,19 +1349,12 @@ input:hover+.password-info {
 							</form>
 
 						</div>
-						<div class="card-footer text-center "
-							style="background-color: #f5a142">
-
-
-							<button class="btn btn-primary p-2" onclick="Home();">Home</button>
-							<button class="btn btn-primary p-2" id="submitBtn"
+						<div class="card-footer text-center ">
+							<button class="custom-btn" onclick="Home();">Home</button>
+							<button class="custom-btn" id="submitBtn"
 								onclick="ModifyTab1Submit();">Submit</button>
-
-							<button class="btn btn-primary p-2" onclick="Back();">Back</button>
-
+							<button class="custom-btn" onclick="Back();">Back</button>
 						</div>
-
-
 					</div>
 				</div>
 
@@ -1399,22 +1362,17 @@ input:hover+.password-info {
 				<div th:if="${formmode}=='listholiday'">
 					<div class="panel panel-primary filterable">
 						<div class="card w-100 border panel panel-primary filterable">
-							<div class="card-header"
-								style="background-color: #f5a142; height: 70px">
+							<div class="card-header">
 								<div class="float-left">
-									<h6 style="font-size: 1.2rem; color: black;">HOLIDAY
-										MASTER - LIST</h6>
+									<h4>HOLIDAY MASTER - LIST</h4>
 								</div>
-
 							</div>
-
 							<div class="card-body">
 								<div class="table-responsive">
 									<table class="table table-bordered  table-hover table-sm"
 										style="margin-bottom: 0px; font-size: initial;"
 										id="AssosiateTable">
-										<thead class="thead-light">
-
+										<thead class="table-header">
 											<tr>
 												<th>Srl No</th>
 												<th>Year</th>
@@ -1438,25 +1396,18 @@ input:hover+.password-info {
 													th:text="${#dates.format(chartacc?.record_date, 'dd-MM-yyyy')}"></td>
 												<td th:text="${#dates.format(chartacc?.record_date, 'dd')}"></td>
 												<td th:text="${chartacc?.holiday_desc}"></td>
-
 												<td th:text="${chartacc?.holiday_remarks}"></td>
-
-
-
 											</tr>
 										</tbody>
-
-
 									</table>
 								</div>
 							</div>
 
-							<div class="card-footer text-center"
-								style="background-color: #f5a142">
-								<button class="btn btn-primary p-2" onclick="Home();">Home</button>
-								<button class="btn btn-primary p-2" id="submitBtn"
+							<div class="card-footer text-center">
+								<button class="custom-btn" onclick="Home();">Home</button>
+								<button class="custom-btn" id="submitBtn"
 									onclick="getCheckedValues()">Submit</button>
-								<button class="btn btn-primary p-2" onclick="Back();">Back</button>
+								<button class="custom-btn" onclick="Back();">Back</button>
 							</div>
 						</div>
 					</div>
@@ -1465,14 +1416,10 @@ input:hover+.password-info {
 
 				<div th:if="${formmode}=='viewrecord'">
 					<div class="card ">
-
-						<div class="card-header"
-							style="background-color: #f5a142; height: 50px">
+						<div class="card-header">
 							<div class="float-left">
-								<h6 style="font-size: 1.2rem; color: black;">Holiday
-									Master-View</h6>
+								<h4>Holiday Master-View</h4>
 							</div>
-
 						</div>
 						<div class="card-body">
 							<form class=" border border-secondary" action="#" method="post"
@@ -1574,16 +1521,10 @@ input:hover+.password-info {
 							</form>
 
 						</div>
-						<div class="card-footer text-center "
-							style="background-color: #f5a142">
-
-
-							<button class="btn btn-primary p-2" onclick="Home();">Home</button>
-
-							<button class="btn btn-primary p-2" onclick="Back();">Back</button>
-
+						<div class="card-footer text-center ">
+							<button class="custom-btn" onclick="Home();">Home</button>
+							<button class="custom-btn" onclick="Back();">Back</button>
 						</div>
-
 					</div>
 
 
@@ -1591,15 +1532,11 @@ input:hover+.password-info {
 				<!-- ------------------------------------Organization Modify---------------------------------- -->
 				<div th:if="${formmode}=='view'">
 					<div class="card ">
-
-						<div class="card-header"
-							style="background-color: #f5a142; height: 50px">
+						<div class="card-header">
 							<div class="float-left">
-								<h6 style="font-size: 1.2rem; color: black;">BRANCH - VIEW</h6>
+								<h4>BRANCH - VIEW</h4>
 							</div>
-
 						</div>
-
 						<div class="card-body">
 							<form class=" border border-secondary" action="#" method="post"
 								id="" autocomplete="off">
@@ -1820,37 +1757,23 @@ input:hover+.password-info {
 											class="form-control form-control-sm bg-white border border-dark" />
 									</div>
 								</div>
-
-
 							</form>
-
 						</div>
-						<div class="card-footer text-center "
-							style="background-color: #f5a142">
-
-
-							<button class="btn btn-primary p-2" onclick="Home();">Home</button>
-
-							<button class="btn btn-primary p-2" onclick="Back();">Back</button>
-
+						<div class="card-footer text-center">
+							<button class="custom-btn" onclick="Home();">Home</button>
+							<button class="custom-btn" onclick="Back();">Back</button>
 						</div>
-
 					</div>
 
 
 				</div>
 				<div th:if="${formmode}=='DeleteBranch'">
 					<div class="card ">
-
-						<div class="card-header"
-							style="background-color: #f5a142; height: 50px">
+						<div class="card-header">
 							<div class="float-left">
-								<h6 style="font-size: 1.2rem; color: black;">BRANCH -
-									DELETE</h6>
+								<h4>BRANCH - DELETE</h4>
 							</div>
-
 						</div>
-
 						<div class="card-body">
 							<form class=" border border-secondary" action="#" method="post"
 								id="tab2Del" autocomplete="off">
@@ -2076,14 +1999,10 @@ input:hover+.password-info {
 							</form>
 
 						</div>
-						<div class="card-footer text-center "
-							style="background-color: #f5a142">
-
-
-							<button class="btn btn-primary p-2" onclick="Home();">Home</button>
-							<button class="btn btn-primary p-2" onclick="del_bran();">Submit</button>
-							<button class="btn btn-primary p-2" onclick="Back();">Back</button>
-
+						<div class="card-footer text-center">
+							<button class="custom-btn" onclick="Home();">Home</button>
+							<button class="custom-btn" onclick="del_bran();">Submit</button>
+							<button class="custom-btn" onclick="Back();">Back</button>
 						</div>
 
 					</div>
@@ -2092,16 +2011,11 @@ input:hover+.password-info {
 				</div>
 				<div th:if="${formmode}=='modify'">
 					<div class="card ">
-
-						<div class="card-header"
-							style="background-color: #f5a142; height: 50px">
+						<div class="card-header">
 							<div class="float-left">
-								<h6 style="font-size: 1.2rem; color: black;">BRANCH -
-									MODIFY</h6>
+								<h4>BRANCH - MODIFY</h4>
 							</div>
-
 						</div>
-
 
 						<div class="card-body">
 							<form class=" border border-secondary" action="#" method="post"
@@ -2329,18 +2243,12 @@ input:hover+.password-info {
 							</form>
 
 						</div>
-						<div class="card-footer text-center "
-							style="background-color: #f5a142">
-
-
-							<button class="btn btn-primary p-2" onclick="Home();">Home</button>
-							<button class="btn btn-primary p-2" id="submitBtn"
+						<div class="card-footer text-center ">
+							<button class="custom-btn" onclick="Home();">Home</button>
+							<button class="custom-btn" id="submitBtn"
 								onclick="ModifyTab2Submit();">Submit</button>
-
-							<button class="btn btn-primary p-2" onclick="Back();">Back</button>
-
+							<button class="custom-btn" onclick="Back();">Back</button>
 						</div>
-
 					</div>
 
 
@@ -2348,16 +2256,11 @@ input:hover+.password-info {
 
 				<div th:if="${formmode} =='ModifyHead'">
 					<div class="card">
-						<div class="card-header"
-							style="background-color: #f48c30; height: 50px">
+						<div class="card-header">
 							<div class="float-left">
-								<h6 style="font-size: 1.2rem; color: black;">HEAD OFFICE -
-									MODIFY</h6>
+								<h4>HEAD OFFICE - MODIFY</h4>
 							</div>
-
 						</div>
-
-
 						<div class="card-body">
 							<form class=" border border-secondary" action="#" method="post"
 								id="tab1modify" autocomplete="off">
@@ -2543,30 +2446,21 @@ input:hover+.password-info {
 							</form>
 
 						</div>
-						<div class="card-footer text-center "
-							style="background-color: #f48c30">
-
-
-							<button class="btn btn-primary p-2" onclick="Home();">Home</button>
-							<button class="btn btn-primary p-2" id="submitBtn"
+						<div class="card-footer text-center ">
+							<button class="custom-btn" onclick="Home();">Home</button>
+							<button class="custom-btn" id="submitBtn"
 								onclick="ModifyTab1Submit();">Submit</button>
-
-							<button class="btn btn-primary p-2" onclick="Back();">Back</button>
-
+							<button class="custom-btn" onclick="Back();">Back</button>
 						</div>
-
-
 					</div>
 				</div>
 
 				<div th:if="${formmode} =='AddBranch'">
 					<div class="card">
-						<div class="card-header"
-							style="background-color: #f5a142; height: 50px">
+						<div class="card-header">
 							<div class="float-left">
-								<h6 style="font-size: 1.2rem; color: black;">BRANCH - ADD</h6>
+								<h4>BRANCH - ADD</h4>
 							</div>
-
 						</div>
 
 						<div class="card-body">
@@ -2797,27 +2691,14 @@ input:hover+.password-info {
 							</form>
 
 						</div>
-						<div class="card-footer text-center "
-							style="background-color: #f5a142">
-
-
-							<button class="btn btn-primary p-2" onclick="Home();">Home</button>
-							<button class="btn btn-primary p-2" id="submitBtn"
-								onclick="AddSubmit();">Submit</button>
-
-							<button class="btn btn-primary p-2" onclick="Back();">Back</button>
-
+						<div class="card-footer text-center">
+							<button class="custom-btn" onclick="Home();">Home</button>
+							<button class="custom-btn" id="submitBtn" onclick="AddSubmit();">Submit</button>
+							<button class="custom-btn" onclick="Back();">Back</button>
 						</div>
 					</div>
 				</div>
-
-
-
-
 			</div>
-
-
-
 		</div>
 	</div>
 

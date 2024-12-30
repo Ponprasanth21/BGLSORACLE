@@ -20,6 +20,9 @@
 <link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon">
 <link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
 
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/color_document.css}">
+
 <script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
 	th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
 <script class="jsbin"
@@ -153,42 +156,42 @@
 	opacity: 0;
 	transition: opacity 0.3s;
 }
+
 .file-upload-input {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0; /* Hide the file input */
-    cursor: pointer;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0; /* Hide the file input */
+	cursor: pointer;
 }
 
-
-
 #file-name {
-    font-size: 14px;
-    color: #555;
+	font-size: 14px;
+	color: #555;
 }
 
 .file-upload-label {
-    display: inline-block;
-    padding: 5px 10px;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-    border-radius: 3px;
-    text-align: center;
+	display: inline-block;
+	padding: 5px 10px;
+	background-color: #007bff;
+	color: white;
+	cursor: pointer;
+	border-radius: 3px;
+	text-align: center;
 }
+
 input:hover+.password-info {
 	visibility: visible;
 	opacity: 0.8;
 }
 
 .table-bordered th {
-    font-size: medium;
+	font-size: medium;
 }
 
-.table-bordered td{
+.table-bordered td {
 	font-size: smaller;
 }
 </style>
@@ -235,140 +238,144 @@ input:hover+.password-info {
 		location.href = './employeeProfile?formmode=modify&employee_id='
 				+ employee_id;
 	}
-	
+
 	function modifySubmit(event) {
-	    // Prevent the default form submission behavior
-	  
+		// Prevent the default form submission behavior
 
-	    const employeeId = document.getElementById("employee_id").value.trim();
+		const employeeId = document.getElementById("employee_id").value.trim();
 
-	    // Check if the Employee ID is provided
-	    if (employeeId === "") {
-	        $("#alertmsg1").text("Please fill out the Employee Id field.");
-	        $('#alert1').modal("show");
-	        return; // Stop further execution if employeeId is empty
-	    }
+		// Check if the Employee ID is provided
+		if (employeeId === "") {
+			$("#alertmsg1").text("Please fill out the Employee Id field.");
+			$('#alert1').modal("show");
+			return; // Stop further execution if employeeId is empty
+		}
 
-	    // First AJAX call to modify the employee data
-	    $.ajax({
-	        url: './employeeModify',
-	        data: $("#employeeForm2").serialize(),
-	        type: 'POST',
-	        success: function(data) {
-	            $("#alertmsg").text(data);
-	            $('#alert').modal('show');
+		// First AJAX call to modify the employee data
+		$.ajax({
+			url : './employeeModify',
+			data : $("#employeeForm2").serialize(),
+			type : 'POST',
+			success : function(data) {
+				$("#alertmsg").text(data);
+				$('#alert').modal('show');
 
-	            // Proceed with the second AJAX call to upload the photo if the first one succeeds
-	            var photoInput = $("#employeeForm2").find("input[name='employee_Photo']");
-	            var photoFile = photoInput[0].files[0]; // Get the selected photo file
+				// Proceed with the second AJAX call to upload the photo if the first one succeeds
+				var photoInput = $("#employeeForm2").find(
+						"input[name='employee_Photo']");
+				var photoFile = photoInput[0].files[0]; // Get the selected photo file
 
-	            if (!photoFile) {
-	                // Alert if no file is selected
-	                $("#alertmsg").text("Please select a photo file.");
-	                $('#alert').modal("show");
-	                return; // Stop further execution if no file is selected
-	            }
+				if (!photoFile) {
+					// Alert if no file is selected
+					$("#alertmsg").text("Please select a photo file.");
+					$('#alert').modal("show");
+					return; // Stop further execution if no file is selected
+				}
 
-	            // Create FormData for the photo upload
-	            var formData = new FormData();
-	            formData.append("photoFile", photoFile);
-	            formData.append("employeeId", employeeId);
+				// Create FormData for the photo upload
+				var formData = new FormData();
+				formData.append("photoFile", photoFile);
+				formData.append("employeeId", employeeId);
 
-	            // Second AJAX call to upload the photo
-	            $.ajax({
-	                url: './employeeAdd1',
-	                data: formData,
-	                type: 'POST',
-	                processData: false, // Prevent jQuery from converting the FormData object
-	                contentType: false, // Prevent jQuery from setting content type
-	                success: function(photoResponse) {
-	                    // Display a success message for the photo upload
-	                    $("#alertmsg").text("Photo upload completed: " + photoResponse);
-	                    $('#alert').modal("show");
-	                },
-	                error: function(xhr, status, error) {
-	                    // Handle errors during photo upload
-	                    var detailedError = xhr.responseText || error;
-	                    $("#alertmsg").text("An error occurred during photo upload: " + detailedError);
-	                    $('#alert').modal("show");
-	                }
-	            });
-	        },
-	        error: function(xhr, status, error) {
-	            // Handle errors during employee modification
-	            var detailedError = xhr.responseText || error;
-	            $("#alertmsg").text("An error occurred: " + detailedError);
-	            $('#alert').modal("show");
-	        }
-	    });
+				// Second AJAX call to upload the photo
+				$.ajax({
+					url : './employeeAdd1',
+					data : formData,
+					type : 'POST',
+					processData : false, // Prevent jQuery from converting the FormData object
+					contentType : false, // Prevent jQuery from setting content type
+					success : function(photoResponse) {
+						// Display a success message for the photo upload
+						$("#alertmsg").text(
+								"Photo upload completed: " + photoResponse);
+						$('#alert').modal("show");
+					},
+					error : function(xhr, status, error) {
+						// Handle errors during photo upload
+						var detailedError = xhr.responseText || error;
+						$("#alertmsg").text(
+								"An error occurred during photo upload: "
+										+ detailedError);
+						$('#alert').modal("show");
+					}
+				});
+			},
+			error : function(xhr, status, error) {
+				// Handle errors during employee modification
+				var detailedError = xhr.responseText || error;
+				$("#alertmsg").text("An error occurred: " + detailedError);
+				$('#alert').modal("show");
+			}
+		});
 	}
 
 	function employeeSubmit(event) {
-	 // Prevent the default form submission
-//alert("hihihi")
-	    const employeeId = document.getElementById("employee_id1").value.trim();
+		// Prevent the default form submission
+		//alert("hihihi")
+		const employeeId = document.getElementById("employee_id1").value.trim();
 
-	    if (employeeId === "") {
-	        $("#alertmsg1").text("Please fill out the Employee Id field.");
-	        $('#alert1').modal("show");
-	        return; // Stop further execution if employeeId is empty
-	    }
+		if (employeeId === "") {
+			$("#alertmsg1").text("Please fill out the Employee Id field.");
+			$('#alert1').modal("show");
+			return; // Stop further execution if employeeId is empty
+		}
 
-	    // First AJAX call to submit employee details
-	    $.ajax({
-	        url: './employeeAdd',
-	        data: $("#employeeForm1").serialize(),
-	        type: 'POST',
-	        success: function(data) {
-	            $("#alertmsg").text(data);
-	            $('#alert').modal('show');
+		// First AJAX call to submit employee details
+		$.ajax({
+			url : './employeeAdd',
+			data : $("#employeeForm1").serialize(),
+			type : 'POST',
+			success : function(data) {
+				$("#alertmsg").text(data);
+				$('#alert').modal('show');
 
-	            // Proceed with the second AJAX call to upload the photo if the first one succeeds
-	            var photoInput = $("#employeeForm1").find("input[name='employee_Photo']");
-	            var photoFile = photoInput[0].files[0]; // Get the selected photo file
+				// Proceed with the second AJAX call to upload the photo if the first one succeeds
+				var photoInput = $("#employeeForm1").find(
+						"input[name='employee_Photo']");
+				var photoFile = photoInput[0].files[0]; // Get the selected photo file
 
-	            if (!photoFile) {
-	                $("#alertmsg").text("Please select a photo file.");
-	                $('#alert').modal("show");
-	                return; // Stop further execution if no file is selected
-	            }
+				if (!photoFile) {
+					$("#alertmsg").text("Please select a photo file.");
+					$('#alert').modal("show");
+					return; // Stop further execution if no file is selected
+				}
 
-	            // Create FormData for the photo upload
-	            var formData = new FormData();
-	            formData.append("photoFile", photoFile);
-	            formData.append("employeeId", employeeId);
+				// Create FormData for the photo upload
+				var formData = new FormData();
+				formData.append("photoFile", photoFile);
+				formData.append("employeeId", employeeId);
 
-	            // Second AJAX call to upload the photo
-	            $.ajax({
-	                url: './employeeAdd1',
-	                data: formData,
-	                type: 'POST',
-	                processData: false, // Prevent jQuery from converting the FormData object
-	                contentType: false, // Prevent jQuery from setting content type
-	                success: function(photoResponse) {
-	                    alert("Photo upload completed: " + photoResponse);
-	                },
-	                error: function(xhr, status, error) {
-	                    var detailedError = xhr.responseText || error;
-	                    $("#alertmsg").text("An error occurred during photo upload: " + detailedError);
-	                    $('#alert').modal("show");
-	                }
-	            });
-	        },
-	        error: function(xhr, status, error) {
-	            var detailedError = xhr.responseText || error;
-	            $("#alertmsg").text("An error occurred: " + detailedError);
-	            $('#alert').modal("show");
-	        }
-	    });
+				// Second AJAX call to upload the photo
+				$.ajax({
+					url : './employeeAdd1',
+					data : formData,
+					type : 'POST',
+					processData : false, // Prevent jQuery from converting the FormData object
+					contentType : false, // Prevent jQuery from setting content type
+					success : function(photoResponse) {
+						alert("Photo upload completed: " + photoResponse);
+					},
+					error : function(xhr, status, error) {
+						var detailedError = xhr.responseText || error;
+						$("#alertmsg").text(
+								"An error occurred during photo upload: "
+										+ detailedError);
+						$('#alert').modal("show");
+					}
+				});
+			},
+			error : function(xhr, status, error) {
+				var detailedError = xhr.responseText || error;
+				$("#alertmsg").text("An error occurred: " + detailedError);
+				$('#alert').modal("show");
+			}
+		});
 	}
 
-
-
 	function verifySubmit() {
-	//	alert("hihih")
+		//	alert("hihih")
 		var employeeId = document.getElementById("employee_id").value.trim();
-	//	alert(employeeId)
+		//	alert(employeeId)
 		$.ajax({
 			url : './employeeVerify',
 			data : $("#employeeForm").serialize(),
@@ -380,8 +387,6 @@ input:hover+.password-info {
 		});
 
 	}
-
-
 
 	function Delete(a) {
 		event.preventDefault();
@@ -467,18 +472,17 @@ input:hover+.password-info {
 </script>
 
 <script>
-function updateFileName() {
-    var fileInput = document.getElementById("employee_Photo");
-    var fileNameSpan = document.getElementById("file-name");
-    
-    // Check if a file is selected
-    if (fileInput.files && fileInput.files.length > 0) {
-        fileNameSpan.textContent = fileInput.files[0].name; // Display the selected file name
-    } else {
-        fileNameSpan.textContent = "Select The File"; // Default message if no file is selected
-    }
-}
+	function updateFileName() {
+		var fileInput = document.getElementById("employee_Photo");
+		var fileNameSpan = document.getElementById("file-name");
 
+		// Check if a file is selected
+		if (fileInput.files && fileInput.files.length > 0) {
+			fileNameSpan.textContent = fileInput.files[0].name; // Display the selected file name
+		} else {
+			fileNameSpan.textContent = "Select The File"; // Default message if no file is selected
+		}
+	}
 </script>
 </head>
 
@@ -497,19 +501,15 @@ function updateFileName() {
 				<div th:if="${formmode}=='list'">
 
 					<div class="card">
-						<div class="card-header "
-							style="background-color: #f5a142; height: 50px">
+						<div class="card-header ">
 
 							<div class="float-left">
-								<h6 style="font-size: 1.2rem; color: black;">EMPLOYEE
-									PROFILE - LIST</h6>
+								<h4>EMPLOYEE PROFILE - LIST</h4>
 							</div>
 
 							<div class="float-right">
-								<button class="btn btn-primary p-2" onclick="add();">Add</button>
-
+								<button class="custom-btn" onclick="add();">Add</button>
 							</div>
-
 						</div>
 
 						<div class="mt-3"
@@ -517,22 +517,18 @@ function updateFileName() {
 							<!-- Tab buttons -->
 							<button class="tablinks rounded-pill" id="userButton"
 								onclick="openUserProfile(this);"
-								style="font-size: 16px; padding: 4px 8px; height: 40%; width: 30%;">User
+								style="font-size: 16px; padding: 4px 8px; height: 40%; width: 30%; background-color: #f5a142;color:white;">User
 								Profile</button>
 							<button class="tablinks active rounded-pill" id="employeeButton"
-								style="font-size: 16px; padding: 4px 8px; height: 40%; width: 30%;">Employee
+								style="font-size: 16px; padding: 4px 8px; height: 40%; width: 30%; background-color: #f5a142;color:white;">Employee
 								Profile</button>
-
 						</div>
 
 						<div class="card-body">
-
-
 							<table class="table table-bordered  table-hover table-sm"
 								style="margin-bottom: 0px; font-size: initial;"
 								id="AssosiateTable">
-								<thead class="thead-light">
-
+								<thead class="table-header">
 									<tr style="text-align: left">
 										<th>Srl No</th>
 										<th>Employee Id</th>
@@ -570,7 +566,7 @@ function updateFileName() {
 
 												<button class="btn btn-primary p-2 " type="button"
 													id="dropdownMenuButton" title="action"
-													style="line-height: 0.7; font-size: 11px;background-color: #B2BEB5;color: white;border: none;outline: none"
+													style="line-height: 0.7; font-size: 11px; background-color: #B2BEB5; color: white; border: none; outline: none"
 													data-toggle="dropdown" aria-haspopup="true"
 													aria-expanded="false">Action</button>
 
@@ -615,13 +611,9 @@ function updateFileName() {
 								</tbody>
 
 							</table>
-							<div class="card-footer text-center"
-								style="background-color: #f5a142;">
-
-
-								<button class="btn btn-primary P-2" onclick="Home();">Home</button>
-								<button class="btn btn-primary P-2" onclick="Back();">Back</button>
-
+							<div class="card-footer text-center">
+								<button class="custom-btn" onclick="Home();">Home</button>
+								<button class="custom-btn" onclick="Back();">Back</button>
 							</div>
 						</div>
 
@@ -633,19 +625,14 @@ function updateFileName() {
 					<div class="card">
 						<form action="#" method="post" id="employeeForm1"
 							autocomplete="off">
-							<div class="card-header"
-								style="background-color: #f5a142; height: 50px">
+							<div class="card-header">
 								<div class="float-left">
-									<h6 style="font-size: 1.2rem; color: black;">EMPLOYEE
-										PROFILE - ADD</h6>
+									<h4>EMPLOYEE PROFILE - ADD</h4>
 								</div>
 
 								<div class="float-right">
-
-									<button class="btn btn-primary P-2" onclick="list()">List</button>
-
+									<button class="custom-btn" onclick="list()">List</button>
 								</div>
-
 							</div>
 
 							<div class="card-body">
@@ -1075,45 +1062,39 @@ function updateFileName() {
 
 										</div>
 									</div>
-									
-												<div class="row formline" style="padding: 0px 0px 10px 0px;">
+
+									<div class="row formline" style="padding: 0px 0px 10px 0px;">
 										<div class="col-sm-1"></div>
 										<div class="col-sm-2 d-flex align-items-center">
 											Employee Photo</div>
 
 
 										<div class="col-sm-2 d-flex align-items-center">
-										
-											<input type="file" name="employee_Photo"
-												id="employee_Photo"
+
+											<input type="file" name="employee_Photo" id="employee_Photo"
 												class="form-control form-control-sm bg-white border border-dark" />
 
 										</div>
 
 										<div class="col-sm-1"></div>
 										<div class="col-sm-2 d-flex align-items-center">
-											Employee Remarks </div>
+											Employee Remarks</div>
 										<div class="col-sm-2 d-flex align-items-center">
 
 											<input type="text" name="employee_Remarks"
 												id="employee_Remarks"
-												class="form-control form-control-sm bg-white border border-dark"
-												 />
+												class="form-control form-control-sm bg-white border border-dark" />
 
 										</div>
 									</div>
 								</div>
 
 							</div>
-							<div class="card-footer text-center"
-								style="background-color: #f5a142">
-
-
-								<button class="btn btn-primary P-2" onclick="Home();">Home</button>
-								<button class="btn btn-primary P-2" onclick="employeeSubmit();"
+							<div class="card-footer text-center">
+								<button class="custom-btn" onclick="Home();">Home</button>
+								<button class="custom-btn" onclick="employeeSubmit();"
 									type="submit">Submit</button>
-								<button class="btn btn-primary P-2" onclick="Back();">Back</button>
-
+								<button class="custom-btn" onclick="Back();">Back</button>
 							</div>
 
 							<div class="table-responsive">
@@ -1173,13 +1154,10 @@ function updateFileName() {
 				<div th:if="${formmode}=='view'">
 					<div class="card">
 
-						<div class="card-header"
-							style="background-color: #f5a142; height: 50px">
+						<div class="card-header">
 							<div class="float-left">
-								<h6 style="font-size: 1.2rem; color: black;">EMPLOYEE
-									PROFILE - VIEW</h6>
+								<h4>EMPLOYEE PROFILE - VIEW</h4>
 							</div>
-
 						</div>
 
 						<div class="card-body">
@@ -1599,13 +1577,9 @@ function updateFileName() {
 							</form>
 
 						</div>
-						<div class="card-footer text-center"
-							style="background-color: #f5a142">
-
-
-							<button class="btn btn-primary P-2" onclick="Home();">Home</button>
-							<button class="btn btn-primary P-2" onclick="Back();">Back</button>
-
+						<div class="card-footer text-center">
+							<button class="custom-btn" onclick="Home();">Home</button>
+							<button class="custom-btn" " onclick="Back();">Back</button>
 						</div>
 						<div class="table-responsive">
 							<table class="table table-hover table-sm"
@@ -1669,11 +1643,9 @@ function updateFileName() {
 				<div th:if="${formmode}=='modify'">
 					<div class="card">
 
-						<div class="card-header"
-							style="background-color: #f5a142; height: 50px">
+						<div class="card-header">
 							<div class="float-left">
-								<h6 style="font-size: 1.2rem; color: black;">EMPLOYEE
-									PROFILE - MODIFY</h6>
+								<h4>EMPLOYEE PROFILE - MODIFY</h4>
 							</div>
 
 						</div>
@@ -2134,38 +2106,42 @@ function updateFileName() {
 									</div>
 								</div>
 								<div class="row formline" style="padding: 0px 0px 10px 0px;">
-										<div class="col-sm-1"></div>
-										<div class="col-sm-2 d-flex align-items-center">
-											Employee Photo</div>
+									<div class="col-sm-1"></div>
+									<div class="col-sm-2 d-flex align-items-center">Employee
+										Photo</div>
 
 
-										<div class="col-sm-2 d-flex align-items-center">
-										 <div class="file-upload-wrapper">
-										   <label for="employee_Photo" class="file-upload-label">Upload File</label> 
-										 <input type="file" id="employee_Photo" name="employee_Photo" class="file-upload-input" onchange="updateFileName()">
-    
-    <!-- Placeholder for the file name display -->
-    <span id="file-name" th:text="${fileData1 != null ? 'File Is Selected' : 'Select The File'}">Select The File</span>
+									<div class="col-sm-2 d-flex align-items-center">
+										<div class="file-upload-wrapper">
+											<label for="employee_Photo" class="file-upload-label">Upload
+												File</label> <input type="file" id="employee_Photo"
+												name="employee_Photo" class="file-upload-input"
+												onchange="updateFileName()">
+
+											<!-- Placeholder for the file name display -->
+											<span id="file-name"
+												th:text="${fileData1 != null ? 'File Is Selected' : 'Select The File'}">Select
+												The File</span>
 										</div>
 										<!-- 	<input type="file" name="employee_Photo"
 												id="employee_Photo"	th:value="${employee?.employee_Photo}"
 												class="form-control form-control-sm bg-white border border-dark" /> -->
-									<!--  <img th:src="'data:image/png;base64,' + ${fileData1}" alt="Excel File Image" />  -->
+										<!--  <img th:src="'data:image/png;base64,' + ${fileData1}" alt="Excel File Image" />  -->
 
-										</div>
-
-										<div class="col-sm-1"></div>
-										<div class="col-sm-2 d-flex align-items-center">
-											Employee Remarks </div>
-										<div class="col-sm-2 d-flex align-items-center">
-
-											<input type="text" name="employee_Remarks"
-												id="employee_Remarks"th:value="${employee?.employee_Remarks}"
-												class="form-control form-control-sm bg-white border border-dark"
-												 />
-
-										</div>
 									</div>
+
+									<div class="col-sm-1"></div>
+									<div class="col-sm-2 d-flex align-items-center">Employee
+										Remarks</div>
+									<div class="col-sm-2 d-flex align-items-center">
+
+										<input type="text" name="employee_Remarks"
+											id="employee_Remarks"
+											th:value="${employee?.employee_Remarks}"
+											class="form-control form-control-sm bg-white border border-dark" />
+
+									</div>
+								</div>
 
 
 								<!-- <div>
@@ -2245,15 +2221,11 @@ function updateFileName() {
 							</form>
 
 						</div>
-						<div class="card-footer text-center"
-							style="background-color: #f5a142">
-
-
-							<button class="btn btn-primary P-2" onclick="Home();">Home</button>
-							<button class="btn btn-primary P-2" onclick="modifySubmit();"
+						<div class="card-footer text-center">
+							<button class="custom-btn" onclick="Home();">Home</button>
+							<button class="custom-btn" onclick="modifySubmit();"
 								type="submit">Submit</button>
-							<button class="btn btn-primary P-2" onclick="Back();">Back</button>
-
+							<button class="custom-btn" onclick="Back();">Back</button>
 						</div>
 
 						<div class="table-responsive">
@@ -2319,13 +2291,10 @@ function updateFileName() {
 				<div th:if="${formmode}=='verify'">
 					<div class="card">
 
-						<div class="card-header"
-							style="background-color: #f5a142; height: 50px">
+						<div class="card-header">
 							<div class="float-left">
-								<h6 style="font-size: 1.2rem; color: black;">EMPLOYEE
-									PROFILE - VERIFY</h6>
+								<h4>EMPLOYEE PROFILE - VERIFY</h4>
 							</div>
-
 						</div>
 
 						<div class="card-body">
@@ -2333,7 +2302,7 @@ function updateFileName() {
 								id="employeeForm" autocomplete="off">
 								<div class="row formline" style="padding: 15px 0px 2px 0px;">
 
-<div class="col-sm-1"></div>
+									<div class="col-sm-1"></div>
 									<div class="col-sm-2 d-flex align-items-center">Branch Id</div>
 
 
@@ -2345,7 +2314,7 @@ function updateFileName() {
 
 
 									</div>
-									
+
 									<div class="col-sm-1"></div>
 									<div class="col-sm-2 d-flex align-items-center">Branch
 										Name</div>
@@ -2359,7 +2328,7 @@ function updateFileName() {
 
 									</div>
 
-									
+
 								</div>
 
 								<div class="row formline" style="padding: 0px 0px 2px 0px;">
@@ -2452,7 +2421,7 @@ function updateFileName() {
 
 								<div class="row formline" style="padding: 0px 0px 2px 0px;">
 
-<div class="col-sm-1"></div>
+									<div class="col-sm-1"></div>
 									<div class="col-sm-2 d-flex align-items-center">Category</div>
 									<div class="col-sm-2 d-flex align-items-center">
 
@@ -2463,7 +2432,7 @@ function updateFileName() {
 
 
 									</div>
-									
+
 
 									<div class="col-sm-1"></div>
 									<div class="col-sm-2 d-flex align-items-center">Department</div>
@@ -2742,14 +2711,10 @@ function updateFileName() {
 							</form>
 
 						</div>
-						<div class="card-footer text-center"
-							style="background-color: #f5a142">
-
-
-							<button class="btn btn-primary P-2" onclick="Home();">Home</button>
-							<button class="btn btn-primary P-2" onclick="verifySubmit();">Verify</button>
-							<button class="btn btn-primary P-2" onclick="Back();">Back</button>
-
+						<div class="card-footer text-center">
+							<button class="custom-btn" onclick="Home();">Home</button>
+							<button class="custom-btn" onclick="verifySubmit();">Verify</button>
+							<button class="custom-btn" onclick="Back();">Back</button>
 						</div>
 
 						<div class="table-responsive">

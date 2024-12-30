@@ -24,6 +24,8 @@
 <link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon">
 <link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
 
+<link rel="stylesheet" type="text/css" th:href="@{/css/color_document.css}">
+
 <script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
 	th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
 <script src="/webjars/popper.js/1.14.7/umd/popper.min.js"
@@ -987,15 +989,13 @@ input:hover+.password-info {
 
 					<div class="card w-100 border">
 
-						<div class="card-header"
-							style="background-color: #f5a142; height: 50px">
+						<div class="card-header">
 							<div class="float-left">
-								<h6 style="font-size: 1.2rem;">USER PROFILE - LIST</h6>
+								<h4>USER PROFILE - LIST</h4>
 							</div>
 							<div class="btn-group nav-buttons float-right">
-								<button type="button" class="btn btn-primary p-2" id="btnAdd"
+								<button type="button" class="custom-btn" id="btnAdd"
 									onclick="adduser();">Create User</button>
-
 							</div>
 
 
@@ -1004,11 +1004,11 @@ input:hover+.password-info {
 							style="padding: 4px 4px; position: relative; display: flex; justify-content: space-around; width: 100%;">
 							<!-- Tab buttons -->
 							<button class="tablinks active rounded-pill" id="userButton"
-								style="font-size: 16px; padding: 4px 8px; height: 40%; width: 30%;">User
+								style="font-size: 16px; padding: 4px 8px; height: 40%; width: 30%;background-color:#f5a142;">User
 								Profile</button>
 							<button class="tablinks rounded-pill" id="employeeButton"
 								onclick="openEmployeeProfile(this);"
-								style="font-size: 16px; padding: 4px 8px; height: 40%; width: 30%;">Employee
+								style="font-size: 16px; padding: 4px 8px; height: 40%; width: 30%;background-color:#f5a142;color:white;">Employee
 								Profile</button>
 
 						</div>
@@ -1016,7 +1016,7 @@ input:hover+.password-info {
 							<div class="table-responsive">
 								<table class="table  table-bordered  table-hover table-sm"
 									style="margin-bottom: 0px; font-size: initial;" id="usertable">
-									<thead class="thead-light">
+									<thead class="table-header">
 										<tr>
 											<th>User Id</th>
 											<th>User Name</th>
@@ -1091,10 +1091,9 @@ input:hover+.password-info {
 									</tbody>
 								</table>
 							</div>
-							<div class="card-footer text-center"
-								style="background-color: #f5a142">
-								<button class="btn btn-primary p-2" onclick="Home();">Home</button>
-								<button class="btn btn-primary p-2" onclick="Back();">Back</button>
+							<div class="card-footer text-center">
+								<button class="custom-btn" onclick="Home();">Home</button>
+								<button class="custom-btn" onclick="Back();">Back</button>
 							</div>
 						</div>
 					</div>
@@ -1102,10 +1101,9 @@ input:hover+.password-info {
 				<!-- ------------------------------------user profile add---------------------------------- -->
 				<div th:if="${formmode}=='add'">
 					<div class="card w-100 border">
-						<div class="card-header"
-							style="background-color: #f5a142; height: 50px">
+						<div class="card-header">
 							<div class="float-left">
-								<h6 style="font-size: 1.5rem;">USER PROFILE-ADD</h6>
+								<h4>USER PROFILE-ADD</h4>
 							</div>
 						</div>
 						<div class="card-body">
@@ -1317,7 +1315,7 @@ input:hover+.password-info {
 								</div>
 
 								<div class="card-header"
-									style="background-color: #f5a142; height: 50px; padding: 11px 15px;">
+									style="padding: 11px 15px;">
 									<div class="float-left" style="padding-left: 100px;">
 										<h6 style="font-size: 1.5rem;">ROLE AND RIGHTS</h6>
 
@@ -1410,18 +1408,12 @@ input:hover+.password-info {
 
 
 						<div class="card-footer text-center mt-3">
-
-
-
-
-							<button type="button" class="btn btn-xs btn-primary p-2"
+							<button type="button" class="custom-btn"
 								id="btnHome" onclick="Home();">Home</button>
-							<button type="button" class="btn btn-xs btn-primary p-2"
+							<button type="button" class="custom-btn"
 								id="btnSubmit" onclick="submitform();">Submit</button>
-							<button type="button" class="btn btn-xs btn-primary p-2"
+							<button type="button" class="custom-btn"
 								id="btnBack" onclick="Back();">Back</button>
-
-
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">
@@ -1489,23 +1481,22 @@ input:hover+.password-info {
 
 					<div class="card w-100 border">
 
-						<div class="card-header"
-							style="background-color: #f5a142; height: 50px">
+						<div class="card-header">
 							<div class="float-left" th:if="${formmode}=='view'">
-								<h6 style="font-size: 1.5rem;">USER PROFILE - VIEW</h6>
+								<h4>USER PROFILE - VIEW</h4>
 
 							</div>
 							<div class="float-left" th:if="${formmode}=='verify'">
-								<h6 style="font-size: 1.5rem;">USER PROFILE - VERIFY</h6>
+								<h4>USER PROFILE - VERIFY</h4>
 
 							</div>
 							<div class="float-left"
 								th:if="${formmode}=='delete' or ${formmode}=='deleteUnverified' ">
-								<h6 style="font-size: 1.5rem;">USER PROFILE - DELETE</h6>
+								<h4>USER PROFILE - DELETE</h4>
 
 							</div>
 							<div class="btn-group nav-buttons float-right">
-								<button type="button" class="btn btn-xs btn-primary btns p-2"
+								<button type="button" class="custom-btn"
 									id="btnAdd" onclick="goToList();">List</button>
 
 							</div>
@@ -1775,11 +1766,9 @@ input:hover+.password-info {
 
 
 								<div class="card-header"
-									style="background-color: #f5a142; height: 50px; padding: 11px 15px;">
+									style="padding: 11px 15px;">
 									<div class="float-left" style="padding-left: 100px;">
-										<h6 style="font-size: 1.5rem;">ROLE AND RIGHTS</h6>
-
-
+										<h4 style="font-size: 1.5rem;">ROLE AND RIGHTS</h4>
 									</div>
 
 
@@ -1881,28 +1870,22 @@ input:hover+.password-info {
 						</div>
 
 						<div class="card-footer text-center mt-3">
-
-
-
-
-							<button type="button" class="btn btn-xs btn-primary p-2"
+							<button type="button" class="custom-btn"
 								id="btnHome" onclick="Home();">Home</button>
 							<button type="button" th:if="${formmode}=='verify'"
-								class="btn btn-xs btn-primary p-2" id="btnSubmit"
+								class="custom-btn" id="btnSubmit"
 								th:attr="data-userId=${userProfile?.userid}"
 								onclick="verifyData(this);">Verify</button>
 							<button type="button" th:if="${formmode}=='delete'"
-								class="btn btn-xs btn-primary p-2" id="btnSubmit"
+								class="custom-btn" id="btnSubmit"
 								th:attr="data-userId=${userProfile?.userid},data-flag=${userProfile?.entity_flg}"
 								onclick="deleteRecord(this);">Delete</button>
 							<button type="button" th:if="${formmode}=='deleteUnverified'"
-								class="btn btn-xs btn-primary p-2" id="btnSubmit"
+								class="custom-btn" id="btnSubmit"
 								th:attr="data-userId=${userProfile?.userid},data-flag=${userProfile?.entity_flg}"
 								onclick="deleteUnverifiedRecord(this);">Delete</button>
-							<button type="button" class="btn btn-xs btn-primary p-2"
+							<button type="button" class="custom-btn"
 								id="btnBack" onclick="Back();">Back</button>
-
-
 						</div>
 
 						<div class="card-body">
@@ -1972,19 +1955,15 @@ input:hover+.password-info {
 
 					<div class="card w-100 border">
 
-						<div class="card-header"
-							style="background-color: #f5a142; height: 50px">
+						<div class="card-header">
 							<div class="float-left">
-								<h6 style="font-size: 1.5rem;">USER PROFILE - MODIFY</h6>
+								<h4>USER PROFILE - MODIFY</h4>
 
 							</div>
 							<div class="btn-group nav-buttons float-right">
-								<button type="button" class="btn btn-xs btn-primary btns p-2"
+								<button type="button" class="custom-btn"
 									id="btnAdd" onclick="goToList();">List</button>
-
 							</div>
-
-
 						</div>
 						<div class="card-body">
 
@@ -2337,18 +2316,12 @@ input:hover+.password-info {
 						</div>
 
 						<div class="card-footer text-center mt-3">
-
-
-
-
-							<button type="button" class="btn btn-xs btn-primary p-2"
+							<button type="button" class="custom-btn"
 								id="btnHome" onclick="Home();">Home</button>
-							<button type="button" class="btn btn-xs btn-primary p-2"
+							<button type="button" class="custom-btn"
 								id="btnSubmit" onclick="modifySubmit();">Modify</button>
-							<button type="button" class="btn btn-xs btn-primary p-2"
+							<button type="button" class="custom-btn"
 								id="btnBack" onclick="Back();">Back</button>
-
-
 						</div>
 
 						<div class="card-body">
