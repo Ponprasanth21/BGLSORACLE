@@ -20,6 +20,9 @@
 <link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon">
 <link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
 
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/color_document.css}">
+
 <script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
 	th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
 <script src="/webjars/popper.js/1.14.7/umd/popper.min.js"
@@ -324,7 +327,7 @@ input:hover+.password-info {
 				+ encodeURIComponent(accountvalue) + '&flow_code='
 				+ encodeURIComponent(flowCode) + '&flow_date='
 				+ encodeURIComponent(flowDate) + '&flow_amount='
-				+ encodeURIComponent(flowAmount)+ '&currency='
+				+ encodeURIComponent(flowAmount) + '&currency='
 				+ encodeURIComponent(currency);
 		location.href = url;
 	}
@@ -346,22 +349,16 @@ input:hover+.password-info {
 			<div class="col-sm-11 ml-5 mt-2">
 
 				<div th:if="${formmode}=='list'">
-					<div class="card-header "
-						style="background-color: #f5a142; HEIGHT: 50px; padding-left: 5px;">
-
+					<div class="card-header ">
 						<div class="float-left">
-							<h6 style="font-size: 1.2rem; color: black;">DEPOSIT ACCOUNT
-								MAINTENANCE - LIST</h6>
+							<h4>DEPOSIT ACCOUNT MAINTENANCE - LIST</h4>
 						</div>
-
-
 					</div>
 
 					<table class="table table-bordered  table-hover table-sm"
 						style="margin-bottom: 0px; font-size: initial;"
 						id="AssosiateTable">
-						<thead class="thead-light">
-
+						<thead class="table-header">
 							<tr>
 								<th>CUST ID</th>
 								<th>CUST NAME</th>
@@ -445,37 +442,23 @@ input:hover+.password-info {
 					</table>
 
 
-					<div class="card-footer text-center"
-						style="background-color: #f5a142;">
-
-
-						<button class="btn btn-primary P-2" onclick="Home();">Home</button>
-						<button class="btn btn-primary P-2" onclick="back();">Back</button>
-
+					<div class="card-footer text-center">
+						<button class="custom-btn" onclick="Home();">Home</button>
+						<button class="custom-btn" onclick="back();">Back</button>
 					</div>
-
-
-
-
 				</div>
 
 
 				<div th:if="${formmode}=='view'">
 					<div class="row">
 						<div class="col-sm-12">
-							<div class="card" style="border-radius: 2px">
+							<div class="card">
 
 
-								<div class="card-header "
-									style="background-color: #f5a142; height: 50px">
-
+								<div class="card-header ">
 									<div class="float-left">
-										<h6 style="font-size: 1.2rem; color: black;">DEPOSIT
-											ACCOUNT MAINTENANCE FLOW</h6>
+										<h4>DEPOSIT ACCOUNT MAINTENANCE FLOW</h4>
 									</div>
-
-
-
 								</div>
 
 								<div class="tab mt-2"
@@ -1112,8 +1095,8 @@ input:hover+.password-info {
 													card-footer text-center
 													mt-2"
 									style="background-color: #f5a142">
-									<button class="btn btn-primary p-2 " onclick="home();">Home</button>
-									<button class="btn btn-primary p-2 " onclick="back();">Back</button>
+									<button class="custom-btn" onclick="home();">Home</button>
+									<button class="custom-btn" onclick="back();">Back</button>
 								</div>
 							</div>
 						</div>
@@ -1124,18 +1107,11 @@ input:hover+.password-info {
 					<div class="row">
 						<div class="col-sm-12">
 							<div class="card" style="border-radius: 2px">
-
-
-								<div class="card-header "
-									style="background-color: #f5a142; height: 50px">
-
+								<div class="card-header ">
 									<div class="float-left">
-										<h6 style="font-size: 1.2rem; color: black;">DEPOSIT
-											ACCOUNT MAINTENANCE FLOW - VERIFY</h6>
+										<h4>DEPOSIT
+											ACCOUNT MAINTENANCE FLOW - VERIFY</h4>
 									</div>
-
-
-
 								</div>
 								<div class="card-body">
 									<form class="border border-secondary" action="#" method="post"
@@ -1440,11 +1416,10 @@ input:hover+.password-info {
 
 									</tbody>
 								</table>
-								<div class="card-footer text-center mt-2"
-									style="background-color: #f5a142">
-									<button class="btn btn-primary p-2 " onclick="home();">Home</button>
-									<button class="btn btn-primary p-2 " onclick="VerifySubmit();">Verify</button>
-									<button class="btn btn-primary p-2 " onclick="back();">Back</button>
+								<div class="card-footer text-center mt-2">
+									<button class="custom-btn" onclick="home();">Home</button>
+									<button class="custom-btn" onclick="VerifySubmit();">Verify</button>
+									<button class="custom-btn" onclick="back();">Back</button>
 								</div>
 							</div>
 						</div>
@@ -1457,16 +1432,10 @@ input:hover+.password-info {
 							<div class="card" style="border-radius: 2px">
 
 
-								<div class="card-header "
-									style="background-color: #f5a142; height: 50px">
-
+								<div class="card-header ">
 									<div class="float-left">
-										<h6 style="font-size: 1.2rem; color: black;">DEPOSIT
-											ACCOUNT MAINTENANCE FLOW - MODIFY</h6>
+										<h4>DEPOSIT ACCOUNT MAINTENANCE FLOW - MODIFY</h4>
 									</div>
-
-
-
 								</div>
 								<div class="card-body">
 									<form class="border border-secondary" action="#" method="post"
@@ -1770,11 +1739,10 @@ input:hover+.password-info {
 
 									</tbody>
 								</table>
-								<div class="card-footer text-center mt-2"
-									style="background-color: #f5a142">
-									<button class="btn btn-primary p-2 " onclick="home();">Home</button>
-									<button class="btn btn-primary p-2 " onclick="ModifySubmit();">Submit</button>
-									<button class="btn btn-primary p-2 " onclick="back();">Back</button>
+								<div class="card-footer text-center mt-2">
+									<button class="custom-btn" onclick="home();">Home</button>
+									<button class="custom-btn" onclick="ModifySubmit();">Submit</button>
+									<button class="custom-btn" onclick="back();">Back</button>
 								</div>
 							</div>
 						</div>

@@ -20,6 +20,8 @@
 <link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon">
 <link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
 
+<link rel="stylesheet" type="text/css" th:href="@{/css/color_document.css}">
+
 <script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
 	th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
 <script src="/webjars/popper.js/1.14.7/umd/popper.min.js"
@@ -766,20 +768,19 @@ tr td:first-child:before {
 					th:if="${formmode}=='add' OR ${formmode}=='view' OR ${formmode}=='edit' OR ${formmode}=='view1' OR ${formmode}=='delete'">
 
 					<div class="card">
-						<div class="card-header border-bottom-0"
-							style="background-color: #f5a142;">
+						<div class="card-header border-bottom-0">
 
 							<div class="float-left">
-								<h3 style="font-size: 1.2rem" th:if="${formmode}=='view'">GENERAL
-									LEDGER</h3>
-								<h3 style="font-size: 1.2rem" th:if="${formmode}=='edit'">GENERAL
-									LEDGER- MODIFY</h3>
-								<h3 style="font-size: 1.2rem" th:if="${formmode}=='add'">GENERAL
-									LEDGER- ADD</h3>
-								<h3 style="font-size: 1.2rem" th:if="${formmode}=='delete'">GENERAL
-									LEDGER - DELETE</h3>
-								<h3 style="font-size: 1.2rem" th:if="${formmode}=='view1'">GENERAL
-									LEDGER</h3>
+								<h4 th:if="${formmode}=='view'">GENERAL
+									LEDGER</h4>
+								<h4 th:if="${formmode}=='edit'">GENERAL
+									LEDGER- MODIFY</h4>
+								<h4 th:if="${formmode}=='add'">GENERAL
+									LEDGER- ADD</h4>
+								<h4 th:if="${formmode}=='delete'">GENERAL
+									LEDGER - DELETE</h4>
+								<h4 th:if="${formmode}=='view1'">GENERAL
+									LEDGER</h4>
 							</div>
 						</div>
 						<div class="mt-3" th:if="${formmode}=='view'"
@@ -787,25 +788,24 @@ tr td:first-child:before {
 							<!-- Tab buttons -->
 							<button class="tablinks rounded-pill" id="RefButton"
 								onclick="RefCode(this);"
-								style="font-size: 16px; padding: 4px 8px; height: 40%; width: 18%;">Reference
+								style="font-size: 16px; padding: 4px 8px; height: 40%; width: 18%;background-color:#f5a142;color:white;">Reference
 								Code Maintenance</button>
 							<button class="tablinks active rounded-pill" id="GLButton"
 								onclick="GLStruct(this);"
-								style="font-size: 16px; padding: 4px 8px; height: 40%; width: 18%;">GL
+								style="font-size: 16px; padding: 4px 8px; height: 40%; width: 18%;background-color:#f5a142;color:white;">GL
 								Structure</button>
 							<button class="tablinks rounded-pill" id="param"
 								onclick="SchemeCode(this);"
-								style="font-size: 16px; padding: 4px 8px; height: 40%; width: 18%;">Scheme
+								style="font-size: 16px; padding: 4px 8px; height: 40%; width: 18%;background-color:#f5a142;color:white;">Scheme
 								Codes</button>
 							<button class="tablinks rounded-pill" id="chartOfAccounts"
 								onclick="Chart(this);"
-								style="font-size: 16px; padding: 4px 8px; height: 40%; width: 18%;">Chart
+								style="font-size: 16px; padding: 4px 8px; height: 40%; width: 18%;background-color:#f5a142;color:white;">Chart
 								of Accounts</button>
 							<button class="tablinks rounded-pill" id="accountLedger"
 								onclick="Account(this);"
-								style="font-size: 16px; padding: 4px 8px; height: 40%; width: 18%;">Account
+								style="font-size: 16px; padding: 4px 8px; height: 40%; width: 18%;background-color:#f5a142;color:white;">Account
 								Ledger</button>
-
 						</div>
 
 						<div class="card-body p-3">
@@ -1180,35 +1180,34 @@ tr td:first-child:before {
 								</div>
 							</form>
 						</div>
-						<div class="card-footer  text-center"
-							style="background-color: #f5a142;">
-							<button type="button" class="btn btn-primary " onclick="home()"
+						<div class="card-footer  text-center">
+							<button type="button" class="custom-btn" onclick="home()"
 								id="btnHome">Home</button>
-							<a class="btn btn-primary  text-white" onclick="addUser()"
-								th:if="${formmode}=='view'" id="btnModify">Add</a> <a
-								class="btn btn-primary  text-white" onclick="upload()"
-								th:if="${formmode}=='view'" id="btnupload">Upload</a> <a
-								class="btn btn-primary  text-white" id="btnModify"
-								th:if="${formmode}=='view'" onclick="modifyData();">Modify</a> <a
-								class="btn btn-primary  text-white" id="btnDelete"
-								th:if="${formmode}=='view'" onclick="deleteData();">Delete</a> <a
-								class="btn btn-primary  text-white" th:if="${formmode}=='view'"
+							<a class="custom-btn" onclick="addUser()"
+								th:if="${formmode}=='view'" style="color:white;" id="btnModify">Add</a> <a
+								class="custom-btn" onclick="upload()"
+								th:if="${formmode}=='view'" style="color:white;" id="btnupload">Upload</a> <a
+								class="custom-btn" id="btnModify"
+								th:if="${formmode}=='view'" style="color:white;" onclick="modifyData();">Modify</a> <a
+								class="custom-btn" id="btnDelete"
+								th:if="${formmode}=='view'" style="color:white;" onclick="deleteData();">Delete</a> <a
+								class="custom-btn" style="color:white;" th:if="${formmode}=='view'"
 								id="btnList" onclick="userList();">List</a>
 
 							<button th:if="${formmode}== 'add'" type="button"
-								class="btn btn-primary " form="RefCodeMaster" id="btnSubmit"
+								class="custom-btn" form="RefCodeMaster" id="btnSubmit"
 								onclick="submitform(this);" th:attr="data-formmode=${formmode}">Submit</button>
 
-							<button type="button" class="btn btn-primary " id="btnEdit"
+							<button type="button" class="custom-btn" id="btnEdit"
 								th:if="${formmode}=='edit'" th:attr="data-formmode=${formmode}"
 								onclick="modifyUserData(this);">Submit</button>
 
 							<button th:if="${formmode}== 'delete'" type="button"
-								class="btn btn-primary " form="AdminAssociateProfile"
+								class="custom-btn" form="AdminAssociateProfile"
 								id="btnSubmit" onclick="deleteUserData(this);"
 								th:attr="data-formmode=${formmode}">Submit</button>
 
-							<button type="button" class="btn btn-primary " id="btnBack"
+							<button type="button" class="custom-btn" id="btnBack"
 								onclick="back();">Back</button>
 						</div>
 					</div>
@@ -1218,7 +1217,7 @@ tr td:first-child:before {
 					<form action="#" method="post" autocomplete="off"
 						style="width: 100%">
 						<div class="card">
-							<div class="card-header" style="background-color: #f5a142;">
+							<div class="card-header">
 								<div class="float-right"></div>
 								<h4>Upload Excel</h4>
 							</div>
@@ -1244,16 +1243,14 @@ tr td:first-child:before {
 									<div class="form-group "></div>
 								</div>
 							</div>
-							<div class="card-footer text-center"
-								style="background-color: #f5a142;">
-								<button type="button" class="btn btn-primary" id="btnHome"
+							<div class="card-footer text-center">
+								<button type="button" class="custom-btn" id="btnHome"
 									onclick="home();">Home</button>
-								<button type="button" class="btn btn-primary" id="btnHome"
+								<button type="button" class="custom-btn" id="btnHome"
 									onclick="uploadlist();">List</button>
-								<button type="button" class="btn btn-primary" id="nav"
+								<button type="button" class="custom-btn" id="nav"
 									onclick="submitexcelgst(this)">Validate</button>
-
-								<button type="button" class="btn btn-primary" id="btnBack"
+								<button type="button" class="custom-btn" id="btnBack"
 									onclick="back();">Back</button>
 							</div>
 						</div>
@@ -1265,12 +1262,11 @@ tr td:first-child:before {
 						<div class="card w-100 border panel panel-primary filterable">
 							<div class="card-header">
 								<div class="float-left">
-									<h6 style="background-color: #f5a142;font-size: 1.2rem; color: black;">GENERAL
-										LEDGER</h6>
+									<h4>GENERAL LEDGER</h4>
 								</div>
 								<div class="float-right">
 									<button type="button"
-										class="btn btn-xs btn-primary btns p-2 border"
+										class="custom-btn"
 										id="selectAllBtn" onclick="toggleSelectAll()">Select
 										All</button>
 								</div>
@@ -1279,7 +1275,7 @@ tr td:first-child:before {
 								<div class="table-responsive">
 									<table class="table table-bordered table-hover table-sm"
 										style="margin-bottom: 0px; font-size: initial;" id="usertable">
-										<thead class="thead-light">
+										<thead class="table-header">
 											<tr class="filters">
 												<th style="width: 5%"><input type="text"
 													class="form-control font-weight-bold" placeholder="Srl No"
@@ -1361,12 +1357,11 @@ tr td:first-child:before {
 									</table>
 								</div>
 							</div>
-							<div class="card-footer text-center"
-								style="background-color: #f5a142">
-								<button class="btn btn-primary p-2" onclick="Home();">Home</button>
-								<button class="btn btn-primary p-2" id="submitBtn"
+							<div class="card-footer text-center">
+								<button class="custom-btn" onclick="Home();">Home</button>
+								<button class="custom-btn" id="submitBtn"
 									onclick="getCheckedValues()">Submit</button>
-								<button class="btn btn-primary p-2" onclick="Back();">Back</button>
+								<button class="custom-btn" onclick="Back();">Back</button>
 							</div>
 						</div>
 					</div>
@@ -1375,18 +1370,16 @@ tr td:first-child:before {
 				<div th:if="${formmode}=='list'">
 					<div class="panel panel-primary filterable">
 						<div class="card w-100 border panel panel-primary filterable">
-							<div class="card-header"
-								style="background-color: #f5a142; height: 70px">
+							<div class="card-header">
 								<div class="float-left">
-									<h6 style="font-size: 1.2rem; color: black;">GENERAL
-										LEDGER - LIST</h6>
+									<h4>GENERAL LEDGER - LIST</h4>
 								</div>
 							</div>
 							<div class="card-body">
 								<div class="table-responsive">
 									<table class="table table-bordered table-hover table-sm"
 										style="margin-bottom: 0px; font-size: initial;" id="usertable">
-										<thead class="thead-light">
+										<thead class="table-header">
 											<tr class="filters">
 												<th style="width: 3%"><input type="text"
 													class="form-control font-weight-bold" placeholder="S.No"
@@ -1467,10 +1460,9 @@ tr td:first-child:before {
 									</table>
 								</div>
 							</div>
-							<div class="card-footer text-center"
-								style="background-color: #f5a142">
-								<button class="btn btn-primary p-2" onclick="Home();">Home</button>
-								<button class="btn btn-primary p-2" onclick="Back();">Back</button>
+							<div class="card-footer text-center">
+								<button class="custom-btn" onclick="Home();">Home</button>
+								<button class="custom-btn" onclick="Back();">Back</button>
 							</div>
 						</div>
 					</div>
@@ -1479,18 +1471,16 @@ tr td:first-child:before {
 				<div th:if="${formmode}=='modify'">
 					<div class="panel panel-primary filterable">
 						<div class="card w-100 border panel panel-primary filterable">
-							<div class="card-header"
-								style="background-color: #f5a142; height: 70px">
+							<div class="card-header">
 								<div class="float-left">
-									<h6 style="font-size: 1.2rem; color: black;">GENERAL
-										LEDGER - MODIFY</h6>
+									<h4>GENERAL LEDGER - MODIFY</h4>
 								</div>
 							</div>
 							<div class="card-body">
 								<div class="table-responsive">
 									<table class="table table-bordered table-hover table-sm"
 										style="margin-bottom: 0px; font-size: initial;" id="usertable">
-										<thead class="thead-light">
+										<thead class="table-header">
 											<tr class="filters">
 												<th style="width: 3%"><input type="text"
 													class="form-control font-weight-bold" placeholder="S.No"
@@ -1576,11 +1566,9 @@ tr td:first-child:before {
 								</div>
 							</div>
 
-							<div class="card-footer text-center"
-								style="background-color: #f5a142">
-								<button class="btn btn-primary p-2" onclick="Home();">Home</button>
-
-								<button class="btn btn-primary p-2" onclick="Back();">Back</button>
+							<div class="card-footer text-center">
+								<button class="custom-btn" onclick="Home();">Home</button>
+								<button class="custom-btn" onclick="Back();">Back</button>
 							</div>
 						</div>
 					</div>
@@ -1589,20 +1577,17 @@ tr td:first-child:before {
 				<div th:if="${formmode}=='deleteList'">
 					<div class="panel panel-primary filterable">
 						<div class="card w-100 border panel panel-primary filterable">
-							<div class="card-header"
-								style="background-color: #f5a142; height: 70px">
+							<div class="card-header">
 								<div class="float-left">
-									<h6 style="font-size: 1.2rem; color: black;">GENERAL
-										LEDGER -DELETE</h6>
+									<h4>GENERAL LEDGER -DELETE</h4>
 								</div>
-
 							</div>
 
 							<div class="card-body">
 								<div class="table-responsive">
 									<table class="table table-bordered table-hover table-sm"
 										style="margin-bottom: 0px; font-size: initial;" id="usertable">
-										<thead class="thead-light">
+										<thead class="table-header">
 											<tr class="filters">
 												<th style="width: 3%"><input type="text"
 													class="form-control font-weight-bold" placeholder="S.No"
@@ -1667,11 +1652,9 @@ tr td:first-child:before {
 								</div>
 							</div>
 
-							<div class="card-footer text-center"
-								style="background-color: #f5a142">
-								<button class="btn btn-primary p-2" onclick="Home();">Home</button>
-
-								<button class="btn btn-primary p-2" onclick="Back();">Back</button>
+							<div class="card-footer text-center">
+								<button class="custom-btn" onclick="Home();">Home</button>
+								<button class="custom-btn" onclick="Back();">Back</button>
 							</div>
 						</div>
 					</div>
@@ -1679,13 +1662,10 @@ tr td:first-child:before {
 
 				<div th:if="${formmode}=='viewusinglsh'">
 					<div class="card w-100 border">
-						<div class="card-header"
-							style="background-color: #f5a142; height: 50px">
+						<div class="card-header">
 							<div class="float-left">
-								<h6 style="font-size: 1.2rem; color: black;">GENERAL LEDGER
-									- VIEW</h6>
+								<h4>GENERAL LEDGER - VIEW</h4>
 							</div>
-
 						</div>
 						<div class="card-body">
 							<form action="#" id="" th:object="${values}">
@@ -1810,10 +1790,9 @@ tr td:first-child:before {
 								</div>
 							</form>
 						</div>
-						<div class="card-footer text-center"
-							style="background-color: #f5a142">
-							<button class="btn btn-primary" onclick="Home();">Home</button>
-							<button class="btn btn-primary" onclick="Back();">Back</button>
+						<div class="card-footer text-center">
+							<button class="custom-btn" onclick="Home();">Home</button>
+							<button class="custom-btn" onclick="Back();">Back</button>
 						</div>
 
 

@@ -21,6 +21,8 @@
 <link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon">
 <link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
 
+<link rel="stylesheet" type="text/css" th:href="@{/css/color_document.css}">
+
 <script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
 	th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
 <script src="/webjars/popper.js/1.14.7/umd/popper.min.js"
@@ -820,7 +822,7 @@ function handleSelectChange() {
 							<form action="#" th:object="${asset_flows}" method="POST"
 								autocomplete="off" id="asset_flows">
 								<div class="card">
-									<div class="card-header" style="background-color: #BBC3CB;">
+									<div class="card-header">
 										<div class="float-left">
 											<h6>COLLATERAL FLOW</h6>
 										</div>
@@ -1046,7 +1048,7 @@ function handleSelectChange() {
 											</div>
 											<div class="card-footer text-center"
 												style="background-color: #BBC3CB;">
-												<button type="button" class="btn btn-sm btn-primary"
+												<button type="button" class="custom-btn"
 													style="text-align: center;" id="genflow"
 													onclick="genflows();">GENERATE FLOWS</button>
 											</div>
@@ -1056,7 +1058,7 @@ function handleSelectChange() {
 										<fieldset id="tableset" style="display: none">
 											<div class="table-responsive mt-3">
 												<table class="table table-bordered mt-3" id="flowsTable">
-													<thead>
+													<thead class="table-header">
 														<tr>
 															<!-- Generating 13 columns -->
 															<th style="font-weight: 500;">SRL</th>
@@ -1084,12 +1086,12 @@ function handleSelectChange() {
 									<div class="card-footer text-center"
 										style="background-color: #BBC3CB;">
 
-										<button type="button" class="btn btn-primary" id="btnHome"
+										<button type="button" class="custom-btn" id="btnHome"
 											onclick="home()">Home</button>
 
-										<button type="button" class="btn btn-xs btn-primary"
+										<button type="button" class="custom-btn"
 											id="btnSubmit1" onclick="addSubmit();">Submit</button>
-										<button type="button" class="btn btn-primary" id="btnBack"
+										<button type="button" class="custom-btn" id="btnBack"
 											onclick="back()">Back</button>
 									</div>
 								</div>

@@ -32,6 +32,8 @@
 <link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon">
 <link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
 
+<link rel="stylesheet" type="text/css" th:href="@{/css/color_document.css}">
+
 <script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
 	th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
 <script src="/webjars/popper.js/1.14.7/umd/popper.min.js"
@@ -1697,10 +1699,9 @@ function gotocorporate(){
 					<div class="panel panel-primary filterable">
 
 						<div class="card w-100 border panel panel-primary filterable">
-							<div class="card-header"
-								style="background-color: #e9ecef; height: 50px">
+							<div class="card-header">
 								<div class="float-left">
-									<h6 style="font-size: 1.2rem;">CUSTOMER MAINTENANCE</h6>
+									<h4>CUSTOMER MAINTENANCE</h4>
 								</div>
 							</div>
 							<div class="card-body">
@@ -1713,17 +1714,12 @@ function gotocorporate(){
 								</div>
 
 							</div>
-							<div class="card-footer text-center"
-								style="background-color: #e9ecef">
-								<button class="btn btn-primary p-2" onclick="Home();">Home</button>
-								<button class="btn btn-primary p-2" onclick="back()">Back</button>
-
+							<div class="card-footer text-center">
+								<button class="custom-btn" onclick="Home();">Home</button>
+								<button class="custom-btn" onclick="back()">Back</button>
 							</div>
 						</div>
-
 					</div>
-
-
 				</div>
 
 				<div th:if="${formmode}=='retailclick'">
@@ -1732,11 +1728,10 @@ function gotocorporate(){
 					<div class="panel panel-primary filterable">
 
 						<div class="card w-100 border panel panel-primary filterable">
-							<div class="card-header"
-								style="background-color: #e9ecef; height: 50px; display: flex; justify-content: space-between; align-items: center;">
+							<div class="card-header">
 								<!-- List Title -->
 								<div class="float-left">
-									<h6 style="font-size: 1.2rem;">CUSTOMER MAINTENANCE - LIST</h6>
+									<h4>CUSTOMER MAINTENANCE - LIST</h4>
 								</div>
 
 								<!-- Customer Type -->
@@ -1749,14 +1744,14 @@ function gotocorporate(){
 								<!-- Filter Button -->
 								<div>
 									<button type="button"
-										class="btn btn-xs btn-primary btns p-2 border btn-filter">Filter</button>
+										class="custom-btn btn-filter">Filter</button>
 								</div>
 							</div>
 							<div class="card-body">
 
 								<div class="table-responsive">
 									<table class="table table-bordered  table-hover table-sm">
-										<thead>
+										<thead class="table-header">
 											<tr class="filters">
 												<th style="width: 5%"><input type="text"
 													class="form-control font-weight-bold" placeholder="S.No"
@@ -1855,13 +1850,9 @@ function gotocorporate(){
 								</div>
 
 							</div>
-							<div class="card-footer text-center"
-								style="background-color: #e9ecef">
-
-
-								<button class="btn btn-primary p-2" onclick="Home();">Home</button>
-								<button class="btn btn-primary p-2" onclick="back()">Back</button>
-
+							<div class="card-footer text-center">
+								<button class="custom-btn" onclick="Home();">Home</button>
+								<button class="custom-btn" onclick="back()">Back</button>
 							</div>
 						</div>
 
@@ -1876,10 +1867,9 @@ function gotocorporate(){
 					<div class="panel panel-primary filterable">
 
 						<div class="card w-100 border panel panel-primary filterable">
-							<div class="card-header"
-								style="background-color: #e9ecef; height: 50px; display: flex; justify-content: space-between; align-items: center;">
+							<div class="card-header">
 								<div class="float-left">
-									<h6 style="font-size: 1.2rem;">CUSTOMER MAINTENANCE</h6>
+									<h4>CUSTOMER MAINTENANCE</h4>
 								</div>
 								<div
 									style="text-align: center; flex-grow: 1; display: flex; justify-content: center;">
@@ -1900,7 +1890,7 @@ function gotocorporate(){
 
 								<div class="table-responsive mt-2">
 									<table class="table table-bordered  table-hover table-sm">
-										<thead>
+										<thead class="table-header">
 											<tr class="filters">
 												<th style="width: 5%"><input type="text"
 													class="form-control font-weight-bold" placeholder="S.NO"
@@ -2020,10 +2010,9 @@ function gotocorporate(){
 									</table>
 								</div>
 							</div>
-							<div class="card-footer text-center"
-								style="background-color: #e9ecef">
-								<button class="btn btn-primary p-2" onclick="Home();">Home</button>
-								<button class="btn btn-primary p-2" onclick="back()">Back</button>
+							<div class="card-footer text-center">
+								<button class="custom-btn" onclick="Home();">Home</button>
+								<button class="custom-btn" onclick="back()">Back</button>
 
 							</div>
 						</div>
@@ -2037,11 +2026,9 @@ function gotocorporate(){
 				<div th:if="${formmode}=='viewCust'">
 
 					<div class="card">
-						<div class="card-header"
-							style="background-color: #e9ecef; height: 50px">
+						<div class="card-header">
 							<div class="float-left">
-								<h6 style="font-size: 1.2rem;" class="ml-3">CUSTOMER
-									MAINTENANCE - VIEW</h6>
+								<h4>CUSTOMER MAINTENANCE - VIEW</h4>
 							</div>
 						</div>
 						<div class="card-body">
@@ -2394,8 +2381,8 @@ function gotocorporate(){
 										</div>
 									</div>
 									<div class="card-footer text-center">
-										<button class="btn btn-primary p-2" onclick="home();">Home</button>
-										<button class="btn btn-primary p-2" onclick="back()">Back</button>
+										<button class="custom-btn" onclick="home();">Home</button>
+										<button class="custom-btn" onclick="back()">Back</button>
 									</div>
 								</div>
 								<div id="tab3" class="tabcontent" style="display: none;">
@@ -2435,8 +2422,8 @@ function gotocorporate(){
 										</div>
 									</div>
 									<div class="card-footer text-center">
-										<button class="btn btn-primary p-2" onclick="home();">Home</button>
-										<button class="btn btn-primary p-2" onclick="back()">Back</button>
+										<button class="custom-btn" onclick="home();">Home</button>
+										<button class="custom-btn" onclick="back()">Back</button>
 									</div>
 								</div>
 								<!--  start tab4-->
@@ -2468,7 +2455,7 @@ function gotocorporate(){
 										</div>
 										<div class="table-responsive mt-2">
 											<table class="table table-bordered  table-hover table-sm">
-												<thead>
+												<thead class="table-header">
 													<tr class="filters">
 														<th style="width: 8%"><input type="text"
 															class="form-control font-weight-bold"
@@ -2519,10 +2506,10 @@ function gotocorporate(){
 										</div>
 
 										<div class="card-footer text-center">
-											<button class="btn btn-primary p-2" onclick="home();">Home</button>
-											<button class="btn btn-primary p-2"
+											<button class="custom-btn" onclick="home();">Home</button>
+											<button class="custom-btn"
 												onclick="addFormSubmit(this)" id="addSubmitData">Submit</button>
-											<button class="btn btn-primary p-2" onclick="back()">Back</button>
+											<button class="custom-btn" onclick="back()">Back</button>
 										</div>
 									</div>
 								</div>
@@ -2533,7 +2520,7 @@ function gotocorporate(){
 									<div class="card  panel panel-primary filterable">
 										<div class="">
 											<button type="button"
-												class="btn btn-xs btn-primary btns p-2 border btn-filter float-right mr-2 mt-2 mb-2">Filter</button>
+												class="custom-btn btn-filter float-right mr-2 mt-2 mb-2">Filter</button>
 										</div>
 										<div class="customer-container" style="font-weight: 500;">
 											<div>
@@ -2555,7 +2542,7 @@ function gotocorporate(){
 										<div class="table-responsive mt-2">
 											<table class="table table-bordered  table-hover table-sm"
 												style="table-layout: fixed; width: 100%;">
-												<thead>
+												<thead class="table-header">
 													<tr class="filters">
 														<th style="width: 8%"><input type="text"
 															class="form-control font-weight-bold"
@@ -2616,8 +2603,8 @@ function gotocorporate(){
 
 
 										<div class="card-footer text-center">
-											<button class="btn btn-primary p-2" onclick="home();">Home</button>
-											<button class="btn btn-primary p-2" onclick="back()">Back</button>
+											<button class="custom-btn" onclick="home();">Home</button>
+											<button class="custom-btn" onclick="back()">Back</button>
 										</div>
 									</div>
 								</div>
@@ -2626,8 +2613,8 @@ function gotocorporate(){
 						</div>
 
 						<div class="card-footer text-center">
-							<button class="btn btn-primary p-2" onclick="home();">Home</button>
-							<button class="btn btn-primary p-2" onclick="back()">Back</button>
+							<button class="custom-btn" onclick="home();">Home</button>
+							<button class="custom-btn" onclick="back()">Back</button>
 						</div>
 						<div class="container-fluid card">
 							<div class="">
@@ -2718,11 +2705,9 @@ function gotocorporate(){
 				<div th:if="${formmode}=='EditCust'">
 
 					<div class="card">
-						<div class="card-header"
-							style="background-color: #e9ecef; height: 50px">
+						<div class="card-header">
 							<div class="float-left">
-								<h6 style="font-size: 1.2rem;" class="ml-3">CUSTOMER
-									MAINTENANCE - MODIFY</h6>
+								<h4>CUSTOMER MAINTENANCE - MODIFY</h4>
 							</div>
 						</div>
 						<div class="card-body">
@@ -2987,11 +2972,11 @@ function gotocorporate(){
 										</div>
 									</div>
 									<div class="card-footer text-center">
-										<button class="btn btn-primary p-2" onclick="home();">Home</button>
-										<button class="btn btn-primary p-2"
+										<button class="custom-btn" onclick="home();">Home</button>
+										<button class="custom-btn"
 											onclick="PersonalDetilsForEdit(this)"
 											th:attr="data-refnumber=${appreNO}" id="addSubmitData">Submit</button>
-										<button class="btn btn-primary p-2" onclick="back()">Back</button>
+										<button class="custom-btn" onclick="back()">Back</button>
 									</div>
 								</div>
 
@@ -3103,9 +3088,9 @@ function gotocorporate(){
 												</table>
 											</div>
 											<div class="text-center card-footer">
-												<button class="btn btn-primary p-2" type="button"
+												<button class="custom-btn" type="button"
 													onclick="rowadd()">Add</button>
-												<button class="btn btn-primary p-2" type="button"
+												<button class="custom-btn" type="button"
 													th:attr="data-refnumber=${appreNO}"
 													onclick="submitfileForEdit(this)">Submit</button>
 												<input type="text" hidden id="rec_no_for_indi"
@@ -3186,14 +3171,14 @@ function gotocorporate(){
 											</table>
 										</div>
 										<div class="card-footer text-center">
-											<button class="btn btn-primary p-2" onclick="home();">Home</button>
-											<button class="btn btn-primary p-2" type="button"
+											<button class="custom-btn" onclick="home();">Home</button>
+											<button class="custom-btn" type="button"
 												onclick="addRowsignature()">Add</button>
 
-											<button class="btn btn-primary p-2"
+											<button class="custom-btn"
 												onclick="signsubmitcor(this);"
 												th:attr="data-refnumber=${appreNO}" id="addSubmitData">Submit</button>
-											<button class="btn btn-primary p-2" onclick="back()">Back</button>
+											<button class="custom-btn" onclick="back()">Back</button>
 										</div>
 									</div>
 								</div>
@@ -3224,7 +3209,7 @@ function gotocorporate(){
 										<div class="table-responsive mt-2">
 											<table class="table table-bordered  table-hover table-sm"
 												style="table-layout: fixed; width: 100%;">
-												<thead>
+												<thead class="table-header">
 													<tr class="filters">
 														<th style="width: 8%"><input type="text"
 															class="form-control font-weight-bold"
@@ -3287,8 +3272,8 @@ function gotocorporate(){
 							</form>
 						</div>
 						<div class="card-footer text-center">
-							<button class="btn btn-primary p-2" onclick="home();">Home</button>
-							<button class="btn btn-primary p-2" onclick="back()">Back</button>
+							<button class="custom-btn" onclick="home();">Home</button>
+							<button class="custom-btn" onclick="back()">Back</button>
 						</div>
 
 						<table
@@ -3347,11 +3332,9 @@ function gotocorporate(){
 				<div th:if="${formmode}=='VerifyCust'">
 
 					<div class="card">
-						<div class="card-header"
-							style="background-color: #e9ecef; height: 50px">
+						<div class="card-header">
 							<div class="float-left">
-								<h6 style="font-size: 1.2rem;" class="ml-3">CUSTOMER
-									MAINTENANCE - VERIFY</h6>
+								<h4>CUSTOMER MAINTENANCE - VERIFY</h4>
 							</div>
 
 
@@ -3731,10 +3714,10 @@ function gotocorporate(){
 							</form>
 						</div>
 						<div class="card-footer text-center">
-							<button class="btn btn-primary p-2" onclick="home();">Home</button>
-							<button class="btn btn-primary p-2"
+							<button class="custom-btn" onclick="home();">Home</button>
+							<button class="custom-btn"
 								onclick="addsubmitverify(event)">Verify</button>
-							<button class="btn btn-primary p-2" onclick="back1()">Back</button>
+							<button class="custom-btn" onclick="back1()">Back</button>
 						</div>
 						<table
 							Style="border: 1px solid #ccc; width: 100%; max-width: 100%; margin: 0 auto; box-sizing: border-box;">

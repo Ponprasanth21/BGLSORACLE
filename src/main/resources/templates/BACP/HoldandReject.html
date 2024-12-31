@@ -31,6 +31,8 @@
 <link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon">
 <link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
 
+<link rel="stylesheet" type="text/css" th:href="@{/css/color_document.css}">
+
 <script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
 	th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
 <script src="/webjars/popper.js/1.14.7/umd/popper.min.js"
@@ -1280,15 +1282,14 @@ function calculateDTI() {
 					<div class="panel panel-primary filterable">
 
 						<div class="card w-100 border panel panel-primary filterable">
-							<div class="card-header"
-								style="background-color: #e9ecef; height: 50px">
+							<div class="card-header">
 								<div class="float-left">
-									<h6 style="font-size: 1.2rem;">HOLD AND REJECT- LIST</h6>
+									<h4>HOLD AND REJECT- LIST</h4>
 								</div>
 								<div class="float-right">
 
 									<button type="button"
-										class="btn btn-xs btn-primary btns p-2 border btn-filter">Filter</button>
+										class="custom-btn btn-filter">Filter</button>
 								</div>
 							</div>
 							<div class="card-body">
@@ -1298,7 +1299,7 @@ function calculateDTI() {
 								<div class="table-responsive">
 									<table class=" table  table-bordered  table-hover table-sm"
 										style="table-layout: fixed; width: 100%;" id="usertable">
-										<thead>
+										<thead class="table-header">
 											<tr class="filters">
 												<th><input type="text"
 													class="form-control font-weight-bold bg-white"
@@ -1365,12 +1366,11 @@ function calculateDTI() {
 								</div>
 
 							</div>
-							<div class="card-footer text-center"
-								style="background-color: #e9ecef">
+							<div class="card-footer text-center">
 
 
-								<button class="btn btn-primary p-2" onclick="Home();">Home</button>
-								<button class="btn btn-primary p-2" onclick="Back();">Back</button>
+								<button class="custom-btn" onclick="Home();">Home</button>
+								<button class="custom-btn" onclick="Back();">Back</button>
 
 							</div>
 						</div>
@@ -1386,9 +1386,9 @@ function calculateDTI() {
 
 					<div class="card w-100 border">
 
-						<div class="card-header" style="background-color: #e9ecef;">
+						<div class="card-header">
 							<div class="float-left">
-								<h6 style="font-size: 1.2rem;">HOLD AND REJECT - VIEW</h6>
+								<h4>HOLD AND REJECT - VIEW</h4>
 
 							</div>
 							<div class="float-right">
@@ -2952,13 +2952,13 @@ function calculateDTI() {
 										th:src="@{/images/loader.gif}" alt="Loading..." />
 								</div>
 							</div>
-							<div class="card-footer text-center mt-3">
-							<button type="button" class="btn btn-xs btn-primary p-2"
+							<div class="card-footer text-center">
+							<button type="button" class="custom-btn"
 									id="btnBack" th:if="${customerRequest?.status != 'REJECT'}"
 									onclick="submitfin();">Proceed</button>
-								<button type="button" class="btn btn-xs btn-primary p-2"
+								<button type="button" class="custom-btn"
 									id="btnSubmit" onclick="onaof();">View AOF</button>
-								<button type="button" class="btn btn-xs btn-primary p-2"
+								<button type="button" class="custom-btn"
 									id="btnBack" onclick="goBack();">Back</button>
 
 

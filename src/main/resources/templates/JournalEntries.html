@@ -24,6 +24,8 @@
 <link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon">
 <link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
 
+<link rel="stylesheet" type="text/css" th:href="@{/css/color_document.css}">
+
 <script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
 	th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
 <script src="/webjars/popper.js/1.14.7/umd/popper.min.js"
@@ -2358,11 +2360,9 @@ th, td {
 
 
 					<div class="card w-100 border">
-						<div class="card-header"
-							style="background-color: #f5a142; height: 50px">
+						<div class="card-header">
 							<div class="float-left">
-								<h6 style="font-size: 1.2rem; color: black;">TRANSACTION
-									MAINTANANCE - LIST</h6>
+								<h4>TRANSACTION MAINTANANCE - LIST</h4>
 							</div>
 
 						</div>
@@ -2371,7 +2371,7 @@ th, td {
 								<table class="table  table-bordered  table-hover table-sm"
 									style="margin-bottom: 0px; font-size: initial; table-layout: fixed; width: 100%;"
 									id="usertable">
-									<thead class="thead-light">
+									<thead class="table-header">
 										<tr>
 											<th style="text-align: left">Tran Date</th>
 											<th style="text-align: left">Tran Id</th>
@@ -2432,13 +2432,9 @@ th, td {
 								</table>
 							</div>
 						</div>
-						<div class="card-footer text-center"
-							style="background-color: #f5a142">
-
-
-							<button class="btn btn-primary p-2" onclick="Home();">Home</button>
-							<button class="btn btn-primary p-2" onclick="Back();">Back</button>
-
+						<div class="card-footer text-center">
+							<button class="custom-btn" onclick="Home();">Home</button>
+							<button class="custom-btn" onclick="Back();">Back</button>
 						</div>
 					</div>
 
@@ -2447,22 +2443,17 @@ th, td {
 
 				<div th:if="${formmode}=='modify'">
 					<div class="card w-100 border">
-						<div class="card-header"
-							style="background-color: #f5a142; height: 50px">
+						<div class="card-header">
 							<div class="float-left">
-								<h6 style="font-size: 1.2rem; color: black;">TRANSACTION
-									MAINTANANCE - MODIFY</h6>
+								<h4>TRANSACTION MAINTANANCE - MODIFY</h4>
 							</div>
-
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">
 								<table class="table  table-bordered  table-hover table-sm"
 									style="margin-bottom: 0px; font-size: initial; table-layout: fixed; width: 100%;"
 									id="usertable">
-									<thead class="thead-light">
-
-
+									<thead class="table-header">
 										<tr>
 											<th style="text-align: center">TRAN DATE</th>
 											<th style="text-align: center">TRAN ID</th>
@@ -2511,17 +2502,11 @@ th, td {
 								</table>
 							</div>
 						</div>
-						<div class="card-footer text-center"
-							style="background-color: #f5a142">
-
-
-							<button class="btn btn-primary p-2" onclick="Home();">Home</button>
-							<button class="btn btn-primary p-2" onclick="Back();">Back</button>
-
+						<div class="card-footer text-center">
+							<button class="custom-btn" onclick="Home();">Home</button>
+							<button class="custom-btn" onclick="Back();">Back</button>
 						</div>
 					</div>
-
-
 				</div>
 
 				<!-- ------------------------------------Journal Entries add---------------------------------- -->
@@ -2536,15 +2521,13 @@ th, td {
 					</script>
 
 					<div class="card w-100 border">
-						<div class="card-header" style="background-color: #f5a142;">
+						<div class="card-header">
 							<div
 								class="d-flex justify-content-between align-items-center h-100">
 								<!-- Left side: Title -->
 								<div class="float-left">
-									<h6 style="font-size: 1.2rem; color: black;">TRANSACTION
-										MAINTENANCE</h6>
+									<h4>TRANSACTION MAINTENANCE</h4>
 								</div>
-
 								<!-- Right side: Date field -->
 								<div class="d-flex align-items-center">
 									<div class="col-auto mr-5">
@@ -3050,7 +3033,7 @@ th, td {
 							<table class="table  table-bordered table-sm d-none"
 								style="margin-bottom: 0px; font-size: initial; width: 100%;"
 								id="transactionaccountvalues">
-								<thead class="thead-light">
+								<thead class="table-header">
 									<tr>
 										<th style="text-align: left; width: 20%;">GENERAL LEDGER</th>
 										<th style="text-align: left; width: 20%;">GL SUB HEAD</th>
@@ -3078,7 +3061,7 @@ th, td {
 							<table class="table  table-bordered table-sm d-none"
 								style="margin-bottom: 0px; font-size: initial; table-layout: fixed; width: 100%;"
 								id="transactionTable">
-								<thead class="thead-light">
+								<thead class="table-header">
 
 									<tr>
 										<th style="text-align: center">TRAN DATE</th>
@@ -3102,16 +3085,15 @@ th, td {
 						</div>
 						</form>
 					</div>
-					<div class="card-footer text-center"
-						style="background-color: #f5a142">
-						<button class="btn btn-primary p-2" onclick="Home();">Home</button>
-						<button class="btn btn-primary p-2 d-none" id="addscreenfunctions"
+					<div class="card-footer text-center">
+						<button class="custom-btn" onclick="Home();">Home</button>
+						<button class="custom-btn d-none" id="addscreenfunctions"
 							onclick="addTransactionRows(this);">Add</button>
-						<button class="btn btn-primary d-none p-2"
+						<button class="custom-btn d-none"
 							id="transactionAddButton" onclick="transactionSubmit(this);">Submit</button>
 						<!-- <button class="btn btn-primary p-2" id="validatefunctions"
 								onclick="validatefunction(this);">Validate</button> -->
-						<button class="btn btn-primary p-2" onclick="Back();">Back</button>
+						<button class="custom-btn" onclick="Back();">Back</button>
 					</div>
 					<div class="card-body">
 						<div class="table-responsive">
@@ -3166,23 +3148,16 @@ th, td {
 						</div>
 					</div>
 				</div>
-
-
-
-
 				<!-- ------------------------------------view---------------------------------- -->
 
 				<div th:if="${formmode}=='view'">
-
 					<div class="card w-100 border">
-						<div class="card-header"
-							style="background-color: #f5a142; height: 50px">
+						<div class="card-header">
 							<div
 								class="d-flex justify-content-between align-items-center h-100">
 								<!-- Left side: Title -->
 								<div class="float-left">
-									<h6 style="font-size: 1.2rem; color: black;">JOURNAL
-										ENTRIES-VIEW</h6>
+									<h4>JOURNAL ENTRIES-VIEW</h4>
 								</div>
 
 								<!-- Right side: Date field -->
@@ -3688,7 +3663,7 @@ th, td {
 									<table class="table  table-bordered table-sm d-none"
 										style="margin-bottom: 0px; font-size: initial; width: 100%;"
 										id="transactionaccountvalues">
-										<thead class="thead-light">
+										<thead class="table-header">
 											<tr>
 												<th style="text-align: left; width: 20%;">GENERAL
 													LEDGER</th>
@@ -3715,7 +3690,7 @@ th, td {
 									<table class="table  table-bordered table-sm d-none"
 										style="margin-bottom: 0px; font-size: initial; table-layout: fixed; width: 100%;"
 										id="transactionTable">
-										<thead class="thead-light">
+										<thead class="table-header">
 
 											<tr>
 												<th style="text-align: center">TRAN DATE</th>
@@ -3747,7 +3722,7 @@ th, td {
 								<table class="table table-bordered table-hover table-sm d-none"
 									style="margin-bottom: 0px; font-size: initial; table-layout: fixed; width: 100%;"
 									id="usertablevalues">
-									<thead class="thead-light">
+									<thead class="table-header">
 										<tr>
 											<th style="text-align: left">TRAN DATE</th>
 											<th style="text-align: left">TRAN ID</th>
@@ -3784,17 +3759,11 @@ th, td {
 								</table>
 							</div>
 						</div>
-						<div class="card-footer text-center"
-							style="background-color: #f5a142">
-
-
-							<button class="btn btn-primary p-2" onclick="Home();">Home</button>
-							<button class="btn btn-primary p-2" onclick="views(this);">View</button>
-							<button class="btn btn-primary p-2" onclick="Back();">Back</button>
-
-
+						<div class="card-footer text-center">
+							<button class="custom-btn" onclick="Home();">Home</button>
+							<button class="custom-btn" onclick="views(this);">View</button>
+							<button class="custom-btn" onclick="Back();">Back</button>
 						</div>
-
 
 						<div class="card-body">
 							<div class="table-responsive">
@@ -3866,14 +3835,12 @@ th, td {
 						});
 					</script>
 					<div class="card w-100 border">
-						<div class="card-header"
-							style="background-color: #f5a142; height: 50px">
+						<div class="card-header">
 							<div
 								class="d-flex justify-content-between align-items-center h-100">
 								<!-- Left side: Title -->
 								<div class="float-left">
-									<h6 style="font-size: 1.2rem; color: black;">TRANSACTION
-										MAINTANANCE- MODIFY DATAS</h6>
+									<h4>TRANSACTION MAINTANANCE- MODIFY DATAS</h4>
 								</div>
 
 								<!-- Right side: Date field -->
@@ -4350,7 +4317,7 @@ th, td {
 										<table class="table  table-bordered table-sm d-none"
 											style="margin-bottom: 0px; font-size: initial; width: 100%;"
 											id="transactionaccountvalues">
-											<thead class="thead-light">
+											<thead class="table-header">
 												<tr>
 													<th style="text-align: left; width: 20%;">GENERAL
 														LEDGER</th>
@@ -4377,8 +4344,7 @@ th, td {
 										<table class="table  table-bordered table-sm d-none"
 											style="margin-bottom: 0px; font-size: initial; table-layout: fixed; width: 100%;"
 											id="transactionTable">
-											<thead class="thead-light">
-
+											<thead class="table-header">
 												<tr>
 													<th style="text-align: center">TRAN DATE</th>
 													<th style="text-align: center">TRAN ID</th>
@@ -4409,7 +4375,7 @@ th, td {
 								<table class="table table-bordered table-hover table-sm d-none "
 									style="margin-bottom: 0px; font-size: initial; table-layout: fixed; width: 100%;"
 									id="usertablevalues">
-									<thead class="thead-light">
+									<thead class="table-header">
 										<tr>
 											<th style="text-align: left">TRAN DATE</th>
 											<th style="text-align: left">TRAN ID</th>
@@ -4456,16 +4422,11 @@ th, td {
 								</div>
 							</div>
 						</div>
-						<div class="card-footer text-center"
-							style="background-color: #f5a142">
-
-
-							<button class="btn btn-primary p-2" onclick="Home();">Home</button>
-							<button class="btn btn-primary p-2"
+						<div class="card-footer text-center">
+							<button class="custom-btn" onclick="Home();">Home</button>
+							<button class="custom-btn"
 								onclick="Submitdatasmodify(this);">Submit</button>
-							<button class="btn btn-primary p-2" onclick="Back();">Back</button>
-
-
+							<button class="custom-btn" onclick="Back();">Back</button>
 						</div>
 
 
@@ -4532,11 +4493,9 @@ th, td {
 				<div th:if="${formmode}=='view2'">
 
 					<div class="card w-100 border">
-						<div class="card-header"
-							style="background-color: #f5a142; height: 50px">
+						<div class="card-header">
 							<div class="float-left">
-								<h6 style="font-size: 1.2rem; color: black;">Bulk
-									Transactions</h6>
+								<h4>Bulk Transactions</h4>
 							</div>
 						</div>
 						<div class="row formline"

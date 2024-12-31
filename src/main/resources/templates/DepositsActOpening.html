@@ -21,6 +21,9 @@
 <link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	
+<link rel="stylesheet" type="text/css" th:href="@{/css/color_document.css}">
+
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
 <script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
@@ -519,21 +522,11 @@ document.getElementById("maturity_amt").value = lastFlowAmount.toString().replac
 					<div class="row">
 						<div class="col-sm-12">
 							<div class="card" style="border-radius: 2px">
-
-
-								<div class="card-header "
-									style="background-color: #f5a142; height: 50px">
-
+								<div class="card-header ">
 									<div class="float-left">
-										<h6 style="font-size: 1.2rem; color: black;">DEPOSIT
-											ACCOUNT OPENING</h6>
+										<h4>DEPOSIT ACCOUNT OPENING</h4>
 									</div>
-
-
-
 								</div>
-
-
 
 								<div class="tab mt-2"
 									style="padding: 4px 4px; position: relative; display: flex; justify-content: space-around; margin-top: 10px; width: 100%; height: 43px">
@@ -838,31 +831,19 @@ document.getElementById("maturity_amt").value = lastFlowAmount.toString().replac
 												</div>
 											</div>
 										</div>
-										<div class="card-footer text-center mt-2"
-											style="background-color: #f5a142">
-											<button class="btn btn-primary p-2 " onclick="home();">Home</button>
-
-											<button class="btn btn-primary p-2 " onclick="back();">Back</button>
+										<div class="card-footer text-center">
+											<button class="custom-btn" onclick="home();">Home</button>
+											<button class="custom-btn" onclick="back();">Back</button>
 										</div>
-
-
-
-
-
 									</div>
 
 									<div id="tab2" class="tabcontent" style="display: none">
 										<div class="card-body">
 
-											<div class="card-header "
-												style="background-color: #f5a142; HEIGHT: 50px; padding-left: 5px">
-
+											<div class="card-header ">
 												<div class="float-left">
-													<h6 style="font-size: 1.2rem; color: black;">DEPOSIT
-														ACCOUNT OPENING - FLOW</h6>
+													<h4>DEPOSIT ACCOUNT OPENING - FLOW</h4>
 												</div>
-
-
 											</div>
 
 											<table class="table  table-bordered  table-hover table-sm"

@@ -20,6 +20,8 @@
 <link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon">
 <link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
 
+<link rel="stylesheet" type="text/css" th:href="@{/css/color_document.css}">
+
 <script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
 	th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
 <script src="/webjars/popper.js/1.14.7/umd/popper.min.js"
@@ -495,15 +497,14 @@ function verifysubmit(a) {
 				<div th:if="${formmode}=='list'">
 					<div class="panel panel-primary filterable">
 						<div class="card w-100 border panel panel-primary filterable">
-							<div class="card-header" style="background-color: #f5a142">
+							<div class="card-header">
 								<div class="float-left">
-									<h6 style="font-size: 1.2rem; color: black;">CHART OF
-										ACCOUNTS - LIST</h6>
+									<h4>CHART OF ACCOUNTS - LIST</h4>
 								</div>
 								<div class="float-right">
 									<button type="button"
-										class="btn btn-primary btns p-2 btn-filter">Filter</button>
-									<button type="button" class="btn btn-primary p-2" id="btnadd"
+										class="custom-btn btn-filter">Filter</button>
+									<button type="button" class="custom-btn" id="btnadd"
 										style="text-align: center;" onclick="adduser(this);">Add</button>
 								</div>
 							</div>
@@ -513,23 +514,23 @@ function verifysubmit(a) {
 								<!-- Tab buttons -->
 								<button class="tablinks rounded-pill" id="RefButton"
 									onclick="RefCode(this);"
-									style="font-size: 16px; padding: 4px 8px; height: 40%; width: 18%;">Reference
+									style="font-size: 16px; padding: 4px 8px; height: 40%; width: 18%;background-color:#f5a142;color:white;">Reference
 									Code Maintenance</button>
 								<button class="tablinks rounded-pill" id="GLButton"
 									onclick="GLStruct(this);"
-									style="font-size: 16px; padding: 4px 8px; height: 40%; width: 18%;">GL
+									style="font-size: 16px; padding: 4px 8px; height: 40%; width: 18%;background-color:#f5a142;color:white;">GL
 									Structure</button>
 								<button class="tablinks rounded-pill" id="param"
 									onclick="SchemeCode(this);"
-									style="font-size: 16px; padding: 4px 8px; height: 40%; width: 18%;">Scheme
+									style="font-size: 16px; padding: 4px 8px; height: 40%; width: 18%;background-color:#f5a142;color:white;">Scheme
 									Codes</button>
 								<button class="tablinks active rounded-pill"
 									id="chartOfAccounts" onclick="Chart(this);"
-									style="font-size: 16px; padding: 4px 8px; height: 40%; width: 18%;">Chart
+									style="font-size: 16px; padding: 4px 8px; height: 40%; width: 18%;background-color:#f5a142;color:white;">Chart
 									of Accounts</button>
 								<button class="tablinks rounded-pill" id="accountLedger"
 									onclick="Account(this);"
-									style="font-size: 16px; padding: 4px 8px; height: 40%; width: 18%;">Account
+									style="font-size: 16px; padding: 4px 8px; height: 40%; width: 18%;background-color:#f5a142;color:white;">Account
 									Ledger</button>
 
 							</div>
@@ -538,7 +539,7 @@ function verifysubmit(a) {
 								<div class="table-responsive">
 									<table class="table  table-bordered  table-hover table-sm"
 										style="margin-bottom: 0px; font-size: initial;" id="usertable">
-										<thead class="thead-light">
+										<thead class="table-header">
 											<tr class="filters">
 												<th style="width: 6%"><input type="text"
 													class="form-control font-weight-bold" placeholder="Head"
@@ -632,11 +633,10 @@ function verifysubmit(a) {
 									</table>
 								</div>
 							</div>
-							<div class="card-footer text-center border-top-0"
-								style="background-color: #f5a142">
-								<button type="button" class="btn btn-primary p-2" id="btnHome"
+							<div class="card-footer text-center border-top-0">
+								<button type="button" class="custom-btn" id="btnHome"
 									onclick="home();">Home</button>
-								<button type="button" class="btn btn-primary p-2" id="btnBack"
+								<button type="button" class="custom-btn" id="btnBack"
 									onclick="Back();">Back</button>
 							</div>
 						</div>
@@ -645,11 +645,8 @@ function verifysubmit(a) {
 
 				<div th:if="${formmode}=='add'">
 					<div class="card">
-						<div class="card-header"
-							style="height: 50px; background-color: #f5a142;">
-
-							<h6 style="font-size: 1.2rem; color: black;">CHART OF
-								ACCOUNTS - ADD</h6>
+						<div class="card-header">
+							<h4>CHART OF ACCOUNTS - ADD</h4>
 						</div>
 						<div class="card-body">
 							<form class=" border border-secondary" action="#" method="post"
@@ -904,13 +901,12 @@ function verifysubmit(a) {
 
 							</form>
 						</div>
-						<div class="card-footer text-center"
-							style="background-color: #f5a142">
-							<button type="button" class="btn btn-primary p-2" id="btnHome"
+						<div class="card-footer text-center">
+							<button type="button" class="custom-btn" id="btnHome"
 								onclick="home();">Home</button>
-							<button type="button" class="btn btn-primary p-2"
+							<button type="button" class="custom-btn"
 								onclick="addsubmit(this);">Submit</button>
-							<button type="button" class="btn btn-primary p-2" id="btnBack"
+							<button type="button" class="custom-btn" id="btnBack"
 								onclick="Back();">Back</button>
 						</div>
 
@@ -919,10 +915,8 @@ function verifysubmit(a) {
 
 				<div th:if="${formmode}=='view'">
 					<div class="card">
-						<div class="card-header"
-							style="height: 50px; background-color: #f5a142;">
-							<h6 style="font-size: 1.2rem; color: black;">CHART OF
-								ACCOUNTS - VIEW</h6>
+						<div class="card-header">
+							<h4>CHART OF ACCOUNTS - VIEW</h4>
 						</div>
 						<div class="card-body">
 							<form class=" border border-secondary" action="#" method="post"
@@ -1171,12 +1165,10 @@ function verifysubmit(a) {
 
 							</form>
 						</div>
-						<div class="card-footer text-center"
-							style="background-color: #f5a142">
-							<button type="button" class="btn btn-xs btn-primary mr-2"
+						<div class="card-footer text-center">
+							<button type="button" class="custom-btn"
 								id="btnHome" onclick="home();">Home</button>
-
-							<button type="button" class="btn btn-xs btn-primary ml-2"
+							<button type="button" class="custom-btn"
 								id="btnBack" onclick="Back();">Back</button>
 						</div>
 					</div>
@@ -1184,10 +1176,8 @@ function verifysubmit(a) {
 
 				<div th:if="${formmode}=='verify'">
 					<div class="card">
-						<div class="card-header"
-							style="height: 50px; background-color: #f5a142;">
-							<h6 style="font-size: 1.2rem; color: black;">CHART OF
-								ACCOUNTS - VERIFY</h6>
+						<div class="card-header">
+							<h4>CHART OF ACCOUNTS - VERIFY</h4>
 						</div>
 						<div class="card-body">
 							<form class=" border border-secondary" action="#" method="post"
@@ -1437,13 +1427,12 @@ function verifysubmit(a) {
 
 							</form>
 						</div>
-						<div class="card-footer text-center"
-							style="background-color: #f5a142">
-							<button type="button" class="btn btn-primary p-2" id="btnHome"
+						<div class="card-footer text-center">
+							<button type="button" class="custom-btn" id="btnHome"
 								onclick="home();">Home</button>
-							<button type="button" class="btn btn-primary p-2" id=""
+							<button type="button" class="custom-btn" id=""
 								onclick="verifysubmit(this);">Verify</button>
-							<button type="button" class="btn btn-primary p-2" id="btnBack"
+							<button type="button" class="custom-btn" id="btnBack"
 								onclick="Back();">Back</button>
 						</div>
 					</div>
@@ -1451,10 +1440,8 @@ function verifysubmit(a) {
 
 				<div th:if="${formmode}=='delete'">
 					<div class="card">
-						<div class="card-header"
-							style="height: 50px; background-color: #f5a142;">
-							<h6 style="font-size: 1.2rem; color: black;">CHART OF
-								ACCOUNTS - DELETE</h6>
+						<div class="card-header">
+							<h4>CHART OF ACCOUNTS - DELETE</h4>
 						</div>
 						<div class="card-body">
 							<form class=" border border-secondary" action="#" method="post"
@@ -1704,15 +1691,13 @@ function verifysubmit(a) {
 
 							</form>
 						</div>
-						<div class="card-footer text-center"
-							style="background-color: #f5a142">
-							<button type="button" class="btn btn-primary p-2" id="btnHome"
+						<div class="card-footer text-center">
+							<button type="button" class="custom-btn" id="btnHome"
 								onclick="home();">Home</button>
-							<button type="button" class="btn btn-primary p-2" id="btnsubmit"
+							<button type="button" class="custom-btn" id="btnsubmit"
 								th:attr="data-attr=${chartaccount?.acct_num}"
 								onclick="deletesubmit(this);">Delete</button>
-
-							<button type="button" class="btn btn-primary p-2" id="btnBack"
+							<button type="button" class="custom-btn" id="btnBack"
 								onclick="Back();">Back</button>
 						</div>
 					</div>
@@ -1720,10 +1705,8 @@ function verifysubmit(a) {
 
 				<div th:if="${formmode}=='modify'">
 					<div class="card">
-						<div class="card-header"
-							style="padding: 1px 0px 0px 1px; background-color: #f5a142;">
-							<h6 style="height: 40px; text-align: left; padding: 10px;">
-								CHART OF ACCOUNTS - MODIFY</h6>
+						<div class="card-header">
+							<h4>CHART OF ACCOUNTS - MODIFY</h4>
 						</div>
 						<div class="card-body">
 							<form class=" border border-secondary" action="#" method="post"
@@ -2011,13 +1994,12 @@ function verifysubmit(a) {
 								</div>
 							</form>
 						</div>
-						<div class="card-footer text-center"
-							style="background-color: #f5a142">
-							<button type="button" class="btn btn-primary p-2" id="btnHome"
+						<div class="card-footer text-center">
+							<button type="button" class="custom-btn" id="btnHome"
 								onclick="home();">Home</button>
-							<button type="button" class="btn btn-primary p-2"
+							<button type="button" class="custom-btn"
 								onclick="modifysubmit(this);">Submit</button>
-							<button type="button" class="btn btn-primary p-2" id="btnBack"
+							<button type="button" class="custom-btn" id="btnBack"
 								onclick="Back();">Back</button>
 						</div>
 

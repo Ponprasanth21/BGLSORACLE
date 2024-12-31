@@ -13,6 +13,8 @@
 <link rel="stylesheet" type="text/css"
 	href="/webjars/datatables/1.10.19/css/jquery.dataTables.min.css"
 	th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
+	
+<link rel="stylesheet" type="text/css" th:href="@{/css/color_document.css}">
 
 <script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
 	th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
@@ -1084,7 +1086,7 @@ body {
 
 		<div class="card border panel panel-primary filterable"
 			style="width: 1400px">
-			<div class="card-header " style="height: 50px">
+			<div class="card-header">
 				<div class="panel-heading text-center" id="modheadtitle">
 					<b style="font-size: 1.2rem;">DAY END OPERATION</b> <span
 						class="glyphicon glyphicon-question-sign" onclick="open1()"></span>
@@ -1271,9 +1273,9 @@ body {
 			</div>
 			<div class="modal-footer " style="margin-top: -25px">
 
-				<button type="button" class="btn btn-xs btn-primary" id="btnhome">Home</button>
+				<button type="button" class="custom-btn" id="btnhome">Home</button>
 
-				<button type="button" class="btn btn-xs btn-primary" value="back"
+				<button type="button" class="custom-btn" value="back"
 					id="btnback">Back</button>
 
 			</div>

@@ -32,6 +32,9 @@
 <link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon">
 <link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
 
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/color_document.css}">
+
 <script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
 	th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
 <script src="/webjars/popper.js/1.14.7/umd/popper.min.js"
@@ -60,6 +63,7 @@
 .chn {
 	box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.2);
 }
+
 .custom-modal {
 	max-width: 80%; /* Set width as 80% of the screen width */
 	max-height: 500%; /* Set height as 80% of the screen height */
@@ -535,16 +539,14 @@ function calculateDTI() {
 					<div class="panel panel-primary filterable">
 
 						<div class="card w-100 border panel panel-primary filterable">
-							<div class="card-header"
-								style="background-color: #e9ecef; height: 50px">
+							<div class="card-header">
 								<div class="float-left">
-									<h6 style="font-size: 1.2rem;">KYC COMPLIANCE- LIST</h6>
+									<h4>KYC COMPLIANCE- LIST</h4>
 								</div>
 								<div class="float-right">
 									<!-- <button type="button" class="btn btn-xs btn-primary btns p-2"
 										onclick="Home(this)">DashBoard</button> -->
-									<button type="button"
-										class="btn btn-xs btn-primary btns p-2 border btn-filter">Filter</button>
+									<button type="button" class="custom-btn btn-filter">Filter</button>
 								</div>
 							</div>
 							<div class="card-body">
@@ -554,7 +556,7 @@ function calculateDTI() {
 								<div class="table-responsive">
 									<table class="table table-bordered  table-hover table-sm"
 										id="usertable">
-										<thead>
+										<thead class="table-header">
 											<tr class="filters">
 												<th><input type="text" style="width: 80px"
 													class="form-control font-weight-bold bg-white"
@@ -596,11 +598,9 @@ function calculateDTI() {
 													th:if="${kycl.ca_customer_type == 'CORPORATE'}"
 													th:text="${kycl.corporateName}">Corporate Name</span> <span
 													th:if="${kycl.ca_customer_type == 'RETAIL'}"
-													th:text="${kycl.ca_preferred_name}">Preferred Name</span>
-													<span
+													th:text="${kycl.ca_preferred_name}">Preferred Name</span> <span
 													th:if="${kycl.ca_customer_type == 'RETAIL'}"
-													th:text="${kycl.ca_full_name_1}">Full
-														Name</span></td>
+													th:text="${kycl.ca_full_name_1}">Full Name</span></td>
 												<td style="font-size: 14px"
 													th:text="${kycl.ca_idenditification_number}">456</td>
 												<td align="center"><input type="radio"
@@ -617,12 +617,11 @@ function calculateDTI() {
 								</div>
 
 							</div>
-							<div class="card-footer text-center"
-								style="background-color: #e9ecef">
+							<div class="card-footer text-center">
 
 
-								<button class="btn btn-primary p-2" onclick="Home();">Home</button>
-								<button class="btn btn-primary p-2" onclick="Back();">Back</button>
+								<button class="custom-btn" onclick="Home();">Home</button>
+								<button class="custom-btn" onclick="Back();">Back</button>
 
 							</div>
 						</div>
@@ -633,14 +632,14 @@ function calculateDTI() {
 				</div>
 
 				<!-- ------------------------------------Approval- view---------------------------------- -->
-					<div th:if="${formmode}=='view'">
+				<div th:if="${formmode}=='view'">
 
 
 					<div class="card w-100 border">
 
-						<div class="card-header" style="background-color: #e9ecef;">
+						<div class="card-header">
 							<div class="float-left">
-								<h6 style="font-size: 1.2rem;">LIST FOR KYC - VIEW</h6>
+								<h4>LIST FOR KYC - VIEW</h4>
 
 							</div>
 							<div class="float-right">
@@ -831,7 +830,7 @@ function calculateDTI() {
 											</div>
 										</div>
 									</div>
-																	</div>
+								</div>
 								<label></label>
 								<div class="
 										row formline"></div>
@@ -1827,12 +1826,10 @@ function calculateDTI() {
 													<label for="sche_type">Cap At Maturity ? </label>
 												</div>
 												<div class="col-sm-2">
-													 <input
-														type="radio" id="maturity_flg"
+													<input type="radio" id="maturity_flg"
 														th:value="${paymentDetails?.maturity_flg}"
 														name="maturity_flg"><font>Yes</font><input
-														type="radio" id="maturity_flg"
-														name="maturity_flg"
+														type="radio" id="maturity_flg" name="maturity_flg"
 														th:value="${paymentDetails?.maturity_flg}"
 														style="margin-left: 20px;" checked><font>No</font>
 												</div>
@@ -1905,7 +1902,7 @@ function calculateDTI() {
 
 									</div>
 								</div>
-							<!--END ACCOUNT DETAILS  -->
+								<!--END ACCOUNT DETAILS  -->
 								<label></label>
 								<div class="row formline"></div>
 								<div class="card "
@@ -2106,37 +2103,36 @@ function calculateDTI() {
 									</div>
 									<div class="card-body">
 										<div class="p-2"
-													style="background-color: #eeeeee; overflow: auto; height: 180px">
-														<table>
-													<thead>
+											style="background-color: #eeeeee; overflow: auto; height: 180px">
+											<table>
+												<thead>
 													<tr>
-													<th></th>
-													<th style="width:800px;text-align:center" >NAME :</th>
+														<th></th>
+														<th style="width: 800px; text-align: center">NAME :</th>
 													</tr>
-													</thead>
-													<tbody id="sign">
-														<tr  th:each="sign : ${SIGNATURE}">
-															<th></th>
-															<td th:text="${sign?.keyword}"style="width:800px;text-align:center"></td>
-															
-															<td class="p-2">
-																<div id="photoCapture1"
-																
-																	style="border: 1px solid #ccc; height: 60px; width: 100px;">
-																</div>
-																</td>
-																<td>
-																<div style="padding-left:50px; height: 60px; width: 100px;"
-																	id="imgCapture1"
-																	>
-																</div>
+												</thead>
+												<tbody id="sign">
+													<tr th:each="sign : ${SIGNATURE}">
+														<th></th>
+														<td th:text="${sign?.keyword}"
+															style="width: 800px; text-align: center"></td>
 
-															</td>
-														
-														</tr>
-													</tbody>
-												</table>
-												</div>
+														<td class="p-2">
+															<div id="photoCapture1"
+																style="border: 1px solid #ccc; height: 60px; width: 100px;">
+															</div>
+														</td>
+														<td>
+															<div
+																style="padding-left: 50px; height: 60px; width: 100px;"
+																id="imgCapture1"></div>
+
+														</td>
+
+													</tr>
+												</tbody>
+											</table>
+										</div>
 									</div>
 								</div>
 								<label></label>
@@ -2197,10 +2193,9 @@ function calculateDTI() {
 											<label class="col-sm-2" style="font-size: 14px"><strong>KYC
 													Date </strong></label>
 											<div class="col-sm-2">
-												<input type="date" id="kyc_date"
-													style="font-weight: 500"
-													class="form-control form-control-sm bg-white border border-dark" name="kyc_date"
-													autocomplete="off" readonly="readonly">
+												<input type="date" id="kyc_date" style="font-weight: 500"
+													class="form-control form-control-sm bg-white border border-dark"
+													name="kyc_date" autocomplete="off" readonly="readonly">
 											</div>
 										</div>
 										<div class="row formline  mt-2"
@@ -2208,12 +2203,11 @@ function calculateDTI() {
 											<label class="col-sm-2" style="font-size: 14px"><strong>KYC
 													Officer </strong></label>
 											<div class="col-sm-2">
-												<input type="text" id="kyc_officer"
-													style="font-weight: 500"
-													class="form-control form-control-sm bg-white border border-dark" th:value="${UserId}"
+												<input type="text" id="kyc_officer" style="font-weight: 500"
+													class="form-control form-control-sm bg-white border border-dark"
+													th:value="${UserId}"
 													onkeyup="this.value = this.value.toUpperCase();"
-													name="kyc_officer" autocomplete="off"
-													readonly="readonly">
+													name="kyc_officer" autocomplete="off" readonly="readonly">
 											</div>
 										</div>
 										<div class="row formline  mt-2"
@@ -2223,8 +2217,7 @@ function calculateDTI() {
 											<div class="col-sm-2">
 												<select type="text" id="kyc_comp"
 													class="form-control form-control-sm bg-white border border-dark"
-													style="font-weight: 500" name="kyc_comp"
-													readonly>
+													style="font-weight: 500" name="kyc_comp" readonly>
 													<option value="">SELECT</option>
 													<option value="COMPLETED">COMPLETED</option>
 													<option value="PARTIAL">PARTIAL</option>
@@ -2237,8 +2230,8 @@ function calculateDTI() {
 													Review Date</strong></label>
 											<div class="col-sm-2">
 												<input type="date" id="kycreview" style="font-weight: 500"
-													class="form-control form-control-sm bg-white border border-dark" name="kycreview"
-													autocomplete="off" readonly="readonly">
+													class="form-control form-control-sm bg-white border border-dark"
+													name="kycreview" autocomplete="off" readonly="readonly">
 											</div>
 										</div>
 										<div class="row formline mt-2"
@@ -2247,8 +2240,8 @@ function calculateDTI() {
 											<div class="col-sm-2">
 												<input type="text" id="remaks" style="font-weight: 500"
 													onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
-													class="form-control form-control-sm bg-white border border-dark" name="kycreview"
-													autocomplete="off">
+													class="form-control form-control-sm bg-white border border-dark"
+													name="kycreview" autocomplete="off">
 											</div>
 										</div>
 									</div>
@@ -2270,19 +2263,15 @@ function calculateDTI() {
 										th:src="@{/images/loader.gif}" alt="Loading..." />
 								</div>
 							</div>
-							<div class="card-footer text-center mt-3">
-								<button type="button" class="btn btn-xs btn-primary p-2"
-									id="btnBack" onclick="Home(this);">Home</button>
-									<button type="button" class="btn btn-xs btn-primary p-2"
-									id="btnHome" onclick="kycclick();">Submit</button>
-							
-								<button type="button" class="btn btn-xs btn-primary p-2"
-									id="btnBack" onclick="showConfirmationModal();">Hold</button>
-								<button type="button" class="btn btn-xs btn-primary p-2"
-									id='btnback' onclick="Back()">Back</button>
-							
-
-
+							<div class="card-footer text-center">
+								<button type="button" class="custom-btn" id="btnBack"
+									onclick="Home(this);">Home</button>
+								<button type="button" class="custom-btn" id="btnHome"
+									onclick="kycclick();">Submit</button>
+								<button type="button" class="custom-btn" id="btnBack"
+									onclick="showConfirmationModal();">Hold</button>
+								<button type="button" class="custom-btn" id='btnback'
+									onclick="Back()">Back</button>
 							</div>
 						</div>
 
@@ -2370,7 +2359,7 @@ function calculateDTI() {
 
 				</div>
 
-<!--VIEW END  -->
+				<!--VIEW END  -->
 			</div>
 		</div>
 	</div>
@@ -2487,7 +2476,7 @@ function calculateDTI() {
 							<label for="date_to_income" style="font-size: 14px"><strong>DEBT
 									TO INCOME </strong></label>
 						</div>
-					<!-- 	<div class="col-sm-2">
+						<!-- 	<div class="col-sm-2">
 							<button type="button" class="btn btn-primary"
 								onclick="calculateDTI()">Calculate DTI</button>
 						</div> -->
@@ -2536,92 +2525,98 @@ function calculateDTI() {
 			</div>
 		</div>
 	</div>
-<!-- Confirmation Modal -->
-<div class="modal fade" id="confirmationModalreject" tabindex="-1"
-	role="dialog" aria-labelledby="confirmationModalLabel"
-	aria-hidden="true" data-backdrop="false">
-	<div class="modal-dialog modal-lg" role="document">
-		<!-- Added modal-lg for larger size -->
-		
-		<div class="modal-content">
-		<div class="card">
-			<div class="modal-header">
-				<h5 class="modal-title" id="confirmationModalLabel"
-					style="font-size: 14px; padding-top: 5px">REJECT CONFIRMATION</h5>
-				<!-- Removed close button -->
-			</div>
-			<div class="modal-body" style="height: auto; padding-top: 15px;">
-				<!-- Removed fixed height for flexibility -->
-				<div>
-				<!-- Centered the confirmation text -->
-				<label style="font-size: 14px;">Are you sure to Reject this record?</label>
-			</div>
-				<div class="row formline" style=" font-weight: 500;margin-top: 5px">
-					<label class="col-form-label ml-3"
-						style="font-size: 14px;"> Reject Remarks </label>
-					<!-- Adjusted label to align -->
-					<div class="col-sm-6">
-						<!-- Increased input width for better alignment -->
-						<input type="text" id="reject_remarks" style="font-weight: 500"
-							onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
-							class="form-control form-control-sm" name="reject_remarks"
-							autocomplete="off">
+	<!-- Confirmation Modal -->
+	<div class="modal fade" id="confirmationModalreject" tabindex="-1"
+		role="dialog" aria-labelledby="confirmationModalLabel"
+		aria-hidden="true" data-backdrop="false">
+		<div class="modal-dialog modal-lg" role="document">
+			<!-- Added modal-lg for larger size -->
+
+			<div class="modal-content">
+				<div class="card">
+					<div class="modal-header">
+						<h5 class="modal-title" id="confirmationModalLabel"
+							style="font-size: 14px; padding-top: 5px">REJECT
+							CONFIRMATION</h5>
+						<!-- Removed close button -->
+					</div>
+					<div class="modal-body" style="height: auto; padding-top: 15px;">
+						<!-- Removed fixed height for flexibility -->
+						<div>
+							<!-- Centered the confirmation text -->
+							<label style="font-size: 14px;">Are you sure to Reject
+								this record?</label>
+						</div>
+						<div class="row formline"
+							style="font-weight: 500; margin-top: 5px">
+							<label class="col-form-label ml-3" style="font-size: 14px;">
+								Reject Remarks </label>
+							<!-- Adjusted label to align -->
+							<div class="col-sm-6">
+								<!-- Increased input width for better alignment -->
+								<input type="text" id="reject_remarks" style="font-weight: 500"
+									onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+									class="form-control form-control-sm" name="reject_remarks"
+									autocomplete="off">
+							</div>
+						</div>
+					</div>
+
+					<div class="modal-footer mt-2">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal" onclick="back();">Cancel</button>
+						<button type="button" class="btn btn-primary"
+							onclick="RejectAcc();">Confirm</button>
 					</div>
 				</div>
 			</div>
-			
-			<div class="modal-footer mt-2">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal"
-					onclick="back();">Cancel</button>
-				<button type="button" class="btn btn-primary" onclick="RejectAcc();">Confirm</button>
-			</div>
-		</div>
 		</div>
 	</div>
-</div>
 	<!-- Confirmation Modal -->
 	<div class="modal fade" id="confirmationModal" tabindex="-1"
-	role="dialog" aria-labelledby="confirmationModalLabel"
-	aria-hidden="true" data-backdrop="false">
-	<div class="modal-dialog modal-lg" role="document">
-		<!-- Added modal-lg for larger size -->
-		
-		<div class="modal-content">
-		<div class="card">
-			<div class="modal-header">
-				<h5 class="modal-title" id="confirmationModalLabel"
-					style="font-size: 14px; padding-top: 5px">HOLD CONFIRMATION</h5>
-				<!-- Removed close button -->
-			</div>
-			<div class="modal-body" style="height: auto; padding-top: 15px;">
-				<!-- Removed fixed height for flexibility -->
-				<div>
-				<!-- Centered the confirmation text -->
-				<label style="font-size: 14px;">Are you sure to Hold this record?</label>
-			</div>
-				<div class="row formline" style=" font-weight: 500;margin-top: 5px">
-					<label class="col-form-label ml-3"
-						style="font-size: 14px;"> Hold Remarks </label>
-					<!-- Adjusted label to align -->
-					<div class="col-sm-6">
-						<!-- Increased input width for better alignment -->
-						<input type="text" id="hold_remarks" style="font-weight: 500"
-							onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
-							class="form-control form-control-sm" name="hold_remarks"
-							autocomplete="off">
+		role="dialog" aria-labelledby="confirmationModalLabel"
+		aria-hidden="true" data-backdrop="false">
+		<div class="modal-dialog modal-lg" role="document">
+			<!-- Added modal-lg for larger size -->
+
+			<div class="modal-content">
+				<div class="card">
+					<div class="modal-header">
+						<h5 class="modal-title" id="confirmationModalLabel"
+							style="font-size: 14px; padding-top: 5px">HOLD CONFIRMATION</h5>
+						<!-- Removed close button -->
+					</div>
+					<div class="modal-body" style="height: auto; padding-top: 15px;">
+						<!-- Removed fixed height for flexibility -->
+						<div>
+							<!-- Centered the confirmation text -->
+							<label style="font-size: 14px;">Are you sure to Hold this
+								record?</label>
+						</div>
+						<div class="row formline"
+							style="font-weight: 500; margin-top: 5px">
+							<label class="col-form-label ml-3" style="font-size: 14px;">
+								Hold Remarks </label>
+							<!-- Adjusted label to align -->
+							<div class="col-sm-6">
+								<!-- Increased input width for better alignment -->
+								<input type="text" id="hold_remarks" style="font-weight: 500"
+									onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+									class="form-control form-control-sm" name="hold_remarks"
+									autocomplete="off">
+							</div>
+						</div>
+					</div>
+
+					<div class="modal-footer mt-2">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal" onclick="back();">Cancel</button>
+						<button type="button" class="btn btn-primary" onclick="holdfin();">Confirm</button>
 					</div>
 				</div>
 			</div>
-			
-			<div class="modal-footer mt-2">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal"
-					onclick="back();">Cancel</button>
-				<button type="button" class="btn btn-primary" onclick="holdfin();">Confirm</button>
-			</div>
-		</div>
 		</div>
 	</div>
-</div>
 	<script>
 
 	function show1(a) { 
@@ -2897,20 +2892,21 @@ function formatNumber(number) {
 	});
 }
 </script>
-<div class="modal fade" data-backdrop="false" data-keyboard="false"
-	tabindex="-1" role="dialog" aria-hidden="true"
-	style="padding-left: 10%" id="mypopup22">
-	<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
-		style="height: 20%">
-		<div class="modal-content">
-			<div class="modal-body" style="text-align: center">
-				<p id="popupmsg_body"></p>
-				<button type="button" class="btn btn-primary" data-dismiss="modal"
-					onclick="Back();">Close</button>
+	<div class="modal fade" data-backdrop="false" data-keyboard="false"
+		tabindex="-1" role="dialog" aria-hidden="true"
+		style="padding-left: 10%" id="mypopup22">
+		<div
+			class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+			style="height: 20%">
+			<div class="modal-content">
+				<div class="modal-body" style="text-align: center">
+					<p id="popupmsg_body"></p>
+					<button type="button" class="btn btn-primary" data-dismiss="modal"
+						onclick="Back();">Close</button>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
 
 </body>
 <script>
@@ -3013,63 +3009,61 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 </script>
-	<div class="modal" id="myleasecal" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel" data-backdrop="false"
-		aria-hidden="true">
-		<div class="modal-dialog custom-modal modal-dialog-centered"
-			role="document">
-			<!-- Custom class added here -->
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="myModalLabel">Demand Schedule
-						Details</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body" style="overflow-y: auto;">
-					<div class="table-responsive" id="demandtable">
-						<table class="table table-bordered">
-							<thead>
-								<tr>
-									<th style="text-align: left; width: 60px !important;">Srl.
-										No.</th>
+<div class="modal" id="myleasecal" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" data-backdrop="false" aria-hidden="true">
+	<div class="modal-dialog custom-modal modal-dialog-centered"
+		role="document">
+		<!-- Custom class added here -->
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="myModalLabel">Demand Schedule
+					Details</h5>
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-y: auto;">
+				<div class="table-responsive" id="demandtable">
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th style="text-align: left; width: 60px !important;">Srl.
+									No.</th>
 
-									<th style="text-align: left; width: 60px !important;">
-										Installment Date</th>
-									<th style="text-align: left; width: 60px !important;">
-										Installment Description</th>
-									<th style="text-align: right; width: 60px !important;">
-										Installment Amt.</th>
-									<th style="text-align: right; width: 60px !important;">
-										Principal Amt.</th>
-									<th style="text-align: right; width: 60px !important;">Interest
-										Amt.</th>
-									<th style="text-align: right; width: 60px !important;">Charges
-										Amt.</th>
-									<th style="text-align: right; width: 60px !important;">
-										Principal Outstanding</th>
+								<th style="text-align: left; width: 60px !important;">
+									Installment Date</th>
+								<th style="text-align: left; width: 60px !important;">
+									Installment Description</th>
+								<th style="text-align: right; width: 60px !important;">
+									Installment Amt.</th>
+								<th style="text-align: right; width: 60px !important;">
+									Principal Amt.</th>
+								<th style="text-align: right; width: 60px !important;">Interest
+									Amt.</th>
+								<th style="text-align: right; width: 60px !important;">Charges
+									Amt.</th>
+								<th style="text-align: right; width: 60px !important;">
+									Principal Outstanding</th>
 
-								</tr>
-							</thead>
-							<tbody id="repaymentDet">
+							</tr>
+						</thead>
+						<tbody id="repaymentDet">
 
-								<!-- More rows can be added similarly -->
-							</tbody>
-						</table>
-					</div>
-				</div>
-
-
-				<div class="modal-footer">
-					<!-- <button type="button" class="btn btn-primary"
-																	onclick="calculateDTI()">Calculate DTI</button> -->
-					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal">Close</button>
+							<!-- More rows can be added similarly -->
+						</tbody>
+					</table>
 				</div>
 			</div>
-		</div>
 
+
+			<div class="modal-footer">
+				<!-- <button type="button" class="btn btn-primary"
+																	onclick="calculateDTI()">Calculate DTI</button> -->
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			</div>
+		</div>
 	</div>
+
+</div>
 </html>

@@ -20,6 +20,9 @@
 <link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon">
 <link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
 
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/color_document.css}">
+
 <script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
 	th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
 <script src="/webjars/popper.js/1.14.7/umd/popper.min.js"
@@ -363,14 +366,12 @@ input:hover+.password-info {
 			<div class="col-sm-11 ml-5 mt-2">
 				<div th:if="${formmode}=='list'">
 					<div class="card">
-						<div class="card-header "
-							style="background-color: #f5a142; height: 50px">
+						<div class="card-header ">
 							<div class="float-left">
-								<h4 style="font-size: 1.2rem; color: black;">REFERENCE CODE
-									MAINTENANCE</h4>
+								<h4>REFERENCE CODE MAINTENANCE</h4>
 							</div>
 							<div class="float-right">
-								<button class="btn btn-primary P-2" onclick="add();">Add</button>
+								<button class="custom-btn" onclick="add();">Add</button>
 							</div>
 						</div>
 						<div class="mt-3"
@@ -378,23 +379,23 @@ input:hover+.password-info {
 							<!-- Tab buttons -->
 							<button class="tablinks active rounded-pill" id="RefButton"
 								onclick="RefCode(this);"
-								style="font-size: 16px; padding: 4px 8px; height: 40%; width: 18%;">Reference
+								style="font-size: 16px; padding: 4px 8px; height: 40%; width: 18%; background-color: #f5a142; color: white;">Reference
 								Code Maintenance</button>
 							<button class="tablinks rounded-pill" id="GLButton"
 								onclick="GLStruct(this);"
-								style="font-size: 16px; padding: 4px 8px; height: 40%; width: 18%;">GL
+								style="font-size: 16px; padding: 4px 8px; height: 40%; width: 18%; background-color: #f5a142; color: white;">GL
 								Structure</button>
 							<button class="tablinks rounded-pill" id="param"
 								onclick="SchemeCode(this);"
-								style="font-size: 16px; padding: 4px 8px; height: 40%; width: 18%;">Scheme
+								style="font-size: 16px; padding: 4px 8px; height: 40%; width: 18%; background-color: #f5a142; color: white;">Scheme
 								Codes</button>
 							<button class="tablinks rounded-pill" id="chartOfAccounts"
 								onclick="Chart(this);"
-								style="font-size: 16px; padding: 4px 8px; height: 40%; width: 18%;">Chart
+								style="font-size: 16px; padding: 4px 8px; height: 40%; width: 18%; background-color: #f5a142; color: white;">Chart
 								of Accounts</button>
 							<button class="tablinks rounded-pill" id="accountLedger"
 								onclick="Account(this);"
-								style="font-size: 16px; padding: 4px 8px; height: 40%; width: 18%;">Account
+								style="font-size: 16px; padding: 4px 8px; height: 40%; width: 18%; background-color: #f5a142; color: white;">Account
 								Ledger</button>
 
 						</div>
@@ -415,56 +416,44 @@ input:hover+.password-info {
 								</div>
 
 							</div> -->
-								<table class="table table-bordered  table-hover table-sm"
+								<table class="table table-bordered table-hover table-sm"
 									style="margin-bottom: 0px; font-size: initial;"
 									id="AssosiateTable">
-									<thead class="thead-light">
-
+									<thead>
 										<tr>
 											<th>Ref Type</th>
 											<th>Type Desc</th>
 											<th>Ref Id</th>
 											<th>Ref Desc</th>
 											<th>Module Id</th>
-
 										</tr>
 									</thead>
-
 									<tbody id="placelist">
-
-										<tr th:each="EmployeeData,iterator : ${refList}">
-
-
+										<tr th:each="EmployeeData, iterator : ${refList}">
 											<td th:text="${EmployeeData.ref_type}"></td>
 											<td
 												th:text="${#strings.replace(EmployeeData.ref_type_desc, '_', ' ')}"></td>
 											<td th:text="${EmployeeData.ref_id}"></td>
 											<td th:text="${EmployeeData.ref_id_desc}"></td>
 											<td th:text="${EmployeeData.module_id}"></td>
-
 										</tr>
-
 									</tbody>
-
 								</table>
+
 							</div>
 						</div>
-						<div class="card-footer text-center"
-							style="background-color: #f5a142;">
-							<button class="btn btn-primary P-2" onclick="Home();">Home</button>
-							<button class="btn btn-primary P-2" onclick="Back();">Back</button>
+						<div class="card-footer text-center">
+							<button class="custom-btn" onclick="Home();">Home</button>
+							<button class="custom-btn" onclick="Back();">Back</button>
 						</div>
 					</div>
 				</div>
 
 				<div th:if="${formmode}=='nav'">
 					<div class="card">
-						<div class="card-header "
-							style="background-color: #f5a142; height: 50px">
-
+						<div class="card-header ">
 							<div class="float-left">
-								<h6 style="font-size: 1.2rem; color: black;">REFERENCE CODE
-									MAINTENANCE - ADD</h6>
+								<h4>REFERENCE CODE MAINTENANCE - ADD</h4>
 							</div>
 						</div>
 
@@ -554,16 +543,11 @@ input:hover+.password-info {
 								</div>
 							</form>
 						</div>
-						<div class="card-footer text-center"
-							style="background-color: #f5a142;">
-
-
-							<button class="btn btn-primary P-2" onclick="Home();">Home</button>
-							<button class="btn btn-primary P-2" onclick="Submit();">Submit</button>
-							<button class="btn btn-primary P-2" onclick="Back();">Back</button>
-
+						<div class="card-footer text-center">
+							<button class="custom-btn" onclick="Home();">Home</button>
+							<button class="custom-btn" onclick="Submit();">Submit</button>
+							<button class="custom-btn" onclick="Back();">Back</button>
 						</div>
-
 					</div>
 				</div>
 

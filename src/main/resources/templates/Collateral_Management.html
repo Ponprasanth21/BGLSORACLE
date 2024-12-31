@@ -23,6 +23,9 @@
 	th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
 <link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon">
 <link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
+
+<link rel="stylesheet" type="text/css" th:href="@{/css/color_document.css}">
+
 <script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
 	th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
 <script src="/webjars/popper.js/1.14.7/umd/popper.min.js"
@@ -922,15 +925,13 @@ body {
 				<!-- -------------------------------------------------------------Organization Main-------------------------------------------- -->
 				<div th:if="${formmode}=='list'">
 					<div class="card ">
-						<div class="card-header"
-							style="background-color: #e9ecef; height: 50px">
+						<div class="card-header">
 							<div class="float-left">
-								<h6 style="font-size: 1.2rem; color: black;">COLLATERAL
-									MANAGEMENT - LIST</h6>
+								<h4>COLLATERAL MANAGEMENT - LIST</h4>
 							</div>
 							<div class="float-right">
-								<button class="btn btn-primary p-2" onclick="addcolla()">Add</button>
-								<button class="btn btn-xs btn-primary p-2 mr-4  btn-filter">Filter</button>
+								<button class="custom-btn" onclick="addcolla()">Add</button>
+								<button class="custom-btn  btn-filter">Filter</button>
 							</div>
 						</div>
 						<div class="card-body">
@@ -938,7 +939,7 @@ body {
 								<div class="table-responsive">
 									<table class="table  table-bordered  table-hover table-sm"
 										style="margin-bottom: 0px; font-size: initial;" id="usertable">
-										<thead class="thead-light">
+										<thead class="table-header">
 											<tr>
 												<th>Branch Id</th>
 												<th>Customer Id</th>
@@ -994,10 +995,9 @@ body {
 								</div>
 							</div>
 						</div>
-						<div class="card-footer text-center "
-							style="background-color: #e9ecef">
-							<button class="btn btn-primary p-2" onclick="Home();">Home</button>
-							<button class="btn btn-primary p-2" onclick="Back();">Back</button>
+						<div class="card-footer text-center ">
+							<button class="custom-btn" onclick="Home();">Home</button>
+							<button class="custom-btn" onclick="Back();">Back</button>
 						</div>
 					</div>
 				</div>
@@ -1006,16 +1006,13 @@ body {
 					<div class="card w-100 border">
 						<div class="card-header">
 							<div class="float-left">
-								<h6 style="font-size: 1.2rem; color: black;">COLLATERAL
-									MANAGEMENT-ADD</h6>
+								<h4>COLLATERAL MANAGEMENT - ADD</h4>
 							</div>
 						</div>
 						<form action="#" method="post" autocomplete="off" id="colla"
 							th:object="${colla}">
 							<div id="tab1" class="tabcontent" style="display: block;">
 								<div class="card-body">
-
-
 									<div class="row formline">
 										<div class="col-sm-1">
 											<label>Branch Code</label>
@@ -1698,10 +1695,9 @@ body {
 							</div> -->
 							<!------------------------------------------------------------------ IMMOVABLE PROPERTY -------------------------------------------------------------------->
 							<div id="immovablePropertyDetails" style="display: none;">
-								<div class="card-header"
-									style="background-color: #e9ecef; height: 50px">
+								<div class="card-header">
 									<div class="float-left">
-										<h6 style="font-size: 1.5rem;">IMMOVABLE PROPERTY</h6>
+										<h4>IMMOVABLE PROPERTY</h4>
 									</div>
 								</div>
 								<div class="card-body">
@@ -1789,10 +1785,9 @@ body {
 							</div>
 							<!------------------------------------------------------------------ Plant and Machinery -------------------------------------------------------------------->
 							<div id="plantAndMachineryDetails" style="display: none;">
-								<div class="card-header"
-									style="background-color: #e9ecef; height: 50px">
+								<div class="card-header">
 									<div class="float-left">
-										<h6 style="font-size: 1.5rem;">PLANT AND MACHINERY</h6>
+										<h4>PLANT AND MACHINERY</h4>
 									</div>
 								</div>
 								<div class="card-body">
@@ -1837,10 +1832,9 @@ body {
 							</div>
 							<!------------------------------------------------------------------ Gold Ornaments-------------------------------------------------------------------->
 							<div id="goldOrnamentsDetails" style="display: none;">
-								<div class="card-header"
-									style="background-color: #e9ecef; height: 50px">
+								<div class="card-header">
 									<div class="float-left">
-										<h6 style="font-size: 1.5rem;">GOLD ORNAMENTS</h6>
+										<h4 style="font-size: 1.5rem;">GOLD ORNAMENTS</h4>
 									</div>
 								</div>
 								<div class="card-body">
@@ -1918,10 +1912,9 @@ body {
 							</div>
 							<!------------------------------------------------------------------Vehicles-------------------------------------------------------------------->
 							<div id="vehiclesDetails" style="display: none;">
-								<div class="card-header"
-									style="background-color: #e9ecef; height: 50px">
+								<div class="card-header">
 									<div class="float-left">
-										<h6 style="font-size: 1.5rem;">VEHICLES</h6>
+										<h4>VEHICLES</h4>
 									</div>
 								</div>
 								<div class="card-body">
@@ -2000,10 +1993,9 @@ body {
 							</div>
 							<!------------------------------------------------------------------ Book Debts-------------------------------------------------------------------->
 							<div id="bookDebitsDetails" style="display: none;">
-								<div class="card-header"
-									style="background-color: #e9ecef; height: 50px">
+								<div class="card-header">
 									<div class="float-left">
-										<h6 style="font-size: 1.5rem;">BOOK DEBTS</h6>
+										<h4>BOOK DEBTS</h4>
 									</div>
 								</div>
 								<div class="card-body">
@@ -2083,10 +2075,9 @@ body {
 							</div>
 							<!------------------------------------------------------------------ Share Certificate-------------------------------------------------------------------->
 							<div id="shareCertificatesDetails" style="display: none;">
-								<div class="card-header"
-									style="background-color: #e9ecef; height: 50px">
+								<div class="card-header">
 									<div class="float-left">
-										<h6 style="font-size: 1.5rem;">SHARE CERTIFICATION</h6>
+										<h4>SHARE CERTIFICATION</h4>
 									</div>
 								</div>
 								<div class="card-body">
@@ -2131,10 +2122,9 @@ body {
 							<!------------------------------------------------------------------Personal Guarantee-------------------------------------------------------------------->
 							<div id="guaranteesDetails" style="display: none;">
 								<div class="card">
-									<div class="card-header"
-										style="background-color: #e9ecef; height: 50px">
+									<div class="card-header">
 										<div class="float-left">
-											<h6 style="font-size: 1.5rem;">PERSONAL GUARANTEE</h6>
+											<h4 style="font-size: 1.5rem;">PERSONAL GUARANTEE</h4>
 										</div>
 									</div>
 									<div class="card-body" id="guaranteesBody">
@@ -2179,12 +2169,12 @@ body {
 							<!--------------------------------------------------------------------------Details End-------------------------------------------------------------------->
 						</form>
 					</div>
-					<div class="card-footer text-center mt-3">
-						<button type="button" class="btn btn-xs btn-primary p-2"
+					<div class="card-footer text-center">
+						<button type="button" class="custom-btn"
 							id="btnHome" onclick="Home();">Home</button>
-						<button type="button" class="btn btn-xs btn-primary p-2"
+						<button type="button" class="custom-btn"
 							id="btnSubmit" onclick="submitformadd();">Submit</button>
-						<button type="button" class="btn btn-xs btn-primary p-2"
+						<button type="button" class="custom-btn"
 							id="btnBack" onclick="Back();">Back</button>
 					</div>
 					<!------------------------------------------------------------------------ Add footer ------------------------------------------------------------------>
@@ -2980,7 +2970,7 @@ body {
 										<table class="table  table-bordered  table-hover table-sm"
 											style="margin-bottom: 0px; font-size: initial;"
 											id="flowsTable">
-											<thead class="thead-light">
+											<thead class="table-header">
 												<tr>
 													<th>SRL</th>
 													<th>FLOW ID</th>
@@ -3006,10 +2996,9 @@ body {
 						</div>
 						<!------------------------------------------------------------------ IMMOVABLE PROPERTY -------------------------------------------------------------------->
 						<div id="immovablePropertyDetails" style="display: none;">
-							<div class="card-header"
-								style="background-color: #e9ecef; height: 50px">
+							<div class="card-header">
 								<div class="float-left">
-									<h6 style="font-size: 1.5rem;">IMMOVABLE PROPERTY</h6>
+									<h4>IMMOVABLE PROPERTY</h4>
 								</div>
 							</div>
 							<div class="card-body">
@@ -3097,10 +3086,9 @@ body {
 						</div>
 						<!------------------------------------------------------------------ Plant and Machinery -------------------------------------------------------------------->
 						<div id="plantAndMachineryDetails" style="display: none;">
-							<div class="card-header"
-								style="background-color: #e9ecef; height: 50px">
+							<div class="card-header">
 								<div class="float-left">
-									<h6 style="font-size: 1.5rem;">PLANT AND MACHINERY</h6>
+									<h4>PLANT AND MACHINERY</h4>
 								</div>
 							</div>
 							<div class="card-body">
@@ -3144,10 +3132,9 @@ body {
 						</div>
 						<!------------------------------------------------------------------ Gold Ornaments-------------------------------------------------------------------->
 						<div id="goldOrnamentsDetails" style="display: none;">
-							<div class="card-header"
-								style="background-color: #e9ecef; height: 50px">
+							<div class="card-header">
 								<div class="float-left">
-									<h6 style="font-size: 1.5rem;">GOLD ORNAMENTS</h6>
+									<h4 style="font-size: 1.5rem;">GOLD ORNAMENTS</h4>
 								</div>
 							</div>
 							<div class="card-body">
@@ -3224,10 +3211,9 @@ body {
 						</div>
 						<!------------------------------------------------------------------Vehicles-------------------------------------------------------------------->
 						<div id="vehiclesDetails" style="display: none;">
-							<div class="card-header"
-								style="background-color: #e9ecef; height: 50px">
+							<div class="card-header">
 								<div class="float-left">
-									<h6 style="font-size: 1.5rem;">VEHICLES</h6>
+									<h4 style="font-size: 1.5rem;">VEHICLES</h4>
 								</div>
 							</div>
 							<div class="card-body">
@@ -3309,10 +3295,9 @@ body {
 						</div>
 						<!------------------------------------------------------------------ Book Debts-------------------------------------------------------------------->
 						<div id="bookDebitsDetails" style="display: none;">
-							<div class="card-header"
-								style="background-color: #e9ecef; height: 50px">
+							<div class="card-header">
 								<div class="float-left">
-									<h6 style="font-size: 1.5rem;">BOOK DEBTS</h6>
+									<h4 style="font-size: 1.5rem;">BOOK DEBTS</h4>
 								</div>
 							</div>
 							<div class="card-body">
@@ -3389,10 +3374,9 @@ body {
 						</div>
 						<!------------------------------------------------------------------ Share Certificate-------------------------------------------------------------------->
 						<div id="shareCertificatesDetails" style="display: none;">
-							<div class="card-header"
-								style="background-color: #e9ecef; height: 50px">
+							<div class="card-header">
 								<div class="float-left">
-									<h6 style="font-size: 1.5rem;">SHARE CERTIFICATION</h6>
+									<h4>SHARE CERTIFICATION</h4>
 								</div>
 							</div>
 							<div class="card-body">
@@ -3435,10 +3419,9 @@ body {
 						<!------------------------------------------------------------------Personal Guarantee-------------------------------------------------------------------->
 						<div id="guaranteesDetails" style="display: none;">
 							<div class="card">
-								<div class="card-header"
-									style="background-color: #e9ecef; height: 50px">
+								<div class="card-header">
 									<div class="float-left">
-										<h6 style="font-size: 1.5rem;">PERSONAL GUARANTEE</h6>
+										<h4>PERSONAL GUARANTEE</h4>
 									</div>
 								</div>
 								<div class="card-body" id="guaranteesBody">
@@ -3482,10 +3465,10 @@ body {
 						</div>
 						<!--------------------------------------------------------------------------Details End-------------------------------------------------------------------->
 					</div>
-					<div class="card-footer text-center mt-3">
-						<button type="button" class="btn btn-xs btn-primary p-2"
+					<div class="card-footer text-center">
+						<button type="button" class="custom-btn"
 							id="btnHome" onclick="Home();">Home</button>
-						<button type="button" class="btn btn-xs btn-primary p-2"
+						<button type="button" class="custom-btn"
 							id="btnBack" onclick="Back();">Back</button>
 					</div>
 					<!-----------------------------------------------------------------footer end ------------------------------------------------------------>
@@ -3500,8 +3483,8 @@ body {
 						<div class="card-header"
 							style="padding: 8px 8px; display: flex; justify-content: space-around;">
 							<div class="float-left">
-								<h6 style="font-size: 1.2rem; color: black;">COLLATERAL
-									MANAGEMENT-MODIFY</h6>
+								<h4 style="font-size: 1.2rem; color: black;">COLLATERAL
+									MANAGEMENT-MODIFY</h4>
 							</div>
 
 							<button class="tablinks active" id="screen3"
@@ -4270,10 +4253,9 @@ body {
 							</div> -->
 							<!------------------------------------------------------------------ IMMOVABLE PROPERTY -------------------------------------------------------------------->
 							<div id="immovablePropertyDetails" style="display: none;">
-								<div class="card-header"
-									style="background-color: #e9ecef; height: 50px">
+								<div class="card-header">
 									<div class="float-left">
-										<h6 style="font-size: 1.5rem;">IMMOVABLE PROPERTY</h6>
+										<h4>IMMOVABLE PROPERTY</h4>
 									</div>
 								</div>
 								<div class="card-body">
@@ -4373,10 +4355,9 @@ body {
 							</div>
 							<!------------------------------------------------------------------ Plant and Machinery -------------------------------------------------------------------->
 							<div id="plantAndMachineryDetails" style="display: none;">
-								<div class="card-header"
-									style="background-color: #e9ecef; height: 50px">
+								<div class="card-header">
 									<div class="float-left">
-										<h6 style="font-size: 1.5rem;">PLANT AND MACHINERY</h6>
+										<h4 style="font-size: 1.5rem;">PLANT AND MACHINERY</h4>
 									</div>
 								</div>
 								<div class="card-body">
@@ -4425,10 +4406,9 @@ body {
 							</div>
 							<!------------------------------------------------------------------ Gold Ornaments-------------------------------------------------------------------->
 							<div id="goldOrnamentsDetails" style="display: none;">
-								<div class="card-header"
-									style="background-color: #e9ecef; height: 50px">
+								<div class="card-header">
 									<div class="float-left">
-										<h6 style="font-size: 1.5rem;">GOLD ORNAMENTS</h6>
+										<h4>GOLD ORNAMENTS</h4>
 									</div>
 								</div>
 								<div class="card-body">
@@ -4514,10 +4494,9 @@ body {
 							</div>
 							<!------------------------------------------------------------------Vehicles-------------------------------------------------------------------->
 							<div id="vehiclesDetails" style="display: none;">
-								<div class="card-header"
-									style="background-color: #e9ecef; height: 50px">
+								<div class="card-header">
 									<div class="float-left">
-										<h6 style="font-size: 1.5rem;">VEHICLES</h6>
+										<h4 style="font-size: 1.5rem;">VEHICLES</h4>
 									</div>
 								</div>
 								<div class="card-body">
@@ -4604,10 +4583,9 @@ body {
 							</div>
 							<!------------------------------------------------------------------ Book Debts-------------------------------------------------------------------->
 							<div id="bookDebitsDetails" style="display: none;">
-								<div class="card-header"
-									style="background-color: #e9ecef; height: 50px">
+								<div class="card-header">
 									<div class="float-left">
-										<h6 style="font-size: 1.5rem;">BOOK DEBTS</h6>
+										<h4>BOOK DEBTS</h4>
 									</div>
 								</div>
 								<div class="card-body">
@@ -4695,10 +4673,9 @@ body {
 							</div>
 							<!------------------------------------------------------------------ Share Certificate-------------------------------------------------------------------->
 							<div id="shareCertificatesDetails" style="display: none;">
-								<div class="card-header"
-									style="background-color: #e9ecef; height: 50px">
+								<div class="card-header">
 									<div class="float-left">
-										<h6 style="font-size: 1.5rem;">SHARE CERTIFICATION</h6>
+										<h4 style="font-size: 1.5rem;">SHARE CERTIFICATION</h4>
 									</div>
 								</div>
 								<div class="card-body">
@@ -4747,10 +4724,9 @@ body {
 							<!------------------------------------------------------------------Personal Guarantee-------------------------------------------------------------------->
 							<div id="guaranteesDetails" style="display: none;">
 								<div class="card">
-									<div class="card-header"
-										style="background-color: #e9ecef; height: 50px">
+									<div class="card-header">
 										<div class="float-left">
-											<h6 style="font-size: 1.5rem;">PERSONAL GUARANTEE</h6>
+											<h4>PERSONAL GUARANTEE</h4>
 										</div>
 									</div>
 									<div class="card-body" id="guaranteesBody">
@@ -4800,11 +4776,11 @@ body {
 						<!--------------------------------------------------------------------------Details End-------------------------------------------------------------------->
 
 						<div class="card-footer text-center mt-3">
-							<button type="button" class="btn btn-xs btn-primary p-2"
+							<button type="button" class="custom-btn"
 								id="btnHome" onclick="Home();">Home</button>
-							<button type="button" class="btn btn-xs btn-primary p-2"
+							<button type="button" class="custom-btn"
 								id="btnHome" onclick="submitdatas(this);">Submit</button>
-							<button type="button" class="btn btn-xs btn-primary p-2"
+							<button type="button" class="custom-btn"
 								id="btnBack" onclick="Back();">Back</button>
 						</div>
 
