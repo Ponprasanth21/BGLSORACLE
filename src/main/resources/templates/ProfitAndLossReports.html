@@ -12,6 +12,8 @@
 <link rel="stylesheet" type="text/css"
 	href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"
 	th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/color_document.css}">
+
 <link rel="stylesheet" type="text/css"
 	href="/webjars/font-awesome/5.9.0/css/all.min.css"
 	th:href="@{/webjars/font-awesome/5.9.0/css/all.min.css}">
@@ -554,7 +556,7 @@ $(document)
 				<div th:if="${formmode}=='list'">
 					<div class="panel panel-primary filterable">
 						<div class="card w-100 border panel panel-primary filterable">
-							<div class="card-header" style="background-color: #f5a142">
+							<div class="card-header"  >
 								<div class="float-left"
 									style="display: flex; margin-left: -10px; justify-content: space-between; align-items: center;">
 									<h5>INCOME</h5>
@@ -620,8 +622,8 @@ $(document)
 							</div>
 
 							<div class="card-footer text-center border-top-0"
-								style="background-color: #f5a142">
-								<button type="button" class="btn btn-xs btn-primary mr-2"
+								 >
+								<button type="button" class="custom-btn"
 									id="btnHome" onclick="Home();">Home</button>
 
 							</div>
@@ -706,9 +708,9 @@ $(document)
 
 
 							<div class="card-footer text-center border-top-0"
-								style="background-color: #f5a142">
+								 >
 
-								<button type="button" class="btn btn-xs btn-primary ml-2"
+								<button type="button" class="custom-btn"
 									id="btnBack" onclick="back();">Back</button>
 							</div>
 

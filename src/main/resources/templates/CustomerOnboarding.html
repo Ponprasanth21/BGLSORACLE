@@ -66,6 +66,7 @@
 <script src="https://cdn.jsdelivr.net/npm/signature_pad"></script>
 <script src="https://cdn.jsdelivr.net/npm/signature_pad"></script>
 <link rel="stylesheet" href="css/signature-pad.css">
+<link rel="stylesheet" type="text/css" th:href="@{/css/color_document.css}">
 
 
 <style>
@@ -353,7 +354,7 @@ body {
 }
 
 /* Add Animation */
-@
+
 -webkit-keyframes animatetop {from { top:-300px;
 	opacity: 0
 }
@@ -364,7 +365,7 @@ to {
 }
 
 }
-@
+
 keyframes animatetop {from { top:-300px;
 	opacity: 0
 }
@@ -3787,18 +3788,19 @@ function SmsFunction() {
 					</div>
 
 
-					<div class="card-footer text-center" id="checkbuttons">
-						<div
-							class="row formline text-center d-flex justify-content-center">
-							<button type="button" class="custom-btn" id="btnHome"
-								onclick="home()">Home</button>
-							<button type="submit" class="custom-btn"
-								id="checkcustbtn" onclick="checkcust();">Customer Check</button>
-							<button type="button" class="custom-btn" id="btnBack"
-								onclick="back()">Back</button>
+						<div class="card-footer text-center" id="checkbuttons">
+							<div
+							
+								class="row formline text-center d-flex justify-content-center">
+								<button type="button" class="custom-btn" id="btnHome"
+									onclick="home()">Home</button>
+								<button type="submit" class="custom-btn"
+									id="checkcustbtn" onclick="checkcust();">Customer Check</button>
+								<button type="button" class="custom-btn" id="btnBack"
+									onclick="back()">Back</button>
+							</div>
+	
 						</div>
-
-					</div>
 
 					<div class="card-footer text-center" id="proceed&Hold"
 						style="text-align: center; margin-top: 25px; margin-bottom: 25px;"

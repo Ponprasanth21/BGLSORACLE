@@ -23,19 +23,21 @@
 }
 
 .card-footer {
-	background-color: #f5a142;
+    background-color: #f5a142;
+    height: 45px; /* Adjust the height value as needed */
 }
+
 
 .card-header {
 	background-color: #f5a142;
-	height: 50px;
+	height: 45px;
 	color: white;
 	font-size: 1.2rem;
 }
 
 .table-header {
 	background-color: #f5a142;
-	height: 50px;
+	height: 45px;
 	color: white;
 	font-size: 1.2rem;
 }

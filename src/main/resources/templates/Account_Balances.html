@@ -15,6 +15,9 @@
 	href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css"
 	th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
 <link rel="stylesheet" type="text/css"
+	th:href="@{/css/color_document.css}">
+
+<link rel="stylesheet" type="text/css"
 	href="/webjars/datatables/1.10.19/css/jquery.dataTables.min.css"
 	th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
 <link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon">
@@ -625,12 +628,10 @@ input:hover+.password-info {
 			<div class="col-sm-11 ml-5 mt-2">
 
 				<div th:if="${formmode}=='list'">
-					<div class="card-header "
-						style="background-color: #f5a142; HEIGHT: 50px; padding-left: 5px;">
+					<div class="card-header ">
 
 						<div class="float-left">
-							<h6 style="font-size: 1.2rem; color: black;" class="ml-4">Account
-								Balances</h6>
+							<h4>Account Balances</h4>
 						</div>
 					</div>
 
@@ -649,12 +650,11 @@ input:hover+.password-info {
 					</div>
 
 
-					<div class="card-footer text-center"
-						style="background-color: #f5a142;">
+					<div class="card-footer text-center">
 
 
-						<button class="btn btn-primary P-2" onclick="Home();">Home</button>
-						<button class="btn btn-primary P-2" onclick="back();">Back</button>
+						<button class="custom-btn" onclick="Home();">Home</button>
+						<button class="custom-btn" onclick="back();">Back</button>
 
 					</div>
 
@@ -669,17 +669,14 @@ input:hover+.password-info {
 							<div class="card">
 								<div class="panel panel-primary filterable">
 									<div
-										class="card-header d-flex justify-content-between align-items-center"
-										style="background-color: #f5a142; height: auto;">
+										class="card-header d-flex justify-content-between align-items-center">
 										<div>
-											<h4
-												style="font-family: Verdana; font-size: x-large; font-style: inherit;">Lease
-												Account Balances</h4>
+											<h4>Lease Account Balances</h4>
 										</div>
 										<div class="d-flex align-items-center">
 											<label for="date_of_loan"
-												style="font-size: 15px; margin-right: 10px; white-space: nowrap;">As on
-												Date</label> <input type="date" id="date_of_loan"
+												style="font-size: 15px; margin-right: 10px; white-space: nowrap;">As
+												on Date</label> <input type="date" id="date_of_loan"
 												onchange="leasedate()"
 												class="form-control form-control-sm bg-white border border-dark pl-2"
 												autocomplete="off" />
@@ -731,10 +728,10 @@ input:hover+.password-info {
 									</div>
 
 									<div class="card-footer text-center">
-										<button type="button" class="btn btn-primary" id="btnHome"
+										<button type="button" class="custom-btn" id="btnHome"
 											onclick="home()">Home</button>
 
-										<button type="button" class="btn btn-primary" id="btnBack"
+										<button type="button" class="custom-btn" id="btnBack"
 											onclick="back()">Back</button>
 
 									</div>
@@ -817,12 +814,12 @@ input:hover+.password-info {
 										</div>
 									</div>
 
-									<div class="card-footer text-center" 
-									style="background-color: #f5a142">
-										<button type="button" class="btn btn-primary" id="btnHome"
+									<div class="card-footer text-center"
+										 >
+										<button type="button" class="custom-btn" id="btnHome"
 											onclick="home()">Home</button>
 
-										<button type="button" class="btn btn-primary" id="btnBack"
+										<button type="button" class="custom-btn" id="btnBack"
 											onclick="back()">Back</button>
 
 									</div>

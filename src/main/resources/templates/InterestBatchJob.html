@@ -1,4 +1,4 @@
-<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+ <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
@@ -14,6 +14,7 @@
 		th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
 	<link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon">
 	<link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
+<link rel="stylesheet" type="text/css" th:href="@{/css/color_document.css}">
 
 	<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
 		th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
@@ -1268,11 +1269,12 @@
 			<div class="col-sm-11 ml-5 mt-2">
 
 				<div th:if="${formmode}=='list'">
-					<div class="card-header " style="background-color: #f5a142; HEIGHT: 50px; padding-left: 5px;">
+					<div class="card-header " style="  HEIGHT: 50px; padding-left: 5px;">
 
 						<div class="float-left">
-							<h6 style="font-size: 1.2rem; color: black;" class="ml-4">BATCH
-								JOB</h6>
+						<h4>BATCH
+								JOB</h4>
+							 
 						</div>
 
 
@@ -1448,11 +1450,11 @@
 					</div>
 
 
-					<div class="card-footer text-center" style="background-color: #f5a142;">
+					<div class="card-footer text-center"  >
 
 
-						<button class="btn btn-primary P-2" onclick="Home();">Home</button>
-						<button class="btn btn-primary P-2" onclick="back();">Back</button>
+						<button class="custom-btn" onclick="Home();">Home</button>
+						<button class="custom-btn" onclick="back();">Back</button>
 
 					</div>
 

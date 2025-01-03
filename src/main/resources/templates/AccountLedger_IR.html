@@ -23,6 +23,8 @@
 	th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
 <link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon">
 <link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/color_document.css}">
 
 <script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
 	th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
@@ -673,11 +675,11 @@ input:hover+.password-info {
 					<div class="panel panel-primary filterable">
 						<div class="card w-100 border panel panel-primary filterable">
 
-							<div class="card-header"
-								style="background-color: #e9ecef; height: 50px">
+							<div class="card-header">
 								<div class="float-left">
-									<h6 style="font-size: 1.2rem; color: black;">ACCOUNT
-										LEDGER - LIST</h6>
+									<h4>ACCOUNT LEDGER - LIST</h4>
+
+
 								</div>
 								<div class="float-right">
 									<button type="button"
@@ -761,11 +763,11 @@ input:hover+.password-info {
 							</div>
 
 							<div class="card-footer text-center"
-								style="background-color: #e9ecef">
+								 >
 
 
-								<button class="btn btn-primary p-2" onclick="Home();">Home</button>
-								<button class="btn btn-primary p-2" onclick="Back();">Back</button>
+								<button class="custom-btn" onclick="Home();">Home</button>
+								<button class="custom-btn" onclick="Back();">Back</button>
 
 							</div>
 
@@ -779,10 +781,10 @@ input:hover+.password-info {
 
 
 					<div class="card w-100 border">
-						<div class="card-header"
-							style="background-color: #e9ecef; height: 50px">
+						<div class="card-header">
 							<div class="float-left">
-								<h6 style="font-size: 1.2rem; color: black;">ACCOUNT LEDGER - VIEW</h6>
+								<h4>ACCOUNT LEDGER - VIEW</h4>
+
 							</div>
 
 						</div>
@@ -815,7 +817,7 @@ input:hover+.password-info {
 
 								<div class="row formline"
 									style="padding: 0px 0px 2px 0px; margin-left: -130px">
-									<div class="col-sm-1"></div>
+									<div class="col-sm-1"></div>	
 									<div class="col-sm-2">Acct Bal</div>
 									<div class="col-sm-2">
 										<input type="text" name="acct_bal" id="acct_bal"
@@ -1042,9 +1044,9 @@ input:hover+.password-info {
 						</table>
 						<!---------------------------------------------------------------------------------------------------->
 						<div class="card-footer text-center"
-							style="background-color: #e9ecef">
-							<button class="btn btn-primary" onclick="Home();">Home</button>
-							<button class="btn btn-primary" onclick="Back();">Back</button>
+							 >
+							<button class="custom-btn" onclick="Home();">Home</button>
+							<button class="custom-btn" onclick="Back();">Back</button>
 						</div>
 
 
@@ -1076,7 +1078,7 @@ input:hover+.password-info {
 				</div>
 				<div class="modal-body" style="text-align: center;">
 					<h6 id="normalalertmsg"></h6>
-					<button type="button" class="btn btn-primary" data-dismiss="modal"
+					<button type="button" class="custom-btn" data-dismiss="modal"
 						onclick="$('#normalalert').modal('hide')">Close</button>
 				</div>
 			</div>

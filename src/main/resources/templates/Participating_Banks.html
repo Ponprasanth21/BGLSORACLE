@@ -23,6 +23,8 @@
 	th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
 <link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon">
 <link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/color_document.css}">
 
 <script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
 	th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
@@ -270,7 +272,7 @@ input:hover+.password-info {
 
 	function enquiryuser(a) {
 		var acct_num = a.getAttribute("data-attr");
-		
+
 		location.href = 'participatingJobs?formmode=view&acct_num=' + acct_num;
 	}
 
@@ -346,11 +348,10 @@ input:hover+.password-info {
 					<div class="panel panel-primary filterable">
 						<div class="card w-100 border panel panel-primary filterable">
 
-							<div class="card-header"
-								style="background-color: #f5a142; height: 50px">
+							<div class="card-header">
 								<div class="float-left">
-									<h6 style="font-size: 1.2rem; color: black;">PATICIPATING
-										BANK - LIST</h6>
+									<h4>PATICIPATING BANK - LIST</h4>
+
 								</div>
 								<div class="float-right">
 									<button type="button"
@@ -363,7 +364,7 @@ input:hover+.password-info {
 										style="margin-bottom: 0px; font-size: initial;" id="usertable">
 										<thead class="thead-light">
 											<tr class="filters">
-												<th style="width:10%"><input type="text"
+												<th style="width: 10%"><input type="text"
 													class="form-control font-weight-bold"
 													placeholder="Bank Code" disabled></th>
 												<th style="width: 15%"><input type="text"
@@ -410,12 +411,11 @@ input:hover+.password-info {
 								</div>
 							</div>
 
-							<div class="card-footer text-center"
-								style="background-color: #f5a142">
+							<div class="card-footer text-center">
 
 
-								<button class="btn btn-primary p-2" onclick="Home();">Home</button>
-								<button class="btn btn-primary p-2" onclick="Back();">Back</button>
+								<button class="custom-btn" onclick="Home();">Home</button>
+								<button class="custom-btn" onclick="Back();">Back</button>
 
 							</div>
 
@@ -524,7 +524,7 @@ input:hover+.password-info {
 											th:value="${chartaccount?.country}" readonly />
 									</div>
 								</div>
-								
+
 								<div class="row formline" style="padding: 0px 0px 2px 30px;">
 									<div class="col-sm-1"></div>
 									<div class="col-sm-2">LANDLINE</div>
@@ -541,7 +541,7 @@ input:hover+.password-info {
 											th:value="${chartaccount?.web_site}" readonly />
 									</div>
 								</div>
-								
+
 								<div class="row formline" style="padding: 0px 0px 2px 30px;">
 									<div class="col-sm-1"></div>
 									<div class="col-sm-2">CONTACT PERSON</div>
@@ -558,7 +558,7 @@ input:hover+.password-info {
 											th:value="${chartaccount?.contact_details}" readonly />
 									</div>
 								</div>
-								
+
 								<div class="row formline" style="padding: 0px 0px 2px 30px;">
 									<div class="col-sm-1"></div>
 									<div class="col-sm-2">MOBILE NO</div>
@@ -568,15 +568,14 @@ input:hover+.password-info {
 											th:value="${chartaccount?.mobile_no}" readonly />
 									</div>
 									<div class="col-sm-1"></div>
-									<div class="col-sm-2">EMAIL ID
-									</div>
+									<div class="col-sm-2">EMAIL ID</div>
 									<div class="col-sm-2">
 										<input type="text" name="email_id" id="email_id"
 											class="form-control form-control-sm bg-white border border-dark"
 											th:value="${chartaccount?.email_id}" readonly />
 									</div>
 								</div>
-								
+
 								<div class="row formline" style="padding: 0px 0px 2px 30px;">
 									<div class="col-sm-1"></div>
 									<div class="col-sm-2">SWIFT CODE</div>
@@ -593,50 +592,53 @@ input:hover+.password-info {
 											th:value="${chartaccount?.bic_code}" readonly />
 									</div>
 								</div>
-								
+
 								<div class="row formline" style="padding: 0px 0px 2px 30px;">
 									<div class="col-sm-1"></div>
 									<div class="col-sm-2">SETTLEMENT ACCOUNT NO</div>
 									<div class="col-sm-2">
-										<input type="text" name="settlement_account_no" id="settlement_account_no"
+										<input type="text" name="settlement_account_no"
+											id="settlement_account_no"
 											class="form-control form-control-sm bg-white border border-dark"
 											th:value="${chartaccount?.settlement_account_no}" readonly />
 									</div>
 									<div class="col-sm-1"></div>
 									<div class="col-sm-2">SETTLEMENT ACCOUNT NAME</div>
 									<div class="col-sm-2">
-										<input type="text" name="settlement_account_name" id="settlement_account_name"
+										<input type="text" name="settlement_account_name"
+											id="settlement_account_name"
 											class="form-control form-control-sm bg-white border border-dark"
 											th:value="${chartaccount?.settlement_account_name}" readonly />
 									</div>
 								</div>
-								
+
 								<div class="row formline" style="padding: 0px 0px 2px 30px;">
 									<div class="col-sm-1"></div>
 									<div class="col-sm-2">SETTLEMENT CURRENCY</div>
 									<div class="col-sm-2">
-										<input type="text" name="settlement_currency" id="settlement_currency"
+										<input type="text" name="settlement_currency"
+											id="settlement_currency"
 											class="form-control form-control-sm bg-white border border-dark"
 											th:value="${chartaccount?.settlement_currency}" readonly />
 									</div>
 									<div class="col-sm-1"></div>
 									<div class="col-sm-2">MIRROR ACCOUNT NO</div>
 									<div class="col-sm-2">
-										<input type="text" name="mirror_account_no" id="mirror_account_no"
+										<input type="text" name="mirror_account_no"
+											id="mirror_account_no"
 											class="form-control form-control-sm bg-white border border-dark"
 											th:value="${chartaccount?.mirror_account_no}" readonly />
 									</div>
 								</div>
 
-								
-								
+
+
 							</form>
 						</div>
 
-						<div class="card-footer text-center"
-							style="background-color: #f5a142">
-							<button class="btn btn-primary" onclick="Home();">Home</button>
-							<button class="btn btn-primary" onclick="Back();">Back</button>
+						<div class="card-footer text-center">
+							<button class="custom-btn" onclick="Home();">Home</button>
+							<button class="custom-btn" onclick="Back();">Back</button>
 						</div>
 
 
@@ -669,7 +671,7 @@ input:hover+.password-info {
 				</div>
 				<div class="modal-body" style="text-align: center;">
 					<h6 id="normalalertmsg"></h6>
-					<button type="button" class="btn btn-primary" data-dismiss="modal"
+					<button type="button" class="custom-btn" data-dismiss="modal"
 						onclick="$('#normalalert').modal('hide')">Close</button>
 				</div>
 			</div>

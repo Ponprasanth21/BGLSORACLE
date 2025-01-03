@@ -23,6 +23,7 @@
 	th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
 <link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon">
 <link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
+<link rel="stylesheet" type="text/css" th:href="@{/css/color_document.css}">
 
 <script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
 	th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
@@ -266,9 +267,9 @@ input:hover+.password-info {
 					<div class="panel panel-primary filterable">
 						<div class="card w-100 border panel panel-primary filterable">
 							<div class="card-header"
-								style="background-color: #e9ecef; height: 70px">
+								 >
 								<div class="float-left">
-									<h6 style="font-size: 1.2rem; color: black;">Lease Loan
+									<h6 style="font-size: 1.2rem;">Lease Loan
 										Interest Summary</h6>
 								</div>
 								<div class="float-right d-flex align-items-center">
@@ -285,9 +286,9 @@ input:hover+.password-info {
 							<div class="card-body">
 								<div class="table-responsive">
 									<table class="table table-bordered table-hover table-sm"
-										style="margin-bottom: 0px; font-size: initial;"
+										style="margin-bottom: 0px;font-size: initial;"
 										id="AssosiateTable">
-										<thead class="thead-light">
+										<thead class="table-header">
 											<tr>
 												<th style="width: 8%">Loan No</th>
 												<th>Name</th>
@@ -332,9 +333,9 @@ input:hover+.password-info {
 							</div>
 
 							<div class="card-footer text-center"
-								style="background-color: #e9ecef">
-								<button class="btn btn-primary p-2" onclick="Home();">Home</button>
-								<button class="btn btn-primary p-2" onclick="Back();">Back</button>
+								 >
+								<button class="custom-btn" onclick="Home();">Home</button>
+								<button class="custom-btn" onclick="Back();">Back</button>
 							</div>
 						</div>
 					</div>
